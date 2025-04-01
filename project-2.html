@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Walkable Project Grid</title>
+  <title>Simplified Walkable Test</title>
   <style>
     html, body {
       margin: 0;
@@ -12,85 +12,52 @@
       font-family: sans-serif;
       background: #f5f5f5;
     }
-    #map {
-      position: relative;
-      width: 1512px;
+    #world {
+      position: absolute;
+      width: 100vw;
       height: 3000px;
       background: repeating-linear-gradient(#e0f7ff, #e0f7ff 99px, #d0e8f0 100px);
     }
-    .card {
-      position: absolute;
-      background: #ffffff;
-      border: 2px solid #ccc;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
     #player {
       position: fixed;
-      left: 100px;
       top: 50vh;
+      left: 100px;
       width: 20px;
       height: 20px;
-      background: royalblue;
+      background-color: royalblue;
       border-radius: 50%;
-      z-index: 1000;
       transform: translateY(-50%);
-    }
-    .teleport {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: mediumseagreen;
-      border: 3px dashed white;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
-<div id="map">
-  <div class="card" style="left: 187px; top: 708px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 213px; top: 736px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 187px; top: 1344px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 213px; top: 1372px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 187px; top: 1980px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 213px; top: 2008px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 596px; top: 708px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 622px; top: 736px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 596px; top: 1344px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 622px; top: 1372px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 596px; top: 1980px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 622px; top: 2008px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 1005px; top: 708px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 1031px; top: 736px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 1005px; top: 1344px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 1031px; top: 1372px; width: 269px; height: 262px;"></div>
-  <div class="card" style="left: 1005px; top: 1980px; width: 320px; height: 418px;"></div>
-  <div class="card" style="left: 1031px; top: 2008px; width: 269px; height: 262px;"></div>
-</div>
-<div id="player"></div>
+  <div id="world"></div>
+  <div id="player"></div>
 
-<script>
-  const player = document.getElementById("player");
-  const speed = 6;
-  const keys = {};
-  let horizontal = 100;
-  let vertical = 100;
+  <script>
+    const player = document.getElementById("player");
+    const speed = 6;
+    const keys = {};
+    let x = 100;
+    let y = 0;
 
-  document.addEventListener("keydown", e => keys[e.key] = true);
-  document.addEventListener("keyup", e => keys[e.key] = false);
+    document.addEventListener("keydown", e => keys[e.key] = true);
+    document.addEventListener("keyup", e => keys[e.key] = false);
 
-  function movePlayer() {
-    if (keys['ArrowLeft']) horizontal -= speed;
-    if (keys['ArrowRight']) horizontal += speed;
-    if (keys['ArrowUp']) vertical -= speed;
-    if (keys['ArrowDown']) vertical += speed;
+    function move() {
+      if (keys['ArrowLeft']) x -= speed;
+      if (keys['ArrowRight']) x += speed;
+      if (keys['ArrowUp']) y -= speed;
+      if (keys['ArrowDown']) y += speed;
 
-    player.style.left = `${horizontal}px`;
-    window.scrollTo({ top: vertical - window.innerHeight / 2 });
+      player.style.left = `${x}px`;
+      window.scrollTo({ top: y, behavior: 'auto' });
 
-    requestAnimationFrame(movePlayer);
-  }
+      requestAnimationFrame(move);
+    }
 
-  movePlayer();
-</script>
+    move();
+  </script>
 </body>
 </html>

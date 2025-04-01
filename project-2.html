@@ -72,35 +72,13 @@
   const player = document.getElementById("player");
   const map = document.getElementById("map");
   const speed = 6;
-  let pos = {{ x: 100, y: 100 }};
-  const keys = {{}};
+  let pos = { x: 100, y: 100 };
+  const keys = {};
 
-  document.addEventListener('keydown', e => keys[e.key] = true);
-  document.addEventListener('keyup', e => keys[e.key] = false);
+  document.addEventListener("keydown", e => keys[e.key] = true);
+  document.addEventListener("keyup", e => keys[e.key] = false);
 
-  function checkCollision(newX, newY) {{
-    const playerRect = {{ left: newX, top: newY, right: newX+20, bottom: newY+20 }};
-    const blocks = document.querySelectorAll('.card');
-    for (let block of blocks) {{
-      const rect = block.getBoundingClientRect();
-      const mapRect = map.getBoundingClientRect();
-      const blockRect = {{
-        left: rect.left - mapRect.left,
-        top: rect.top - mapRect.top + window.scrollY,
-        right: rect.right - mapRect.left,
-        bottom: rect.bottom - mapRect.top + window.scrollY
-      }};
-      if (
-        playerRect.right > blockRect.left &&
-        playerRect.left < blockRect.right &&
-        playerRect.bottom > blockRect.top &&
-        playerRect.top < blockRect.bottom
-      ) return true;
-    }}
-    return false;
-  }}
-
-  function movePlayer() {{
+  function movePlayer() {
     let newX = pos.x;
     let newY = pos.y;
     if (keys['ArrowUp']) newY -= speed;
@@ -108,15 +86,16 @@
     if (keys['ArrowLeft']) newX -= speed;
     if (keys['ArrowRight']) newX += speed;
 
-    if (!checkCollision(newX, newY)) {{
-      pos.x = newX;
-      pos.y = newY;
-    }}
+    pos.x = newX;
+    pos.y = newY;
 
-    map.scrollTo({ top: pos.y - window.innerHeight / 2 });
+    // Move player visually using transform instead of scroll
+    player.style.left = `${pos.x}px`;
+    player.style.top = `${pos.y}px`;
 
+    window.scrollTo({ top: pos.y - window.innerHeight / 2, behavior: 'auto' });
     requestAnimationFrame(movePlayer);
-  }}
+  }
 
   movePlayer();
 </script>

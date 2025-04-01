@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Walkable Portfolio</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
       font-family: sans-serif;
       background: #e6f2f8;
+      height: 100%;
+    }
+
+    body {
       position: relative;
     }
 
@@ -67,14 +70,12 @@
     }
 
     #player {
-      position: absolute;
+      position: fixed;
       width: 20px;
       height: 20px;
       background: royalblue;
       border-radius: 50%;
       z-index: 100;
-      top: 100px;
-      left: 100px;
     }
   </style>
 </head>
@@ -132,6 +133,13 @@
 
     player.style.left = pos.x + 'px';
     player.style.top = pos.y + 'px';
+
+    // Scroll the window with the player
+    window.scrollTo({
+      top: pos.y - window.innerHeight / 2,
+      left: 0,
+      behavior: 'auto'
+    });
 
     requestAnimationFrame(movePlayer);
   }

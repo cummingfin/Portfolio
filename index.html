@@ -6,7 +6,7 @@
   <title>Interactive Drawer Portfolio</title>
   <style>
     body {
-      background-color: #f5f5f5;
+      background-color: #E3F4F7;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -20,24 +20,26 @@
       cursor: pointer;
       overflow: visible !important;
     }
-    .drawer {
-      transition: transform 0.5s ease;
-      transform-origin: top left;
-    }
-    .drawer:hover {
-      transform: translate(15px, -8px);
-    }
-    .drawer.open {
-      transform: translate(60px, -40px);
-    }
+
     svg {
       width: 100%;
       height: auto;
       overflow: visible !important;
     }
-    text {
+    .drawer {
+      transition: transform 0.5s ease;
+      transform-origin: top left;
+    }
+    .drawer:hover {
+      transform: translate(-15px, 8px);
+    }
+    .drawer.open {
+      transform: translate(-60px, 30px);
+    }
+    svg {
+      width: 100%;
+      height: auto;
       overflow: visible;
-      white-space: nowrap;
     }
   </style>
 </head>

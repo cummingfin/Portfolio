@@ -19,6 +19,11 @@
       max-width: 90%;
       cursor: pointer;
       overflow: visible !important;
+      padding: 20px; /* Add padding to prevent SVG edge clipping */
+    }
+
+    .svg-container {
+      overflow: visible !important;
     }
 
     svg {
@@ -36,16 +41,12 @@
     .drawer.open {
       transform: translate(-60px, 30px);
     }
-    svg {
-      width: 100%;
-      height: auto;
-      overflow: visible;
-    }
   </style>
 </head>
 <body>
 
 <div class="cabinet">
+  <div class="svg-container">
   <!-- Embed User's SVG here -->
 <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 286.59 346.06">
@@ -139,5 +140,7 @@
   });
 </script>
 
+</body>
+</html>
 </body>
 </html>

@@ -21,7 +21,7 @@
     .card {
       position: absolute;
       width: 300px;
-      height: 200px;
+      height: 250px;
       background: white;
       border: 2px solid #ccc;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -29,6 +29,17 @@
       box-sizing: border-box;
       border-radius: 16px;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
     }
     .teleport {
       position: absolute;
@@ -54,13 +65,49 @@
 </head>
 <body>
   <div id="world">
-    <div class="card" style="top: 300px; left: 200px;"></div>
-    <div class="card" style="top: 800px; left: 400px;"></div>
-    <div class="card" style="top: 1300px; left: 150px;"></div>
-    <div class="card" style="top: 1800px; left: 500px;"></div>
-    <div class="card" style="top: 2300px; left: 250px;"></div>
-    <div class="teleport" style="top: 600px; left: 100px;" data-target="https://example.com/project1"></div>
-    <div class="teleport" style="top: 1600px; left: 300px;" data-target="https://example.com/project2"></div>
+    <!-- Row 1 -->
+    <div class="card" style="top: 400px; left: 100px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project A</h3>
+      <p>Short description of Project A.</p>
+    </div>
+    <div class="teleport" style="top: 670px; left: 190px;" data-target="https://example.com/project-a"></div>
+
+    <div class="card" style="top: 400px; left: 450px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project B</h3>
+      <p>Short description of Project B.</p>
+    </div>
+    <div class="teleport" style="top: 670px; left: 540px;" data-target="https://example.com/project-b"></div>
+
+    <div class="card" style="top: 400px; left: 800px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project C</h3>
+      <p>Short description of Project C.</p>
+    </div>
+    <div class="teleport" style="top: 670px; left: 890px;" data-target="https://example.com/project-c"></div>
+
+    <!-- Row 2 -->
+    <div class="card" style="top: 1000px; left: 100px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project D</h3>
+      <p>Short description of Project D.</p>
+    </div>
+    <div class="teleport" style="top: 1270px; left: 190px;" data-target="https://example.com/project-d"></div>
+
+    <div class="card" style="top: 1000px; left: 450px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project E</h3>
+      <p>Short description of Project E.</p>
+    </div>
+    <div class="teleport" style="top: 1270px; left: 540px;" data-target="https://example.com/project-e"></div>
+
+    <div class="card" style="top: 1000px; left: 800px;">
+      <img src="https://via.placeholder.com/80" alt="Placeholder">
+      <h3>Project F</h3>
+      <p>Short description of Project F.</p>
+    </div>
+    <div class="teleport" style="top: 1270px; left: 890px;" data-target="https://example.com/project-f"></div>
   </div>
   <div id="player"></div>
 

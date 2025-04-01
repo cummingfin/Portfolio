@@ -70,7 +70,7 @@
     }
 
     #player {
-      position: fixed;
+      position: absolute;
       width: 20px;
       height: 20px;
       background: royalblue;
@@ -128,16 +128,16 @@
     if (keys['ArrowLeft']) newX -= speed;
     if (keys['ArrowRight']) newX += speed;
 
-    pos.x = newX;
-    pos.y = newY;
+    pos.x = Math.max(0, newX);
+    pos.y = Math.max(0, newY);
 
     player.style.left = pos.x + 'px';
-    player.style.top = pos.y + 'px';
+    player.style.top = pos.y + window.scrollY + 'px';
 
-    // Scroll the window with the player
+    // Adjust scroll position to keep player centered
+    const scrollTargetY = pos.y - window.innerHeight / 2 + 10;
     window.scrollTo({
-      top: pos.y - window.innerHeight / 2,
-      left: 0,
+      top: scrollTargetY,
       behavior: 'auto'
     });
 

@@ -30,6 +30,15 @@
       border-radius: 16px;
       z-index: 1;
     }
+    .teleport {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: mediumseagreen;
+      border: 3px dashed white;
+      z-index: 1;
+    }
     #player {
       position: fixed;
       top: 50vh;
@@ -50,6 +59,8 @@
     <div class="card" style="top: 1300px; left: 150px;"></div>
     <div class="card" style="top: 1800px; left: 500px;"></div>
     <div class="card" style="top: 2300px; left: 250px;"></div>
+    <div class="teleport" style="top: 600px; left: 100px;" data-target="https://example.com/project1"></div>
+    <div class="teleport" style="top: 1600px; left: 300px;" data-target="https://example.com/project2"></div>
   </div>
   <div id="player"></div>
 
@@ -61,14 +72,22 @@
     let y = 0;
 
     const cards = Array.from(document.querySelectorAll(".card")).map(card => {
-      const rect = card.getBoundingClientRect();
-      const worldTop = card.offsetTop;
-      const worldLeft = card.offsetLeft;
       return {
-        top: worldTop,
-        left: worldLeft,
-        right: worldLeft + card.offsetWidth,
-        bottom: worldTop + card.offsetHeight
+        top: card.offsetTop,
+        left: card.offsetLeft,
+        right: card.offsetLeft + card.offsetWidth,
+        bottom: card.offsetTop + card.offsetHeight
+      };
+    });
+
+    const teleports = Array.from(document.querySelectorAll(".teleport")).map(tp => {
+      return {
+        el: tp,
+        top: tp.offsetTop,
+        left: tp.offsetLeft,
+        right: tp.offsetLeft + tp.offsetWidth,
+        bottom: tp.offsetTop + tp.offsetHeight,
+        target: tp.dataset.target
       };
     });
 
@@ -94,6 +113,24 @@
       return false;
     }
 
+    function checkTeleport(px, py) {
+      const top = py + window.innerHeight / 2 - 10;
+      const bottom = py + window.innerHeight / 2 + 10;
+      const left = px;
+      const right = px + 20;
+
+      for (const tp of teleports) {
+        if (
+          right > tp.left &&
+          left < tp.right &&
+          bottom > tp.top &&
+          top < tp.bottom
+        ) {
+          window.location.href = tp.target;
+        }
+      }
+    }
+
     function move() {
       let newX = x;
       let newY = y;
@@ -111,6 +148,7 @@
       player.style.left = `${x}px`;
       window.scrollTo({ top: y, behavior: 'auto' });
 
+      checkTeleport(x, y);
       requestAnimationFrame(move);
     }
 

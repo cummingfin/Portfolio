@@ -8,7 +8,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      overflow: auto;
       font-family: sans-serif;
       background: #f5f5f5;
     }
@@ -25,15 +25,12 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     #player {
-      position: fixed;
+      position: absolute;
       width: 20px;
       height: 20px;
       background: royalblue;
       border-radius: 50%;
       z-index: 1000;
-      left: 100px;
-      top: 50vh;
-      transform: translateY(-50%);
     }
     .teleport {
       position: absolute;
@@ -65,8 +62,8 @@
   <div class="card" style="left: 1031px; top: 1372px; width: 269px; height: 262px;"></div>
   <div class="card" style="left: 1005px; top: 1980px; width: 320px; height: 418px;"></div>
   <div class="card" style="left: 1031px; top: 2008px; width: 269px; height: 262px;"></div>
+  <div id="player"></div>
 </div>
-<div id="player"></div>
 
 <script>
   const player = document.getElementById("player");
@@ -89,7 +86,6 @@
     pos.x = newX;
     pos.y = newY;
 
-    // Move player visually using transform instead of scroll
     player.style.left = `${pos.x}px`;
     player.style.top = `${pos.y}px`;
 

@@ -1,11 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Project 1</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Walkable Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: sans-serif;
+      background: #e6f2f8;
+      position: relative;
+    }
+
+    .project-block {
+      position: absolute;
+      width: 200px;
+      height: 150px;
+      background: white;
+      border: 2px solid #ccc;
+      padding: 10px;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+
+    #player {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: royalblue;
+      border-radius: 50%;
+      z-index: 10;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Project 1</h1>
-  <p>This is a placeholder page for testing.</p>
-  <a href="index.html">← Back to drawers</a>
+  <!-- Project Blocks -->
+  <div class="project-block" style="top: 100px; left: 100px;">
+    <h4>Project 1</h4>
+    <p>Info about project 1</p>
+  </div>
+  <div class="project-block" style="top: 100px; left: 400px;">
+    <h4>Project 2</h4>
+    <p>Info about project 2</p>
+  </div>
+  <div class="project-block" style="top: 300px; left: 250px;">
+    <h4>Project 3</h4>
+    <p>Info about project 3</p>
+  </div>
+
+  <!-- Player -->
+  <div id="player"></div>
+
+  <script>
+    const player = document.getElementById('player');
+    let pos = { x: 50, y: 50 };
+    const speed = 4;
+
+    function movePlayer() {
+      player.style.left = pos.x + 'px';
+      player.style.top = pos.y + 'px';
+    }
+
+    function checkCollisions(x, y) {
+      const blocks = document.querySelectorAll('.project-block');
+      for (let block of blocks) {
+        const rect = block.getBoundingClientRect();
+        const blockLeft = rect.left;
+        const blockTop = rect.top;
+        const blockRight = rect.right;
+        const blockBottom = rect.bottom;
+
+        if (
+          x + 20 > blockLeft &&
+          x < blockRight &&
+          y + 20 > blockTop &&
+          y < blockBottom
+        ) {
+          return true; // collision detected
+        }
+      }
+      return false;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      let newX = pos.x;
+      let newY = pos.y;
+
+      if (e.key === 'ArrowUp') newY -= speed;
+      if (e.key === 'ArrowDown') newY += speed;
+      if (e.key === 'ArrowLeft') newX -= speed;
+      if (e.key === 'ArrowRight') newX += speed;
+
+      if (!checkCollisions(newX, newY)) {
+        pos.x = newX;
+        pos.y = newY;
+        movePlayer();
+      }
+    });
+
+    movePlayer();
+  </script>
 </body>
 </html>

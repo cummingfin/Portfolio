@@ -16,12 +16,21 @@
 
     .project-block {
       position: absolute;
-      width: 200px;
-      height: 150px;
+      width: 300px;
+      height: auto;
       background: white;
       border: 2px solid #ccc;
-      padding: 10px;
+      padding: 15px;
       box-sizing: border-box;
+      z-index: 1;
+    }
+
+    .project-image {
+      position: absolute;
+      width: 250px;
+      height: 150px;
+      object-fit: cover;
+      border: 2px solid #ccc;
       z-index: 1;
     }
 
@@ -36,18 +45,23 @@
   </style>
 </head>
 <body>
-  <!-- Project Blocks -->
-  <div class="project-block" style="top: 100px; left: 100px;">
-    <h4>Project 1</h4>
-    <p>Info about project 1</p>
-  </div>
+  <!-- Images on the left -->
+  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 100px; left: 50px;">
+  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 300px; left: 50px;">
+  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 500px; left: 50px;">
+
+  <!-- Text blocks on the right -->
   <div class="project-block" style="top: 100px; left: 400px;">
-    <h4>Project 2</h4>
-    <p>Info about project 2</p>
+    <h4>Project 1</h4>
+    <p>This is a description of project 1 with some more detailed text.</p>
   </div>
-  <div class="project-block" style="top: 300px; left: 250px;">
+  <div class="project-block" style="top: 300px; left: 400px;">
+    <h4>Project 2</h4>
+    <p>This is a description of project 2 with different layout and ideas.</p>
+  </div>
+  <div class="project-block" style="top: 500px; left: 400px;">
     <h4>Project 3</h4>
-    <p>Info about project 3</p>
+    <p>Here we explain project 3, possibly with links or images too.</p>
   </div>
 
   <!-- Player -->
@@ -55,16 +69,35 @@
 
   <script>
     const player = document.getElementById('player');
-    let pos = { x: 50, y: 50 };
-    const speed = 4;
+    let pos = { x: 250, y: 200 };
+    const speed = 8;
+    let keys = {};
+
+    document.addEventListener('keydown', e => keys[e.key] = true);
+    document.addEventListener('keyup', e => keys[e.key] = false);
 
     function movePlayer() {
+      let newX = pos.x;
+      let newY = pos.y;
+
+      if (keys['ArrowUp']) newY -= speed;
+      if (keys['ArrowDown']) newY += speed;
+      if (keys['ArrowLeft']) newX -= speed;
+      if (keys['ArrowRight']) newX += speed;
+
+      if (!checkCollisions(newX, newY)) {
+        pos.x = newX;
+        pos.y = newY;
+      }
+
       player.style.left = pos.x + 'px';
       player.style.top = pos.y + 'px';
+
+      requestAnimationFrame(movePlayer);
     }
 
     function checkCollisions(x, y) {
-      const blocks = document.querySelectorAll('.project-block');
+      const blocks = document.querySelectorAll('.project-block, .project-image');
       for (let block of blocks) {
         const rect = block.getBoundingClientRect();
         const blockLeft = rect.left;
@@ -78,27 +111,11 @@
           y + 20 > blockTop &&
           y < blockBottom
         ) {
-          return true; // collision detected
+          return true; // collision
         }
       }
       return false;
     }
-
-    document.addEventListener('keydown', (e) => {
-      let newX = pos.x;
-      let newY = pos.y;
-
-      if (e.key === 'ArrowUp') newY -= speed;
-      if (e.key === 'ArrowDown') newY += speed;
-      if (e.key === 'ArrowLeft') newX -= speed;
-      if (e.key === 'ArrowRight') newX += speed;
-
-      if (!checkCollisions(newX, newY)) {
-        pos.x = newX;
-        pos.y = newY;
-        movePlayer();
-      }
-    });
 
     movePlayer();
   </script>

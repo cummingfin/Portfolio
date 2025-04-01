@@ -25,13 +25,15 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     #player {
-      position: absolute;
+      position: fixed;
       left: 100px;
+      top: 50vh;
       width: 20px;
       height: 20px;
       background: royalblue;
       border-radius: 50%;
       z-index: 1000;
+      transform: translateY(-50%);
     }
     .teleport {
       position: absolute;
@@ -63,27 +65,27 @@
   <div class="card" style="left: 1031px; top: 1372px; width: 269px; height: 262px;"></div>
   <div class="card" style="left: 1005px; top: 1980px; width: 320px; height: 418px;"></div>
   <div class="card" style="left: 1031px; top: 2008px; width: 269px; height: 262px;"></div>
-  <div id="player"></div>
 </div>
+<div id="player"></div>
 
 <script>
   const player = document.getElementById("player");
   const speed = 6;
   const keys = {};
-  let pos = { x: 100, y: 100 };
+  let horizontal = 100;
+  let vertical = 100;
 
   document.addEventListener("keydown", e => keys[e.key] = true);
   document.addEventListener("keyup", e => keys[e.key] = false);
 
   function movePlayer() {
-    if (keys['ArrowLeft']) pos.x -= speed;
-    if (keys['ArrowRight']) pos.x += speed;
-    if (keys['ArrowUp']) pos.y -= speed;
-    if (keys['ArrowDown']) pos.y += speed;
+    if (keys['ArrowLeft']) horizontal -= speed;
+    if (keys['ArrowRight']) horizontal += speed;
+    if (keys['ArrowUp']) vertical -= speed;
+    if (keys['ArrowDown']) vertical += speed;
 
-    player.style.left = `${pos.x}px`;
-    player.style.top = `${pos.y}px`;
-    window.scrollTo({ top: pos.y - window.innerHeight / 2 });
+    player.style.left = `${horizontal}px`;
+    window.scrollTo({ top: vertical - window.innerHeight / 2 });
 
     requestAnimationFrame(movePlayer);
   }

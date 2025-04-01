@@ -35,28 +35,28 @@
 
     .three-column .col {
       flex: 1;
-      background: white;
+      color: #333;
       padding: 20px;
-      border: 2px solid #ccc;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-left: 4px solid #0077b6;
     }
 
     .image-left {
       display: flex;
       gap: 40px;
+      align-items: center;
     }
 
     .image-left img {
       width: 40%;
       height: auto;
-      border: 2px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .image-left .text {
       flex: 1;
-      background: white;
       padding: 20px;
-      border: 2px solid #ccc;
+      color: #222;
     }
 
     .full-image {
@@ -66,7 +66,8 @@
     .full-image img {
       max-width: 90%;
       height: auto;
-      border: 2px solid #ccc;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     #player {
@@ -80,35 +81,39 @@
       z-index: 100;
       transform: translateY(-50%);
     }
+
+    .collidable {
+      position: absolute;
+    }
   </style>
 </head>
 <body>
 
 <div class="section three-column">
-  <div class="col">
+  <div class="col collidable">
     <h3>Column 1</h3>
     <p>This is the first column with some header and text.</p>
   </div>
-  <div class="col">
+  <div class="col collidable">
     <h3>Column 2</h3>
     <p>This is the second column with some content.</p>
   </div>
-  <div class="col">
+  <div class="col collidable">
     <h3>Column 3</h3>
     <p>This is the third column with more info.</p>
   </div>
 </div>
 
 <div class="section image-left">
-  <img src="https://via.placeholder.com/400x300" alt="Project Image">
-  <div class="text">
+  <img src="https://via.placeholder.com/400x300" alt="Project Image" class="collidable">
+  <div class="text collidable">
     <h3>Project Title</h3>
     <p>This section has a large image on the left and text on the right, styled like a normal website content block.</p>
   </div>
 </div>
 
 <div class="section full-image">
-  <img src="https://via.placeholder.com/1000x400" alt="Full Width Image">
+  <img src="https://via.placeholder.com/1000x400" alt="Full Width Image" class="collidable">
 </div>
 
 <div id="player"></div>
@@ -122,10 +127,16 @@
   document.addEventListener('keyup', e => keys[e.key] = false);
 
   function movePlayer() {
-    if (keys['ArrowUp']) pos.y -= speed;
-    if (keys['ArrowDown']) pos.y += speed;
-    if (keys['ArrowLeft']) pos.x -= speed;
-    if (keys['ArrowRight']) pos.x += speed;
+    let newX = pos.x;
+    let newY = pos.y;
+
+    if (keys['ArrowUp']) newY -= speed;
+    if (keys['ArrowDown']) newY += speed;
+    if (keys['ArrowLeft']) newX -= speed;
+    if (keys['ArrowRight']) newX += speed;
+
+    pos.x = newX;
+    pos.y = newY;
 
     window.scrollTo({
       top: pos.y - window.innerHeight / 2,

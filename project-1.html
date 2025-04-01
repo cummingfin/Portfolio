@@ -3,151 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Walkable Portfolio</title>
+  <title>Portfolio</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background: #e6f2f8;
-      height: 100%;
-    }
-
     body {
-      position: relative;
+      margin: 0;
+      font-family: sans-serif;
+      background: #fdfdfd;
+      line-height: 1.6;
     }
 
-    .section {
-      width: 100vw;
-      height: 100vh;
-      box-sizing: border-box;
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .three-column {
-      display: flex;
-      gap: 20px;
-    }
-
-    .three-column .col {
-      flex: 1;
-      color: #333;
-      padding: 20px;
-      border-left: 4px solid #0077b6;
-    }
-
-    .image-left {
-      display: flex;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .image-left img {
-      width: 40%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .image-left .text {
-      flex: 1;
-      padding: 20px;
-      color: #222;
-    }
-
-    .full-image {
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 60px 40px;
       text-align: center;
     }
 
-    .full-image img {
+    .project {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 60px 40px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .project img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .project-text {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+
+    .full-width-image {
+      width: 100%;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .full-width-image img {
       max-width: 90%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border-radius: 8px;
     }
 
-    #player {
-      position: fixed;
-      left: 100px;
-      top: 50vh;
-      width: 20px;
-      height: 20px;
-      background: royalblue;
-      border-radius: 50%;
-      z-index: 100;
-      transform: translateY(-50%);
-    }
-
-    .collidable {
-      position: absolute;
+    footer {
+      background: #f1f1f1;
+      padding: 40px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
     }
   </style>
 </head>
 <body>
 
-<div class="section three-column">
-  <div class="col collidable">
-    <h3>Column 1</h3>
-    <p>This is the first column with some header and text.</p>
+<header>
+  <h1>My Project Portfolio</h1>
+  <p>Showcasing a collection of my design and development work</p>
+</header>
+
+<section class="project">
+  <img src="https://via.placeholder.com/500x300" alt="Project Image">
+  <div class="project-text">
+    <h2>Project One</h2>
+    <p>This project demonstrates my ability to build clean, responsive layouts and solve interesting challenges with HTML, CSS, and JavaScript.</p>
   </div>
-  <div class="col collidable">
-    <h3>Column 2</h3>
-    <p>This is the second column with some content.</p>
+</section>
+
+<section class="project">
+  <div class="project-text">
+    <h2>Project Two</h2>
+    <p>In this project, I developed a full-stack web application using modern JavaScript frameworks and integrated third-party APIs.</p>
   </div>
-  <div class="col collidable">
-    <h3>Column 3</h3>
-    <p>This is the third column with more info.</p>
-  </div>
+  <img src="https://via.placeholder.com/500x300" alt="Project Image">
+</section>
+
+<div class="full-width-image">
+  <img src="https://via.placeholder.com/1200x400" alt="Highlight Image">
 </div>
 
-<div class="section image-left">
-  <img src="https://via.placeholder.com/400x300" alt="Project Image" class="collidable">
-  <div class="text collidable">
-    <h3>Project Title</h3>
-    <p>This section has a large image on the left and text on the right, styled like a normal website content block.</p>
+<section class="project">
+  <img src="https://via.placeholder.com/500x300" alt="Project Image">
+  <div class="project-text">
+    <h2>Project Three</h2>
+    <p>A creative piece exploring motion design and user experience through animation and interactive storytelling.</p>
   </div>
-</div>
+</section>
 
-<div class="section full-image">
-  <img src="https://via.placeholder.com/1000x400" alt="Full Width Image" class="collidable">
-</div>
-
-<div id="player"></div>
-
-<script>
-  const speed = 6;
-  const pos = { x: 100, y: 100 };
-  const keys = {};
-
-  document.addEventListener('keydown', e => keys[e.key] = true);
-  document.addEventListener('keyup', e => keys[e.key] = false);
-
-  function movePlayer() {
-    let newX = pos.x;
-    let newY = pos.y;
-
-    if (keys['ArrowUp']) newY -= speed;
-    if (keys['ArrowDown']) newY += speed;
-    if (keys['ArrowLeft']) newX -= speed;
-    if (keys['ArrowRight']) newX += speed;
-
-    pos.x = newX;
-    pos.y = newY;
-
-    window.scrollTo({
-      top: pos.y - window.innerHeight / 2,
-      behavior: 'auto'
-    });
-
-    requestAnimationFrame(movePlayer);
-  }
-
-  movePlayer();
-</script>
+<footer>
+  &copy; 2025 Your Name — All rights reserved.
+</footer>
 
 </body>
 </html>

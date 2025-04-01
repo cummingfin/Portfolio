@@ -14,24 +14,56 @@
       position: relative;
     }
 
-    .project-block {
-      position: absolute;
-      width: 300px;
-      height: auto;
-      background: white;
-      border: 2px solid #ccc;
-      padding: 15px;
+    .section {
+      width: 100vw;
+      height: 100vh;
       box-sizing: border-box;
-      z-index: 1;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    .project-image {
-      position: absolute;
-      width: 250px;
-      height: 150px;
-      object-fit: cover;
+    .three-column {
+      display: flex;
+      gap: 20px;
+    }
+
+    .three-column .col {
+      flex: 1;
+      background: white;
+      padding: 20px;
       border: 2px solid #ccc;
-      z-index: 1;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .image-left {
+      display: flex;
+      gap: 40px;
+    }
+
+    .image-left img {
+      width: 40%;
+      height: auto;
+      border: 2px solid #ccc;
+    }
+
+    .image-left .text {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border: 2px solid #ccc;
+    }
+
+    .full-image {
+      text-align: center;
+    }
+
+    .full-image img {
+      max-width: 90%;
+      height: auto;
+      border: 2px solid #ccc;
     }
 
     #player {
@@ -40,84 +72,72 @@
       height: 20px;
       background: royalblue;
       border-radius: 50%;
-      z-index: 10;
+      z-index: 100;
+      top: 100px;
+      left: 100px;
     }
   </style>
 </head>
 <body>
-  <!-- Images on the left -->
-  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 100px; left: 50px;">
-  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 300px; left: 50px;">
-  <img src="https://via.placeholder.com/250x150" class="project-image" style="top: 500px; left: 50px;">
 
-  <!-- Text blocks on the right -->
-  <div class="project-block" style="top: 100px; left: 400px;">
-    <h4>Project 1</h4>
-    <p>This is a description of project 1 with some more detailed text.</p>
+<div class="section three-column">
+  <div class="col">
+    <h3>Column 1</h3>
+    <p>This is the first column with some header and text.</p>
   </div>
-  <div class="project-block" style="top: 300px; left: 400px;">
-    <h4>Project 2</h4>
-    <p>This is a description of project 2 with different layout and ideas.</p>
+  <div class="col">
+    <h3>Column 2</h3>
+    <p>This is the second column with some content.</p>
   </div>
-  <div class="project-block" style="top: 500px; left: 400px;">
-    <h4>Project 3</h4>
-    <p>Here we explain project 3, possibly with links or images too.</p>
+  <div class="col">
+    <h3>Column 3</h3>
+    <p>This is the third column with more info.</p>
   </div>
+</div>
 
-  <!-- Player -->
-  <div id="player"></div>
+<div class="section image-left">
+  <img src="https://via.placeholder.com/400x300" alt="Project Image">
+  <div class="text">
+    <h3>Project Title</h3>
+    <p>This section has a large image on the left and text on the right, styled like a normal website content block.</p>
+  </div>
+</div>
 
-  <script>
-    const player = document.getElementById('player');
-    let pos = { x: 250, y: 200 };
-    const speed = 8;
-    let keys = {};
+<div class="section full-image">
+  <img src="https://via.placeholder.com/1000x400" alt="Full Width Image">
+</div>
 
-    document.addEventListener('keydown', e => keys[e.key] = true);
-    document.addEventListener('keyup', e => keys[e.key] = false);
+<div id="player"></div>
 
-    function movePlayer() {
-      let newX = pos.x;
-      let newY = pos.y;
+<script>
+  const player = document.getElementById('player');
+  let pos = { x: 100, y: 100 };
+  const speed = 6;
+  let keys = {};
 
-      if (keys['ArrowUp']) newY -= speed;
-      if (keys['ArrowDown']) newY += speed;
-      if (keys['ArrowLeft']) newX -= speed;
-      if (keys['ArrowRight']) newX += speed;
+  document.addEventListener('keydown', e => keys[e.key] = true);
+  document.addEventListener('keyup', e => keys[e.key] = false);
 
-      if (!checkCollisions(newX, newY)) {
-        pos.x = newX;
-        pos.y = newY;
-      }
+  function movePlayer() {
+    let newX = pos.x;
+    let newY = pos.y;
 
-      player.style.left = pos.x + 'px';
-      player.style.top = pos.y + 'px';
+    if (keys['ArrowUp']) newY -= speed;
+    if (keys['ArrowDown']) newY += speed;
+    if (keys['ArrowLeft']) newX -= speed;
+    if (keys['ArrowRight']) newX += speed;
 
-      requestAnimationFrame(movePlayer);
-    }
+    pos.x = newX;
+    pos.y = newY;
 
-    function checkCollisions(x, y) {
-      const blocks = document.querySelectorAll('.project-block, .project-image');
-      for (let block of blocks) {
-        const rect = block.getBoundingClientRect();
-        const blockLeft = rect.left;
-        const blockTop = rect.top;
-        const blockRight = rect.right;
-        const blockBottom = rect.bottom;
+    player.style.left = pos.x + 'px';
+    player.style.top = pos.y + 'px';
 
-        if (
-          x + 20 > blockLeft &&
-          x < blockRight &&
-          y + 20 > blockTop &&
-          y < blockBottom
-        ) {
-          return true; // collision
-        }
-      }
-      return false;
-    }
+    requestAnimationFrame(movePlayer);
+  }
 
-    movePlayer();
-  </script>
+  movePlayer();
+</script>
+
 </body>
 </html>

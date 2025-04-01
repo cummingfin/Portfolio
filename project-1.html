@@ -70,12 +70,15 @@
     }
 
     #player {
-      position: absolute;
+      position: fixed;
+      left: 100px;
+      top: 50vh;
       width: 20px;
       height: 20px;
       background: royalblue;
       border-radius: 50%;
       z-index: 100;
+      transform: translateY(-50%);
     }
   </style>
 </head>
@@ -111,33 +114,21 @@
 <div id="player"></div>
 
 <script>
-  const player = document.getElementById('player');
-  let pos = { x: 100, y: 100 };
   const speed = 6;
-  let keys = {};
+  const pos = { x: 100, y: 100 };
+  const keys = {};
 
   document.addEventListener('keydown', e => keys[e.key] = true);
   document.addEventListener('keyup', e => keys[e.key] = false);
 
   function movePlayer() {
-    let newX = pos.x;
-    let newY = pos.y;
+    if (keys['ArrowUp']) pos.y -= speed;
+    if (keys['ArrowDown']) pos.y += speed;
+    if (keys['ArrowLeft']) pos.x -= speed;
+    if (keys['ArrowRight']) pos.x += speed;
 
-    if (keys['ArrowUp']) newY -= speed;
-    if (keys['ArrowDown']) newY += speed;
-    if (keys['ArrowLeft']) newX -= speed;
-    if (keys['ArrowRight']) newX += speed;
-
-    pos.x = Math.max(0, newX);
-    pos.y = Math.max(0, newY);
-
-    player.style.left = pos.x + 'px';
-    player.style.top = pos.y + window.scrollY + 'px';
-
-    // Adjust scroll position to keep player centered
-    const scrollTargetY = pos.y - window.innerHeight / 2 + 10;
     window.scrollTo({
-      top: scrollTargetY,
+      top: pos.y - window.innerHeight / 2,
       behavior: 'auto'
     });
 

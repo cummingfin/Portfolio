@@ -1,61 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Isometric Drawer Portfolio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Drawer Portfolio</title>
   <style>
     body {
-      background: #f9f9f9;
-      font-family: sans-serif;
+      background-color: #f5f5f5;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
+      overflow: hidden;
     }
-    svg {
-      width: 400px;
-      height: auto;
+    .cabinet {
+      width: 600px;
+      max-width: 90%;
       cursor: pointer;
     }
     .drawer {
       transition: transform 0.5s ease;
+      transform-origin: left center;
     }
     .drawer:hover {
-      transform: translateX(5px);
+      transform: translate(10px, -5px);
     }
     .drawer.open {
-      transform: translateX(20px);
+      transform: translate(60px, -30px);
     }
-    text {
-      pointer-events: none;
+    svg {
+      width: 100%;
+      height: auto;
     }
   </style>
 </head>
 <body>
 
 <div class="cabinet">
-  <?xml version="1.0" encoding="utf-8" ?>
-<svg baseProfile="tiny" height="500px" version="1.2" width="400px" xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink"><defs /><g id="cabinet"><polygon fill="none" points="50,50 300,50 280,450 30,450" stroke="black" stroke-width="2" /></g><g class="drawer" id="drawer1"><polygon fill="none" points="60,60 290,60 280,130 50,130" stroke="black" stroke-width="2" /><text font-family="sans-serif" font-size="12px" x="70" y="100">Project 1</text></g><g class="drawer" id="drawer2"><polygon fill="none" points="65,140 295,140 285,210 55,210" stroke="black" stroke-width="2" /><text font-family="sans-serif" font-size="12px" x="75" y="180">Project 2</text></g><g class="drawer" id="drawer3"><polygon fill="none" points="70,220 300,220 290,290 60,290" stroke="black" stroke-width="2" /><text font-family="sans-serif" font-size="12px" x="80" y="260">Project 3</text></g><g class="drawer" id="drawer4"><polygon fill="none" points="75,300 305,300 295,370 65,370" stroke="black" stroke-width="2" /><text font-family="sans-serif" font-size="12px" x="85" y="340">Project 4</text></g></svg>
+  <!-- Embed User's SVG here -->
+  <?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 286.59 346.06">
+  <g id="BodyBehind">
+    <polygon points="6.99 94.12 6.99 266.5 143.29 188.08 143.29 15.66 6.99 94.12" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="6.99 94.12 6.99 266.5 .5 262.75 .5 82.88 6.99 94.12" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="1"/>
+  </g>
+  <g id="Drawer5">
+    <polygon points="20.43 242.74 136.87 310.42 266.89 235.59 149.85 168.01 20.43 242.74" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.41 299.37 214.81 258.15 214.81 273.14 143.41 314.36 143.41 299.37" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="214.81 258.15 208.32 254.4 137.21 295.79 143.41 299.37 214.81 258.15" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="20.43 227.75 91.83 186.53 91.83 201.52 20.43 242.74 20.43 227.75" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="91.83 186.53 85.34 182.79 14.23 224.18 20.43 227.75 91.83 186.53" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.29 284.18 13.47 209.23 7.28 213.22 137.09 288.17 143.29 284.18" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.29 284.18 137.09 288.17 137.09 318.15 143.29 314.16 143.29 284.18" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="7.28 243.2 137.09 318.15 137.09 288.17 7.28 213.22 7.28 243.2" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+  </g>
+  <g id="Drawer4">
+    <polygon points="20.42 212.9 136.86 280.57 266.88 205.74 149.84 138.17 20.42 212.9" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.41 269.53 214.8 228.31 214.8 243.3 143.41 284.52 143.41 269.53" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="214.8 228.31 208.31 224.56 137.21 265.95 143.41 269.53 214.8 228.31" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="20.42 197.91 91.82 156.69 91.82 171.68 20.42 212.9 20.42 197.91" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="91.82 156.69 85.33 152.94 14.22 194.33 20.42 197.91 91.82 156.69" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.28 254.34 13.47 179.39 7.27 183.38 137.08 258.33 143.28 254.34" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.28 254.34 137.08 258.33 137.08 288.31 143.28 284.32 143.28 254.34" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="7.27 213.36 137.08 288.31 137.08 258.33 7.27 183.38 7.27 213.36" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+  </g>
+  <g id="Drawer3">
+    <polygon points="20.28 183 136.72 250.67 266.74 175.84 149.7 108.27 20.28 183" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.26 239.63 214.66 198.41 214.66 213.4 143.26 254.62 143.26 239.63" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="214.66 198.41 208.17 194.66 137.06 236.05 143.26 239.63 214.66 198.41" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="20.28 168.01 91.68 126.79 91.68 141.78 20.28 183 20.28 168.01" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="91.68 126.79 85.18 123.04 14.08 164.43 20.28 168.01 91.68 126.79" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.14 224.44 13.32 149.49 7.12 153.48 136.94 228.43 143.14 224.44" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.14 224.44 136.94 228.43 136.94 258.41 143.14 254.42 143.14 224.44" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="7.12 183.46 136.94 258.41 136.94 228.43 7.12 153.48 7.12 183.46" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+  </g>
+  <g id="Drawer2">
+    <polygon points="20.28 152.81 136.72 220.48 266.75 145.65 149.71 78.08 20.28 152.81" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.27 209.44 214.67 168.21 214.67 183.2 143.27 224.43 143.27 209.44" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="214.67 168.21 208.18 164.47 137.07 205.86 143.27 209.44 214.67 168.21" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="20.28 137.82 91.68 96.6 91.68 111.59 20.28 152.81 20.28 137.82" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="91.68 96.6 85.19 92.85 14.09 134.24 20.28 137.82 91.68 96.6" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.14 194.24 13.33 119.3 7.13 123.29 136.95 198.24 143.14 194.24" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.14 194.24 136.95 198.24 136.95 228.21 143.14 224.22 143.14 194.24" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="7.13 153.27 136.95 228.21 136.95 198.24 7.13 123.29 7.13 153.27" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+  </g>
+  <g id="Drawer1">
+    <polygon points="20.15 122.71 136.59 190.38 266.61 115.55 149.57 47.97 20.15 122.71" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.13 179.33 214.53 138.11 214.53 153.1 143.13 194.32 143.13 179.33" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="214.53 138.11 208.04 134.36 136.93 175.75 143.13 179.33 214.53 138.11" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="20.15 107.72 91.55 66.49 91.55 81.48 20.15 122.71 20.15 107.72" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="91.55 66.49 85.05 62.75 13.95 104.14 20.15 107.72 91.55 66.49" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.01 164.14 13.19 89.19 6.99 93.18 136.81 168.13 143.01 164.14" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.01 164.14 136.81 168.13 136.81 198.11 143.01 194.12 143.01 164.14" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="6.99 123.16 136.81 198.11 136.81 168.13 6.99 93.18 6.99 123.16" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+  </g>
+  <g id="BodyInFront">
+    <polygon points="143.29 165.32 143.29 345.2 286.09 262.75 285.25 83.36 143.29 165.32" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="10"/>
+    <polygon points="143.29 .43 285.25 83.36 143.29 165.32 .5 82.88 143.29 .43" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="1"/>
+    <polygon points="143.29 165.32 143.29 345.2 136.8 341.45 136.8 169.07 143.29 165.32" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="1"/>
+    <polygon points="143.29 165.32 136.8 169.07 6.99 94.12 .5 82.88 143.29 165.32" fill="#fff" stroke="#d1d3d4" stroke-miterlimit="1"/>
+  </g>
+</svg>
 </div>
 
 <script>
-  const links = {
-    drawer1: "project-1.html",
-    drawer2: "project-2.html",
-    drawer3: "project-3.html",
-    drawer4: "project-4.html"
+  const drawerLinks = {
+    Drawer1: 'project1.html',
+    Drawer2: 'project2.html',
+    Drawer3: 'project3.html',
+    Drawer4: 'project4.html',
+    Drawer5: 'project5.html'
   };
 
-  document.querySelectorAll('.drawer').forEach(drawer => {
+  document.querySelectorAll('#Drawer1, #Drawer2, #Drawer3, #Drawer4, #Drawer5').forEach(drawer => {
+    drawer.classList.add('drawer');
     drawer.addEventListener('click', () => {
       drawer.classList.add('open');
-      const id = drawer.id;
-      const link = links[id];
       setTimeout(() => {
-        window.location.href = link;
-      }, 500);
+        window.location.href = drawerLinks[drawer.id];
+      }, 600);
     });
   });
 </script>

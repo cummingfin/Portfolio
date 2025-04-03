@@ -34,14 +34,13 @@
 
     /* Cube appears after light using delay */
     #phoneCube {
-      transform: scaleY(0);
-      transform-origin: bottom center;
+      transform: scale(1, 0);
+      transform-origin: center bottom;
       transition: transform 0.3s ease 0.4s, opacity 0.3s ease 0.4s;
     }
     #phone:hover #phoneCube {
       opacity: 1;
-      transform: scaleY(1);
-      transition-delay: 0.8s;
+      transform: scale(1, 1);
     }
 
     #vr:hover #vrLight {

@@ -34,9 +34,12 @@
 
     /* Cube appears after light using delay */
     #phoneCube {
-      transform: scale(1, 0);
-      transform-origin: center bottom;
-      transition: transform 0.3s ease 0.4s, opacity 0.3s ease 0.4s;
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transform-box: fill-box;
+  transition: transform 0.3s ease 0.4s, opacity 0.3s ease 0.4s;
+}
+
     }
     #phone:hover #phoneCube {
       opacity: 1;

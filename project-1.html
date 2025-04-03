@@ -2,105 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Isometric Coffee Cup - About Me</title>
   <style>
     body {
+      background: #fafafa;
       margin: 0;
-      font-family: sans-serif;
-      background: #E3F4F7;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #0077b6;
-      color: white;
-      padding: 60px 40px;
-      text-align: center;
-    }
-
-    .project {
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      padding: 60px 40px;
-      border-bottom: 1px solid #ddd;
+      height: 100vh;
     }
-
-    .project img {
-      width: 100%;
-      max-width: 500px;
+    svg {
+      width: 300px;
       height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
-    .project-text {
-      flex: 1;
-      min-width: 300px;
-      padding: 20px;
+    #steam {
+      animation: puff 3s ease-in-out infinite;
+      opacity: 0.6;
+      transform-origin: center;
     }
-
-    .full-width-image {
-      width: 100%;
-      margin: 40px 0;
-      text-align: center;
+    @keyframes puff {
+      0% { transform: translateY(0px) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+      100% { transform: translateY(-20px) scale(0.8); opacity: 0; }
     }
-
-    .full-width-image img {
-      max-width: 90%;
-      height: auto;
-      border-radius: 8px;
+    #cup:hover #teabag {
+      animation: swing 1.5s ease-in-out infinite;
+      transform-origin: top center;
     }
-
-    footer {
-      background: #f1f1f1;
-      padding: 40px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #555;
+    @keyframes swing {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
     }
   </style>
 </head>
 <body>
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g id="cup">
+      <!-- Cup body -->
+      <ellipse cx="100" cy="150" rx="50" ry="20" fill="white" stroke="black"/>
+      <path d="M50 50 Q50 150 100 170 Q150 150 150 50" fill="white" stroke="black"/>
+      <ellipse cx="100" cy="50" rx="50" ry="20" fill="white" stroke="black"/>
 
-<header>
-  <h1>My Project Portfolio</h1>
-  <p>Showcasing a collection of my design and development work</p>
-</header>
+      <!-- Liquid inside -->
+      <ellipse cx="100" cy="50" rx="45" ry="15" fill="#c69c6d" />
 
-<section class="project">
-  <img src="https://via.placeholder.com/500x300" alt="Project Image">
-  <div class="project-text">
-    <h2>Project One</h2>
-    <p>This project demonstrates my ability to build clean, responsive layouts and solve interesting challenges with HTML, CSS, and JavaScript.</p>
-  </div>
-</section>
+      <!-- Steam group -->
+      <g id="steam" stroke="gray" fill="none" stroke-width="1.5">
+        <path d="M90 30 Q85 15 90 5" />
+        <path d="M100 30 Q95 15 100 5" />
+        <path d="M110 30 Q105 15 110 5" />
+      </g>
 
-<section class="project">
-  <div class="project-text">
-    <h2>Project Two</h2>
-    <p>In this project, I developed a full-stack web application using modern JavaScript frameworks and integrated third-party APIs.</p>
-  </div>
-  <img src="https://via.placeholder.com/500x300" alt="Project Image">
-</section>
-
-<div class="full-width-image">
-  <img src="https://via.placeholder.com/1200x400" alt="Highlight Image">
-</div>
-
-<section class="project">
-  <img src="https://via.placeholder.com/500x300" alt="Project Image">
-  <div class="project-text">
-    <h2>Project Three</h2>
-    <p>A creative piece exploring motion design and user experience through animation and interactive storytelling.</p>
-  </div>
-</section>
-
-<footer>
-  &copy; 2025 Your Name — All rights reserved.
-</footer>
-
+      <!-- Teabag -->
+      <g id="teabag" stroke="black" fill="none" stroke-width="1">
+        <line x1="100" y1="60" x2="100" y2="110" />
+        <rect x="95" y="110" width="10" height="10" fill="#a8cf8c" stroke="black" />
+      </g>
+    </g>
+  </svg>
 </body>
 </html>

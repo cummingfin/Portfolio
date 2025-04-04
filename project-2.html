@@ -13,7 +13,7 @@
       height: 100vh;
     }
     svg {
-      width: 70vw;
+      width: 90vw;
       height: auto;
       overflow: visible;
     }
@@ -23,31 +23,29 @@
     #phoneCube,
     #vrLight {
       opacity: 0;
-      transition: opacity 0.4s ease;
       pointer-events: none;
     }
 
     /* Phone light on hover */
     #phone:hover #phoneLight {
       opacity: 1;
+      transition: opacity 0.4s ease;
     }
 
-    /* Cube appears after light using delay */
+    /* Cube appears with scale from bottom after light */
     #phoneCube {
-  transform: scaleY(0);
-  transform-origin: center bottom;
-  transform-box: fill-box;
-  transition: transform 0.3s ease 0.4s, opacity 0.3s ease 0.4s;
-}
-
+      transform: scaleY(0);
+      transform-origin: center bottom;
+      transition: transform 0.3s ease 0.4s, opacity 0.3s ease 0.4s;
     }
     #phone:hover #phoneCube {
       opacity: 1;
-      transform: scale(1, 1);
+      transform: scaleY(1);
     }
 
     #vr:hover #vrLight {
       opacity: 1;
+      transition: opacity 0.4s ease;
     }
 
     /* Paper floating - slower, stays up longer */
@@ -68,8 +66,8 @@
     }
     @keyframes rustle {
       0% { transform: rotate(0deg); }
-      30% { transform: rotate(0.2deg); }
-      70% { transform: rotate(-0.2deg); }
+      30% { transform: rotate(1deg); }
+      70% { transform: rotate(-1deg); }
       100% { transform: rotate(0deg); }
     }
 
@@ -80,6 +78,34 @@
     }
     #laptop:hover #laptopScreen {
       fill: #f5f77e;
+    }
+
+    /* Popup styling */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      width: 80vw;
+      max-width: 600px;
+      z-index: 10;
+      display: none;
+    }
+    .popup.active {
+      display: block;
+    }
+    .popup .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -276,5 +302,35 @@
 </svg>
     <!-- Make sure elements are grouped and named: #paper, #plantLeaves, #phone, #phoneLight, #phoneCube, #vrLight, #laptopScreen -->
   </svg>
+
+  <!-- Popup Containers -->
+  <div id="popup-phone" class="popup">
+    <button class="close" onclick="closePopup('popup-phone')">✕</button>
+    <h2>Phone Project</h2>
+    <p>Here you can include images, videos, or text about the phone-related project.</p>
+  </div>
+
+  <div id="popup-vr" class="popup">
+    <button class="close" onclick="closePopup('popup-vr')">✕</button>
+    <h2>VR Project</h2>
+    <p>Details about the VR headset project go here.</p>
+  </div>
+
+  <script>
+    const phone = document.getElementById('phone');
+    const vr = document.getElementById('vr');
+
+    phone?.addEventListener('click', () => {
+      document.getElementById('popup-phone').classList.add('active');
+    });
+
+    vr?.addEventListener('click', () => {
+      document.getElementById('popup-vr').classList.add('active');
+    });
+
+    function closePopup(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+  </script>
 </body>
 </html>

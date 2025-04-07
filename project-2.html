@@ -411,21 +411,27 @@
     <p>Details about the VR headset project go here.</p>
   </div>
 
-  <script>
-    const phone = document.getElementById('phone');
-    const vr = document.getElementById('vr');
+ <script>
+  const phone = document.getElementById('phone');
+  const vr = document.getElementById('vr');
+  const laptop = document.getElementById('laptop');
 
-    phone?.addEventListener('click', () => {
-      document.getElementById('popup-phone').classList.add('active');
-    });
+  phone?.addEventListener('click', () => {
+    document.getElementById('popup-phone').classList.add('active');
+  });
 
-    vr?.addEventListener('click', () => {
-      document.getElementById('popup-vr').classList.add('active');
-    });
+  vr?.addEventListener('click', () => {
+    document.getElementById('popup-vr').classList.add('active');
+  });
 
-    function closePopup(id) {
-      document.getElementById(id).classList.remove('active');
-    }
-  </script>
+  laptop?.addEventListener('click', () => {
+    window.location.href = 'more-projects.html'; // Replace with your actual URL or route
+  });
+
+  function closePopup(id) {
+    document.getElementById(id).classList.remove('active');
+  }
+</script>
+
 </body>
 </html>

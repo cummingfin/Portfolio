@@ -18,13 +18,25 @@
 
     svg {
       width: 100vw;
-      height: 80vh;
+      height: 100vh;
       display: block;
+    }
+
+    #Loading {
+      opacity: 1;
+      transition: opacity 1s ease;
+      pointer-events: all;
+    }
+
+    #desktopScreen {
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
     }
 
     #loadingWheel {
       animation: spin 1s linear infinite;
-      transform-origin: center;
+      transform-origin: 500px 350px;
     }
 
     @keyframes spin {
@@ -36,7 +48,11 @@
 <body>
 
   <!-- Full-screen SVG with Layer1, Loading, and DesktopScreen embedded -->
- <?xml version="1.0" encoding="UTF-8"?>
+  <svg id="projectOS" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+    <!-- Layer1: Always visible background -->
+    <g id="Layer1">
+      <!-- Your background shapes go here -->
+      <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842.89 491.58">
   <g id="Table">
     <rect x=".5" y="435.83" width="841.89" height="55.25" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
@@ -124,20 +140,6 @@
     </g>
     <path d="M485.38,388.43h-106.89c-4.71,0-8-4.15-7.36-9.16l3.15-24.55c.57-4.42,4.51-7.94,8.82-7.94h97.68c4.31,0,8.25,3.52,8.82,7.94l3.15,24.55c.64,5.02-2.65,9.16-7.36,9.16Z" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
   </g>
-  <g id="loading">
-    <path d="M327.13-76.93h217.83v406.72h-217.83c-4.46,0-8.09-3.62-8.09-8.09V-68.84c0-4.46,3.62-8.09,8.09-8.09Z" transform="translate(558.43 -305.56) rotate(90)" fill="#5c5c5c" stroke="#231f20" stroke-miterlimit="10"/>
-    <path d="M446.79,111.64c0,8.17-6.62,14.79-14.79,14.79s-14.79-6.62-14.79-14.79,6.62-25.2,14.79-25.2,14.79,17.03,14.79,25.2Z" fill="#d19c66" stroke="#231f20" stroke-miterlimit="10"/>
-    <g id="loadingWheel">
-      <rect x="424.06" y="148.96" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(272.22 578.21) rotate(-90)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="430.85" y="142.18" width="2.3" height="8.07" rx="1.15" ry="1.15" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="430.85" y="155.74" width="2.3" height="8.07" rx="1.15" ry="1.15" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="437.63" y="148.96" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(591.78 -285.79) rotate(90)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="426.05" y="144.16" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(20.33 345.48) rotate(-45)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="435.64" y="144.16" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(232.73 -265.46) rotate(45)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="426.05" y="153.76" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(236.7 -255.86) rotate(45)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-      <rect x="435.64" y="153.76" width="2.3" height="8.07" rx="1.15" ry="1.15" transform="translate(857.23 -39.5) rotate(135)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
-    </g>
-  </g>
   <g id="desktopScreen">
     <g id="desktop">
       <path d="M326.23-77.82h219.62v406.72h-219.62c-4.46,0-8.09-3.62-8.09-8.09V-69.74c0-4.46,3.62-8.09,8.09-8.09Z" transform="translate(557.54 -306.46) rotate(90)" fill="#e0f2f6" stroke="#231f20" stroke-miterlimit="10"/>
@@ -204,7 +206,48 @@
       <polygon points="408.22 46.11 393.96 58.16 379.7 46.11 408.22 46.11" fill="#fff" stroke="#231f20" stroke-linejoin="round"/>
     </g>
   </g>
+  <g id="loading">
+    <path d="M326.23-77.82h219.62v406.72h-219.62c-4.46,0-8.09-3.62-8.09-8.09V-69.74c0-4.46,3.62-8.09,8.09-8.09Z" transform="translate(557.54 -306.46) rotate(90)" fill="#5c5c5c" stroke="#231f20" stroke-miterlimit="10"/>
+    <path d="M446.79,110.63c0,8.23-6.62,14.91-14.79,14.91s-14.79-6.67-14.79-14.91,6.62-25.4,14.79-25.4,14.79,17.17,14.79,25.4Z" fill="#d19c66" stroke="#231f20" stroke-miterlimit="10"/>
+    <g id="loadingWheel">
+      <rect x="424.06" y="148.28" width="2.32" height="8.07" rx="1.15" ry="1.15" transform="translate(272.91 577.52) rotate(-90)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <rect x="430.85" y="141.41" width="2.3" height="8.13" rx="1.15" ry="1.15" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <rect x="430.85" y="155.08" width="2.3" height="8.13" rx="1.15" ry="1.15" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <rect x="437.62" y="148.28" width="2.32" height="8.07" rx="1.15" ry="1.15" transform="translate(591.09 -286.47) rotate(90)" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <path d="M430.05,150.35h0c-.45.45-1.18.45-1.63,0l-4.07-4.11c-.45-.45-.45-1.19,0-1.64h0c.45-.45,1.18-.45,1.63,0l4.07,4.11c.45.45.45,1.19,0,1.64Z" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <path d="M433.94,150.35h0c-.45-.45-.45-1.19,0-1.64l4.07-4.11c.45-.45,1.18-.45,1.63,0h0c.45.45.45,1.19,0,1.64l-4.07,4.11c-.45.45-1.18.45-1.63,0Z" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <path d="M424.35,160.02h0c-.45-.45-.45-1.19,0-1.64l4.07-4.11c.45-.45,1.18-.45,1.63,0h0c.45.45.45,1.19,0,1.64l-4.07,4.11c-.45.45-1.18.45-1.63,0Z" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+      <path d="M433.94,154.27h0c.45-.45,1.18-.45,1.63,0l4.07,4.11c.45.45.45,1.19,0,1.64h0c-.45.45-1.18.45-1.63,0l-4.07-4.11c-.45-.45-.45-1.19,0-1.64Z" fill="#83c668" stroke="#231f20" stroke-miterlimit="10"/>
+    </g>
+  </g>
 </svg>
+    </g>
+
+    <!-- Loading layer: visible on load, fades out -->
+    <g id="Loading">
+      <g id="loadingWheel">
+        <circle cx="500" cy="350" r="40" stroke="#0f0" stroke-width="6" fill="none" stroke-linecap="round" />
+      </g>
+    </g>
+
+    <!-- Desktop screen: hidden initially, fades in -->
+    <g id="desktopScreen">
+      <!-- App icons go here -->
+      <g id="Lawny" style="cursor: pointer;">
+        <rect x="200" y="200" width="64" height="64" fill="#0f0" rx="10" />
+        <text x="232" y="240" fill="#111" font-size="14" text-anchor="middle">Lawny</text>
+      </g>
+    </g>
+  </svg>
+
+  <!-- Lawny Modal -->
+  <div id="lawny-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 100;">
+    <div class="modal-content" style="background: #222; padding: 2rem; border: 2px solid #0f0; border-radius: 10px; max-width: 600px; width: 90%; position: relative; color: #0f0;">
+      <span class="close" style="position: absolute; top: 1rem; right: 1.5rem; font-size: 24px; cursor: pointer; color: #0f0;">&times;</span>
+      <h2>Lawny</h2>
+      <p>This is your Lawny project content. Add more details, links, or media here!</p>
+    </div>
+  </div>
 
   <script>
     window.addEventListener("load", () => {
@@ -213,8 +256,10 @@
 
       setTimeout(() => {
         loadingLayer.style.opacity = 0;
+        loadingLayer.style.pointerEvents = 'none';
         desktopLayer.style.opacity = 1;
-      }, 2000);
+        desktopLayer.style.pointerEvents = 'all';
+      }, 3000); // 3 seconds delay
     });
 
     // Modal logic

@@ -243,6 +243,14 @@
       }, 2000); // 2 seconds delay
     });
 
+      const contact = document.getElementById('contact');
+        if (contact) {
+          contact.style.cursor = 'pointer';
+          contact.addEventListener('click', () => {
+            window.location.href = 'contact.html';
+          });
+        }
+
     // Modal logic
     const lawny = document.getElementById('Lawny');
     const lawnyModal = document.getElementById('lawny-modal');

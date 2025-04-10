@@ -47,6 +47,10 @@
       display: none;
       z-index: 999;
     }
+
+    text {
+    visibility: hidden;
+    }
   </style>
 </head>
 <body>
@@ -209,6 +213,9 @@
     }, 'Click to copy');
 
   function typeTextElement(textEl, delayPerLetter, onComplete) {
+
+    textEl.style.visibility = 'visible';
+    
   const tspans = Array.from(textEl.querySelectorAll('tspan'));
   const originalText = tspans.length > 0
     ? tspans.map(t => t.textContent)

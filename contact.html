@@ -193,35 +193,6 @@
       el.addEventListener('click', action);
     }
 
-        // Animate SVG <text> elements as if typed
-    function animateTypingText(textElement, delay = 0) {
-      const fullText = textElement.textContent;
-      textElement.textContent = '';
-      let i = 0;
-    
-      function typeChar() {
-        if (i < fullText.length) {
-          textElement.textContent += fullText.charAt(i);
-          i++;
-          setTimeout(typeChar, 20); // speed per character
-        }
-      }
-    
-      setTimeout(typeChar, delay);
-    }
-    
-    // Animate all <text> elements
-    window.addEventListener('load', () => {
-      const texts = document.querySelectorAll('#contactScene text');
-      let cumulativeDelay = 0;
-    
-      texts.forEach(text => {
-        animateTypingText(text, cumulativeDelay);
-        cumulativeDelay += text.textContent.length * 20 + 200; // type time + pause between lines
-      });
-    });
-
-
     // Setup interactive behaviors
     setupInteractive('clickHere', () => {
       window.open('https://www.linkedin.com/in/findlay-cumming-9a8481204/', '_blank');
@@ -236,6 +207,59 @@
       navigator.clipboard.writeText('cummingfin@gmail.com');
       alert('Email address copied!');
     }, 'Click to copy');
+
+    <script>
+  // Function to animate typing of one <text> element
+  function typeText(element, fullText, delayPerLetter, onComplete) {
+    let i = 0;
+    element.textContent = '';
+
+    function type() {
+      if (i < fullText.length) {
+        element.textContent += fullText.charAt(i);
+        i++;
+        setTimeout(type, delayPerLetter);
+      } else {
+        onComplete();
+      }
+    }
+
+    type();
+  }
+
+  // When SVG loads
+  window.addEventListener('load', () => {
+    const textElements = Array.from(document.querySelectorAll('#contactScene text'));
+
+    // Sort top to bottom by y position
+    textElements.sort((a, b) => {
+      const aY = parseFloat(a.getAttribute('y')) || 0;
+      const bY = parseFloat(b.getAttribute('y')) || 0;
+      return aY - bY;
+    });
+
+    // Calculate total number of characters
+    const totalChars = textElements.reduce((sum, el) => sum + el.textContent.length, 0);
+    const totalDuration = 5000; // 5 seconds
+    const delayPerLetter = Math.max(5, Math.floor(totalDuration / totalChars));
+
+    let current = 0;
+
+    function animateNext() {
+      if (current >= textElements.length) return;
+      const el = textElements[current];
+      const fullText = el.textContent;
+      typeText(el, fullText, delayPerLetter, () => {
+        current++;
+        animateNext();
+      });
+    }
+
+    // Start the chain
+    animateNext();
+  });
+</script>
+
   </script>
 
 </body>

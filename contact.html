@@ -208,55 +208,79 @@
       alert('Email address copied!');
     }, 'Click to copy');
 
-  // Function to animate typing of one <text> element
-  function typeText(element, fullText, delayPerLetter, onComplete) {
-    let i = 0;
-    element.textContent = '';
+  function typeTextElement(textEl, delayPerLetter, onComplete) {
+  const tspans = Array.from(textEl.querySelectorAll('tspan'));
+  const originalText = tspans.length > 0
+    ? tspans.map(t => t.textContent)
+    : [textEl.textContent];
 
-    function type() {
-      if (i < fullText.length) {
-        element.textContent += fullText.charAt(i);
-        i++;
-        setTimeout(type, delayPerLetter);
-      } else {
-        onComplete();
-      }
-    }
-
-    type();
+  // Clear all tspans
+  if (tspans.length > 0) {
+    tspans.forEach(t => t.textContent = '');
+  } else {
+    textEl.textContent = '';
   }
 
-  // When SVG loads
-  window.addEventListener('load', () => {
-    const textElements = Array.from(document.querySelectorAll('#contactScene text'));
+  let tIndex = 0;
+  let cIndex = 0;
 
-    // Sort top to bottom by y position
-    textElements.sort((a, b) => {
-      const aY = parseFloat(a.getAttribute('y')) || 0;
-      const bY = parseFloat(b.getAttribute('y')) || 0;
-      return aY - bY;
-    });
-
-    // Calculate total number of characters
-    const totalChars = textElements.reduce((sum, el) => sum + el.textContent.length, 0);
-    const totalDuration = 5000; // 5 seconds
-    const delayPerLetter = Math.max(5, Math.floor(totalDuration / totalChars));
-
-    let current = 0;
-
-    function animateNext() {
-      if (current >= textElements.length) return;
-      const el = textElements[current];
-      const fullText = el.textContent;
-      typeText(el, fullText, delayPerLetter, () => {
-        current++;
-        animateNext();
-      });
+  function typeNext() {
+    if (tIndex >= originalText.length) {
+      onComplete();
+      return;
     }
 
-    // Start the chain
-    animateNext();
+    const currentLine = originalText[tIndex];
+    const targetTspan = tspans.length > 0 ? tspans[tIndex] : textEl;
+
+    if (cIndex < currentLine.length) {
+      targetTspan.textContent += currentLine.charAt(cIndex);
+      cIndex++;
+      setTimeout(typeNext, delayPerLetter);
+    } else {
+      tIndex++;
+      cIndex = 0;
+      setTimeout(typeNext, delayPerLetter);
+    }
+  }
+
+  typeNext();
+}
+
+window.addEventListener('load', () => {
+  const textElements = Array.from(document.querySelectorAll('#contactScene text'));
+
+  // Sort top to bottom visually by y-position
+  textElements.sort((a, b) => {
+    const ay = a.getBoundingClientRect().top;
+    const by = b.getBoundingClientRect().top;
+    return ay - by;
   });
+
+  const totalChars = textElements.reduce((sum, el) => {
+    const tspans = el.querySelectorAll('tspan');
+    if (tspans.length > 0) {
+      return sum + Array.from(tspans).reduce((s, t) => s + t.textContent.length, 0);
+    }
+    return sum + el.textContent.length;
+  }, 0);
+
+  const totalDuration = 5000;
+  const delayPerLetter = Math.max(5, Math.floor(totalDuration / totalChars));
+  let current = 0;
+
+  function animateNext() {
+    if (current >= textElements.length) return;
+    const el = textElements[current];
+    typeTextElement(el, delayPerLetter, () => {
+      current++;
+      animateNext();
+    });
+  }
+
+  animateNext();
+});
+
 </script>
 
 </body>

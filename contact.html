@@ -262,9 +262,9 @@ window.addEventListener('load', () => {
   document.getElementById('email'),
   document.querySelector('#staticElements text:nth-of-type(3)'),
   document.querySelector('#staticElements text:nth-of-type(4)'),
-  document.getElementById('phoneNumber').querySelector('text'),
-  document.querySelector('#staticElements text:nth-of-type(5)'),
   document.getElementById('clickHere').querySelector('text')
+  document.querySelector('#staticElements text:nth-of-type(5)'),
+  document.getElementById('phoneNumber').querySelector('text'),
 ].filter(Boolean); // filter out nulls just in case
 
   const totalChars = textElements.reduce((sum, el) => {

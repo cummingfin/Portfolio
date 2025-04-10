@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact</title>
 
   <!-- Fira Code from Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"/>
 
   <style>
     body {
@@ -26,7 +26,16 @@
       font-family: 'Fira Code', monospace;
     }
 
-    .copy-hint {
+    .interactive {
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    .interactive:hover {
+      filter: drop-shadow(0 0 6px #0f0);
+    }
+
+    #hint {
       position: absolute;
       background: #222;
       color: #0f0;
@@ -36,20 +45,16 @@
       font-size: 12px;
       pointer-events: none;
       display: none;
-      z-index: 10;
-    }
-
-    .hover-group {
-      display: none;
+      z-index: 999;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating hover label -->
-  <div id="hint" class="copy-hint">Click to copy</div>
+  <!-- Floating 'Click to copy' bubble -->
+  <div id="hint">Click to copy</div>
 
-  <!-- ⬇️ Paste your full SVG below this line -->
+  <!-- ⬇️ INSERT YOUR SVG BELOW THIS LINE -->
   <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1261.25 491.58">
   <g id="Table">
@@ -61,7 +66,7 @@
     <path d="M896.08,395.51h-509.81c-7.89,0-13.23-8.69-10.18-16.55l50.32-129.99h429.53l50.32,129.99c3.05,7.87-2.3,16.55-10.18,16.55Z" fill="#879fd2" stroke="#231f20" stroke-miterlimit="10" stroke-width=".75"/>
     <path d="M445.84.38h390.55c10.72,0,19.43,8.7,19.43,19.43v229.16h-429.4V19.8c0-10.72,8.7-19.43,19.43-19.43Z" fill="#879fd2" stroke="#231f20" stroke-miterlimit="10" stroke-width=".75"/>
     <path d="M536.25-78.69h217.83v406.72h-217.83c-4.46,0-8.09-3.62-8.09-8.09V-70.61c0-4.46,3.62-8.09,8.09-8.09Z" transform="translate(765.79 -516.45) rotate(90)" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-    <circle cx="641.12" cy="6.05" r="3" fill="#231f20" stroke="#fff" stroke-miterlimit="10"/>
+    <circle cx="641.12" cy="6.05" r="3" fill="#231f20"/>
     <g>
       <path d="M861.84,337.96h-441.45c-3.16,0-4.88-2.41-3.84-5.36l24.79-70.63c.81-2.31,3.71-4.17,6.48-4.17h386.61c2.77,0,5.66,1.86,6.48,4.17l24.79,70.63c1.03,2.95-.68,5.36-3.84,5.36Z" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
       <g>
@@ -141,12 +146,8 @@
   <path id="screen" d="M536.31-78.69h217.83v406.72h-217.83c-4.46,0-8.09-3.62-8.09-8.09V-70.61c0-4.46,3.62-8.09,8.09-8.09Z" transform="translate(765.85 -516.51) rotate(90)" fill="#4a494a" stroke="#231f20" stroke-miterlimit="10"/>
   <g id="screenContents">
     <text id="email" transform="translate(572.25 92.59)" font-family="FiraCode-Regular, &apos;Fira Code&apos;" font-size="12"><tspan x="0" y="0" fill="#7fc56c">cummingfin@gmail.com</tspan><tspan x="144" y="0" fill="#fff" letter-spacing="0em">&gt;</tspan></text>
-    <text id="emailHover" transform="translate(572.25 92.6)" fill="#f9a66d" font-family="FiraCode-Medium, &apos;Fira Code&apos;" font-size="12" font-weight="500"><tspan x="0" y="0">cummingfin@gmail.com&gt;</tspan></text>
     <g id="clickHere">
       <text transform="translate(566.19 132.41)" fill="#7fc56c" font-family="FiraCode-Regular, &apos;Fira Code&apos;" font-size="12"><tspan x="0" y="0">Click Here</tspan></text>
-    </g>
-    <g id="clickHereHover">
-      <text transform="translate(566.19 132.42)" fill="#f9a66d" font-family="FiraCode-Medium, &apos;Fira Code&apos;" font-size="12" font-weight="500"><tspan x="0" y="0">Click Here</tspan></text>
     </g>
     <g id="staticElements">
       <text transform="translate(458.59 52.29)" fill="#fff" font-family="FiraCode-Regular, &apos;Fira Code&apos;" font-size="21"><tspan x="0" y="0">Terminal</tspan></text>
@@ -158,23 +159,21 @@
     <g id="phoneNumber">
       <text transform="translate(544.14 153.29)" fill="#7fc56c" font-family="FiraCode-Regular, &apos;Fira Code&apos;" font-size="12"><tspan x="0" y="0">07710698974</tspan></text>
     </g>
-    <g id="phoneNumberHover">
-      <text transform="translate(544.14 153.29)" fill="#f9a66d" font-family="FiraCode-Medium, &apos;Fira Code&apos;" font-size="12" font-weight="500"><tspan x="0" y="0">07710698974</tspan></text>
-    </g>
   </g>
 </svg>
+  <!-- ⬆️ END OF SVG SECTION -->
 
   <script>
-    function setupHover(baseId, hoverId, onClick, hintText = '') {
-      const base = document.getElementById(baseId);
-      const hover = document.getElementById(hoverId);
-      const hint = document.getElementById('hint');
+    const hint = document.getElementById('hint');
 
-      if (!base || !hover) return;
+    function setupInteractive(id, action, hintText = '') {
+      const el = document.getElementById(id);
+      if (!el) return;
 
-      base.addEventListener('mouseenter', (e) => {
-        hover.style.display = 'inline';
-        if (hintText && hint) {
+      el.classList.add('interactive');
+
+      el.addEventListener('mouseenter', (e) => {
+        if (hintText) {
           hint.innerText = hintText;
           hint.style.display = 'block';
           hint.style.left = e.pageX + 'px';
@@ -182,36 +181,31 @@
         }
       });
 
-      base.addEventListener('mousemove', (e) => {
-        if (hint) {
-          hint.style.left = e.pageX + 'px';
-          hint.style.top = e.pageY - 30 + 'px';
-        }
+      el.addEventListener('mousemove', (e) => {
+        hint.style.left = e.pageX + 'px';
+        hint.style.top = e.pageY - 30 + 'px';
       });
 
-      base.addEventListener('mouseleave', () => {
-        hover.style.display = 'none';
-        if (hint) hint.style.display = 'none';
+      el.addEventListener('mouseleave', () => {
+        hint.style.display = 'none';
       });
 
-      base.addEventListener('click', onClick);
+      el.addEventListener('click', action);
     }
 
-    // LinkedIn open
-    setupHover('clickHere', 'clickHereHover', () => {
+    // Setup interactive behaviors
+    setupInteractive('clickHere', () => {
       window.open('https://www.linkedin.com/in/findlay-cumming-9a8481204/', '_blank');
     });
 
-    // Phone copy
-    setupHover('phoneNumber', 'phoneNumberHover', () => {
+    setupInteractive('phoneNumber', () => {
       navigator.clipboard.writeText('07710698974');
-      alert('Phone number copied to clipboard!');
+      alert('Phone number copied!');
     }, 'Click to copy');
 
-    // Email copy
-    setupHover('email', 'emailHover', () => {
+    setupInteractive('email', () => {
       navigator.clipboard.writeText('cummingfin@gmail.com');
-      alert('Email address copied to clipboard!');
+      alert('Email address copied!');
     }, 'Click to copy');
   </script>
 

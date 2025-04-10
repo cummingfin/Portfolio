@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+
+  <!-- Fira Code from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
+
   <style>
     body {
       margin: 0;
@@ -12,18 +16,14 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: 'Courier New', monospace;
+      font-family: 'Fira Code', monospace;
       color: #0f0;
     }
 
     svg {
       max-width: 100%;
       max-height: 100%;
-      display: block;
-    }
-
-    .hover-group {
-      display: none;
+      font-family: 'Fira Code', monospace;
     }
 
     .copy-hint {
@@ -38,8 +38,19 @@
       display: none;
       z-index: 10;
     }
+
+    .hover-group {
+      display: none;
+    }
   </style>
-<?xml version="1.0" encoding="UTF-8"?>
+</head>
+<body>
+
+  <!-- Floating hover label -->
+  <div id="hint" class="copy-hint">Click to copy</div>
+
+  <!-- ⬇️ Paste your full SVG below this line -->
+  <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1261.25 491.58">
   <g id="Table">
     <rect x=".5" y="435.83" width="1260.25" height="55.25" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
@@ -152,58 +163,76 @@
     </g>
   </g>
 </svg>
+  <svg id="contactScene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+    <g id="screen">
+      <!-- Your laptop screen background -->
+    </g>
+
+    <g id="screenContents">
+      <g id="staticElements">
+        <!-- Your static text and layout -->
+      </g>
+
+      <!-- INTERACTIVE GROUPS -->
+      <g id="clickHere" style="cursor: pointer;"></g>
+      <g id="clickHereHover" class="hover-group"></g>
+
+      <g id="phoneNumber" style="cursor: pointer;"></g>
+      <g id="phoneNumberHover" class="hover-group"></g>
+
+      <g id="email" style="cursor: pointer;"></g>
+      <g id="emailHover" class="hover-group"></g>
+    </g>
   </svg>
 
   <script>
-    const showHover = (targetId, hoverId, action, hintText = '') => {
-      const target = document.getElementById(targetId);
+    function setupHover(baseId, hoverId, onClick, hintText = '') {
+      const base = document.getElementById(baseId);
       const hover = document.getElementById(hoverId);
       const hint = document.getElementById('hint');
 
-      if (!target || !hover) return;
+      if (!base || !hover) return;
 
-      target.addEventListener('mouseover', (e) => {
+      base.addEventListener('mouseenter', (e) => {
         hover.style.display = 'inline';
-        if (hintText) {
-          hint.style.display = 'block';
-          hint.style.left = e.pageX + 10 + 'px';
-          hint.style.top = e.pageY - 30 + 'px';
+        if (hintText && hint) {
           hint.innerText = hintText;
-        }
-      });
-
-      target.addEventListener('mousemove', (e) => {
-        if (hintText) {
-          hint.style.left = e.pageX + 10 + 'px';
+          hint.style.display = 'block';
+          hint.style.left = e.pageX + 'px';
           hint.style.top = e.pageY - 30 + 'px';
         }
       });
 
-      target.addEventListener('mouseout', () => {
-        hover.style.display = 'none';
-        hint.style.display = 'none';
+      base.addEventListener('mousemove', (e) => {
+        if (hint) {
+          hint.style.left = e.pageX + 'px';
+          hint.style.top = e.pageY - 30 + 'px';
+        }
       });
 
-      target.addEventListener('click', action);
-    };
+      base.addEventListener('mouseleave', () => {
+        hover.style.display = 'none';
+        if (hint) hint.style.display = 'none';
+      });
 
-    // LinkedIn link
-    showHover('clickHere', 'clickHereHover', () => {
+      base.addEventListener('click', onClick);
+    }
+
+    // LinkedIn open
+    setupHover('clickHere', 'clickHereHover', () => {
       window.open('https://www.linkedin.com/in/findlay-cumming-9a8481204/', '_blank');
     });
 
     // Phone copy
-    showHover('phoneNumber', 'phoneNumberHover', () => {
-      navigator.clipboard.writeText('+44 YOUR PHONE NUMBER').then(() => {
-        alert('Phone number copied to clipboard!');
-      });
+    setupHover('phoneNumber', 'phoneNumberHover', () => {
+      navigator.clipboard.writeText('07710698974');
+      alert('Phone number copied to clipboard!');
     }, 'Click to copy');
 
     // Email copy
-    showHover('email', 'emailHover', () => {
-      navigator.clipboard.writeText('your@email.com').then(() => {
-        alert('Email address copied to clipboard!');
-      });
+    setupHover('email', 'emailHover', () => {
+      navigator.clipboard.writeText('cummingfin@gmail.com');
+      alert('Email address copied to clipboard!');
     }, 'Click to copy');
   </script>
 

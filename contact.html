@@ -52,11 +52,17 @@
     visibility: hidden;
     }
 
+    /* Apply the retro cursor ONLY when over the screen area */
     #screen {
-      cursor: url('data:image/svg+xml;utf8,\
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32">\
-          <path d="M2,2 L2,30 L10,22 L18,30 L30,18 L22,10 L30,2 Z" fill="black" stroke="white" stroke-width="1"/>\
-        </svg>') 0 0, auto;
+      cursor: url('RetroCursor.svg') 0 0, auto;
+    }
+    
+    /* Make sure interactive SVG elements don't override it */
+    #screen *, 
+    #screen a, 
+    #screen [onclick], 
+    #screen text {
+      cursor: inherit !important;
     }
   </style>
 </head>

@@ -193,6 +193,35 @@
       el.addEventListener('click', action);
     }
 
+        // Animate SVG <text> elements as if typed
+    function animateTypingText(textElement, delay = 0) {
+      const fullText = textElement.textContent;
+      textElement.textContent = '';
+      let i = 0;
+    
+      function typeChar() {
+        if (i < fullText.length) {
+          textElement.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(typeChar, 20); // speed per character
+        }
+      }
+    
+      setTimeout(typeChar, delay);
+    }
+    
+    // Animate all <text> elements
+    window.addEventListener('load', () => {
+      const texts = document.querySelectorAll('#contactScene text');
+      let cumulativeDelay = 0;
+    
+      texts.forEach(text => {
+        animateTypingText(text, cumulativeDelay);
+        cumulativeDelay += text.textContent.length * 20 + 200; // type time + pause between lines
+      });
+    });
+
+
     // Setup interactive behaviors
     setupInteractive('clickHere', () => {
       window.open('https://www.linkedin.com/in/findlay-cumming-9a8481204/', '_blank');

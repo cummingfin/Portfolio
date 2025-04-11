@@ -416,6 +416,8 @@
   const phone = document.getElementById('phone');
   const vr = document.getElementById('vr');
   const laptop = document.getElementById('laptop');
+  const plant = document.getElementById('plant');
+  const paper = document.getElementById('paper');
 
   phone?.addEventListener('click', () => {
     document.getElementById('popup-phone').classList.add('active');
@@ -423,6 +425,14 @@
 
   vr?.addEventListener('click', () => {
     document.getElementById('popup-vr').classList.add('active');
+  });
+
+  plant?.addEventListener('click', () => {
+    document.getElementById('popup-plant').classList.add('active');
+  });
+
+  paper?.addEventListener('click', () => {
+    document.getElementById('popup-paper').classList.add('active');
   });
 
   laptop?.addEventListener('click', () => {

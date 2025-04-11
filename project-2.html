@@ -81,107 +81,151 @@
     }
 
     .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 2rem;
-      box-shadow: none;
-      border-radius: 12px;
-      border: 2px solid #231F20;
-      width: calc(100% - 100px);
-      max-width: 1000px;
-      max-height: 90vh;
-      overflow: hidden;
-      z-index: 10;
-      display: none;
-      font-family: 'Satoshi', sans-serif;
-      color: white; /* Optional default text color */
-    }
-    
-    .popup.active {
-      display: block;
-    }
-    
-    .popup .close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: inherit;
-    }
-    
-    .popup-scroll {
-      overflow-y: auto;
-      max-height: 75vh;
-      padding-right: 1rem;
-    }
-    
-    @media (min-width: 800px) {
-      .popup {
-        width: calc(100% - 200px);
-      }
-    }
-    
-    /* 🎨 Individual popup background colors */
-    .popup-phone {
-      background: #F8F6F2;
-      color: black;
-    }
-    
-    .popup-vr {
-      background: #1C1C1C;
-      color: white;
-    }
-    
-    .popup-plant {
-      background: #0B7BA0;
-      color: white;
-    }
-    
-    .popup-paper {
-      background: #FDF3E7;
-      color: black;
-    }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  box-shadow: none;
+  border-radius: 12px;
+  border: 2px solid #231F20;
+  width: calc(100% - 100px);
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow: hidden;
+  z-index: 10;
+  display: none;
+  font-family: 'Satoshi', sans-serif;
+  color: white;
+}
 
-    .popup-inner {
-      padding: 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
+.popup.active {
+  display: block;
+}
 
-    
-    /* Optional gallery/service styles (from before) */
-    .service-icons {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      text-align: center;
-      margin-bottom: 2rem;
-      gap: 1.5rem;
-    }
-    
-    .service-icons img {
-      width: 120px;
-      margin-bottom: 0.5rem;
-    }
-    
-    .popup-gallery {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      max-width: 800px;
-      margin: 2rem auto 0;
-    }
-    
-    .popup-gallery img {
-      width: 100%;
-      border-radius: 8px;
-    }
+.popup .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: inherit;
+}
 
+.popup-scroll {
+  overflow-y: auto;
+  max-height: 75vh;
+  padding-right: 1rem;
+}
+
+@media (min-width: 800px) {
+  .popup {
+    width: calc(100% - 200px);
+  }
+}
+
+/* 🎨 Popup-specific background colors */
+.popup-phone {
+  background: #F8F6F2;
+  color: black;
+}
+
+.popup-vr {
+  background: #1C1C1C;
+  color: white;
+}
+
+.popup-plant {
+  background: #0B7BA0;
+  color: white;
+}
+
+.popup-paper {
+  background: #FDF3E7;
+  color: black;
+}
+
+.popup-inner {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* 🧠 Hero section split layout */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-image img {
+  max-width: 250px;
+}
+
+@media (min-width: 700px) {
+  .hero-section {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-text {
+    flex: 1;
+    padding-right: 2rem;
+  }
+
+  .hero-image {
+    flex: 0 0 auto;
+  }
+}
+
+/* Lead paragraph style */
+.popup-lead {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Services section */
+.service-icons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 3rem 0;
+  gap: 2rem;
+}
+
+.service-icons img {
+  width: 140px;
+  margin-bottom: 1rem;
+}
+
+.service-icons p {
+  font-size: 1.1rem;
+}
+
+/* Gallery */
+.popup-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.popup-gallery img {
+  width: 100%;
+  border-radius: 8px;
+}
 
   </style>
 </head>
@@ -473,63 +517,72 @@
   </svg>
 
   <!-- Popup Containers -->
+<!-- Phone Popup -->
 <div id="popup-phone" class="popup popup-phone">
   <button class="close" onclick="closePopup('popup-phone')">✕</button>
   <div class="popup-scroll">
-    <h2>Phone Project</h2>
-    <p>Here you can include images, videos, or text about the phone-related project.</p>
+    <div class="popup-inner">
+      <h2>Phone Project</h2>
+      <p>Here you can include images, videos, or text about the phone-related project.</p>
+    </div>
   </div>
 </div>
 
+<!-- VR Popup -->
 <div id="popup-vr" class="popup popup-vr">
   <button class="close" onclick="closePopup('popup-vr')">✕</button>
   <div class="popup-scroll">
-    <h2>VR Project</h2>
-    <p>Details about the VR headset project go here.</p>
+    <div class="popup-inner">
+      <h2>VR Project</h2>
+      <p>Details about the VR headset project go here.</p>
+    </div>
   </div>
 </div>
 
+<!-- Plant (DonkeyJobs) Popup -->
 <div id="popup-plant" class="popup popup-plant">
   <button class="close" onclick="closePopup('popup-plant')">✕</button>
   <div class="popup-scroll">
     <div class="popup-inner">
       <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">DonkeyJobs</h2>
-  
-      <p>
-        DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
-      </p>
-  
-      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-        <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" style="max-width: 200px;" />
+
+      <div class="hero-section">
+        <div class="hero-text">
+          <p class="popup-lead">
+            DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
+          </p>
+        </div>
+        <div class="hero-image">
+          <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" />
+        </div>
       </div>
-  
+
       <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
         <img src="AssetsDonkeyJobs/BigGarden.png" alt="Garden Example" style="width: 100%; max-width: 800px; border-radius: 12px;" />
       </div>
-  
+
       <div class="service-icons">
         <div>
-          <p style="font-size: 1.2rem;"><strong>Window Cleaning</strong></p>
           <img src="AssetsDonkeyJobs/WindowCleaning.png" alt="Window Cleaning" />
+          <p><strong>Window Cleaning</strong></p>
         </div>
         <div>
-          <p style="font-size: 1.2rem;"><strong>An Extra Pair of Hands</strong></p>
           <img src="AssetsDonkeyJobs/ExtraPairOfHands.png" alt="Extra Hands" />
+          <p><strong>An Extra Pair of Hands</strong></p>
         </div>
         <div>
-          <p style="font-size: 1.2rem;"><strong>>Gardening</strong></p>
           <img src="AssetsDonkeyJobs/Gardening.png" alt="Gardening" />
+          <p><strong>Gardening</strong></p>
         </div>
       </div>
-  
+
       <p style="font-size: 1.2rem;"><strong>5 star rated on Google</strong></p>
       <img src="AssetsDonkeyJobs/5Stars.png" alt="5 stars" />
-          
-  
+
       <p>
         My role in the company was for the website, marketing, branding and HR. I spent a lot of time developing the DonkeyJobs brand to the point it was recognised over South London. I was responsible for managing employees and making sure they were happy and working to the high standard required to keep our customers happy.
       </p>
-  
+
       <div class="popup-gallery">
         <img src="AssetsDonkeyJobs/Gallery1.png" alt="Project 1" />
         <img src="AssetsDonkeyJobs/Gallery2.png" alt="Project 2" />
@@ -542,13 +595,17 @@
   </div>
 </div>
 
+<!-- Paper Popup -->
 <div id="popup-paper" class="popup popup-paper">
   <button class="close" onclick="closePopup('popup-paper')">✕</button>
   <div class="popup-scroll">
-    <h2>Paper Project</h2>
-    <p>This represents a documentation-based project — maybe a zine, paper, or digital writeup.</p>
+    <div class="popup-inner">
+      <h2>Paper Project</h2>
+      <p>This represents a documentation-based project — maybe a zine, paper, or digital writeup.</p>
+    </div>
   </div>
 </div>
+
 
  <script>
   const phone = document.getElementById('phone');

@@ -81,99 +81,106 @@
     }
 
     .popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2rem;
-  box-shadow: none;
-  border-radius: 12px;
-  border: 2px solid #231F20;
-  width: calc(100% - 100px);
-  max-width: 1000px;
-  max-height: 90vh;
-  overflow: hidden;
-  z-index: 10;
-  display: none;
-  font-family: 'Satoshi', sans-serif;
-  color: white; /* Optional default text color */
-}
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2rem;
+      box-shadow: none;
+      border-radius: 12px;
+      border: 2px solid #231F20;
+      width: calc(100% - 100px);
+      max-width: 1000px;
+      max-height: 90vh;
+      overflow: hidden;
+      z-index: 10;
+      display: none;
+      font-family: 'Satoshi', sans-serif;
+      color: white; /* Optional default text color */
+    }
+    
+    .popup.active {
+      display: block;
+    }
+    
+    .popup .close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    
+    .popup-scroll {
+      overflow-y: auto;
+      max-height: 75vh;
+      padding-right: 1rem;
+    }
+    
+    @media (min-width: 800px) {
+      .popup {
+        width: calc(100% - 200px);
+      }
+    }
+    
+    /* 🎨 Individual popup background colors */
+    .popup-phone {
+      background: #F8F6F2;
+      color: black;
+    }
+    
+    .popup-vr {
+      background: #1C1C1C;
+      color: white;
+    }
+    
+    .popup-plant {
+      background: #0B7BA0;
+      color: white;
+    }
+    
+    .popup-paper {
+      background: #FDF3E7;
+      color: black;
+    }
 
-.popup.active {
-  display: block;
-}
+    .popup-inner {
+      padding: 0 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-.popup .close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: inherit;
-}
-
-.popup-scroll {
-  overflow-y: auto;
-  max-height: 75vh;
-  padding-right: 1rem;
-}
-
-@media (min-width: 800px) {
-  .popup {
-    width: calc(100% - 200px);
-  }
-}
-
-/* 🎨 Individual popup background colors */
-.popup-phone {
-  background: #F8F6F2;
-  color: black;
-}
-
-.popup-vr {
-  background: #1C1C1C;
-  color: white;
-}
-
-.popup-plant {
-  background: #0B7BA0;
-  color: white;
-}
-
-.popup-paper {
-  background: #FDF3E7;
-  color: black;
-}
-
-/* Optional gallery/service styles (from before) */
-.service-icons {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  text-align: center;
-  margin-bottom: 2rem;
-  gap: 1.5rem;
-}
-
-.service-icons img {
-  width: 120px;
-  margin-bottom: 0.5rem;
-}
-
-.popup-gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  max-width: 800px;
-  margin: 2rem auto 0;
-}
-
-.popup-gallery img {
-  width: 100%;
-  border-radius: 8px;
-}
+    
+    /* Optional gallery/service styles (from before) */
+    .service-icons {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+      margin-bottom: 2rem;
+      gap: 1.5rem;
+    }
+    
+    .service-icons img {
+      width: 120px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .popup-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 2rem auto 0;
+    }
+    
+    .popup-gallery img {
+      width: 100%;
+      border-radius: 8px;
+    }
 
 
   </style>
@@ -485,48 +492,52 @@
 <div id="popup-plant" class="popup popup-plant">
   <button class="close" onclick="closePopup('popup-plant')">✕</button>
   <div class="popup-scroll">
-    <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">DonkeyJobs</h2>
-
-    <p>
-      DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
-    </p>
-
-    <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-      <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" style="max-width: 200px;" />
-    </div>
-
-    <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-      <img src="AssetsDonkeyJobs/BigGarden.png" alt="Garden Example" style="width: 100%; max-width: 800px; border-radius: 12px;" />
-    </div>
-
-    <div class="service-icons">
-      <div>
-        <img src="AssetsDonkeyJobs/WindowCleaning.png" alt="Window Cleaning" />
-        <p>Window Cleaning</p>
+    <div class="popup-inner">
+      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">DonkeyJobs</h2>
+  
+      <p>
+        DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
+      </p>
+  
+      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+        <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" style="max-width: 200px;" />
       </div>
-      <div>
-        <img src="AssetsDonkeyJobs/ExtraPairOfHands.png" alt="Extra Hands" />
-        <p>An Extra Pair of Hands</p>
+  
+      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
+        <img src="AssetsDonkeyJobs/BigGarden.png" alt="Garden Example" style="width: 100%; max-width: 800px; border-radius: 12px;" />
       </div>
-      <div>
-        <img src="AssetsDonkeyJobs/Gardening.png" alt="Gardening" />
-        <p>Gardening</p>
+  
+      <div class="service-icons">
+        <div>
+          <p style="font-size: 1.2rem;"><strong>Window Cleaning</strong></p>
+          <img src="AssetsDonkeyJobs/WindowCleaning.png" alt="Window Cleaning" />
+        </div>
+        <div>
+          <p style="font-size: 1.2rem;"><strong>An Extra Pair of Hands</strong></p>
+          <img src="AssetsDonkeyJobs/ExtraPairOfHands.png" alt="Extra Hands" />
+        </div>
+        <div>
+          <p style="font-size: 1.2rem;"><strong>>Gardening</strong></p>
+          <img src="AssetsDonkeyJobs/Gardening.png" alt="Gardening" />
+        </div>
       </div>
-    </div>
-
-    <p style="font-size: 1.2rem;"><strong>5 star rated on Google</strong></p>
-
-    <p>
-      My role in the company was for the website, marketing, branding and HR. I spent a lot of time developing the DonkeyJobs brand to the point it was recognised over South London. I was responsible for managing employees and making sure they were happy and working to the high standard required to keep our customers happy.
-    </p>
-
-    <div class="popup-gallery">
-      <img src="AssetsDonkeyJobs/Gallery1.png" alt="Project 1" />
-      <img src="AssetsDonkeyJobs/Gallery2.png" alt="Project 2" />
-      <img src="AssetsDonkeyJobs/Gallery3.png" alt="Project 3" />
-      <img src="AssetsDonkeyJobs/Gallery4.png" alt="Project 4" />
-      <img src="AssetsDonkeyJobs/Gallery5.png" alt="Project 5" />
-      <img src="AssetsDonkeyJobs/Gallery6.png" alt="Project 6" />
+  
+      <p style="font-size: 1.2rem;"><strong>5 star rated on Google</strong></p>
+      <img src="5Stars.png" alt="5 stars" />
+          
+  
+      <p>
+        My role in the company was for the website, marketing, branding and HR. I spent a lot of time developing the DonkeyJobs brand to the point it was recognised over South London. I was responsible for managing employees and making sure they were happy and working to the high standard required to keep our customers happy.
+      </p>
+  
+      <div class="popup-gallery">
+        <img src="AssetsDonkeyJobs/Gallery1.png" alt="Project 1" />
+        <img src="AssetsDonkeyJobs/Gallery2.png" alt="Project 2" />
+        <img src="AssetsDonkeyJobs/Gallery3.png" alt="Project 3" />
+        <img src="AssetsDonkeyJobs/Gallery4.png" alt="Project 4" />
+        <img src="AssetsDonkeyJobs/Gallery5.png" alt="Project 5" />
+        <img src="AssetsDonkeyJobs/Gallery6.png" alt="Project 6" />
+      </div>
     </div>
   </div>
 </div>

@@ -12,6 +12,168 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      padding-top: 60px; /* Add padding for fixed nav */
+    }
+    
+    /* Retro Nav Bar */
+    .retro-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      z-index: 1000;
+      font-family: 'Courier New', monospace;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+    }
+    
+    .nav-logo {
+      font-weight: bold;
+      font-size: 18px;
+      color: #231f20;
+      text-decoration: none;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+    }
+    
+    .nav-menu li {
+      position: relative;
+    }
+    
+    .nav-menu a {
+      color: #231f20;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+    }
+    
+    .nav-menu a:focus {
+      outline: 2px solid #231f20;
+      outline-offset: 2px;
+    }
+    
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #e0f2f6;
+      border: 2px solid #231f20;
+      border-top: none;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      border-bottom: 1px solid #231f20;
+    }
+    
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #231f20;
+      cursor: pointer;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      padding: 20px;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .mobile-menu li {
+      margin-bottom: 10px;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      color: #231f20;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    
+    .mobile-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+      padding-left: 10px;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-container {
+        padding: 0 15px;
+      }
     }
     svg {
       width: 450px;
@@ -51,6 +213,47 @@
   </style>
 </head>
 <body>
+  <!-- Retro Nav Bar -->
+  <nav class="retro-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Fin Cumming</a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-content" role="menu">
+            <a href="project-2.html" role="menuitem">📱 Phone Projects</a>
+            <a href="project-1.html" role="menuitem">💻 Computer Projects</a>
+            <a href="donkeyjobs.html" role="menuitem">🌱 DonkeyJobs</a>
+            <a href="vr.html" role="menuitem">🥽 VR Projects</a>
+            <a href="more-projects.html" role="menuitem">📂 All Projects</a>
+          </div>
+        </li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="project-2.html">📱 Phone Projects</a></li>
+        <li><a href="project-1.html">💻 Computer Projects</a></li>
+        <li><a href="donkeyjobs.html">🌱 DonkeyJobs</a></li>
+        <li><a href="vr.html">🥽 VR Projects</a></li>
+        <li><a href="more-projects.html">📂 All Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <svg id="mugScene" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
    <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 484.23 498.6">
@@ -360,6 +563,24 @@
   </svg>
 
   <script>
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileToggle.addEventListener('click', () => {
+      const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
     const cupGroup = document.getElementById("cup");
 
     cupGroup.addEventListener("click", () => {

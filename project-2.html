@@ -402,9 +402,9 @@
         <li class="dropdown">
           <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
           <div class="dropdown-content" role="menu">
-            <a href="project-2.html" role="menuitem">📱 Phone Projects</a>
+            <a href="project-2.html?open=phone" role="menuitem">📱 Phone Projects</a>
             <a href="project-1.html" role="menuitem">💻 Computer Projects</a>
-            <a href="donkeyjobs.html" role="menuitem">🌱 DonkeyJobs</a>
+            <a href="project-2.html?open=donkeyjobs" role="menuitem">🌱 DonkeyJobs</a>
             <a href="vr.html" role="menuitem">🥽 VR Projects</a>
             <a href="more-projects.html" role="menuitem">📂 All Projects</a>
           </div>
@@ -422,9 +422,9 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="project-2.html">📱 Phone Projects</a></li>
+        <li><a href="project-2.html?open=phone">📱 Phone Projects</a></li>
         <li><a href="project-1.html">💻 Computer Projects</a></li>
-        <li><a href="donkeyjobs.html">🌱 DonkeyJobs</a></li>
+        <li><a href="project-2.html?open=donkeyjobs">🌱 DonkeyJobs</a></li>
         <li><a href="vr.html">🥽 VR Projects</a></li>
         <li><a href="more-projects.html">📂 All Projects</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -828,6 +828,35 @@
       mobileToggle.setAttribute('aria-expanded', 'false');
     }
   });
+
+  // Check URL parameters and auto-open popups
+  const urlParams = new URLSearchParams(window.location.search);
+  const openParam = urlParams.get('open');
+  
+  if (openParam) {
+    // Auto-open popup when coming from nav
+    setTimeout(() => {
+      let popupId = '';
+      switch(openParam) {
+        case 'donkeyjobs':
+          popupId = 'popup-plant';
+          break;
+        case 'phone':
+          popupId = 'popup-phone';
+          break;
+        case 'vr':
+          popupId = 'popup-vr';
+          break;
+        case 'paper':
+          popupId = 'popup-paper';
+          break;
+      }
+      
+      if (popupId) {
+        document.getElementById(popupId).classList.add('active');
+      }
+    }, 500); // Small delay to ensure page is loaded
+  }
 
   const phone = document.getElementById('phone');
   const vr = document.getElementById('vr');

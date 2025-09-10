@@ -14,6 +14,7 @@
       align-items: flex-end;
       height: 100vh;
       padding-top: 60px; /* Add padding for fixed nav */
+      transition: all 0.5s ease;
     }
     
     /* Retro Nav Bar */
@@ -162,16 +163,78 @@
       padding-left: 10px;
     }
     
+    /* Rotation Hint */
+    .rotation-hint {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #FFB07B;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s ease;
+    }
+
+    .rotation-hint.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .rotation-hint-content {
+      text-align: center;
+      color: #231f20;
+      padding: 20px;
+    }
+
+    .rotation-hint h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .rotation-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: rotate 2s ease-in-out infinite;
+    }
+
+    @keyframes rotate {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(90deg); }
+    }
+
+    .rotation-hint p {
+      font-size: 16px;
+      margin: 0;
+      opacity: 0.8;
+    }
+
+    /* Main content container */
+    .main-content {
+      transition: all 0.5s ease;
+    }
+
+    .main-content.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .nav-menu {
         display: none;
       }
-      
+
       .mobile-menu-toggle {
         display: block;
       }
-      
+
       .nav-container {
         padding: 0 15px;
       }
@@ -392,6 +455,15 @@
   </style>
 </head>
 <body>
+  <!-- Rotation Hint -->
+  <div class="rotation-hint" id="rotationHint">
+    <div class="rotation-hint-content">
+      <div class="rotation-icon">📱</div>
+      <h2>Rotate phone to explore portfolio</h2>
+      <p>Turn your device sideways for the full interactive experience</p>
+    </div>
+  </div>
+
   <!-- Retro Nav Bar -->
   <nav class="retro-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container">
@@ -433,7 +505,9 @@
     </div>
   </nav>
 
-  <svg id="deskScene" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <svg id="deskScene" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
     <!-- 🖼️ Insert your Illustrator-exported SVG here -->
     <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 715.98 486.68">
@@ -718,6 +792,7 @@
 </svg>
     <!-- Make sure elements are grouped and named: #paper, #plantLeaves, #phone, #phoneLight, #phoneCube, #vrLight, #laptopScreen -->
   </svg>
+  </div>
 
   <!-- Popup Containers -->
 <!-- Phone Popup -->
@@ -811,6 +886,33 @@
 
 
  <script>
+  // Rotation detection and smooth transitions
+  const rotationHint = document.getElementById('rotationHint');
+  const mainContent = document.getElementById('mainContent');
+  
+  function checkOrientation() {
+    const isPortrait = window.innerHeight > window.innerWidth;
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile && isPortrait) {
+      // Show rotation hint
+      rotationHint.classList.add('active');
+      mainContent.classList.add('hidden');
+    } else {
+      // Hide rotation hint, show main content
+      rotationHint.classList.remove('active');
+      mainContent.classList.remove('hidden');
+    }
+  }
+  
+  // Check orientation on load and resize
+  window.addEventListener('load', checkOrientation);
+  window.addEventListener('resize', checkOrientation);
+  window.addEventListener('orientationchange', () => {
+    // Small delay to ensure orientation change is complete
+    setTimeout(checkOrientation, 100);
+  });
+
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-menu-toggle');
   const mobileMenu = document.getElementById('mobileMenu');

@@ -225,6 +225,51 @@
       visibility: hidden;
     }
 
+    /* Mobile Card Layout */
+    .mobile-cards {
+      display: none;
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-color: #231f20;
+    }
+
+    .card-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .card-description {
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
+    }
+
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .nav-menu {
@@ -237,6 +282,36 @@
 
       .nav-container {
         padding: 0 15px;
+      }
+
+      /* Show mobile cards, hide desk */
+      .mobile-cards {
+        display: block;
+      }
+
+      .desk-container {
+        display: none;
+      }
+
+      body {
+        align-items: flex-start;
+        padding-top: 80px;
+      }
+    }
+
+    /* Tablet Responsive */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .desk-container {
+        display: block;
+      }
+
+      .mobile-cards {
+        display: none;
+      }
+
+      /* Larger touch targets for tablet */
+      svg {
+        width: 80vw;
       }
     }
     svg {
@@ -367,6 +442,16 @@
   color: white;
 }
 
+.popup-about {
+  background: #FFB07B;
+  color: #231f20;
+}
+
+.popup-awards {
+  background: #FFD700;
+  color: #231f20;
+}
+
 .popup-paper {
   background: #FDF3E7;
   color: black;
@@ -460,7 +545,7 @@
     <div class="rotation-hint-content">
       <div class="rotation-icon">📱</div>
       <h2>Rotate phone to explore portfolio</h2>
-      <p>Turn your device sideways for the full interactive experience</p>
+      <p>Turn your device sideways for the card-based mobile experience</p>
     </div>
   </div>
 
@@ -507,7 +592,48 @@
 
   <!-- Main Content -->
   <div class="main-content" id="mainContent">
-    <svg id="deskScene" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+    <!-- Mobile Card Layout -->
+    <div class="mobile-cards">
+      <div class="card" onclick="openMobilePopup('about')">
+        <div class="card-icon">☕</div>
+        <div class="card-title">About Me</div>
+        <div class="card-description">Learn about my background, skills, and journey in tech</div>
+      </div>
+      
+      <div class="card" onclick="openMobilePopup('computer')">
+        <div class="card-icon">💻</div>
+        <div class="card-title">Computer Projects</div>
+        <div class="card-description">Web development, games, and desktop applications</div>
+      </div>
+      
+      <div class="card" onclick="openMobilePopup('phone')">
+        <div class="card-icon">📱</div>
+        <div class="card-title">Mobile Apps</div>
+        <div class="card-description">iOS and Android applications I've developed</div>
+      </div>
+      
+      <div class="card" onclick="openMobilePopup('vr')">
+        <div class="card-icon">🥽</div>
+        <div class="card-title">VR Projects</div>
+        <div class="card-description">Virtual and augmented reality experiences</div>
+      </div>
+      
+      <div class="card" onclick="openMobilePopup('donkeyjobs')">
+        <div class="card-icon">🌱</div>
+        <div class="card-title">DonkeyJobs</div>
+        <div class="card-description">Eco-friendly garden maintenance company I founded</div>
+      </div>
+      
+      <div class="card" onclick="openMobilePopup('awards')">
+        <div class="card-icon">🏅</div>
+        <div class="card-title">Awards & Recognition</div>
+        <div class="card-description">Achievements and recognition in my career</div>
+      </div>
+    </div>
+
+    <!-- Desktop Desk Layout -->
+    <div class="desk-container">
+      <svg id="deskScene" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
     <!-- 🖼️ Insert your Illustrator-exported SVG here -->
     <?xml version="1.0" encoding="UTF-8"?>
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 715.98 486.68">
@@ -792,6 +918,7 @@
 </svg>
     <!-- Make sure elements are grouped and named: #paper, #plantLeaves, #phone, #phoneLight, #phoneCube, #vrLight, #laptopScreen -->
   </svg>
+    </div>
   </div>
 
   <!-- Popup Containers -->
@@ -884,6 +1011,70 @@
   </div>
 </div>
 
+<!-- About Popup -->
+<div id="popup-about" class="popup popup-about">
+  <button class="close" onclick="closePopup('popup-about')">✕</button>
+  <div class="popup-scroll">
+    <div class="popup-inner">
+      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">About Me</h2>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #333;">
+          Hi! I'm Fin Cumming, a passionate developer and entrepreneur with a love for creating innovative solutions. 
+          I specialize in web development, mobile apps, VR experiences, and have founded my own eco-friendly business.
+        </p>
+      </div>
+      
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h3 style="color: #231f20; margin-top: 0;">Skills & Expertise</h3>
+        <ul style="columns: 2; column-gap: 2rem;">
+          <li>Web Development (React, Node.js, Python)</li>
+          <li>Mobile App Development (iOS, Android)</li>
+          <li>VR/AR Development (Unity, WebXR)</li>
+          <li>UI/UX Design</li>
+          <li>Business Development</li>
+          <li>Project Management</li>
+        </ul>
+      </div>
+      
+      <div style="text-align: center;">
+        <p style="font-size: 1rem; color: #666;">
+          I believe in creating technology that makes a positive impact on the world, 
+          whether that's through sustainable business practices or innovative digital experiences.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Awards Popup -->
+<div id="popup-awards" class="popup popup-awards">
+  <button class="close" onclick="closePopup('popup-awards')">✕</button>
+  <div class="popup-scroll">
+    <div class="popup-inner">
+      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">Awards & Recognition</h2>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #333;">
+          Recognition for innovation, leadership, and impact in technology and business.
+        </p>
+      </div>
+      
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+        <h3 style="color: #231f20; margin-top: 0;">🏆 Business Achievement</h3>
+        <p><strong>DonkeyJobs Success:</strong> Built and scaled an eco-friendly garden maintenance company to 1000+ customers with 20M+ TikTok views</p>
+      </div>
+      
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+        <h3 style="color: #231f20; margin-top: 0;">🚀 Innovation Recognition</h3>
+        <p><strong>VR Development:</strong> Created immersive experiences that push the boundaries of web-based VR</p>
+      </div>
+      
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h3 style="color: #231f20; margin-top: 0;">💡 Technical Excellence</h3>
+        <p><strong>Portfolio Innovation:</strong> Developed unique 3D isometric portfolio showcasing technical creativity</p>
+      </div>
+    </div>
+  </div>
+</div>
 
  <script>
   // Rotation detection and smooth transitions
@@ -895,13 +1086,44 @@
     const isMobile = window.innerWidth <= 768;
     
     if (isMobile && isPortrait) {
-      // Show rotation hint
+      // Show rotation hint for portrait mobile
       rotationHint.classList.add('active');
       mainContent.classList.add('hidden');
     } else {
       // Hide rotation hint, show main content
       rotationHint.classList.remove('active');
       mainContent.classList.remove('hidden');
+    }
+  }
+
+  // Mobile card popup function
+  function openMobilePopup(type) {
+    let popupId = '';
+    switch(type) {
+      case 'about':
+        popupId = 'popup-about';
+        break;
+      case 'computer':
+        // Navigate to computer page
+        window.location.href = 'project-1.html';
+        return;
+      case 'phone':
+        popupId = 'popup-phone';
+        break;
+      case 'vr':
+        // Navigate to VR page (when created)
+        window.location.href = 'vr.html';
+        return;
+      case 'donkeyjobs':
+        popupId = 'popup-plant';
+        break;
+      case 'awards':
+        popupId = 'popup-awards';
+        break;
+    }
+    
+    if (popupId) {
+      document.getElementById(popupId).classList.add('active');
     }
   }
   

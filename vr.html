@@ -66,6 +66,22 @@
       color: #e0f2f6;
     }
     
+    /* Background Table Container */
+    .table-container {
+      position: fixed;
+      top: 60px; /* Start below nav bar */
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - 60px); /* Full height minus nav bar */
+      z-index: 1;
+    }
+    
+    /* Table SVG */
+    .table-container svg {
+      width: 100%;
+      height: 100%;
+    }
+    
     /* VR Frame Container */
     .vr-frame-container {
       position: fixed;
@@ -74,12 +90,33 @@
       width: 100vw;
       height: calc(100vh - 60px); /* Full height minus nav bar */
       z-index: 999;
+      pointer-events: none; /* Allow clicks to pass through to content below */
     }
     
     /* VR Frame SVG */
     .vr-frame-container svg {
       width: 100%;
       height: 100%;
+    }
+    
+    /* Loading Logo Container */
+    .loading-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      /* Add your loading logo styles here */
+    }
+    
+    /* Projects Panel Container */
+    .projects-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1001;
+      /* Add your projects panel styles here */
     }
   </style>
 </head>
@@ -100,6 +137,26 @@
       </ul>
     </div>
   </nav>
+
+  <!-- Background Table Container -->
+  <div class="table-container">
+    <svg viewBox="0 0 715.98 486.68" preserveAspectRatio="xMidYMid meet">
+      <!-- PASTE YOUR TABLE SVG HERE -->
+      <!-- This will be the background table scene -->
+    </svg>
+  </div>
+
+  <!-- Loading Logo Container -->
+  <div class="loading-container">
+    <!-- PASTE YOUR LOADING LOGO SVG HERE -->
+    <!-- This will appear in the center while loading -->
+  </div>
+
+  <!-- Projects Panel Container -->
+  <div class="projects-panel">
+    <!-- PASTE YOUR PROJECTS PANEL SVG HERE -->
+    <!-- This will be the interactive projects selection panel -->
+  </div>
 
   <!-- VR Frame Container -->
   <div class="vr-frame-container">

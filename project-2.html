@@ -392,16 +392,14 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Cup steam animation */
+    /* Cup steam animation - simple pulsing fade */
     #steam {
-      animation: puff 3s ease-in-out infinite;
-      opacity: 0.6;
-      transform-origin: center;
+      animation: steamPulse 2s ease-in-out infinite;
     }
-    @keyframes puff {
-      0% { transform: translateY(0px) scale(1); opacity: 0.3; }
-      50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
-      100% { transform: translateY(-20px) scale(0.8); opacity: 0; }
+    @keyframes steamPulse {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
     .popup {

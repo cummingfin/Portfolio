@@ -100,17 +100,13 @@
       }
     }
 
-    /* Laptop/Desktop - cut off bottom 35% */
+    /* Laptop/Desktop - position table so legs are below screen */
     @media (min-width: 1025px) {
-      .table-container {
-        overflow: hidden;
-        height: 65vh; /* Show only top 65% */
-      }
-      
       .table-container svg {
         width: 70vw;
+        max-width: 1000px; /* Don't grow beyond this size */
         height: auto;
-        transform: translateY(-35%); /* Move up to show top portion */
+        transform: translateY(-20vh); /* Move up so legs go below screen */
       }
     }
     

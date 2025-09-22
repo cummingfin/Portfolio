@@ -394,14 +394,22 @@
 
     /* Cup steam animation */
     #steam {
-      animation: puff 3s ease-in-out infinite;
-      opacity: 0.6;
+      animation: steamPulse 2s ease-in-out infinite;
       transform-origin: center;
     }
-    @keyframes puff {
-      0% { transform: translateY(0px) scale(1); opacity: 0.3; }
-      50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
-      100% { transform: translateY(-20px) scale(0.8); opacity: 0; }
+    @keyframes steamPulse {
+      0% { 
+        transform: translateY(0px) scale(1); 
+        opacity: 0; 
+      }
+      50% { 
+        transform: translateY(-8px) scale(1.1); 
+        opacity: 1; 
+      }
+      100% { 
+        transform: translateY(0px) scale(1); 
+        opacity: 0; 
+      }
     }
 
     .popup {

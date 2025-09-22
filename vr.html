@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR Projects - Fin Cumming</title>
+  <style>
+    body {
+      background-color: #E3F4F7;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: 'Courier New', monospace;
+    }
+    
+    /* Retro Nav Bar */
+    .retro-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      z-index: 1000;
+      font-family: 'Courier New', monospace;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+    }
+    
+    .nav-logo {
+      font-weight: bold;
+      font-size: 18px;
+      color: #231f20;
+      text-decoration: none;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+    }
+    
+    .nav-menu a {
+      color: #231f20;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+    }
+    
+    /* VR Headset Frame Overlay */
+    .vr-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0;
+      transform: scale(1.1);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .vr-frame.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    /* VR Frame SVG */
+    .vr-frame svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Main Content */
+    .main-content {
+      padding-top: 80px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #E3F4F7 0%, #B8E6F0 100%);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .page-title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .page-subtitle {
+      font-size: 1.2rem;
+      color: #606261;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* VR Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .project-card {
+      background: white;
+      border: 3px solid #231f20;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .project-card:hover::before {
+      left: 100%;
+    }
+    
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #231f20;
+      margin-bottom: 15px;
+    }
+    
+    .project-description {
+      color: #606261;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    
+    .tech-tag {
+      background: #e0f2f6;
+      color: #231f20;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .project-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .project-link {
+      background: #231f20;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      flex: 1;
+      text-align: center;
+    }
+    
+    .project-link:hover {
+      background: #606261;
+      transform: translateY(-2px);
+    }
+    
+    .project-link.secondary {
+      background: transparent;
+      color: #231f20;
+      border: 2px solid #231f20;
+    }
+    
+    .project-link.secondary:hover {
+      background: #231f20;
+      color: white;
+    }
+    
+    /* VR Experience Section */
+    .vr-experience {
+      background: white;
+      border: 3px solid #231f20;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .vr-experience h2 {
+      font-size: 2rem;
+      color: #231f20;
+      margin-bottom: 20px;
+    }
+    
+    .vr-experience p {
+      color: #606261;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .project-card {
+        padding: 20px;
+      }
+      
+      .project-links {
+        flex-direction: column;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+    }
+    
+    /* VR Frame Responsive Adjustments */
+    @media (max-width: 768px) {
+      .vr-frame svg {
+        /* Adjust frame thickness for mobile */
+        stroke-width: 8;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .vr-frame svg {
+        stroke-width: 6;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Retro Nav Bar -->
+  <nav class="retro-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Fin Cumming</a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="project-1.html">💻 Computer Projects</a></li>
+        <li><a href="project-2.html?open=phone">📱 Phone Projects</a></li>
+        <li><a href="project-2.html?open=donkeyjobs">🌱 DonkeyJobs</a></li>
+        <li><a href="vr.html" style="background: #231f20; color: #e0f2f6;">🥽 VR Projects</a></li>
+        <li><a href="more-projects.html">📂 All Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- VR Headset Frame Overlay -->
+  <div class="vr-frame" id="vrFrame">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      <!-- VR Headset Frame -->
+      <defs>
+        <linearGradient id="frameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#231f20;stop-opacity:0.8" />
+          <stop offset="50%" style="stop-color:#606261;stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:#231f20;stop-opacity:0.8" />
+        </linearGradient>
+        <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#000000;stop-opacity:0.1" />
+        </linearGradient>
+      </defs>
+      
+      <!-- Main Frame Outline -->
+      <rect x="5" y="15" width="90" height="70" 
+            fill="none" 
+            stroke="url(#frameGradient)" 
+            stroke-width="1.5" 
+            rx="8" 
+            ry="8"/>
+      
+      <!-- Left Lens -->
+      <ellipse cx="25" cy="50" rx="12" ry="15" 
+               fill="url(#lensGradient)" 
+               stroke="url(#frameGradient)" 
+               stroke-width="1"/>
+      
+      <!-- Right Lens -->
+      <ellipse cx="75" cy="50" rx="12" ry="15" 
+               fill="url(#lensGradient)" 
+               stroke="url(#frameGradient)" 
+               stroke-width="1"/>
+      
+      <!-- Bridge -->
+      <rect x="35" y="45" width="30" height="10" 
+            fill="url(#frameGradient)" 
+            rx="2"/>
+      
+      <!-- Top Strap -->
+      <rect x="10" y="5" width="80" height="8" 
+            fill="url(#frameGradient)" 
+            rx="4"/>
+      
+      <!-- Side Straps -->
+      <rect x="2" y="20" width="6" height="60" 
+            fill="url(#frameGradient)" 
+            rx="3"/>
+      <rect x="92" y="20" width="6" height="60" 
+            fill="url(#frameGradient)" 
+            rx="3"/>
+      
+      <!-- Padding Details -->
+      <rect x="8" y="18" width="84" height="4" 
+            fill="url(#frameGradient)" 
+            opacity="0.4"/>
+      <rect x="8" y="78" width="84" height="4" 
+            fill="url(#frameGradient)" 
+            opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">🥽 VR Projects</h1>
+        <p class="page-subtitle">
+          Welcome to my virtual reality development portfolio. Put on your VR headset and explore immersive experiences that push the boundaries of digital interaction.
+        </p>
+      </div>
+
+      <div class="vr-experience">
+        <h2>🎮 Immersive VR Experiences</h2>
+        <p>
+          Each project below represents a unique journey into virtual reality, combining cutting-edge technology with creative storytelling to deliver unforgettable experiences.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- VR Project 1 -->
+        <div class="project-card">
+          <span class="project-icon">🏠</span>
+          <h3 class="project-title">Virtual Home Designer</h3>
+          <p class="project-description">
+            An immersive VR application that allows users to design and walk through their dream homes in real-time. Features realistic physics, material textures, and spatial audio.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unity</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">Oculus SDK</span>
+            <span class="tech-tag">Blender</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">View Demo</a>
+            <a href="#" class="project-link secondary">GitHub</a>
+          </div>
+        </div>
+
+        <!-- VR Project 2 -->
+        <div class="project-card">
+          <span class="project-icon">🌍</span>
+          <h3 class="project-title">Space Exploration Simulator</h3>
+          <p class="project-description">
+            A VR experience that takes users on a journey through our solar system. Features accurate planetary physics, interactive spacecraft controls, and educational content.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unreal Engine</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">SteamVR</span>
+            <span class="tech-tag">NASA APIs</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Play Now</a>
+            <a href="#" class="project-link secondary">Documentation</a>
+          </div>
+        </div>
+
+        <!-- VR Project 3 -->
+        <div class="project-card">
+          <span class="project-icon">🎨</span>
+          <h3 class="project-title">VR Art Studio</h3>
+          <p class="project-description">
+            A creative VR workspace for digital artists. Features 3D painting tools, sculpting capabilities, and collaborative features for multiple users to create together.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unity</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">OpenXR</span>
+            <span class="tech-tag">WebRTC</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Try It</a>
+            <a href="#" class="project-link secondary">Gallery</a>
+          </div>
+        </div>
+
+        <!-- VR Project 4 -->
+        <div class="project-card">
+          <span class="project-icon">🏥</span>
+          <h3 class="project-title">Medical Training VR</h3>
+          <p class="project-description">
+            A VR training platform for medical students featuring realistic patient scenarios, surgical simulations, and interactive anatomy lessons with haptic feedback.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unity</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">HTC Vive</span>
+            <span class="tech-tag">Medical APIs</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Demo</a>
+            <a href="#" class="project-link secondary">Case Study</a>
+          </div>
+        </div>
+
+        <!-- VR Project 5 -->
+        <div class="project-card">
+          <span class="project-icon">🎪</span>
+          <h3 class="project-title">Virtual Theme Park</h3>
+          <p class="project-description">
+            An interactive VR theme park with multiple rides and attractions. Features multiplayer support, physics-based interactions, and dynamic weather systems.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unreal Engine</span>
+            <span class="tech-tag">Blueprints</span>
+            <span class="tech-tag">Oculus Quest</span>
+            <span class="tech-tag">Multiplayer</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Experience</a>
+            <a href="#" class="project-link secondary">Behind Scenes</a>
+          </div>
+        </div>
+
+        <!-- VR Project 6 -->
+        <div class="project-card">
+          <span class="project-icon">🧠</span>
+          <h3 class="project-title">Mindfulness VR</h3>
+          <p class="project-description">
+            A calming VR experience designed for meditation and stress relief. Features guided breathing exercises, nature environments, and biofeedback integration.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Unity</span>
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">WebXR</span>
+            <span class="tech-tag">Audio Processing</span>
+          </div>
+          <div class="project-links">
+            <a href="#" class="project-link">Relax</a>
+            <a href="#" class="project-link secondary">Research</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // VR Frame Animation
+    document.addEventListener('DOMContentLoaded', function() {
+      const vrFrame = document.getElementById('vrFrame');
+      
+      // Trigger VR frame animation after a short delay
+      setTimeout(() => {
+        vrFrame.classList.add('active');
+      }, 300);
+      
+      // Add some interactive elements
+      const projectCards = document.querySelectorAll('.project-card');
+      
+      projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          // Add subtle VR-themed hover effect
+          this.style.borderColor = '#4A90E2';
+          this.style.boxShadow = '0 15px 35px rgba(74, 144, 226, 0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.borderColor = '#231f20';
+          this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.15)';
+        });
+      });
+      
+      // Add parallax effect to VR frame on scroll
+      let ticking = false;
+      
+      function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        
+        vrFrame.style.transform = `translateY(${parallax}px) scale(1)`;
+        ticking = false;
+      }
+      
+      function requestTick() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }
+      
+      window.addEventListener('scroll', requestTick);
+    });
+  </script>
+</body>
+</html>

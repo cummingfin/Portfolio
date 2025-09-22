@@ -6,7 +6,8 @@
   <title>VR Projects - Fin Cumming</title>
   <style>
     body {
-      background: #FFB07B;
+      background-color: #FFB07B !important;
+      background: #FFB07B !important;
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -91,12 +92,23 @@
       height: calc(100vh - 60px); /* Full height minus nav bar */
       z-index: 999;
       pointer-events: none; /* Allow clicks to pass through to content below */
+      animation: slideDown 1s ease-out;
     }
     
     /* VR Frame SVG */
     .vr-frame-container svg {
       width: 100%;
       height: 100%;
+    }
+    
+    /* Slide down animation for VR frame */
+    @keyframes slideDown {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
     
     /* Loading Logo Container */

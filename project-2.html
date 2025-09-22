@@ -348,6 +348,16 @@
       transition: opacity 0.4s ease;
     }
 
+    /* VR headset clickable */
+    #vr {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #vr:hover {
+      transform: scale(1.05);
+    }
+
     /* Paper floating - slower, stays up longer */
     #paper:hover {
       animation: floatPaper 2s ease-in-out;
@@ -1242,7 +1252,7 @@
   });
 
   vr?.addEventListener('click', () => {
-    document.getElementById('popup-vr').classList.add('active');
+    window.location.href = 'vr.html';
   });
 
   plant?.addEventListener('click', () => {

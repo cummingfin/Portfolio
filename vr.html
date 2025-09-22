@@ -77,11 +77,18 @@
       z-index: 1;
     }
     
-    /* Table SVG */
+    /* Table SVG - match project-2.html exactly */
     .table-container svg {
-      width: 80vw;
-      max-width: 1000px;
+      width: 70vw;
       height: auto;
+      overflow: visible;
+    }
+
+    /* Tablet Responsive - match project-2.html */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .table-container svg {
+        width: 80vw;
+      }
     }
     
     /* VR Frame Container */
@@ -93,7 +100,8 @@
       height: calc(100vh - 60px); /* Full height minus nav bar */
       z-index: 999;
       pointer-events: none; /* Allow clicks to pass through to content below */
-      animation: slideDown 1s ease-out 0.5s both;
+      transform: translateY(-100%); /* Start off-screen */
+      animation: slideDown 1s ease-out 0.5s forwards;
     }
     
     /* VR Frame SVG */

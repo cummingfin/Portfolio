@@ -9,12 +9,13 @@
       background-color: #FFB07B !important;
       background: #FFB07B !important;
       margin: 0;
-      padding: 0;
+      padding-top: 60px; /* Add padding for fixed nav */
       overflow-x: hidden;
       font-family: 'Courier New', monospace;
       display: flex;
       justify-content: center;
       align-items: flex-end;
+      height: 100vh;
     }
     
     /* Retro Nav Bar */
@@ -92,7 +93,7 @@
       height: calc(100vh - 60px); /* Full height minus nav bar */
       z-index: 999;
       pointer-events: none; /* Allow clicks to pass through to content below */
-      animation: slideDown 1s ease-out;
+      animation: slideDown 1s ease-out 0.5s both;
     }
     
     /* VR Frame SVG */
@@ -105,9 +106,11 @@
     @keyframes slideDown {
       0% {
         transform: translateY(-100%);
+        opacity: 0;
       }
       100% {
         transform: translateY(0);
+        opacity: 1;
       }
     }
     

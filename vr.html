@@ -99,6 +99,20 @@
         width: 80vw;
       }
     }
+
+    /* Laptop/Desktop - cut off bottom 35% */
+    @media (min-width: 1025px) {
+      .table-container {
+        overflow: hidden;
+        height: 65vh; /* Show only top 65% */
+      }
+      
+      .table-container svg {
+        width: 70vw;
+        height: auto;
+        transform: translateY(-35%); /* Move up to show top portion */
+      }
+    }
     
     /* VR Frame Container */
     .vr-frame-container {
@@ -172,7 +186,8 @@
 
   <!-- Background Table Container -->
   <div class="table-container">
-    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 715.98 546.02" preserveAspectRatio="xMidYMid meet">
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="252.58mm" height="267.06mm" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 715.98 757.03" preserveAspectRatio="xMidYMid meet">
   <defs>
     <clipPath id="clippath">
       <polygon points="256.66 294.06 264.62 289.44 314.67 318.33 306.7 322.96 256.66 294.06" fill="none"/>
@@ -204,12 +219,12 @@
         <g id="table">
           <polygon points="13.98 239.01 13.98 493.84 1 486.34 1 231.52 13.98 239.01" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
           <polygon points="26.97 246.51 26.97 486.34 13.98 493.84 13.98 239.01 26.97 246.51" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+          <polygon points="468.32 501.33 468.32 756.16 455.34 748.66 455.34 493.84 468.32 501.33" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+          <polygon points="481.31 493.84 481.31 748.66 468.32 756.16 468.32 501.33 481.31 493.84" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+          <polygon points="702 366.42 702 621.46 689.02 613.96 689.02 373.92 702 366.42" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+          <polygon points="714.99 359.14 714.99 613.96 702 621.46 702 366.63 714.99 359.14" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
           <polygon points="714.99 336.44 693.22 349.01 689.02 351.43 481.32 471.36 468.34 478.85 455.36 471.36 26.97 224.02 13.99 216.53 13.98 216.53 1 209.03 254.14 62.88 714.99 336.44" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
           <polygon points="714.99 336.44 714.99 358.93 702.01 366.42 689.02 373.92 481.32 493.84 468.34 501.33 455.36 493.84 26.97 246.51 13.98 239.01 1 231.52 1 209.03 13.98 216.53 13.99 216.53 26.97 224.02 455.36 471.36 468.34 478.85 481.32 471.36 689.02 351.43 693.22 349.01 714.99 336.44" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-          <polyline points="689.02 546.02 689.02 373.92 702.01 366.42 702.01 546.02" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-          <polyline points="702.01 546.02 702.01 366.42 714.99 358.93 714.99 546.02" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-          <polyline points="455.36 546.02 455.36 493.84 468.34 501.33 468.34 546.02" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
-          <polyline points="468.34 546.02 468.34 501.33 481.32 493.84 481.32 546.02" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
         </g>
         <polygon points="659.92 340.21 628.39 322.01 596.87 340.21 628.39 358.41 659.92 340.21" fill="#7d7d7d"/>
       </g>
@@ -432,7 +447,7 @@
       </g>
     </g>
   </g>
-    </svg>
+</svg>
   </div>
 
   <!-- Loading Logo Container -->

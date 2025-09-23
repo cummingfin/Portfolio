@@ -408,10 +408,16 @@
       50% { transform: translateY(-8px); }
     }
 
-    /* Cup steam animation - simple pulsing fade */
+    /* Cup steam animation - only runs on hover */
     #steam {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    #cup:hover #steam {
       animation: steamPulse 2s ease-in-out infinite;
     }
+    
     @keyframes steamPulse {
       0% { opacity: 0; }
       50% { opacity: 1; }

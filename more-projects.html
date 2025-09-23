@@ -206,8 +206,8 @@
     }
 
     .popup-content {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      padding: 24px;
+      background: #ffffff;
+      padding: 40px 24px;
       max-height: calc(80vh - 30px);
       overflow-y: auto;
       color: #212529;
@@ -271,9 +271,10 @@
     }
 
     /* Play button hover effect */
-    .game-container a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2) !important;
+    .popup-content a:hover {
+      background: #34495e !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     }
 
     /* Mobile Menu */
@@ -604,59 +605,27 @@
         <button class="popup-close-btn" onclick="closePopup('lawny-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="text-align: center; margin-bottom: 2rem;">
-          <h1 style="font-size: 2.5rem; font-weight: 700; color: #2c3e50; margin: 0 0 0.5rem 0; letter-spacing: -0.02em;">Lawny</h1>
-          <div style="width: 60px; height: 4px; background: linear-gradient(90deg, #27ae60, #2ecc71); margin: 0 auto; border-radius: 2px;"></div>
-        </div>
-
-        <div class="game-info">
-          <h3>About the Game</h3>
-          <p>
-            Lawny is a lawn mowing game. Mow the lawns and get your mower back home. 
-            A simple yet engaging experience that combines strategy with relaxation.
+        <div style="text-align: center; margin-bottom: 3rem;">
+          <h1 style="font-size: 3rem; font-weight: 300; color: #2c3e50; margin: 0 0 1rem 0; letter-spacing: -0.02em;">Lawny</h1>
+          <p style="font-size: 1.1rem; color: #6c757d; margin: 0; font-weight: 300;">
+            A lawn mowing game. Mow the lawns and get your mower back home.
           </p>
         </div>
 
-        <div class="game-container">
-          <h3 style="color: #2c3e50; margin-top: 0;">Play Lawny</h3>
-          <p style="color: #6c757d; margin-bottom: 2rem;">Click the button below to play the game</p>
-          
+        <div style="text-align: center;">
           <a href="https://fin-d-lay.itch.io/lawny" target="_blank" style="
             display: inline-block;
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: #2c3e50;
             color: white;
-            padding: 20px 40px;
+            padding: 18px 36px;
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            transition: transform 0.2s ease;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            margin-bottom: 1rem;
-          ">🎮 Play Lawny Now</a>
-          
-          <p style="color: #6c757d; font-size: 0.9rem; margin: 0;">
-            Opens in a new tab • Free to play
-          </p>
-        </div>
-
-        <div class="game-info">
-          <h3>Game Features</h3>
-          <ul style="color: #34495e; line-height: 1.6; padding-left: 1.5rem;">
-            <li>Relaxing lawn mowing gameplay</li>
-            <li>Beautiful pixel art graphics</li>
-            <li>Multiple lawn types to maintain</li>
-            <li>Progressive difficulty levels</li>
-            <li>Peaceful ambient soundtrack</li>
-          </ul>
-        </div>
-
-        <div class="game-info">
-          <h3>Development Details</h3>
-          <p>
-            This game was developed using modern web technologies and game development frameworks. 
-            It showcases skills in game design, user experience, and interactive web development.
-          </p>
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+          ">Play Game</a>
         </div>
       </div>
     </div>

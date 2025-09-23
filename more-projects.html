@@ -921,8 +921,51 @@
       </div>
     </div>
   </div>
+
+  <!-- Small Animation Popup -->
+  <div id="small-animation-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Small Animation.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('small-animation-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1>Small Animation</h1>
+            <p>
+              A collection of small animations and motion graphics I've created. These pieces showcase my understanding of timing, easing, and visual storytelling through motion.
+            </p>
           </div>
-          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/small-animation.jpg" alt="Small Animation" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Some Sketches Popup -->
+  <div id="some-sketches-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Some Sketches.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('some-sketches-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1>Some Sketches</h1>
+            <p>
+              A collection of my design sketches and creative explorations. These sketches represent my design thinking process and creative development across various projects.
+            </p>
+          </div>
           <!-- Right: Image -->
           <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
             <img src="AssetsProjects/some-sketches.jpg" alt="Some Sketches" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">

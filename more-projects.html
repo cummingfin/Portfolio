@@ -277,6 +277,17 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     }
 
+    /* Clickable SVG elements */
+    .clickable {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .clickable:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+    }
+
     /* Mobile Menu */
     .mobile-menu-toggle {
       display: none;
@@ -545,7 +556,7 @@
         <text transform="translate(463.2 78.2)" fill="#231f20" font-family="SatoshiVariable-Medium, &apos;Satoshi Variable&apos;" font-size="8" font-variation-settings="&apos;wght&apos; 500" font-weight="500"><tspan x="0" y="0">L</tspan><tspan x="4.18" y="0" letter-spacing="-.01em">a</tspan><tspan x="8.33" y="0">w</tspan><tspan x="14.47" y="0" letter-spacing="0em">n</tspan><tspan x="18.99" y="0">y</tspan></text>
       </g>
     </g>
-    <g id="fiftyPence">
+    <g id="fiftyPence" class="clickable">
       <g opacity="0">
         <rect x="449.91" y="148.35" width="51" height="51" fill="#e0f2f6"/>
       </g>
@@ -568,14 +579,14 @@
       </g>
       <path d="M557.88,156.62v17.03c0,.77-.63,1.4-1.4,1.4h-27c-.77,0-1.4-.63-1.4-1.4v-19.53c0-.77.63-1.4,1.4-1.4h9.5c.43,0,.83.19,1.09.53l1.58,1.98h14.83c.77,0,1.4.63,1.4,1.4Z" fill="#eada7a" stroke="#231f20" stroke-miterlimit="10"/>
     </g>
-    <g id="oodo">
+    <g id="oodo" class="clickable">
       <rect x="449.91" y="90.8" width="51" height="51" fill="#e0f2f6" opacity="0"/>
       <g>
         <text transform="translate(464.77 134.09)" fill="#231f20" font-family="SatoshiVariable-Medium, &apos;Satoshi Variable&apos;" font-size="8" font-variation-settings="&apos;wght&apos; 500" font-weight="500"><tspan x="0" y="0">oODo</tspan></text>
         <path d="M475.42,96.62c-7.24,0-13.12,5.87-13.12,13.11s5.87,13.12,13.12,13.12,13.11-5.87,13.11-13.12-5.87-13.11-13.11-13.11ZM475.42,116.18c-3.56,0-6.44-2.88-6.44-6.44s2.88-6.44,6.44-6.44,6.44,2.88,6.44,6.44-2.88,6.44-6.44,6.44Z" fill="#b3e0de" stroke="#231f20" stroke-miterlimit="10"/>
       </g>
     </g>
-    <g id="lotus">
+    <g id="lotus" class="clickable">
       <rect x="517.13" y="33.1" width="51" height="51" fill="#e0f2f6" opacity="0"/>
       <text transform="translate(533.33 78.41)" fill="#231f20" font-family="SatoshiVariable-Medium, &apos;Satoshi Variable&apos;" font-size="8" font-variation-settings="&apos;wght&apos; 500" font-weight="500"><tspan x="0" y="0" letter-spacing="-.01em">L</tspan><tspan x="4.1" y="0" letter-spacing="0em">o</tspan><tspan x="8.7" y="0">t</tspan><tspan x="11.25" y="0" letter-spacing="-.01em">u</tspan><tspan x="15.7" y="0">s</tspan></text>
       <g>
@@ -630,6 +641,112 @@
     </div>
   </div>
 
+  <!-- Fifty Pence Popup -->
+  <div id="fifty-pence-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Fifty Pence.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('fifty-pence-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">Fifty Pence</h1>
+          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+            Fifty pence was a service I designed in my second year of my bachelors degree. It is a contactless pad that allowed homeless people to take card donations. The idea for this project came after hearing peoples response "I only have card" when asked for change.
+          </p>
+        </div>
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 400;">
+            <strong>Winner of Fred Maillardet Product Design Breakthrough Award</strong>
+          </p>
+        </div>
+        <div style="text-align: center;">
+          <a href="#" style="
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 300;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+          ">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- oODo Popup -->
+  <div id="oodo-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">oODo.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('oodo-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">oODo</h1>
+          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+            oODo was my final project for my bachelors degree. It was an app that connected customers to their local zero-waste/packaging free shops. It utilised the ability to weigh ingredients specifically for recipes. Then it used a circular reuse system for the packaging used to transport the food.
+          </p>
+        </div>
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 400;">
+            <strong>Nominated for The Waste House Award for Circular Design</strong>
+          </p>
+        </div>
+        <div style="text-align: center;">
+          <a href="#" style="
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 300;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+          ">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lotus Popup -->
+  <div id="lotus-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Lotus.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('lotus-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="text-align: center; margin-bottom: 4rem;">
+          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">Lotus</h1>
+          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+            Lotus is a project showcasing my design work and creative process. This collection represents my exploration of form, function, and aesthetic principles in product design.
+          </p>
+        </div>
+        <div style="text-align: center;">
+          <a href="#" style="
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 300;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+          ">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Mobile menu toggle
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
@@ -671,6 +788,30 @@
 
     lawny.addEventListener('click', () => {
       lawnyPopup.classList.add('active');
+    });
+
+    // Fifty Pence popup
+    const fiftyPence = document.getElementById('fiftyPence');
+    const fiftyPencePopup = document.getElementById('fifty-pence-popup');
+
+    fiftyPence.addEventListener('click', () => {
+      fiftyPencePopup.classList.add('active');
+    });
+
+    // oODo popup
+    const oodo = document.getElementById('oodo');
+    const oodoPopup = document.getElementById('oodo-popup');
+
+    oodo.addEventListener('click', () => {
+      oodoPopup.classList.add('active');
+    });
+
+    // Lotus popup
+    const lotus = document.getElementById('lotus');
+    const lotusPopup = document.getElementById('lotus-popup');
+
+    lotus.addEventListener('click', () => {
+      lotusPopup.classList.add('active');
     });
 
     // Close popup when clicking outside the window

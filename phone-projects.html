@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Projects</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #FFB07B;
+      font-family: 'Courier New', monospace;
+      color: #231f20;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 60px; /* Add padding for fixed nav */
+      overflow-x: hidden;
+    }
+    
+    /* Retro Nav Bar */
+    .retro-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      z-index: 1000;
+      font-family: 'Courier New', monospace;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+    }
+    
+    .nav-logo {
+      font-weight: bold;
+      font-size: 18px;
+      color: #231f20;
+      text-decoration: none;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 20px;
+    }
+    
+    .nav-menu li {
+      position: relative;
+    }
+    
+    .nav-menu a {
+      color: #231f20;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .nav-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+    }
+    
+    .nav-menu a:focus {
+      outline: 2px solid #231f20;
+      outline-offset: 2px;
+    }
+    
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #e0f2f6;
+      border: 2px solid #231f20;
+      border-top: none;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      border-bottom: 1px solid #231f20;
+    }
+    
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #231f20;
+      cursor: pointer;
+      padding: 8px;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      padding: 20px;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      z-index: 999;
+    }
+    
+    .mobile-menu.active {
+      transform: translateY(0);
+    }
+    
+    .mobile-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .mobile-menu li {
+      margin-bottom: 10px;
+    }
+    
+    .mobile-menu a {
+      color: #231f20;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 8px 0;
+      display: block;
+    }
+    
+    /* Phone Container */
+    .phone-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: calc(100vh - 60px);
+    }
+    
+    .phone-container svg {
+      width: 300px;
+      height: auto;
+      max-width: 90vw;
+    }
+    
+    /* Clickable App Groups */
+    #LearnLlama, #ReCanvased {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    #LearnLlama:hover, #ReCanvased:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Popup Styles */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    
+    .popup-content {
+      background: #e0f2f6;
+      border: 3px solid #231f20;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+    
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #231f20;
+      cursor: pointer;
+    }
+    
+    .popup h2 {
+      margin-top: 0;
+      color: #231f20;
+      font-size: 24px;
+    }
+    
+    .popup p {
+      color: #231f20;
+      line-height: 1.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .phone-container svg {
+        width: 250px;
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .phone-container svg {
+        width: 350px;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .phone-container svg {
+        width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Retro Nav Bar -->
+  <nav class="retro-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Fin Cumming</a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-content" role="menu">
+            <a href="phone-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Phone Projects</a>
+            <a href="more-projects.html" role="menuitem">Computer Projects</a>
+            <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
+            <a href="vr.html" role="menuitem">VR Projects</a>
+            <a href="more-projects.html" role="menuitem">All Projects</a>
+          </div>
+        </li>
+        <li><a href="project-1.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="phone-projects.html" style="background: #231f20; color: #e0f2f6;">Phone Projects</a></li>
+        <li><a href="more-projects.html">Computer Projects</a></li>
+        <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
+        <li><a href="vr.html">VR Projects</a></li>
+        <li><a href="more-projects.html">All Projects</a></li>
+        <li><a href="project-1.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Phone Container -->
+  <div class="phone-container">
+    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="91.05mm" height="187.4mm" viewBox="0 0 258.1 531.21">
+      <g id="Layer_1-2" data-name="Layer 1">
+        <g id="Phone">
+          <rect x="-136.05" y="137.05" width="530.21" height="257.1" rx="47.83" ry="47.83" transform="translate(394.66 136.55) rotate(90)" fill="#231f20" stroke="#fff" stroke-miterlimit="10"/>
+          <path d="M248.33,47.99v435.24c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82V47.99c0-20.89,16.94-37.83,37.83-37.83h162.89c20.89,0,37.83,16.94,37.83,37.83Z" fill="#616464"/>
+          <path d="M248.33,241.72v241.51c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82v-80.06s79.5-.74,132.08-88.13c52.58-87.39,106.47-73.32,106.47-73.32Z" fill="#4f5a5b"/>
+          <rect x="20.13" y="453.18" width="217.84" height="57.91" rx="24.94" ry="24.94" fill="#1b252b" opacity=".25"/>
+          <rect x="91.42" y="18.07" width="75.27" height="23.27" rx="11.64" ry="11.64" fill="#231f20"/>
+          <rect x="31.87" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#6bbe58"/>
+          <rect x="84.61" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#fff"/>
+          <rect x="137.26" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#ef455b"/>
+          <path d="M225.11,472.63v19.01c0,4.46-3.62,8.07-8.07,8.07h-19.01c-4.45,0-8.07-3.61-8.07-8.07v-19.01c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#fff"/>
+          <path d="M56.98,486.1l4.5,4.58c.12.12.12.32,0,.44l-2.52,2.52c-3.43,3.29-13.58-7.44-13.58-7.44,0,0-10.73-10.15-7.45-13.58l2.52-2.52c.12-.12.32-.12.44,0l4.58,4.5c.12.12.13.31,0,.44-.68.65-2.52,2.69-1.05,4.36,1.77,2.02,3.75,4.01,3.75,4.01,0,0,1.99,1.97,4,3.75,1.68,1.46,3.71-.37,4.36-1.05.13-.13.32-.12.44,0Z" fill="#fff"/>
+          <g>
+            <circle cx="102.18" cy="482.14" r="15" fill="#467fc1"/>
+            <g>
+              <polygon points="101.48 482.84 102.88 481.43 93.83 473.78 101.48 482.84" fill="#fff"/>
+              <polygon points="102.88 481.43 101.48 482.84 110.54 490.49 102.88 481.43" fill="#dd2e2b"/>
+            </g>
+          </g>
+          <path d="M162.35,488.39s-1.31,2.63-3.94,2.63-2.81-1.72-2.86-2.63c-.06-.9.58-3.92,5.35-3.11l-.12-10.62-10.55,2.22-.08,13.9s-1.32,2.63-3.94,2.63-2.81-1.73-2.87-2.63c-.06-.9.58-3.93,5.35-3.11v-15.53l13.38-2.68.08,4.91.21,14.02Z" fill="#fde5e8"/>
+          <path d="M225.11,472.63v2.66h-35.15v-2.66c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#ffd11b"/>
+        </g>
+        <g id="ReCanvased">
+          <g>
+            <rect x="30.37" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fff"/>
+            <g>
+              <path d="M50.72,82.91c.14,2,.19,4,.18,5.96-.02,4.67-.4,9.12-.85,12.84" fill="none" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
+              <path d="M45.77,76.63s-6.4-5.24.19-9.46c6.89-4.4,7.16,6.5,7.16,6.5,0,0,7.34-6.86,10.55-.56,3.21,6.3-7.61,7.05-7.61,7.05,0,0,7.23,7.62-.12,9.48-7.35,1.86-7.18-6.34-7.18-6.34,0,0-5.7,6.43-8.73,2.55s-3.55-9.32,5.74-9.21Z" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
+              <path d="M53.94,77.74c.34,1.59-1.42,2.98-2.27,3.49-1.39.84-2.86-.93-3.49-2.27-.69-1.47.85-3.52,2.27-3.49,1.27.02,3.19.85,3.49,2.27Z" fill="#fff" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+          </g>
+          <text transform="translate(25.92 113.74)" fill="#fff" font-family="MyriadPro-Regular, 'Myriad Pro'" font-size="9.47"><tspan x="0" y="0" letter-spacing="0em">R</tspan><tspan x="5.13" y="0">e</tspan><tspan x="9.87" y="0" letter-spacing="0em">C</tspan><tspan x="15.3" y="0">a</tspan><tspan x="19.86" y="0" letter-spacing="-.01em">n</tspan><tspan x="24.99" y="0" letter-spacing="0em">v</tspan><tspan x="29.5" y="0">ased</tspan></text>
+        </g>
+        <g id="LearnLlama">
+          <g>
+            <rect x="92.72" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fee238"/>
+            <g>
+              <path d="M100.36,101.39v-13.16c0-4.15,1.92-7.85,4.92-10.26v-8.5c0-1.46,1.18-2.64,2.65-2.64s2.64,1.18,2.64,2.64v5.93c.95-.22,1.94-.33,2.95-.33s2,.11,2.95.33v-5.93c0-1.46,1.18-2.64,2.64-2.64s2.65,1.18,2.65,2.64v8.5c3,2.41,4.92,6.11,4.92,10.26v13.16" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round"/>
+              <path d="M120.21,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M109.42,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="112.03" y1="88.7" x2="113.51" y2="89.59" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="114.99 88.7 113.51 89.59 113.51 91.25" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </g>
+          <text transform="translate(89.38 113.74)" fill="#fff" font-family="MyriadPro-Regular, 'Myriad Pro'" font-size="9.47"><tspan x="0" y="0" letter-spacing="-.01em">L</tspan><tspan x="4.33" y="0">ea</tspan><tspan x="13.64" y="0" letter-spacing="0em">r</tspan><tspan x="16.77" y="0">nLlama</tspan></text>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Popup for LearnLlama -->
+  <div id="learnLlamaPopup" class="popup">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closePopup('learnLlamaPopup')">&times;</button>
+      <h2>LearnLlama</h2>
+      <p>This is a placeholder for the LearnLlama project details. You can add your content here when ready.</p>
+    </div>
+  </div>
+
+  <!-- Popup for ReCanvased -->
+  <div id="reCanvasedPopup" class="popup">
+    <div class="popup-content">
+      <button class="popup-close" onclick="closePopup('reCanvasedPopup')">&times;</button>
+      <h2>ReCanvased</h2>
+      <p>This is a placeholder for the ReCanvased project details. You can add your content here when ready.</p>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const isExpanded = mobileMenu.classList.contains('active');
+      mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // App click handlers
+    document.getElementById('LearnLlama').addEventListener('click', () => {
+      document.getElementById('learnLlamaPopup').style.display = 'flex';
+    });
+
+    document.getElementById('ReCanvased').addEventListener('click', () => {
+      document.getElementById('reCanvasedPopup').style.display = 'flex';
+    });
+
+    // Close popup functions
+    function closePopup(popupId) {
+      document.getElementById(popupId).style.display = 'none';
+    }
+
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('popup')) {
+        e.target.style.display = 'none';
+      }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup').forEach(popup => {
+          popup.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

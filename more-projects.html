@@ -280,12 +280,27 @@
     /* Clickable SVG elements */
     .clickable {
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     .clickable:hover {
       transform: scale(1.05);
-      filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
+    }
+
+    /* Responsive popup layout */
+    @media (max-width: 768px) {
+      .popup-content div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      
+      .popup-content h1[style*="font-size: 3.5rem"] {
+        font-size: 2.5rem !important;
+      }
+      
+      .popup-content p[style*="font-size: 1.2rem"] {
+        font-size: 1.1rem !important;
+      }
     }
 
     /* Mobile Menu */
@@ -616,26 +631,32 @@
         <button class="popup-close-btn" onclick="closePopup('lawny-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">Lawny</h1>
-          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-            Lawny is a lawn mowing game I created. It is an escape room style game, you can choose from different lawn mowers and mow lawns in order to complete the game. This game was made in Unity. Lawn mowers designed in Maya.
-          </p>
-        </div>
-
-        <div style="text-align: center;">
-          <a href="https://fin-d-lay.itch.io/lawny" target="_blank" style="
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 300;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-          ">Try now</a>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Lawny</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Lawny is a lawn mowing game I created. It is an escape room style game, you can choose from different lawn mowers and mow lawns in order to complete the game. This game was made in Unity. Lawn mowers designed in Maya.
+            </p>
+            <a href="https://fin-d-lay.itch.io/lawny" target="_blank" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Try now</a>
+          </div>
+          
+          <!-- Right: Image Placeholder -->
+          <div style="background: #f8f8f8; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+            Image placeholder
+          </div>
         </div>
       </div>
     </div>
@@ -649,30 +670,37 @@
         <button class="popup-close-btn" onclick="closePopup('fifty-pence-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">Fifty Pence</h1>
-          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-            Fifty pence was a service I designed in my second year of my bachelors degree. It is a contactless pad that allowed homeless people to take card donations. The idea for this project came after hearing peoples response "I only have card" when asked for change.
-          </p>
-        </div>
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 400;">
-            <strong>Winner of Fred Maillardet Product Design Breakthrough Award</strong>
-          </p>
-        </div>
-        <div style="text-align: center;">
-          <a href="#" style="
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 300;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-          ">Learn more</a>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Fifty Pence</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Fifty pence was a service I designed in my second year of my bachelors degree. It is a contactless pad that allowed homeless people to take card donations. The idea for this project came after hearing peoples response "I only have card" when asked for change.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Winner of Fred Maillardet Product Design Breakthrough Award
+              </p>
+            </div>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image Placeholder -->
+          <div style="background: #f8f8f8; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+            Image placeholder
+          </div>
         </div>
       </div>
     </div>
@@ -686,30 +714,37 @@
         <button class="popup-close-btn" onclick="closePopup('oodo-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">oODo</h1>
-          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-            oODo was my final project for my bachelors degree. It was an app that connected customers to their local zero-waste/packaging free shops. It utilised the ability to weigh ingredients specifically for recipes. Then it used a circular reuse system for the packaging used to transport the food.
-          </p>
-        </div>
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 400;">
-            <strong>Nominated for The Waste House Award for Circular Design</strong>
-          </p>
-        </div>
-        <div style="text-align: center;">
-          <a href="#" style="
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 300;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-          ">Learn more</a>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">oODo</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              oODo was my final project for my bachelors degree. It was an app that connected customers to their local zero-waste/packaging free shops. It utilised the ability to weigh ingredients specifically for recipes. Then it used a circular reuse system for the packaging used to transport the food.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Nominated for The Waste House Award for Circular Design
+              </p>
+            </div>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image Placeholder -->
+          <div style="background: #f8f8f8; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+            Image placeholder
+          </div>
         </div>
       </div>
     </div>
@@ -723,25 +758,32 @@
         <button class="popup-close-btn" onclick="closePopup('lotus-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="text-align: center; margin-bottom: 4rem;">
-          <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">Lotus</h1>
-          <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-            Lotus is a project showcasing my design work and creative process. This collection represents my exploration of form, function, and aesthetic principles in product design.
-          </p>
-        </div>
-        <div style="text-align: center;">
-          <a href="#" style="
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 16px 32px;
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 300;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            letter-spacing: 0.5px;
-          ">Learn more</a>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Lotus</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Lotus is a project showcasing my design work and creative process. This collection represents my exploration of form, function, and aesthetic principles in product design.
+            </p>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image Placeholder -->
+          <div style="background: #f8f8f8; height: 300px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+            Image placeholder
+          </div>
         </div>
       </div>
     </div>

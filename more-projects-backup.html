@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ProjectOS</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #FFB07B;
+      font-family: 'Courier New', monospace;
+      color: #FFB07B;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding-top: 60px; /* Add padding for fixed nav */
+    }
+    
+    /* Retro Nav Bar */
+    .retro-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      z-index: 1000;
+      font-family: 'Courier New', monospace;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+    }
+    
+    .nav-logo {
+      font-weight: bold;
+      font-size: 18px;
+      color: #231f20;
+      text-decoration: none;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 30px;
+    }
+    
+    .nav-menu li {
+      position: relative;
+    }
+    
+    .nav-menu a {
+      color: #231f20;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+    
+    .nav-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+    }
+    
+    .nav-menu a:focus {
+      outline: 2px solid #231f20;
+      outline-offset: 2px;
+    }
+    
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #e0f2f6;
+      border: 2px solid #231f20;
+      border-top: none;
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-content a {
+      display: block;
+      padding: 12px 16px;
+      border-bottom: 1px solid #231f20;
+    }
+    
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+    
+    /* New Popup System */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courier New', monospace;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .popup-window {
+      position: relative;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      border-radius: 0;
+      width: 90%;
+      max-width: 900px;
+      max-height: 80vh;
+      overflow: hidden;
+      transform: scale(0);
+      animation: windowExpand 0.4s ease-out forwards;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes windowExpand {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .popup-titlebar {
+      background: linear-gradient(90deg, #000080, #0000ff);
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #000;
+    }
+
+    .popup-title {
+      flex: 1;
+    }
+
+    .popup-close-btn {
+      background: #c0c0c0;
+      border: 1px outset #c0c0c0;
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+      width: 16px;
+      height: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
+
+    .popup-close-btn:hover {
+      background: #d0d0d0;
+    }
+
+    .popup-close-btn:active {
+      border: 1px inset #c0c0c0;
+    }
+
+    .popup-content {
+      background: #ffffff;
+      padding: 40px 24px;
+      max-height: calc(80vh - 30px);
+      overflow-y: auto;
+      color: #212529;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .popup-content::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    .popup-content::-webkit-scrollbar-track {
+      background: #f1f3f4;
+      border: 1px solid #e0e0e0;
+    }
+
+    .popup-content::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, #6c757d 0%, #495057 100%);
+      border: 1px solid #495057;
+      border-radius: 2px;
+    }
+
+    .popup-content::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, #5a6268 0%, #343a40 100%);
+    }
+
+    /* Itch.io Game Embed Styles */
+    .game-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .game-iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .game-info {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+
+    .game-info h3 {
+      color: #2c3e50;
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .game-info p {
+      color: #34495e;
+      line-height: 1.6;
+    }
+
+    /* Play button hover effect */
+    .popup-content a:hover {
+      background: #34495e !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Clickable SVG elements */
+    .clickable {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .clickable:hover {
+      transform: scale(1.05);
+    }
+
+    /* Responsive popup layout */
+    @media (max-width: 768px) {
+      .popup-content div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      
+      .popup-content h1[style*="font-size: 3.5rem"] {
+        font-size: 2.5rem !important;
+      }
+      
+      .popup-content p[style*="font-size: 1.2rem"] {
+        font-size: 1.1rem !important;
+      }
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #231f20;
+      cursor: pointer;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #e0f2f6;
+      border-bottom: 2px solid #231f20;
+      padding: 20px;
+    }
+    
+    .mobile-menu.active {
+      display: block;
+    }
+    
+    .mobile-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .mobile-menu li {
+      margin-bottom: 10px;
+    }
+    
+    .mobile-menu a {
+      display: block;
+      padding: 12px 0;
+      color: #231f20;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    
+    .mobile-menu a:hover {
+      background: #231f20;
+      color: #e0f2f6;
+      padding-left: 10px;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .nav-container {
+        padding: 0 15px;
+      }
+    }
+
+    svg {
+      height: auto;
+      width: 100%;
+    }
+
+    #Loading {
+      opacity: 1;
+      transition: opacity 1s ease;
+      pointer-events: all;
+    }
+
+    #desktopScreen {
+      opacity: 1;
+      transition: opacity 1s ease;
+      pointer-events: all;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    #loadingWheel {
+      animation: spin 1s linear infinite;
+      transform-origin: 500px 350px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Hover animation for icons */
+    #desktopIcons g[id] {
+      transition: transform 0.3s ease;
+      transform-origin: center;
+    }
+    
+    #desktopIcons g[id]:hover {
+      transform: scale(1.03);
+    }
+
+    #desktopIcons,
+    #desktopIcons *,
+    #Loading,
+    #Loading *,
+    #desktop,
+    #desktop * {
+      cursor: url('RetroCursor3.png') 0 0, auto;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Retro Nav Bar -->
+  <nav class="retro-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Fin Cumming</a>
+      
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
+          <div class="dropdown-content" role="menu">
+            <a href="phone-projects.html" role="menuitem">Phone Projects</a>
+            <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Computer Projects</a>
+            <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
+            <a href="vr.html" role="menuitem">VR Projects</a>
+            <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">All Projects</a>
+          </div>
+        </li>
+        <li><a href="project-1.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="phone-projects.html">Phone Projects</a></li>
+        <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">Computer Projects</a></li>
+        <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
+        <li><a href="vr.html">VR Projects</a></li>
+        <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">All Projects</a></li>
+        <li><a href="project-1.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Full-screen SVG with Layer1, Loading, and DesktopScreen embedded -->
+  <?xml version="1.0" encoding="UTF-8"?>
+  <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="444.94mm" height="190.66mm" viewBox="0 0 1261.25 540.47">
+    <g id="Layer_1-2" data-name="Layer 1">
+  <g id="Table">
+        <rect x=".5" y="484.72" width="1260.25" height="55.25" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+        <rect x=".5" y="235.26" width="1260.25" height="249.46" fill="#fff" stroke="#231f20" stroke-miterlimit="10"/>
+      </g>
+    
+    <!-- Desktop Icons -->
+  <g id="desktopIcons">
+      <!-- Toddler Text Generator -->
+      <g id="toddlerText" class="clickable">
+        <rect x="50" y="50" width="80" height="80" fill="#e0f2f6" stroke="#231f20" stroke-width="2" rx="8"/>
+        <text x="90" y="100" text-anchor="middle" fill="#231f20" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Toddler Text</text>
+      </g>
+      
+      <!-- Small Animation -->
+      <g id="smallAnimation" class="clickable">
+        <rect x="150" y="50" width="80" height="80" fill="#e0f2f6" stroke="#231f20" stroke-width="2" rx="8"/>
+        <text x="190" y="100" text-anchor="middle" fill="#231f20" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Animation</text>
+      </g>
+      
+      <!-- Some Sketches -->
+      <g id="someSketches" class="clickable">
+        <rect x="250" y="50" width="80" height="80" fill="#e0f2f6" stroke="#231f20" stroke-width="2" rx="8"/>
+        <text x="290" y="100" text-anchor="middle" fill="#231f20" font-family="Arial, sans-serif" font-size="12" font-weight="bold">Sketches</text>
+    </g>
+  </g>
+</svg>
+  <!-- Lawny Popup -->
+  <div id="lawny-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Lawny.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('lawny-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Lawny</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Lawny is a lawn mowing game I created. It is an escape room style game, you can choose from different lawn mowers and mow lawns in order to complete the game. This game was made in Unity. Lawn mowers designed in Maya.
+            </p>
+            <a href="https://fin-d-lay.itch.io/lawny" target="_blank" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Try now</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/lawny.jpg" alt="Lawny Game" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fifty Pence Popup -->
+  <div id="fifty-pence-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Fifty Pence.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('fifty-pence-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Fifty Pence</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Fifty pence was a service I designed in my second year of my bachelors degree. It is a contactless pad that allowed homeless people to take card donations. The idea for this project came after hearing peoples response "I only have card" when asked for change.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Winner of Fred Maillardet Product Design Breakthrough Award
+              </p>
+            </div>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/fifty-pence.jpg" alt="Fifty Pence Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- oODo Popup -->
+  <div id="oodo-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">oODo.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('oodo-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">oODo</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              oODo was my final project for my bachelors degree. It was an app that connected customers to their local zero-waste/packaging free shops. It utilised the ability to weigh ingredients specifically for recipes. Then it used a circular reuse system for the packaging used to transport the food.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Nominated for The Waste House Award for Circular Design
+              </p>
+            </div>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/oodo.jpg" alt="oODo Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lotus Popup -->
+  <div id="lotus-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Lotus.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('lotus-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Lotus</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              Lotus is a project showcasing my design work and creative process. This collection represents my exploration of form, function, and aesthetic principles in product design.
+            </p>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/lotus.jpg" alt="Lotus Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toddler Text Generator Popup -->
+  <div id="toddler-text-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Toddler Text Generator.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('toddler-text-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Toddler Text Generator</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              I made a python program that generatively wrote letters as they were typed out. The letters were designed to look like children's handwriting. Each letter was drawn within certain parameters when its corresponding key was pressed. I made another version in Java so it could be used online.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <button onclick="tryToddlerText()" style="
+                display: inline-block;
+                background: #000;
+                color: white;
+                padding: 14px 28px;
+                text-decoration: none;
+                border-radius: 0;
+                font-weight: 400;
+                font-size: 0.9rem;
+                transition: all 0.2s ease;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border: none;
+                cursor: pointer;
+                margin-right: 1rem;
+              ">Try Toddler Text</button>
+              <a href="#" style="
+                display: inline-block;
+                background: #000;
+                color: white;
+                padding: 14px 28px;
+                text-decoration: none;
+                border-radius: 0;
+                font-weight: 400;
+                font-size: 0.9rem;
+                transition: all 0.2s ease;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+              ">Learn more</a>
+            </div>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/toddler-text.jpg" alt="Toddler Text Generator" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small Animation Popup -->
+  <div id="small-animation-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Small Animation.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('small-animation-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">A Small Animation</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              I made a small keyframe animation in Maya for a module on my masters degree. This project demonstrates my skills in 3D animation and keyframe techniques.
+            </p>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/small-animation.jpg" alt="Small Animation" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Some Sketches Popup -->
+  <div id="some-sketches-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Some Sketches.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('some-sketches-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Some Sketches</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              A collection of my design sketches and creative explorations. These sketches represent my design thinking process and creative development across various projects.
+            </p>
+            <a href="#" style="
+              display: inline-block;
+              background: #000;
+              color: white;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 0;
+              font-weight: 400;
+              font-size: 0.9rem;
+              transition: all 0.2s ease;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            ">Learn more</a>
+          </div>
+          
+          <!-- Right: Image -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+            <img src="AssetsProjects/some-sketches.jpg" alt="Some Sketches" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
+              Image placeholder
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    mobileToggle.addEventListener('click', () => {
+      const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', !isExpanded);
+      mobileMenu.classList.toggle('active');
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    window.addEventListener("load", () => {
+      const loadingLayer = document.getElementById("Loading");
+
+      setTimeout(() => {
+        loadingLayer.classList.add('fade-out');
+      }, 2000); // 2 seconds delay
+    });
+
+      const contact = document.getElementById('contact');
+        if (contact) {
+          contact.style.cursor = 'pointer';
+          contact.addEventListener('click', () => {
+            window.location.href = 'contact.html';
+          });
+        }
+
+    // Modal logic - Updated for new popup system
+    const lawny = document.getElementById('Lawny');
+    const lawnyPopup = document.getElementById('lawny-popup');
+
+    lawny.addEventListener('click', () => {
+      lawnyPopup.classList.add('active');
+    });
+
+    // Fifty Pence popup
+    const fiftyPence = document.getElementById('fiftyPence');
+    const fiftyPencePopup = document.getElementById('fifty-pence-popup');
+
+    fiftyPence.addEventListener('click', () => {
+      fiftyPencePopup.classList.add('active');
+    });
+
+    // oODo popup
+    const oodo = document.getElementById('oodo');
+    const oodoPopup = document.getElementById('oodo-popup');
+
+    oodo.addEventListener('click', () => {
+      oodoPopup.classList.add('active');
+    });
+
+    // Lotus popup
+    const lotus = document.getElementById('lotus');
+    const lotusPopup = document.getElementById('lotus-popup');
+
+    lotus.addEventListener('click', () => {
+      lotusPopup.classList.add('active');
+    });
+
+    // Toddler Text popup
+    const toddlerText = document.getElementById('toddlerText');
+    const toddlerTextPopup = document.getElementById('toddler-text-popup');
+
+    toddlerText.addEventListener('click', () => {
+      toddlerTextPopup.classList.add('active');
+    });
+
+    // Small Animation popup
+    const smallAnimation = document.getElementById('smallAnimation');
+    const smallAnimationPopup = document.getElementById('small-animation-popup');
+
+    smallAnimation.addEventListener('click', () => {
+      smallAnimationPopup.classList.add('active');
+    });
+
+    // Some Sketches popup
+    const someSketches = document.getElementById('someSketches');
+    const someSketchesPopup = document.getElementById('some-sketches-popup');
+
+    someSketches.addEventListener('click', () => {
+      someSketchesPopup.classList.add('active');
+    });
+
+    // Toddler Text Generator function
+    function tryToddlerText() {
+      // This would open the actual Toddler Text Generator
+      // For now, just show an alert
+      alert('Toddler Text Generator would open here!');
+    }
+
+    // Close popup when clicking outside the window
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('popup')) {
+        e.target.classList.remove('active');
+      }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup.active').forEach(popup => {
+          popup.classList.remove('active');
+        });
+      }
+    });
+
+    // Close popup function
+    function closePopup(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+  </script>
+
+</body>
+</html>

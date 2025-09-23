@@ -164,11 +164,11 @@
       animation: panelAppear 0.5s ease-in-out 6s forwards;
     }
 
-    /* VR Frame starts black, then changes to original color */
-    #FrameVR {
+    /* VR Lens starts black, then changes to original color */
+    #Lense {
       fill: #000000;
       opacity: 1;
-      animation: frameColorChange 0.5s ease-in-out 5s forwards;
+      animation: lensColorChange 0.5s ease-in-out 5s forwards;
     }
 
     /* Logo animation sequence */
@@ -181,8 +181,8 @@
       100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
     }
 
-    /* Frame color change animation */
-    @keyframes frameColorChange {
+    /* Lens color change animation */
+    @keyframes lensColorChange {
       0% { fill: #000000; opacity: 1; }
       100% { fill: #4356a6; opacity: 0.26; }
     }

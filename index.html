@@ -269,17 +269,17 @@
       text-align: center;
       line-height: 1.5;
     }
-
+    
     /* Mobile Responsive */
     @media (max-width: 768px) {
       .nav-menu {
         display: none;
       }
-
+      
       .mobile-menu-toggle {
         display: block;
       }
-
+      
       .nav-container {
         padding: 0 15px;
       }
@@ -320,7 +320,7 @@
       .desk-container svg {
         width: 70vw;
         max-width: 1000px; /* Don't grow beyond this size */
-        height: auto;
+      height: auto;
         transform: translateY(40vh); /* Move down more to clear nav bar */
         transform-origin: center; /* Scale from center */
       }
@@ -420,79 +420,126 @@
 
     .popup {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2rem;
-  box-shadow: none;
-  border-radius: 12px;
-  border: 2px solid #231F20;
-  width: calc(100% - 100px);
-  max-width: 1000px;
-  max-height: 90vh;
-  overflow: hidden;
-  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
   display: none;
-  font-family: 'Satoshi', sans-serif;
-  color: white;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
 }
 
 .popup.active {
-  display: block;
+  display: flex;
 }
 
-.popup .close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: inherit;
+.popup-window {
+  position: relative;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  border-radius: 0;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow: hidden;
+  transform: scale(0);
+  animation: windowExpand 0.4s ease-out forwards;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.popup-scroll {
-  overflow-y: auto;
-  max-height: 75vh;
-  padding-right: 1rem;
-}
-
-@media (min-width: 800px) {
-  .popup {
-    width: calc(100% - 200px);
+@keyframes windowExpand {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* 🎨 Popup-specific background colors */
-.popup-phone {
-  background: #F8F6F2;
-  color: black;
-}
-
-.popup-vr {
-  background: #1C1C1C;
+.popup-titlebar {
+  background: linear-gradient(90deg, #000080, #0000ff);
   color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #000;
 }
 
-.popup-plant {
-  background: #0B7BA0;
-  color: white;
+.popup-title {
+  flex: 1;
 }
 
-.popup-about {
-  background: #FFB07B;
-  color: #231f20;
+.popup-close-btn {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+  width: 16px;
+  height: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
 }
 
-.popup-awards {
-  background: #FFD700;
-  color: #231f20;
+.popup-close-btn:hover {
+  background: #d0d0d0;
 }
 
-.popup-paper {
-  background: #FDF3E7;
-  color: black;
+.popup-close-btn:active {
+  border: 1px inset #c0c0c0;
+}
+
+.popup-content {
+  background: #c0c0c0;
+  padding: 16px;
+  max-height: calc(80vh - 30px);
+  overflow-y: auto;
+  color: #000;
+}
+
+.popup-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 1px inset #c0c0c0;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background: #808080;
+  border: 1px outset #808080;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+  background: #606060;
+}
+
+/* Responsive adjustments for popup */
+@media (max-width: 768px) {
+  .popup-window {
+    width: 95%;
+    max-height: 85vh;
+  }
+  
+  .popup-content {
+    padding: 12px;
+  }
 }
 
 .popup-inner {
@@ -983,7 +1030,7 @@
       </g>
     </g>
   </g>
-    </svg>
+</svg>
   </div>
 
   <!-- Popup Containers -->
@@ -1010,56 +1057,60 @@
 </div>
 
 <!-- Plant (DonkeyJobs) Popup -->
-<div id="popup-plant" class="popup popup-plant">
-  <button class="close" onclick="closePopup('popup-plant')">✕</button>
-  <div class="popup-scroll">
-    <div class="popup-inner">
-      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">DonkeyJobs</h2>
+<div id="popup-plant" class="popup">
+  <div class="popup-window">
+    <div class="popup-titlebar">
+      <div class="popup-title">DonkeyJobs.exe</div>
+      <button class="popup-close-btn" onclick="closePopup('popup-plant')">×</button>
+    </div>
+    <div class="popup-content">
+      <h2 style="text-align: center; font-size: 1.5rem; margin-top: 0; color: #000;">DonkeyJobs</h2>
 
-      <div class="hero-section">
-        <div class="hero-text">
-          <p class="popup-lead">
-            DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
-          </p>
+      <div style="margin-bottom: 1rem;">
+        <p style="font-size: 1rem; line-height: 1.4;">
+          DonkeyJobs is an eco-friendly garden maintenance company that I founded and ran for 4 years. We had over 1000 customers and went viral on TikTok with over 20 million views.
+        </p>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" style="max-width: 100%; height: auto; border: 1px solid #000;" />
+      </div>
+
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <img src="AssetsDonkeyJobs/BigGarden.png" alt="Garden Example" style="max-width: 100%; height: auto; border: 1px solid #000;" />
+      </div>
+
+      <div style="display: flex; justify-content: space-around; margin-bottom: 1rem; flex-wrap: wrap;">
+        <div style="text-align: center; margin: 0.5rem;">
+          <img src="AssetsDonkeyJobs/WindowCleaning.png" alt="Window Cleaning" style="max-width: 80px; height: auto; border: 1px solid #000;" />
+          <p style="font-size: 0.9rem; margin: 0.25rem 0;"><strong>Window Cleaning</strong></p>
         </div>
-        <div class="hero-image">
-          <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" />
+        <div style="text-align: center; margin: 0.5rem;">
+          <img src="AssetsDonkeyJobs/ExtraPairOfHands.png" alt="Extra Hands" style="max-width: 80px; height: auto; border: 1px solid #000;" />
+          <p style="font-size: 0.9rem; margin: 0.25rem 0;"><strong>An Extra Pair of Hands</strong></p>
+        </div>
+        <div style="text-align: center; margin: 0.5rem;">
+          <img src="AssetsDonkeyJobs/Gardening.png" alt="Gardening" style="max-width: 80px; height: auto; border: 1px solid #000;" />
+          <p style="font-size: 0.9rem; margin: 0.25rem 0;"><strong>Gardening</strong></p>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: center; margin-bottom: 2rem;">
-        <img src="AssetsDonkeyJobs/BigGarden.png" alt="Garden Example" style="width: 100%; max-width: 800px; border-radius: 12px;" />
+      <div style="text-align: center; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; margin: 0.5rem 0;"><strong>5 star rated on Google</strong></p>
+        <img src="AssetsDonkeyJobs/5Stars.png" alt="5 stars" style="max-width: 150px; height: auto;" />
       </div>
 
-      <div class="service-icons">
-        <div>
-          <img src="AssetsDonkeyJobs/WindowCleaning.png" alt="Window Cleaning" />
-          <p><strong>Window Cleaning</strong></p>
-        </div>
-        <div>
-          <img src="AssetsDonkeyJobs/ExtraPairOfHands.png" alt="Extra Hands" />
-          <p><strong>An Extra Pair of Hands</strong></p>
-        </div>
-        <div>
-          <img src="AssetsDonkeyJobs/Gardening.png" alt="Gardening" />
-          <p><strong>Gardening</strong></p>
-        </div>
-      </div>
-
-      <p style="font-size: 1.2rem;"><strong>5 star rated on Google</strong></p>
-      <img src="AssetsDonkeyJobs/5Stars.png" alt="5 stars" />
-
-      <p>
+      <p style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 1rem;">
         My role in the company was for the website, marketing, branding and HR. I spent a lot of time developing the DonkeyJobs brand to the point it was recognised over South London. I was responsible for managing employees and making sure they were happy and working to the high standard required to keep our customers happy.
       </p>
 
-      <div class="popup-gallery">
-        <img src="AssetsDonkeyJobs/Gallery1.png" alt="Project 1" />
-        <img src="AssetsDonkeyJobs/Gallery2.png" alt="Project 2" />
-        <img src="AssetsDonkeyJobs/Gallery3.png" alt="Project 3" />
-        <img src="AssetsDonkeyJobs/Gallery4.png" alt="Project 4" />
-        <img src="AssetsDonkeyJobs/Gallery5.png" alt="Project 5" />
-        <img src="AssetsDonkeyJobs/Gallery6.png" alt="Project 6" />
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5rem; margin-top: 1rem;">
+        <img src="AssetsDonkeyJobs/Gallery1.png" alt="Project 1" style="width: 100%; height: auto; border: 1px solid #000;" />
+        <img src="AssetsDonkeyJobs/Gallery2.png" alt="Project 2" style="width: 100%; height: auto; border: 1px solid #000;" />
+        <img src="AssetsDonkeyJobs/Gallery3.png" alt="Project 3" style="width: 100%; height: auto; border: 1px solid #000;" />
+        <img src="AssetsDonkeyJobs/Gallery4.png" alt="Project 4" style="width: 100%; height: auto; border: 1px solid #000;" />
+        <img src="AssetsDonkeyJobs/Gallery5.png" alt="Project 5" style="width: 100%; height: auto; border: 1px solid #000;" />
+        <img src="AssetsDonkeyJobs/Gallery6.png" alt="Project 6" style="width: 100%; height: auto; border: 1px solid #000;" />
       </div>
     </div>
   </div>
@@ -1141,7 +1192,7 @@
   </div>
 </div>
 
- <script>
+<script>
   // Rotation detection and smooth transitions
   const rotationHint = document.getElementById('rotationHint');
   const mainContent = document.getElementById('mainContent');
@@ -1224,7 +1275,7 @@
   
   if (openParam) {
     // Auto-open popup when coming from nav
-    setTimeout(() => {
+      setTimeout(() => {
       let popupId = '';
       switch(openParam) {
         case 'donkeyjobs':
@@ -1276,6 +1327,22 @@
   function closePopup(id) {
     document.getElementById(id).classList.remove('active');
   }
+
+  // Close popup when clicking outside the window
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('popup')) {
+      e.target.classList.remove('active');
+    }
+  });
+
+  // Close popup with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.popup.active').forEach(popup => {
+        popup.classList.remove('active');
+      });
+    }
+  });
 </script>
 
 </body>

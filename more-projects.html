@@ -142,9 +142,9 @@
       background: #c0c0c0;
       border: 2px outset #c0c0c0;
       border-radius: 0;
-      width: 90%;
-      max-width: 900px;
-      max-height: 80vh;
+      width: 95%;
+      max-width: 1000px;
+      max-height: 90vh;
       overflow: hidden;
       transform: scale(0);
       animation: windowExpand 0.4s ease-out forwards;
@@ -207,8 +207,8 @@
 
     .popup-content {
       background: #ffffff;
-      padding: 40px 24px;
-      max-height: calc(80vh - 30px);
+      padding: 30px 20px;
+      max-height: calc(90vh - 30px);
       overflow-y: auto;
       color: #212529;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -285,6 +285,106 @@
 
     .clickable:hover {
       transform: scale(1.05);
+    }
+
+    /* Carousel styles */
+    .image-carousel {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #f8f8f8;
+    }
+    
+    .carousel-images {
+      display: flex;
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .carousel-image {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    
+    .carousel-nav:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    
+    .carousel-prev {
+      left: 10px;
+    }
+    
+    .carousel-next {
+      right: 10px;
+    }
+    
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+    }
+    
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    
+    .carousel-dot.active {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* Typography improvements */
+    .popup-content h1 {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: #000;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    
+    .popup-content h3 {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #2c3e50;
+      margin: 0 0 1rem 0;
+    }
+    
+    .popup-content p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      margin: 0 0 1.5rem 0;
+      font-weight: 300;
     }
 
     /* Responsive popup layout */
@@ -1052,6 +1152,68 @@
     someSketches.addEventListener('click', () => {
       someSketchesPopup.classList.add('active');
     });
+
+    // Carousel functionality
+    function initCarousel(carouselId) {
+      const carousel = document.getElementById(carouselId);
+      if (!carousel) return;
+      
+      const images = carousel.querySelectorAll('.carousel-image');
+      const prevBtn = carousel.querySelector('.carousel-prev');
+      const nextBtn = carousel.querySelector('.carousel-next');
+      const dots = carousel.querySelectorAll('.carousel-dot');
+      const imagesContainer = carousel.querySelector('.carousel-images');
+      
+      let currentIndex = 0;
+      
+      function updateCarousel() {
+        const translateX = -currentIndex * 100;
+        imagesContainer.style.transform = `translateX(${translateX}%)`;
+        
+        // Update dots
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
+      
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateCarousel();
+      }
+      
+      function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateCarousel();
+      }
+      
+      function goToImage(index) {
+        currentIndex = index;
+        updateCarousel();
+      }
+      
+      // Event listeners
+      if (nextBtn) nextBtn.addEventListener('click', nextImage);
+      if (prevBtn) prevBtn.addEventListener('click', prevImage);
+      
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToImage(index));
+      });
+      
+      // Initialize
+      updateCarousel();
+    }
+    
+    // Initialize all carousels when popups open
+    function initAllCarousels() {
+      initCarousel('donkeyjobs-carousel');
+      initCarousel('lawny-carousel');
+      initCarousel('fifty-pence-carousel');
+      initCarousel('oodo-carousel');
+      initCarousel('lotus-carousel');
+      initCarousel('toddler-text-carousel');
+      initCarousel('small-animation-carousel');
+      initCarousel('some-sketches-carousel');
+    }
 
     // Toddler Text Generator function
     function tryToddlerText() {

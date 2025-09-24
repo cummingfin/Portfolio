@@ -340,6 +340,9 @@
     }
 
     /* Phone light on hover */
+    #phone {
+      cursor: pointer;
+    }
     #phone:hover #phoneLight {
       opacity: 1;
       transition: opacity 0.4s ease;
@@ -399,6 +402,7 @@
     /* Trophy floating animation on hover */
     #Trophy {
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
     #Trophy:hover {
       animation: floatTrophy 1.5s ease-in-out infinite;
@@ -409,6 +413,9 @@
     }
 
     /* Cup steam animation - only runs on hover */
+    #cup {
+      cursor: pointer;
+    }
     #steam {
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -447,9 +454,9 @@
   background: #c0c0c0;
   border: 2px outset #c0c0c0;
   border-radius: 0;
-  width: 90%;
-  max-width: 800px;
-  max-height: 80vh;
+  width: 98%;
+  max-width: 1200px;
+  max-height: 95vh;
   overflow: hidden;
   transform: scale(0);
   animation: windowExpand 0.4s ease-out forwards;
@@ -472,8 +479,8 @@
 }
 
 .popup-titlebar {
-  background: linear-gradient(90deg, #000080, #0000ff);
-  color: white;
+  background: #e8f4f8;
+  color: #231f20;
   padding: 4px 8px;
   font-size: 12px;
   font-weight: bold;
@@ -512,8 +519,8 @@
 
     .popup-content {
       background: #ffffff;
-      padding: 40px 24px;
-      max-height: calc(80vh - 30px);
+      padding: 50px 40px;
+      max-height: calc(95vh - 30px);
       overflow-y: auto;
       color: #212529;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -549,30 +556,307 @@
 }
 
 /* Play button hover effect */
-.popup-content a:hover {
-  background: #34495e !important;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    .popup-content a:hover {
+      background: #34495e !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Carousel styles */
+    .image-carousel {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #f8f8f8;
+    }
+    
+    .carousel-images {
+      display: flex;
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+    
+    .carousel-image,
+    .carousel-video {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    
+    .carousel-video {
+      cursor: pointer;
+    }
+    
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .carousel-nav:hover {
+      background: rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .carousel-nav:active {
+      transform: translateY(-50%) scale(0.98);
+    }
+    
+    .carousel-prev {
+      left: 10px;
+    }
+    
+    .carousel-next {
+      right: 10px;
+    }
+    
+    .carousel-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: block;
+      text-align: center;
+      font-size: 0;
+    }
+    
+    .carousel-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin: 0 4px;
+      vertical-align: top;
+    }
+    
+    .carousel-dot:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+    
+    .carousel-dot.active {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* Image Lightbox */
+    .image-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .image-lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 80vw;
+      max-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .lightbox-nav:active {
+      transform: translateY(-50%) scale(0.98);
+    }
+
+    .lightbox-prev {
+      left: 50px;
+    }
+
+    .lightbox-next {
+      right: 50px;
+    }
+
+/* Popup Navigation */
+.popup-nav {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.popup-nav-arrow {
+  background: none;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-size: 40px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+  outline: none;
+  pointer-events: auto;
+  padding: 5px;
+}
+
+.popup-nav-arrow:hover {
+  transform: scale(1.2);
+}
+
+.popup-nav-arrow:active {
+  transform: scale(1.1);
+}
+
+/* Typography improvements */
+.popup-content h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #000;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.popup-content h3 {
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #2c3e50;
+  margin: 0 0 1rem 0;
+}
+
+.popup-content p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  font-weight: 300;
 }
 
 /* Responsive adjustments for popup */
 @media (max-width: 768px) {
   .popup-window {
     width: 95%;
-    max-height: 85vh;
+    max-width: 100%;
+    max-height: 90vh;
   }
   
   .popup-content {
-    padding: 16px;
+    padding: 30px 20px;
+    max-height: calc(90vh - 30px);
   }
   
   .popup-content h1 {
-    font-size: 2rem !important;
+    font-size: 1.8rem;
   }
   
-  .popup-content div[style*="display: grid"] {
+  .popup-content div[style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;
-    gap: 1rem !important;
+    gap: 2rem !important;
+  }
+  
+  .popup-content h1[style*="font-size: 3.5rem"] {
+    font-size: 2.5rem !important;
+  }
+  
+  .popup-content p[style*="font-size: 1.2rem"] {
+    font-size: 1.1rem !important;
   }
 }
 
@@ -678,7 +962,7 @@
         <li class="dropdown">
           <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
           <div class="dropdown-content" role="menu">
-            <a href="phone-projects.html" role="menuitem">Phone Projects</a>
+            <a href="phone-projects.html" role="menuitem">Mobile Apps</a>
             <a href="more-projects.html" role="menuitem">Computer Projects</a>
             <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
             <a href="vr.html" role="menuitem">VR Projects</a>
@@ -699,7 +983,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="index.html" style="background: #231f20; color: #e0f2f6;">Home</a></li>
-        <li><a href="phone-projects.html">Phone Projects</a></li>
+        <li><a href="phone-projects.html">Mobile Apps</a></li>
         <li><a href="more-projects.html">Computer Projects</a></li>
         <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
         <li><a href="vr.html">VR Projects</a></li>
@@ -1090,48 +1374,6 @@
   </div>
 </div>
 
-<!-- Plant (DonkeyJobs) Popup -->
-<div id="popup-plant" class="popup">
-  <div class="popup-window">
-    <div class="popup-titlebar">
-      <div class="popup-title">DonkeyJobs.exe</div>
-      <button class="popup-close-btn" onclick="closePopup('popup-plant')">×</button>
-    </div>
-    <div class="popup-content">
-      <div style="text-align: center; margin-bottom: 4rem;">
-        <h1 style="font-size: 2.5rem; font-weight: 200; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.02em;">DonkeyJobs</h1>
-        <p style="font-size: 1.1rem; color: #666; margin: 0; font-weight: 300; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-          I founded and managed a garden maintenance company based in South London for five years. We designed the service to be as eco-friendly as possible, using cargo bikes to travel and all electric tools to carry out our work. My role in the company was for the website, marketing, branding and HR.
-        </p>
-      </div>
-
-      <div style="text-align: center; margin-bottom: 3rem;">
-        <img src="AssetsDonkeyJobs/Hero.png" alt="DonkeyJobs Bike" style="max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 2px 20px rgba(0,0,0,0.1); image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; filter: contrast(1.1) brightness(1.05);" />
-      </div>
-
-      <div style="text-align: center; margin-bottom: 4rem;">
-        <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 400;">
-          <strong>Over 22 million views on TikTok</strong>
-        </p>
-      </div>
-
-      <div style="text-align: center;">
-        <a href="https://donkeyjobs.co.uk" target="_blank" style="
-          display: inline-block;
-          background: #000;
-          color: white;
-          padding: 16px 32px;
-          text-decoration: none;
-          border-radius: 0;
-          font-weight: 300;
-          font-size: 1rem;
-          transition: all 0.2s ease;
-          letter-spacing: 0.5px;
-        ">Learn more</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Paper Popup -->
 <div id="popup-paper" class="popup popup-paper">
@@ -1206,6 +1448,16 @@
         <p><strong>Portfolio Innovation:</strong> Developed unique 3D isometric portfolio showcasing technical creativity</p>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Image Lightbox -->
+<div id="image-lightbox" class="image-lightbox">
+  <div class="lightbox-content">
+    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+    <button class="lightbox-nav lightbox-prev" onclick="previousLightboxImage()">←</button>
+    <button class="lightbox-nav lightbox-next" onclick="nextLightboxImage()">→</button>
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
   </div>
 </div>
 
@@ -1322,7 +1574,7 @@
   const paper = document.getElementById('paper');
 
   phone?.addEventListener('click', () => {
-    document.getElementById('popup-phone').classList.add('active');
+    window.location.href = 'phone-projects.html';
   });
 
   vr?.addEventListener('click', () => {
@@ -1331,6 +1583,41 @@
 
   plant?.addEventListener('click', () => {
     document.getElementById('popup-plant').classList.add('active');
+    initDonkeyJobsCarousel();
+  });
+
+  // Trophy click handler
+  const trophy = document.getElementById('Trophy');
+  console.log('Trophy element found:', trophy);
+  
+  // Test function to manually open trophy popup
+  window.testTrophyPopup = function() {
+    const popup = document.getElementById('popup-trophy');
+    console.log('Manual test - Popup element found:', popup);
+    if (popup) {
+      popup.classList.add('active');
+      console.log('Manual test - Popup should be open now');
+    }
+  };
+  
+  trophy?.addEventListener('click', (e) => {
+    console.log('Trophy clicked!');
+    e.preventDefault();
+    e.stopPropagation();
+    const popup = document.getElementById('popup-trophy');
+    console.log('Popup element found:', popup);
+    if (popup) {
+      popup.classList.add('active');
+      console.log('Popup should be open now');
+    } else {
+      console.error('Popup element not found!');
+    }
+  });
+
+  // Cup click handler - navigate to project-1.html
+  const cup = document.getElementById('cup');
+  cup?.addEventListener('click', () => {
+    window.location.href = 'project-1.html';
   });
 
   paper?.addEventListener('click', () => {
@@ -1360,9 +1647,172 @@
       });
     }
   });
+
+  // Carousel functionality
+  function initCarousel(carouselId) {
+    const carousel = document.getElementById(carouselId);
+    if (!carousel) return;
+    
+    const images = carousel.querySelectorAll('.carousel-image');
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const imagesContainer = carousel.querySelector('.carousel-images');
+    
+    let currentIndex = 0;
+    
+    function updateCarousel() {
+      const translateX = -currentIndex * 100;
+      imagesContainer.style.transform = `translateX(${translateX}%)`;
+      
+      // Update dots
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+    
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCarousel();
+    }
+    
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCarousel();
+    }
+    
+    function goToImage(index) {
+      currentIndex = index;
+      updateCarousel();
+    }
+    
+    // Event listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextImage);
+    if (prevBtn) prevBtn.addEventListener('click', prevImage);
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToImage(index));
+    });
+    
+    // Initialize
+    updateCarousel();
+  }
+
+  // Initialize DonkeyJobs carousel when popup opens
+  function initDonkeyJobsCarousel() {
+    initCarousel('donkeyjobs-carousel');
+  }
+
+  // Lightbox functions
+  let currentLightboxImages = [];
+  let currentLightboxIndex = 0;
+
+  function openLightbox(src, alt) {
+    const lightbox = document.getElementById('image-lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    
+    // Get all carousel images from the current popup
+    const activePopup = document.querySelector('.popup.active');
+    const carouselImages = activePopup.querySelectorAll('.carousel-image');
+    
+    currentLightboxImages = Array.from(carouselImages).map(img => ({
+      src: img.src,
+      alt: img.alt
+    }));
+    
+    currentLightboxIndex = currentLightboxImages.findIndex(img => img.src === src);
+    
+    lightboxImage.src = src;
+    lightboxImage.alt = alt;
+    lightbox.classList.add('active');
+    
+    // Prevent body scroll when lightbox is open
+    document.body.style.overflow = 'hidden';
+  }
+
+  function nextLightboxImage() {
+    if (currentLightboxImages.length === 0) return;
+    
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+    const image = currentLightboxImages[currentLightboxIndex];
+    
+    const lightboxImage = document.getElementById('lightbox-image');
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+  }
+
+  function previousLightboxImage() {
+    if (currentLightboxImages.length === 0) return;
+    
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+    const image = currentLightboxImages[currentLightboxIndex];
+    
+    const lightboxImage = document.getElementById('lightbox-image');
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('image-lightbox');
+    lightbox.classList.remove('active');
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }
+
+  // Close lightbox when clicking outside the image
+  document.getElementById('image-lightbox').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      closeLightbox();
+    }
+  });
+
+  // Close lightbox with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const lightbox = document.getElementById('image-lightbox');
+      if (lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    }
+  });
 </script>
 
-</body>
-</html>
-<!-- Deployment trigger Tue Sep 23 18:20:02 BST 2025 -->
-<!-- GitHub Pages deployment trigger Tue Sep 23 18:26:03 BST 2025 -->
+  <!-- Plant (DonkeyJobs) Popup -->
+  <div id="popup-plant" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">DonkeyJobs.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('popup-plant')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">DonkeyJobs</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              I founded and managed a garden maintenance company based in South London for five years. We designed the service to be as eco-friendly as possible, using cargo bikes to travel and all electric tools to carry out our work. My role in the company was for the website, marketing, branding and HR.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Over 22 million views on TikTok
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Image Carousel -->
+          <div id="donkeyjobs-carousel" class="image-carousel">
+            <div class="carousel-images">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs.png" alt="DonkeyJobs" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs1.jpeg" alt="DonkeyJobs 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs2.jpg" alt="DonkeyJobs 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs3.jpg" alt="DonkeyJobs 3" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs4.jpg" alt="DonkeyJobs 4" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs5.jpg" alt="DonkeyJobs 5" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs6.jpg" alt="DonkeyJobs 6" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs7.jpg" alt="DonkeyJobs 7" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs8.jpg" alt="DonkeyJobs 8" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs9.jpg" alt="DonkeyJobs 9" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/AssetsDonkeyJobs/Donkeyjobs10.jpg" alt="DonkeyJobs 10" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            </div>
+        

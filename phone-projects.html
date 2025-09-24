@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phone Projects</title>
+  <title>Mobile Apps</title>
   
   <style>
     * {
@@ -18,8 +18,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       padding-top: 60px; /* Add padding for fixed nav */
+      padding-bottom: 20px;
       overflow-x: hidden;
     }
     
@@ -101,6 +102,7 @@
       visibility: hidden;
       transform: translateY(-10px);
       transition: all 0.3s ease;
+      z-index: 1001;
     }
     
     .dropdown:hover .dropdown-content {
@@ -131,6 +133,7 @@
     }
     
     .mobile-menu {
+      display: none;
       position: fixed;
       top: 60px;
       left: 0;
@@ -144,6 +147,7 @@
     }
     
     .mobile-menu.active {
+      display: block;
       transform: translateY(0);
     }
     
@@ -171,13 +175,13 @@
       justify-content: center;
       align-items: center;
       width: 100%;
-      height: calc(100vh - 60px);
+      max-height: calc(100vh - 100px); /* Reduced height to prevent cropping */
     }
     
     .phone-container svg {
-      width: 300px;
+      width: 250px; /* Fixed default size */
       height: auto;
-      max-width: 90vw;
+      max-height: 80vh; /* Default height for desktop */
     }
     
     /* Clickable App Groups */
@@ -193,6 +197,7 @@
     }
     
     /* Popup Styles */
+    /* Modern Popup System */
     .popup {
       position: fixed;
       top: 0;
@@ -200,43 +205,234 @@
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 2000;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .popup.active {
+      display: flex;
+    }
+    
+    .popup-window {
+      position: relative;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      border-radius: 0;
+      width: 98%;
+      max-width: 1200px;
+      max-height: 95vh;
+      overflow: hidden;
+      transform: scale(0);
+      animation: windowExpand 0.4s ease-out forwards;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    @keyframes windowExpand {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    
+    .popup-titlebar {
+      background: #e8f4f8;
+      color: #231f20;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #000;
+    }
+    
+    .popup-close-btn {
+      background: #c0c0c0;
+      border: 1px outset #c0c0c0;
+      color: #000;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 6px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .popup-close-btn:hover {
+      background: #a0a0a0;
     }
     
     .popup-content {
-      background: #e0f2f6;
-      border: 3px solid #231f20;
-      border-radius: 8px;
-      padding: 30px;
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      position: relative;
+      background: #ffffff;
+      padding: 50px 40px;
+      max-height: calc(95vh - 30px);
+      overflow-y: auto;
+      color: #212529;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
-    .popup-close {
+    .popup-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .popup-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    .popup-content::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    .popup-content::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    .popup-content h1 {
+      font-family: 'Courier New', monospace;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #000;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    
+    .popup-content p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      margin: 0 0 1.5rem 0;
+      font-weight: 300;
+    }
+
+    /* Popup Navigation Arrows */
+    .popup-nav {
       position: absolute;
-      top: 10px;
-      right: 15px;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .popup-nav-arrow {
       background: none;
       border: none;
-      font-size: 24px;
-      color: #231f20;
+      color: #000;
+      font-size: 40px;
+      font-weight: bold;
       cursor: pointer;
+      pointer-events: auto;
+      transition: color 0.2s ease;
+    }
+
+    .popup-nav-arrow:hover {
+      color: #333;
     }
     
-    .popup h2 {
-      margin-top: 0;
-      color: #231f20;
-      font-size: 24px;
+    /* Video Demo Lightbox */
+    .video-demo-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
     }
-    
-    .popup p {
-      color: #231f20;
-      line-height: 1.6;
+
+    .video-demo-lightbox.active {
+      display: flex;
+    }
+
+    .video-demo-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Device Container - holds both video and frame */
+    .device-container {
+      position: relative;
+      display: none; /* Hidden by default */
+    }
+
+    .device-container.active {
+      display: block;
+    }
+
+    /* iPhone Device */
+    .device-container.iphone {
+      width: auto;
+      height: 80vh;
+      max-width: 90vw;
+    }
+
+    .device-container.iphone video {
+      width: auto;
+      height: 80vh;
+      max-width: 90vw;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* iPad Device */
+    .device-container.ipad {
+      width: auto;
+      height: 80vh;
+      max-width: 90vw;
+    }
+
+    .device-container.ipad video {
+      width: auto;
+      height: 80vh;
+      max-width: 90vw;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .video-demo-close {
+      position: absolute;
+      top: -50px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .video-demo-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    /* Responsive video demo */
+    @media (max-width: 768px) {
+      .video-demo-content {
+        max-width: 95vw;
+        max-height: 85vh;
+      }
     }
     
     /* Responsive */
@@ -250,19 +446,43 @@
       }
       
       .phone-container svg {
-        width: 250px;
+        width: 220px; /* Fixed width for mobile */
+        max-height: 90vh; /* Taller on mobile */
+      }
+      
+      /* Mobile device sizing adjustments */
+      .device-container.iphone {
+        height: 75vh;
+        max-width: 95vw;
+      }
+      
+      .device-container.iphone video {
+        height: 75vh;
+        max-width: 95vw;
+      }
+      
+      .device-container.ipad {
+        height: 75vh;
+        max-width: 95vw;
+      }
+      
+      .device-container.ipad video {
+        height: 75vh;
+        max-width: 95vw;
       }
     }
     
     @media (min-width: 769px) and (max-width: 1024px) {
       .phone-container svg {
-        width: 350px;
+        width: 280px;
+        max-height: 85vh; /* Slightly taller on tablet */
       }
     }
     
     @media (min-width: 1025px) {
       .phone-container svg {
-        width: 400px;
+        width: 320px;
+        max-height: 80vh; /* Shorter on large desktop */
       }
     }
   </style>
@@ -278,7 +498,7 @@
         <li class="dropdown">
           <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
           <div class="dropdown-content" role="menu">
-            <a href="phone-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Phone Projects</a>
+            <a href="phone-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Mobile Apps</a>
             <a href="more-projects.html" role="menuitem">Computer Projects</a>
             <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
             <a href="vr.html" role="menuitem">VR Projects</a>
@@ -299,7 +519,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="phone-projects.html" style="background: #231f20; color: #e0f2f6;">Phone Projects</a></li>
+        <li><a href="phone-projects.html" style="background: #231f20; color: #e0f2f6;">Mobile Apps</a></li>
         <li><a href="more-projects.html">Computer Projects</a></li>
         <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
         <li><a href="vr.html">VR Projects</a></li>
@@ -313,72 +533,160 @@
 
   <!-- Phone Container -->
   <div class="phone-container">
-    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="91.05mm" height="187.4mm" viewBox="0 0 258.1 531.21">
-      <g id="Layer_1-2" data-name="Layer 1">
-        <g id="Phone">
-          <rect x="-136.05" y="137.05" width="530.21" height="257.1" rx="47.83" ry="47.83" transform="translate(394.66 136.55) rotate(90)" fill="#231f20" stroke="#fff" stroke-miterlimit="10"/>
-          <path d="M248.33,47.99v435.24c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82V47.99c0-20.89,16.94-37.83,37.83-37.83h162.89c20.89,0,37.83,16.94,37.83,37.83Z" fill="#616464"/>
-          <path d="M248.33,241.72v241.51c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82v-80.06s79.5-.74,132.08-88.13c52.58-87.39,106.47-73.32,106.47-73.32Z" fill="#4f5a5b"/>
-          <rect x="20.13" y="453.18" width="217.84" height="57.91" rx="24.94" ry="24.94" fill="#1b252b" opacity=".25"/>
-          <rect x="91.42" y="18.07" width="75.27" height="23.27" rx="11.64" ry="11.64" fill="#231f20"/>
-          <rect x="31.87" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#6bbe58"/>
-          <rect x="84.61" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#fff"/>
-          <rect x="137.26" y="464.56" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#ef455b"/>
-          <path d="M225.11,472.63v19.01c0,4.46-3.62,8.07-8.07,8.07h-19.01c-4.45,0-8.07-3.61-8.07-8.07v-19.01c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#fff"/>
-          <path d="M56.98,486.1l4.5,4.58c.12.12.12.32,0,.44l-2.52,2.52c-3.43,3.29-13.58-7.44-13.58-7.44,0,0-10.73-10.15-7.45-13.58l2.52-2.52c.12-.12.32-.12.44,0l4.58,4.5c.12.12.13.31,0,.44-.68.65-2.52,2.69-1.05,4.36,1.77,2.02,3.75,4.01,3.75,4.01,0,0,1.99,1.97,4,3.75,1.68,1.46,3.71-.37,4.36-1.05.13-.13.32-.12.44,0Z" fill="#fff"/>
+    <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="91.06mm" height="187.4mm" viewBox="0 0 258.11 531.21">
+  <g id="Phone">
+    <g id="Phone-2" data-name="Phone">
+      <g>
+        <path d="M248.33,47.99v435.24c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82V47.99c0-20.89,16.94-37.83,37.83-37.83h162.89c20.89,0,37.83,16.94,37.83,37.83Z" fill="#616464"/>
+        <path d="M248.33,241.72v241.51c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82v-80.06s79.5-.74,132.08-88.13c52.58-87.39,106.47-73.32,106.47-73.32Z" fill="#4f5a5b"/>
+        <rect x="20.13" y="453.18" width="217.84" height="57.91" rx="24.94" ry="24.94" fill="#1b252b" opacity=".25"/>
+        <rect x="31.87" y="464.57" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#6bbe58"/>
+        <rect x="84.61" y="464.57" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#fff"/>
+        <rect x="137.27" y="464.57" width="35.14" height="35.14" rx="8.07" ry="8.07" fill="#ef455b"/>
+        <path d="M225.11,472.63v19.01c0,4.46-3.62,8.07-8.07,8.07h-19.01c-4.45,0-8.07-3.61-8.07-8.07v-19.01c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#fff"/>
+        <path d="M56.98,486.1l4.5,4.58c.12.12.12.32,0,.44l-2.52,2.52c-3.43,3.29-13.58-7.44-13.58-7.44,0,0-10.73-10.15-7.45-13.58l2.52-2.52c.12-.12.32-.12.44,0l4.58,4.5c.12.12.13.31,0,.44-.68.65-2.52,2.69-1.05,4.36,1.77,2.02,3.75,4.01,3.75,4.01,0,0,1.99,1.97,4,3.75,1.68,1.46,3.71-.37,4.36-1.05.13-.13.32-.12.44,0Z" fill="#fff"/>
+        <g>
+          <circle cx="102.18" cy="482.14" r="15" fill="#467fc1"/>
           <g>
-            <circle cx="102.18" cy="482.14" r="15" fill="#467fc1"/>
-            <g>
-              <polygon points="101.48 482.84 102.88 481.43 93.83 473.78 101.48 482.84" fill="#fff"/>
-              <polygon points="102.88 481.43 101.48 482.84 110.54 490.49 102.88 481.43" fill="#dd2e2b"/>
-            </g>
+            <polygon points="101.48 482.84 102.89 481.43 93.83 473.78 101.48 482.84" fill="#fff"/>
+            <polygon points="102.89 481.43 101.48 482.84 110.54 490.49 102.89 481.43" fill="#dd2e2b"/>
           </g>
-          <path d="M162.35,488.39s-1.31,2.63-3.94,2.63-2.81-1.72-2.86-2.63c-.06-.9.58-3.92,5.35-3.11l-.12-10.62-10.55,2.22-.08,13.9s-1.32,2.63-3.94,2.63-2.81-1.73-2.87-2.63c-.06-.9.58-3.93,5.35-3.11v-15.53l13.38-2.68.08,4.91.21,14.02Z" fill="#fde5e8"/>
-          <path d="M225.11,472.63v2.66h-35.15v-2.66c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#ffd11b"/>
         </g>
-        <g id="ReCanvased">
-          <g>
-            <rect x="30.37" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fff"/>
-            <g>
-              <path d="M50.72,82.91c.14,2,.19,4,.18,5.96-.02,4.67-.4,9.12-.85,12.84" fill="none" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
-              <path d="M45.77,76.63s-6.4-5.24.19-9.46c6.89-4.4,7.16,6.5,7.16,6.5,0,0,7.34-6.86,10.55-.56,3.21,6.3-7.61,7.05-7.61,7.05,0,0,7.23,7.62-.12,9.48-7.35,1.86-7.18-6.34-7.18-6.34,0,0-5.7,6.43-8.73,2.55s-3.55-9.32,5.74-9.21Z" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
-              <path d="M53.94,77.74c.34,1.59-1.42,2.98-2.27,3.49-1.39.84-2.86-.93-3.49-2.27-.69-1.47.85-3.52,2.27-3.49,1.27.02,3.19.85,3.49,2.27Z" fill="#fff" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
-            </g>
-          </g>
-          <text transform="translate(25.92 113.74)" fill="#fff" font-family="MyriadPro-Regular, 'Myriad Pro'" font-size="9.47"><tspan x="0" y="0" letter-spacing="0em">R</tspan><tspan x="5.13" y="0">e</tspan><tspan x="9.87" y="0" letter-spacing="0em">C</tspan><tspan x="15.3" y="0">a</tspan><tspan x="19.86" y="0" letter-spacing="-.01em">n</tspan><tspan x="24.99" y="0" letter-spacing="0em">v</tspan><tspan x="29.5" y="0">ased</tspan></text>
-        </g>
-        <g id="LearnLlama">
-          <g>
-            <rect x="92.72" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fee238"/>
-            <g>
-              <path d="M100.36,101.39v-13.16c0-4.15,1.92-7.85,4.92-10.26v-8.5c0-1.46,1.18-2.64,2.65-2.64s2.64,1.18,2.64,2.64v5.93c.95-.22,1.94-.33,2.95-.33s2,.11,2.95.33v-5.93c0-1.46,1.18-2.64,2.64-2.64s2.65,1.18,2.65,2.64v8.5c3,2.41,4.92,6.11,4.92,10.26v13.16" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round"/>
-              <path d="M120.21,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M109.42,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="112.03" y1="88.7" x2="113.51" y2="89.59" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
-              <polyline points="114.99 88.7 113.51 89.59 113.51 91.25" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
-            </g>
-          </g>
-          <text transform="translate(89.38 113.74)" fill="#fff" font-family="MyriadPro-Regular, 'Myriad Pro'" font-size="9.47"><tspan x="0" y="0" letter-spacing="-.01em">L</tspan><tspan x="4.33" y="0">ea</tspan><tspan x="13.64" y="0" letter-spacing="0em">r</tspan><tspan x="16.77" y="0">nLlama</tspan></text>
+        <path d="M162.35,488.39s-1.31,2.63-3.94,2.63-2.81-1.72-2.86-2.63c-.06-.9.58-3.92,5.35-3.11l-.12-10.62-10.55,2.22-.08,13.9s-1.32,2.63-3.94,2.63-2.81-1.73-2.87-2.63c-.06-.9.58-3.93,5.35-3.11v-15.53l13.38-2.68.08,4.91.21,14.02Z" fill="#fde5e8"/>
+        <path d="M225.11,472.63v2.66h-35.15v-2.66c0-4.45,3.62-8.06,8.07-8.06h19.01c4.45,0,8.07,3.61,8.07,8.06Z" fill="#ffd11b"/>
+        <rect x="91.42" y="18.07" width="75.27" height="23.27" rx="11.64" ry="11.64" fill="#231f20"/>
+      </g>
+    </g>
+    <g id="ReCanvased">
+      <g>
+        <rect x="30.38" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fff"/>
+        <g>
+          <path d="M50.72,82.91c.14,2,.19,4,.18,5.96-.02,4.67-.4,9.12-.85,12.84" fill="none" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
+          <path d="M45.77,76.63s-6.4-5.24.19-9.46c6.89-4.4,7.16,6.5,7.16,6.5,0,0,7.34-6.86,10.55-.56,3.21,6.3-7.61,7.05-7.61,7.05,0,0,7.23,7.62-.12,9.48-7.35,1.86-7.18-6.34-7.18-6.34,0,0-5.7,6.43-8.73,2.55s-3.55-9.32,5.74-9.21Z" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
+          <path d="M53.94,77.74c.34,1.59-1.42,2.98-2.27,3.49-1.39.84-2.86-.93-3.49-2.27-.69-1.47.85-3.52,2.27-3.49,1.27.02,3.19.85,3.49,2.27Z" fill="#fff" stroke="#231f20" stroke-linejoin="round" stroke-width="2"/>
         </g>
       </g>
-    </svg>
+      <text transform="translate(25.92 113.74)" fill="#fff" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="9.47"><tspan x="0" y="0" letter-spacing="0em">R</tspan><tspan x="5.13" y="0">e</tspan><tspan x="9.87" y="0" letter-spacing="0em">C</tspan><tspan x="15.3" y="0">a</tspan><tspan x="19.86" y="0" letter-spacing="-.01em">n</tspan><tspan x="24.99" y="0" letter-spacing="0em">v</tspan><tspan x="29.5" y="0">ased</tspan></text>
+    </g>
+    <g id="LearnLlama">
+      <g>
+        <rect x="92.73" y="60.14" width="41.58" height="41.58" rx="8.07" ry="8.07" fill="#fee238"/>
+        <g>
+          <path d="M100.36,101.4v-13.16c0-4.15,1.92-7.85,4.92-10.26v-8.5c0-1.46,1.18-2.64,2.65-2.64s2.64,1.18,2.64,2.64v5.93c.95-.22,1.94-.33,2.95-.33s2,.11,2.95.33v-5.93c0-1.46,1.18-2.64,2.64-2.64s2.65,1.18,2.65,2.64v8.5c3,2.41,4.92,6.11,4.92,10.26v13.16" fill="#f9ed2e" stroke="#231f20" stroke-linejoin="round"/>
+          <path d="M120.21,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M109.43,84.36c0,.72-.58,1.3-1.3,1.3h0c-.72,0-1.3-.58-1.3-1.3" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="112.04" y1="88.7" x2="113.52" y2="89.59" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+          <polyline points="114.99 88.7 113.52 89.59 113.52 91.25" fill="none" stroke="#231f20" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </g>
+      <text transform="translate(89.39 113.74)" fill="#fff" font-family="MyriadPro-Regular, &apos;Myriad Pro&apos;" font-size="9.47"><tspan x="0" y="0" letter-spacing="-.01em">L</tspan><tspan x="4.33" y="0">ea</tspan><tspan x="13.64" y="0" letter-spacing="0em">r</tspan><tspan x="16.77" y="0">nLlama</tspan></text>
+    </g>
+     <path id="iphoneFrame" d="M209.78.5H48.33C21.92.5.5,21.91.5,48.33v434.56c0,26.41,21.42,47.82,47.83,47.82h161.45c26.41,0,47.83-21.41,47.83-47.82V48.33c0-26.42-21.42-47.83-47.83-47.83ZM248.33,483.23c0,20.89-16.94,37.82-37.83,37.82H47.61c-20.89,0-37.83-16.93-37.83-37.82V47.99c0-20.89,16.94-37.83,37.83-37.83h162.89c20.89,0,37.83,16.94,37.83,37.83v435.24Z" fill="#231f20" stroke="#000" stroke-miterlimit="10"/>
+   </g>
+ </svg>
   </div>
 
-  <!-- Popup for LearnLlama -->
+  <!-- LearnLlama Popup -->
   <div id="learnLlamaPopup" class="popup">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup('learnLlamaPopup')">&times;</button>
-      <h2>LearnLlama</h2>
-      <p>This is a placeholder for the LearnLlama project details. You can add your content here when ready.</p>
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">LearnLlama.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('learnLlamaPopup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">LearnLlama</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              An AR-powered language learning app that brings Spanish vocabulary to life through interactive 3D objects and immersive experiences.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Winner of Best AR Project - Goldsmiths University, 2024
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Video Thumbnail -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVideoDemo('AssetsProjects/LearnLlama/LearnLlamaVideo.MP4', 'ipad')">
+            <img src="AssetsProjects/LearnLlama/ThumbnailLL@3x.png" alt="LearnLlama Video Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
+              ▶ Play Demo
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <div class="popup-nav">
+        <button class="popup-nav-arrow" onclick="closePopup('learnLlamaPopup'); document.getElementById('reCanvasedPopup').classList.add('active');">←</button>
+        <button class="popup-nav-arrow" onclick="closePopup('learnLlamaPopup'); document.getElementById('reCanvasedPopup').classList.add('active');">→</button>
+      </div>
     </div>
   </div>
 
-  <!-- Popup for ReCanvased -->
+  <!-- ReCanvased Popup -->
   <div id="reCanvasedPopup" class="popup">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closePopup('reCanvasedPopup')">&times;</button>
-      <h2>ReCanvased</h2>
-      <p>This is a placeholder for the ReCanvased project details. You can add your content here when ready.</p>
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">ReCanvased.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('reCanvasedPopup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">ReCanvased</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              A mobile app that transforms canvas art into interactive digital experiences, allowing users to scan and animate their paintings.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Interactive Art Technology
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Video Thumbnail -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVideoDemo('AssetsProjects/Recanvased/RecanvasedVideo.mp4', 'iphone')">
+            <img src="AssetsProjects/Recanvased/RecanvasedTN@3x.png" alt="ReCanvased Video Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
+              ▶ Play Demo
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <div class="popup-nav">
+        <button class="popup-nav-arrow" onclick="closePopup('reCanvasedPopup'); document.getElementById('learnLlamaPopup').classList.add('active');">←</button>
+        <button class="popup-nav-arrow" onclick="closePopup('reCanvasedPopup'); document.getElementById('learnLlamaPopup').classList.add('active');">→</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Demo Lightbox -->
+  <div id="video-demo-lightbox" class="video-demo-lightbox">
+    <div class="video-demo-content">
+      <!-- iPhone Device (for ReCanvased) -->
+      <div id="iphone-device" class="device-container iphone">
+        <video id="demo-video" controls>
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <!-- iPad Device (for LearnLlama) -->
+      <div id="ipad-device" class="device-container ipad">
+        <video id="demo-video-ipad" controls>
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      
+      <!-- Close Button -->
+      <button class="video-demo-close" onclick="closeVideoDemo()">×</button>
     </div>
   </div>
 
@@ -403,31 +711,96 @@
 
     // App click handlers
     document.getElementById('LearnLlama').addEventListener('click', () => {
-      document.getElementById('learnLlamaPopup').style.display = 'flex';
+      document.getElementById('learnLlamaPopup').classList.add('active');
     });
 
     document.getElementById('ReCanvased').addEventListener('click', () => {
-      document.getElementById('reCanvasedPopup').style.display = 'flex';
+      document.getElementById('reCanvasedPopup').classList.add('active');
     });
 
     // Close popup functions
     function closePopup(popupId) {
-      document.getElementById(popupId).style.display = 'none';
+      document.getElementById(popupId).classList.remove('active');
     }
 
     // Close popup when clicking outside
     document.addEventListener('click', (e) => {
       if (e.target.classList.contains('popup')) {
-        e.target.style.display = 'none';
+        document.querySelectorAll('.popup.active').forEach(popup => {
+          popup.classList.remove('active');
+        });
       }
     });
 
     // Close popup with Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        document.querySelectorAll('.popup').forEach(popup => {
-          popup.style.display = 'none';
-        });
+        const activePopup = document.querySelector('.popup.active');
+        const videoLightbox = document.getElementById('video-demo-lightbox');
+        if (activePopup) {
+          activePopup.classList.remove('active');
+        } else if (videoLightbox.classList.contains('active')) {
+          closeVideoDemo();
+        }
+      }
+    });
+
+    // Video demo functions
+    function openVideoDemo(videoSrc, deviceType) {
+      const lightbox = document.getElementById('video-demo-lightbox');
+      const iphoneDevice = document.getElementById('iphone-device');
+      const ipadDevice = document.getElementById('ipad-device');
+      const iphoneVideo = document.getElementById('demo-video');
+      const ipadVideo = document.getElementById('demo-video-ipad');
+      
+      // Hide all devices first
+      iphoneDevice.classList.remove('active');
+      ipadDevice.classList.remove('active');
+      
+      // Show appropriate device and set video source
+      if (deviceType === 'ipad') {
+        ipadDevice.classList.add('active');
+        ipadVideo.src = videoSrc;
+      } else {
+        iphoneDevice.classList.add('active');
+        iphoneVideo.src = videoSrc;
+      }
+      
+      // Show lightbox
+      lightbox.classList.add('active');
+      
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoDemo() {
+      const lightbox = document.getElementById('video-demo-lightbox');
+      const iphoneDevice = document.getElementById('iphone-device');
+      const ipadDevice = document.getElementById('ipad-device');
+      const iphoneVideo = document.getElementById('demo-video');
+      const ipadVideo = document.getElementById('demo-video-ipad');
+      
+      // Pause videos and clear sources
+      iphoneVideo.pause();
+      iphoneVideo.src = '';
+      ipadVideo.pause();
+      ipadVideo.src = '';
+      
+      // Hide all devices
+      iphoneDevice.classList.remove('active');
+      ipadDevice.classList.remove('active');
+      
+      // Hide lightbox
+      lightbox.classList.remove('active');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+    }
+
+    // Close video demo when clicking outside
+    document.getElementById('video-demo-lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeVideoDemo();
       }
     });
   </script>

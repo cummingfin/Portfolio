@@ -303,30 +303,49 @@
       height: 100%;
     }
     
-    .carousel-image {
+    .carousel-image,
+    .carousel-video {
       min-width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    
+    .carousel-video {
+      cursor: pointer;
     }
     
     .carousel-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
+      background: rgba(0, 0, 0, 0.4);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
-      transition: background 0.2s ease;
+      font-size: 14px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
     
     .carousel-nav:hover {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .carousel-nav:active {
+      transform: translateY(-50%) scale(0.98);
     }
     
     .carousel-prev {
@@ -342,22 +361,231 @@
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
+      display: block;
+      text-align: center;
+      font-size: 0;
     }
     
     .carousel-dot {
+      display: inline-block;
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.5);
-      border: none;
       cursor: pointer;
       transition: background 0.2s ease;
+      margin: 0 4px;
+      vertical-align: top;
+    }
+    
+    .carousel-dot:hover {
+      background: rgba(255, 255, 255, 0.8);
     }
     
     .carousel-dot.active {
       background: rgba(255, 255, 255, 1);
+    }
+
+    /* Image Lightbox */
+    .image-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .image-lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 80vw;
+      max-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .lightbox-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      outline: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 1);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .lightbox-nav:active {
+      transform: translateY(-50%) scale(0.98);
+    }
+
+    .lightbox-prev {
+      left: 50px;
+    }
+
+    .lightbox-next {
+      right: 50px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    /* Video Lightbox */
+    .video-lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .video-lightbox.active {
+      display: flex;
+    }
+
+    .video-lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px;
+    }
+
+    .video-lightbox video {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 300;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .video-lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.5);
+      transform: scale(1.1);
+    }
+
+    /* Popup Navigation */
+    .popup-nav {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .popup-nav-arrow {
+      background: none;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-size: 40px;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+      outline: none;
+      pointer-events: auto;
+      padding: 5px;
+    }
+
+    .popup-nav-arrow:hover {
+      transform: scale(1.2);
+    }
+
+    .popup-nav-arrow:active {
+      transform: scale(1.1);
     }
 
     /* Typography improvements */
@@ -385,6 +613,18 @@
       color: #333;
       margin: 0 0 1.5rem 0;
       font-weight: 300;
+    }
+
+    /* Image quality improvements - only for carousel images */
+    .carousel-image {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      filter: contrast(1.1) brightness(1.05);
+      transition: transform 0.2s ease;
+    }
+    
+    .carousel-image:hover {
+      transform: scale(1.02);
     }
 
     /* Responsive popup layout */
@@ -546,7 +786,7 @@
         <li class="dropdown">
           <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
           <div class="dropdown-content" role="menu">
-            <a href="phone-projects.html" role="menuitem">Phone Projects</a>
+            <a href="phone-projects.html" role="menuitem">Mobile Apps</a>
             <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Computer Projects</a>
             <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
             <a href="vr.html" role="menuitem">VR Projects</a>
@@ -567,7 +807,7 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="phone-projects.html">Phone Projects</a></li>
+        <li><a href="phone-projects.html">Mobile Apps</a></li>
         <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">Computer Projects</a></li>
         <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
         <li><a href="vr.html">VR Projects</a></li>
@@ -785,13 +1025,28 @@
             ">Try now</a>
           </div>
           
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/lawny.jpg" alt="Lawny Game" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
+          <!-- Right: Image Carousel -->
+          <div id="lawny-carousel" class="image-carousel">
+            <div class="carousel-images">
+              <img src="AssetsProjects/lawny/Lawny-Screenshot1.png" alt="Lawny Screenshot 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/lawny/Lawny-Screenshot2.png" alt="Lawny Screenshot 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/lawny/Lawny-Screenshot3.png" alt="Lawny Screenshot 3" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+              <img src="AssetsProjects/lawny/Lawny-Screenshot4.png" alt="Lawny Screenshot 4" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            </div>
+            <button class="carousel-nav carousel-prev">←</button>
+            <button class="carousel-nav carousel-next">→</button>
+            <div class="carousel-dots">
+              <span class="carousel-dot active"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
             </div>
           </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -819,13 +1074,24 @@
             </div>
           </div>
           
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/fifty-pence.jpg" alt="Fifty Pence Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
-            </div>
+        <!-- Right: Image Carousel -->
+        <div id="fifty-pence-carousel" class="image-carousel">
+          <div class="carousel-images">
+            <img src="AssetsProjects/fifty-pence/Fiftypence1.png" alt="Fifty Pence Screenshot 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/fifty-pence/Fiftypence2.png" alt="Fifty Pence Screenshot 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
           </div>
+          <button class="carousel-nav carousel-prev">←</button>
+          <button class="carousel-nav carousel-next">→</button>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -853,13 +1119,32 @@
             </div>
           </div>
           
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/oodo.jpg" alt="oODo Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
-            </div>
+        <!-- Right: Image Carousel -->
+        <div id="oodo-carousel" class="image-carousel">
+          <div class="carousel-images">
+            <img src="AssetsProjects/oodo/oodo1.png" alt="oODo Screenshot 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/oodo/oodo2.png" alt="oODo Screenshot 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/oodo/oodo3.png" alt="oODo Screenshot 3" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/oodo/oodo4.png" alt="oODo Screenshot 4" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/oodo/oodo5.png" alt="oODo Screenshot 5" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/oodo/oodo6.png" alt="oODo Screenshot 6" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
           </div>
+          <button class="carousel-nav carousel-prev">←</button>
+          <button class="carousel-nav carousel-next">→</button>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -882,13 +1167,26 @@
             </p>
           </div>
           
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/lotus.jpg" alt="Lotus Project" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
-            </div>
+        <!-- Right: Image Carousel -->
+        <div id="lotus-carousel" class="image-carousel">
+          <div class="carousel-images">
+            <img src="AssetsProjects/lotus/Lotus1.png" alt="Lotus Screenshot 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/lotus/Lotus2.png" alt="Lotus Screenshot 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/lotus/Lotus3.png" alt="Lotus Screenshot 3" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
           </div>
+          <button class="carousel-nav carousel-prev">←</button>
+          <button class="carousel-nav carousel-next">→</button>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+          </div>
+        </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -910,13 +1208,15 @@
               I made a python program that generatively wrote letters as they were typed out. The letters were designed to look like children's handwriting. Each letter was drawn within certain parameters when its corresponding key was pressed. I made another version in Java so it could be used online.
             </p>
           </div>
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/toddler-text.jpg" alt="Toddler Text Generator" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
-            </div>
-          </div>
+        <!-- Right: Image -->
+        <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
+          <img src="AssetsProjects/toddler-text/ToddlerText1.png" alt="Toddler Text Generator" style="width: 100%; height: 100%; object-fit: cover;" onclick="openLightbox(this.src, this.alt)">
+        </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -930,21 +1230,29 @@
         <button class="popup-close-btn" onclick="closePopup('small-animation-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
-          <!-- Left: Description -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-bottom: 3rem;">
+          <!-- Left: Alone Photo -->
           <div>
-            <h1>Small Animation</h1>
-            <p>
-              A collection of small animations and motion graphics I've created. These pieces showcase my understanding of timing, easing, and visual storytelling through motion.
-            </p>
-          </div>
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/small-animation.jpg" alt="Small Animation" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
+            <h3 style="font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: bold; color: #000; margin: 0 0 1rem 0; text-align: center;">Alone</h3>
+            <div style="height: 400px; border-radius: 8px; overflow: hidden; background: #f8f8f8; cursor: pointer; position: relative;" onclick="openVideoLightbox('AssetsProjects/small-animation/AloneVideo.mp4', 'Alone Animation')">
+              <img src="AssetsProjects/small-animation/AlonePhoto.png" alt="Alone Animation" style="width: 100%; height: 100%; object-fit: cover;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 20px; border-radius: 50%; font-size: 24px; pointer-events: none;">▶</div>
             </div>
           </div>
+          
+          <!-- Right: Car Photo -->
+          <div>
+            <h3 style="font-family: 'Courier New', monospace; font-size: 1.5rem; font-weight: bold; color: #000; margin: 0 0 1rem 0; text-align: center;">Car</h3>
+            <div style="height: 400px; border-radius: 8px; overflow: hidden; background: #f8f8f8; cursor: pointer; position: relative;" onclick="openVideoLightbox('AssetsProjects/small-animation/CarVideo.mp4', 'Car Animation')">
+              <img src="AssetsProjects/small-animation/CarPhoto.png" alt="Car Animation" style="width: 100%; height: 100%; object-fit: cover;">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 20px; border-radius: 50%; font-size: 24px; pointer-events: none;">▶</div>
+            </div>
+          </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
         </div>
       </div>
     </div>
@@ -966,15 +1274,61 @@
               A collection of my design sketches and creative explorations. These sketches represent my design thinking process and creative development across various projects.
             </p>
           </div>
-          <!-- Right: Image -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f8f8f8;">
-            <img src="AssetsProjects/some-sketches.jpg" alt="Some Sketches" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div style="display: none; height: 100%; align-items: center; justify-content: center; color: #999; font-size: 1rem; font-weight: 300;">
-              Image placeholder
-            </div>
+        <!-- Right: Image Carousel -->
+        <div id="some-sketches-carousel" class="image-carousel">
+          <div class="carousel-images">
+            <img src="AssetsProjects/some-sketches/Sketch.jpg" alt="Sketch 1" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch1.jpg" alt="Sketch 2" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch2.jpg" alt="Sketch 3" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch3.jpg" alt="Sketch 4" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch4.jpg" alt="Sketch 5" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch5.jpg" alt="Sketch 6" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch6.jpg" alt="Sketch 7" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch7.jpg" alt="Sketch 8" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+            <img src="AssetsProjects/some-sketches/Sketch8.jpg" alt="Sketch 9" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
+          </div>
+          <button class="carousel-nav carousel-prev">←</button>
+          <button class="carousel-nav carousel-next">→</button>
+          <div class="carousel-dots">
+            <span class="carousel-dot active"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
+            <span class="carousel-dot"></span>
           </div>
         </div>
+        </div>
+        <!-- Popup Navigation -->
+        <div class="popup-nav">
+          <button class="popup-nav-arrow" onclick="previousPopup()">←</button>
+          <button class="popup-nav-arrow" onclick="nextPopup()">→</button>
+        </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div id="image-lightbox" class="image-lightbox">
+    <div class="lightbox-content">
+      <img id="lightbox-image" class="lightbox-image" src="" alt="">
+      <button class="lightbox-nav lightbox-prev" onclick="previousLightboxImage()">←</button>
+      <button class="lightbox-nav lightbox-next" onclick="nextLightboxImage()">→</button>
+      <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    </div>
+  </div>
+
+  <!-- Video Lightbox -->
+  <div id="video-lightbox" class="video-lightbox">
+    <div class="video-lightbox-content">
+      <video id="video-lightbox-player" controls>
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <button class="video-lightbox-close" onclick="closeVideoLightbox()">×</button>
     </div>
   </div>
 
@@ -1082,6 +1436,8 @@
       if (!carousel) return;
       
       const images = carousel.querySelectorAll('.carousel-image');
+      const videos = carousel.querySelectorAll('.carousel-video');
+      const allItems = carousel.querySelectorAll('.carousel-image, .carousel-video');
       const prevBtn = carousel.querySelector('.carousel-prev');
       const nextBtn = carousel.querySelector('.carousel-next');
       const dots = carousel.querySelectorAll('.carousel-dot');
@@ -1100,16 +1456,34 @@
       }
       
       function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
+        // Pause current video if it exists
+        const currentVideo = videos[currentIndex];
+        if (currentVideo) {
+          currentVideo.pause();
+        }
+        
+        currentIndex = (currentIndex + 1) % allItems.length;
         updateCarousel();
       }
       
       function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        // Pause current video if it exists
+        const currentVideo = videos[currentIndex];
+        if (currentVideo) {
+          currentVideo.pause();
+        }
+        
+        currentIndex = (currentIndex - 1 + allItems.length) % allItems.length;
         updateCarousel();
       }
       
       function goToImage(index) {
+        // Pause current video if it exists
+        const currentVideo = videos[currentIndex];
+        if (currentVideo) {
+          currentVideo.pause();
+        }
+        
         currentIndex = index;
         updateCarousel();
       }
@@ -1120,6 +1494,17 @@
       
       dots.forEach((dot, index) => {
         dot.addEventListener('click', () => goToImage(index));
+      });
+      
+      // Video click to play/pause
+      videos.forEach(video => {
+        video.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
       });
       
       // Initialize
@@ -1165,7 +1550,158 @@
     function closePopup(id) {
       document.getElementById(id).classList.remove('active');
     }
-  </script>
 
-</body>
-</html>
+    // Lightbox functions
+    let currentLightboxImages = [];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(src, alt) {
+      const lightbox = document.getElementById('image-lightbox');
+      const lightboxImage = document.getElementById('lightbox-image');
+      
+      // Get all carousel images from the current popup
+      const activePopup = document.querySelector('.popup.active');
+      const carouselImages = activePopup.querySelectorAll('.carousel-image');
+      
+      currentLightboxImages = Array.from(carouselImages).map(img => ({
+        src: img.src,
+        alt: img.alt
+      }));
+      
+      currentLightboxIndex = currentLightboxImages.findIndex(img => img.src === src);
+      
+      lightboxImage.src = src;
+      lightboxImage.alt = alt;
+      lightbox.classList.add('active');
+      
+      // Prevent body scroll when lightbox is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    function nextLightboxImage() {
+      if (currentLightboxImages.length === 0) return;
+      
+      currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+      const image = currentLightboxImages[currentLightboxIndex];
+      
+      const lightboxImage = document.getElementById('lightbox-image');
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+    }
+
+    function previousLightboxImage() {
+      if (currentLightboxImages.length === 0) return;
+      
+      currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+      const image = currentLightboxImages[currentLightboxIndex];
+      
+      const lightboxImage = document.getElementById('lightbox-image');
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById('image-lightbox');
+      lightbox.classList.remove('active');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+    }
+
+    // Close lightbox when clicking outside the image
+    document.getElementById('image-lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeLightbox();
+      }
+    });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const lightbox = document.getElementById('image-lightbox');
+        const videoLightbox = document.getElementById('video-lightbox');
+        if (lightbox.classList.contains('active')) {
+          closeLightbox();
+        } else if (videoLightbox.classList.contains('active')) {
+          closeVideoLightbox();
+        }
+      }
+    });
+
+    // Video Lightbox functions
+    function openVideoLightbox(videoSrc, videoTitle) {
+      const videoLightbox = document.getElementById('video-lightbox');
+      const videoPlayer = document.getElementById('video-lightbox-player');
+      
+      videoPlayer.src = videoSrc;
+      videoLightbox.classList.add('active');
+      
+      // Prevent body scroll when video lightbox is open
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoLightbox() {
+      const videoLightbox = document.getElementById('video-lightbox');
+      const videoPlayer = document.getElementById('video-lightbox-player');
+      
+      videoPlayer.pause();
+      videoPlayer.src = '';
+      videoLightbox.classList.remove('active');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
+    }
+
+    // Close video lightbox when clicking outside the video
+    document.getElementById('video-lightbox').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        closeVideoLightbox();
+      }
+    });
+
+    // Popup navigation
+    const popupOrder = [
+      'lawny-popup',
+      'fifty-pence-popup', 
+      'oodo-popup',
+      'lotus-popup',
+      'toddler-text-popup',
+      'small-animation-popup',
+      'some-sketches-popup'
+    ];
+
+    function getCurrentPopupIndex() {
+      const activePopup = document.querySelector('.popup.active');
+      if (!activePopup) return -1;
+      return popupOrder.indexOf(activePopup.id);
+    }
+
+    function nextPopup() {
+      const currentIndex = getCurrentPopupIndex();
+      if (currentIndex === -1) return;
+      
+      const nextIndex = (currentIndex + 1) % popupOrder.length;
+      const currentPopup = document.getElementById(popupOrder[currentIndex]);
+      const nextPopup = document.getElementById(popupOrder[nextIndex]);
+      
+      currentPopup.classList.remove('active');
+      nextPopup.classList.add('active');
+      
+      // Initialize carousels for the new popup
+      initAllCarousels();
+    }
+
+    function previousPopup() {
+      const currentIndex = getCurrentPopupIndex();
+      if (currentIndex === -1) return;
+      
+      const prevIndex = (currentIndex - 1 + popupOrder.length) % popupOrder.length;
+      const currentPopup = document.getElementById(popupOrder[currentIndex]);
+      const prevPopup = document.getElementById(popupOrder[prevIndex]);
+      
+      currentPopup.classList.remove('active');
+      prevPopup.classList.add('active');
+      
+      // Initialize carousels for the new popup
+      initAllCarousels();
+ 

@@ -1422,54 +1422,52 @@
 </div>
 
 <!-- Awards Popup -->
-<div id="popup-awards" class="popup popup-awards">
-  <button class="close" onclick="closePopup('popup-awards')">✕</button>
-  <div class="popup-scroll">
-    <div class="popup-inner">
-      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">🏆 Awards & Recognition</h2>
-      <div style="text-align: center; margin-bottom: 2rem;">
-        <p style="font-size: 1.1rem; line-height: 1.6; color: #333;">
-          Recognition for innovation, leadership, and impact in technology and design.
-        </p>
-      </div>
-      
-      <!-- Canopy of Echoes Award -->
-      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-        <img src="Assets/Awards/CanopyOfEchosAWard.jpg" alt="Canopy of Echoes Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
+<div id="popup-awards" class="popup">
+  <div class="popup-window">
+    <div class="popup-titlebar">
+      <div class="popup-title">Awards.exe</div>
+      <button class="popup-close-btn" onclick="closePopup('popup-awards')">×</button>
+    </div>
+    <div class="popup-content">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; min-height: 400px;">
+        <!-- Left: Awards List -->
         <div>
-          <h3 style="color: #231f20; margin-top: 0;">🌳 Canopy of Echoes</h3>
-          <p><strong>Award:</strong> Nanjing Digital Heritage 2025</p>
-          <p><strong>Recognition:</strong> Winner of the Best Heritage Award, 2025</p>
+          <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Awards</h1>
+          <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+            Recognition for innovation, leadership, and impact in technology and design.
+          </p>
+          
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 400; color: #000; margin: 0 0 0.5rem 0;">Canopy of Echoes</h3>
+            <p style="font-size: 1rem; color: #333; margin: 0 0 0.3rem 0; font-weight: 500;">Nanjing Digital Heritage 2025</p>
+            <p style="font-size: 0.9rem; color: #666; margin: 0 0 1.5rem 0;">Winner of the Best Heritage Award, 2025</p>
+          </div>
+          
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 400; color: #000; margin: 0 0 0.5rem 0;">LearnLlama</h3>
+            <p style="font-size: 1rem; color: #333; margin: 0 0 0.3rem 0; font-weight: 500;">Goldsmiths University</p>
+            <p style="font-size: 0.9rem; color: #666; margin: 0 0 1.5rem 0;">Winner of Best AR Project, 2024</p>
+          </div>
+          
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 400; color: #000; margin: 0 0 0.5rem 0;">Fifty Pence</h3>
+            <p style="font-size: 1rem; color: #333; margin: 0 0 0.3rem 0; font-weight: 500;">Fred Maillardet Product Design</p>
+            <p style="font-size: 0.9rem; color: #666; margin: 0 0 1.5rem 0;">Winner of Breakthrough Award, 2019</p>
+          </div>
+          
+          <div style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.3rem; font-weight: 400; color: #000; margin: 0 0 0.5rem 0;">oODo</h3>
+            <p style="font-size: 1rem; color: #333; margin: 0 0 0.3rem 0; font-weight: 500;">The Waste House</p>
+            <p style="font-size: 0.9rem; color: #666; margin: 0 0 1.5rem 0;">Nominated for Circular Design Award, 2020</p>
+          </div>
         </div>
-      </div>
-      
-      <!-- LearnLlama Award -->
-      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-        <img src="Assets/Awards/LearnLlamaAward.jpg" alt="LearnLlama Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
-        <div>
-          <h3 style="color: #231f20; margin-top: 0;">📚 LearnLlama</h3>
-          <p><strong>Award:</strong> Goldsmiths University</p>
-          <p><strong>Recognition:</strong> Winner of Best AR Project, 2024</p>
-        </div>
-      </div>
-      
-      <!-- Fifty Pence Award -->
-      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-        <img src="Assets/Awards/FiftypenceAward.png" alt="Fifty Pence Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
-        <div>
-          <h3 style="color: #231f20; margin-top: 0;">💰 Fifty Pence</h3>
-          <p><strong>Award:</strong> Fred Maillardet Product Design</p>
-          <p><strong>Recognition:</strong> Winner of Breakthrough Award, 2019</p>
-        </div>
-      </div>
-      
-      <!-- oODo Award -->
-      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
-        <img src="Assets/Awards/oodoAward.png" alt="oODo Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
-        <div>
-          <h3 style="color: #231f20; margin-top: 0;">🎨 oODo</h3>
-          <p><strong>Award:</strong> The Waste House</p>
-          <p><strong>Recognition:</strong> Nominated for Circular Design Award, 2020</p>
+        
+        <!-- Right: Award Photos -->
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <img src="Assets/Awards/CanopyOfEchosAWard.jpg" alt="Canopy of Echoes Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+          <img src="Assets/Awards/LearnLlamaAward.jpg" alt="LearnLlama Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+          <img src="Assets/Awards/FiftypenceAward.png" alt="Fifty Pence Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
+          <img src="Assets/Awards/oodoAward.png" alt="oODo Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
         </div>
       </div>
     </div>

@@ -1390,14 +1390,38 @@
     console.log('Lawny popup:', lawnyPopup);
 
     if (lawny && lawnyPopup) {
-      lawny.addEventListener('click', () => {
-        console.log('Lawny clicked!');
+      lawny.addEventListener('click', (e) => {
+        console.log('Lawny clicked!', e);
+        console.log('Adding active class to:', lawnyPopup);
         lawnyPopup.classList.add('active');
+        console.log('Popup classes after adding active:', lawnyPopup.className);
+        console.log('Popup display style:', window.getComputedStyle(lawnyPopup).display);
         initAllCarousels();
       });
     } else {
       console.log('Lawny or lawnyPopup not found!');
     }
+
+    // Test button to manually open popup
+    const testButton = document.createElement('button');
+    testButton.textContent = 'TEST POPUP';
+    testButton.style.position = 'fixed';
+    testButton.style.top = '100px';
+    testButton.style.right = '20px';
+    testButton.style.zIndex = '9999';
+    testButton.style.padding = '10px';
+    testButton.style.background = 'red';
+    testButton.style.color = 'white';
+    testButton.style.border = 'none';
+    testButton.style.cursor = 'pointer';
+    testButton.addEventListener('click', () => {
+      console.log('Test button clicked!');
+      if (lawnyPopup) {
+        lawnyPopup.classList.add('active');
+        console.log('Test popup opened!');
+      }
+    });
+    document.body.appendChild(testButton);
 
     // Fifty Pence popup
     const fiftyPence = document.getElementById('fiftyPence');

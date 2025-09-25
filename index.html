@@ -164,57 +164,6 @@
       padding-left: 10px;
     }
     
-    /* Rotation Hint */
-    .rotation-hint {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #FFB07B;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.5s ease;
-    }
-
-    .rotation-hint.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .rotation-hint-content {
-      text-align: center;
-      color: #231f20;
-      padding: 20px;
-    }
-
-    .rotation-hint h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      font-weight: 400;
-    }
-
-    .rotation-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
-      animation: rotate 2s ease-in-out infinite;
-    }
-
-    @keyframes rotate {
-      0%, 100% { transform: rotate(0deg); }
-      50% { transform: rotate(90deg); }
-    }
-
-    .rotation-hint p {
-      font-size: 16px;
-      margin: 0;
-      opacity: 0.8;
-    }
 
     /* Main content container */
     .main-content {
@@ -230,46 +179,93 @@
     .mobile-cards {
       display: none;
       padding: 20px;
-      max-width: 600px;
+      width: 100%;
+      max-width: 400px;
       margin: 0 auto;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 2px solid transparent;
+      border: 3px solid #231f20;
+      width: 100%;
+      height: 120px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #FFB07B 0%, #e0f2f6 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
 
     .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      border-color: #231f20;
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+      border-color: #FFB07B;
+    }
+
+    .card:hover::before {
+      opacity: 0.1;
     }
 
     .card-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
-      text-align: center;
+      width: 60px;
+      height: 60px;
+      margin-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .card-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .card-title {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: bold;
       color: #231f20;
-      margin-bottom: 10px;
-      text-align: center;
+      margin-bottom: 8px;
+      font-family: 'Courier New', monospace;
     }
 
     .card-description {
       color: #666;
-      text-align: center;
-      line-height: 1.5;
+      line-height: 1.4;
+      font-size: 14px;
     }
+
     
     /* Mobile Responsive */
     @media (max-width: 768px) {
@@ -978,14 +974,6 @@
   </style>
 </head>
 <body>
-  <!-- Rotation Hint -->
-  <div class="rotation-hint" id="rotationHint">
-    <div class="rotation-hint-content">
-      <div class="rotation-icon">📱</div>
-      <h2>Rotate phone to explore portfolio</h2>
-      <p>Turn your device sideways for the card-based mobile experience</p>
-    </div>
-  </div>
 
   <!-- Retro Nav Bar -->
   <nav class="retro-nav" role="navigation" aria-label="Main navigation">
@@ -1034,40 +1022,66 @@
   <div class="main-content" id="mainContent">
     <!-- Mobile Card Layout -->
     <div class="mobile-cards">
-      <div class="card" onclick="openMobilePopup('about')">
-        <div class="card-icon">☕</div>
-        <div class="card-title">About Me</div>
-        <div class="card-description">Learn about my background, skills, and journey in tech</div>
-      </div>
-      
-      <div class="card" onclick="openMobilePopup('computer')">
-        <div class="card-icon">💻</div>
-        <div class="card-title">Computer Projects</div>
-        <div class="card-description">Web development, games, and desktop applications</div>
-      </div>
-      
-      <div class="card" onclick="openMobilePopup('phone')">
-        <div class="card-icon">📱</div>
-        <div class="card-title">Mobile Apps</div>
-        <div class="card-description">iOS and Android applications I've developed</div>
-      </div>
-      
-      <div class="card" onclick="window.location.href = 'vr.html'">
-        <div class="card-icon">🥽</div>
-        <div class="card-title">VR Projects</div>
-        <div class="card-description">Virtual and augmented reality experiences</div>
-      </div>
-      
-      <div class="card" onclick="openMobilePopup('donkeyjobs')">
-        <div class="card-icon">🌱</div>
-        <div class="card-title">DonkeyJobs</div>
-        <div class="card-description">Eco-friendly garden maintenance company I founded</div>
-      </div>
-      
-      <div class="card" onclick="openMobilePopup('awards')">
-        <div class="card-icon">🏅</div>
-        <div class="card-title">Awards & Recognition</div>
-        <div class="card-description">Achievements and recognition in my career</div>
+      <div class="cards-container">
+        <div class="card" onclick="openMobilePopup('about')">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/About@3x.png" alt="About Me" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">About Me</div>
+            <div class="card-description">Learn about my background, skills, and journey in tech</div>
+          </div>
+        </div>
+        
+        <div class="card" onclick="openMobilePopup('computer')">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/Laptop@3x.png" alt="Computer Projects" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">Computer Projects</div>
+            <div class="card-description">Web development, games, and desktop applications</div>
+          </div>
+        </div>
+        
+        <div class="card" onclick="openMobilePopup('phone')">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/Phone@3x.png" alt="Mobile Apps" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">Mobile Apps</div>
+            <div class="card-description">iOS and Android applications I've developed</div>
+          </div>
+        </div>
+        
+        <div class="card" onclick="window.location.href = 'vr.html'">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/VR@3x.png" alt="VR Projects" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">VR Projects</div>
+            <div class="card-description">Virtual and augmented reality experiences</div>
+          </div>
+        </div>
+        
+        <div class="card" onclick="openMobilePopup('donkeyjobs')">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/DonkeyJobs@3x.png" alt="DonkeyJobs" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">DonkeyJobs</div>
+            <div class="card-description">Eco-friendly garden maintenance company I founded</div>
+          </div>
+        </div>
+        
+        <div class="card" onclick="openMobilePopup('awards')">
+          <div class="card-icon">
+            <img src="Assets/iPhoneIndex/Trophy@3x.png" alt="Awards & Recognition" style="width: 100%; height: 100%; object-fit: contain;">
+          </div>
+          <div class="card-content">
+            <div class="card-title">Awards & Recognition</div>
+            <div class="card-description">Achievements and recognition in my career</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1520,24 +1534,6 @@
 </div>
 
 <script>
-  // Rotation detection and smooth transitions
-  const rotationHint = document.getElementById('rotationHint');
-  const mainContent = document.getElementById('mainContent');
-  
-  function checkOrientation() {
-    const isPortrait = window.innerHeight > window.innerWidth;
-    const isMobile = window.innerWidth <= 768;
-    
-    if (isMobile && isPortrait) {
-      // Show rotation hint for portrait mobile
-      rotationHint.classList.add('active');
-      mainContent.classList.add('hidden');
-    } else {
-      // Hide rotation hint, show main content
-      rotationHint.classList.remove('active');
-      mainContent.classList.remove('hidden');
-    }
-  }
 
   // Mobile card popup function
   function openMobilePopup(type) {
@@ -1570,13 +1566,6 @@
     }
   }
   
-  // Check orientation on load and resize
-  window.addEventListener('load', checkOrientation);
-  window.addEventListener('resize', checkOrientation);
-  window.addEventListener('orientationchange', () => {
-    // Small delay to ensure orientation change is complete
-    setTimeout(checkOrientation, 100);
-  });
 
   // Mobile menu toggle
   const mobileToggle = document.querySelector('.mobile-menu-toggle');

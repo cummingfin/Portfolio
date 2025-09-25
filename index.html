@@ -1422,70 +1422,67 @@
 </div>
 
 <!-- Awards Popup -->
-<div id="popup-awards" class="popup">
-  <div class="popup-window">
-    <div class="popup-titlebar">
-      <div class="popup-title">Awards.exe</div>
-      <button class="popup-close-btn" onclick="closePopup('popup-awards')">×</button>
-    </div>
-    <div class="popup-content">
-      <div style="padding: 2rem;">
-        <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Awards</h1>
-        <p style="font-size: 1.2rem; color: #333; margin: 0 0 3rem 0; font-weight: 300; line-height: 1.6;">
-          Recognition for innovation, leadership, and impact in technology and design.
+<div id="popup-awards" class="popup popup-awards">
+  <button class="close" onclick="closePopup('popup-awards')">✕</button>
+  <div class="popup-scroll">
+    <div class="popup-inner">
+      <h2 style="text-align: center; font-size: 2rem; margin-top: 0;">🏆 Awards & Recognition</h2>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #333;">
+          Recognition for innovation, leadership, and impact in technology and business.
         </p>
-        
-        <!-- LearnLlama Section -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
-          <div>
-            <h3 style="font-size: 2rem; font-weight: 400; color: #000; margin: 0 0 1rem 0;">LearnLlama</h3>
-            <p style="font-size: 1.1rem; color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">Goldsmiths University</p>
-            <p style="font-size: 1rem; color: #666; margin: 0 0 2rem 0;">Winner of Best AR Project, 2024</p>
-            <button onclick="window.location.href='phone-projects.html'" style="background: #231f20; color: white; border: none; padding: 0.8rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.2s ease;">View Project</button>
-          </div>
-          <div>
-            <img src="Assets/Awards/LearnLlamaAward.jpg" alt="LearnLlama Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
+      </div>
+      
+      <!-- LearnLlama Award -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <img src="Assets/Awards/LearnLlamaAward.jpg" alt="LearnLlama Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
+        <div>
+          <h3 style="color: #231f20; margin-top: 0;">📚 LearnLlama</h3>
+          <p><strong>Award:</strong> Educational Innovation Recognition</p>
+          <p><strong>Achievement:</strong> Created an AI-powered learning platform that revolutionizes how students engage with educational content</p>
         </div>
-        
-        <!-- Fifty Pence Section -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
-          <div>
-            <h3 style="font-size: 2rem; font-weight: 400; color: #000; margin: 0 0 1rem 0;">Fifty Pence</h3>
-            <p style="font-size: 1.1rem; color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">Fred Maillardet Product Design</p>
-            <p style="font-size: 1rem; color: #666; margin: 0 0 2rem 0;">Winner of Breakthrough Award, 2019</p>
-            <button onclick="window.location.href='more-projects.html'" style="background: #231f20; color: white; border: none; padding: 0.8rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.2s ease;">View Project</button>
-          </div>
-          <div>
-            <img src="Assets/Awards/FiftypenceAward.png" alt="Fifty Pence Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
+      </div>
+      
+      <!-- Fifty Pence Award -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <img src="Assets/Awards/FiftypenceAward.png" alt="Fifty Pence Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
+        <div>
+          <h3 style="color: #231f20; margin-top: 0;">💰 Fifty Pence</h3>
+          <p><strong>Award:</strong> Financial Technology Excellence</p>
+          <p><strong>Achievement:</strong> Developed innovative fintech solutions that simplify personal finance management</p>
         </div>
-        
-        <!-- oODo Section -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 12px;">
-          <div>
-            <h3 style="font-size: 2rem; font-weight: 400; color: #000; margin: 0 0 1rem 0;">oODo</h3>
-            <p style="font-size: 1.1rem; color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">The Waste House</p>
-            <p style="font-size: 1rem; color: #666; margin: 0 0 2rem 0;">Nominated for Circular Design Award, 2020</p>
-            <button onclick="window.location.href='more-projects.html'" style="background: #231f20; color: white; border: none; padding: 0.8rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.2s ease;">View Project</button>
-          </div>
-          <div>
-            <img src="Assets/Awards/oodoAward.png" alt="oODo Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
+      </div>
+      
+      <!-- oODo Award -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <img src="Assets/Awards/oodoAward.png" alt="oODo Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
+        <div>
+          <h3 style="color: #231f20; margin-top: 0;">🎨 oODo</h3>
+          <p><strong>Award:</strong> Creative Design Innovation</p>
+          <p><strong>Achievement:</strong> Pioneered new approaches to digital design and user experience</p>
         </div>
-        
-        <!-- Canopy of Echoes Section (Coming Soon) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 2rem; padding: 2rem; background: #f0f0f0; border-radius: 12px; opacity: 0.7;">
-          <div>
-            <h3 style="font-size: 2rem; font-weight: 400; color: #000; margin: 0 0 1rem 0;">Canopy of Echoes</h3>
-            <p style="font-size: 1.1rem; color: #333; margin: 0 0 0.5rem 0; font-weight: 500;">Nanjing Digital Heritage 2025</p>
-            <p style="font-size: 1rem; color: #666; margin: 0 0 2rem 0;">Winner of the Best Heritage Award, 2025</p>
-            <button disabled style="background: #ccc; color: #666; border: none; padding: 0.8rem 2rem; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: not-allowed;">Coming Soon</button>
-          </div>
-          <div>
-            <img src="Assets/Awards/CanopyOfEchosAWard.jpg" alt="Canopy of Echoes Award" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;">
-          </div>
+      </div>
+      
+      <!-- Canopy of Echoes Award -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+        <img src="Assets/Awards/CanopyOfEchosAWard.jpg" alt="Canopy of Echoes Award" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid #231f20;">
+        <div>
+          <h3 style="color: #231f20; margin-top: 0;">🌳 Canopy of Echoes</h3>
+          <p><strong>Award:</strong> Environmental Impact Recognition</p>
+          <p><strong>Achievement:</strong> Created solutions that promote environmental awareness and sustainability</p>
         </div>
+      </div>
+      
+      <!-- Business Achievement -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+        <h3 style="color: #231f20; margin-top: 0;">🚀 Business Achievement</h3>
+        <p><strong>DonkeyJobs Success:</strong> Built and scaled an eco-friendly garden maintenance company to 1000+ customers with 20M+ TikTok views</p>
+      </div>
+      
+      <!-- Technical Excellence -->
+      <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+        <h3 style="color: #231f20; margin-top: 0;">💡 Technical Excellence</h3>
+        <p><strong>Portfolio Innovation:</strong> Developed unique 3D isometric portfolio showcasing technical creativity and innovation</p>
       </div>
     </div>
   </div>
@@ -1855,3 +1852,4 @@
               <img src="Assets/AssetsDonkeyJobs/Donkeyjobs9.jpg" alt="DonkeyJobs 9" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
               <img src="Assets/AssetsDonkeyJobs/Donkeyjobs10.jpg" alt="DonkeyJobs 10" class="carousel-image" onclick="openLightbox(this.src, this.alt)">
             </div>
+        

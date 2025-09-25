@@ -281,21 +281,20 @@
       width: 100%;
       height: 100px;
       object-fit: cover;
-      border-radius: 8px 8px 0 0;
+      border-radius: 8px;
     }
 
     .vr-thumbnail-label {
-      background: rgba(0, 0, 0, 0.8);
       color: #fff;
       padding: 8px;
       font-family: 'Courier New', monospace;
-      font-size: 12px;
+      font-size: 14px;
       text-align: center;
-      border-radius: 0 0 8px 8px;
-      height: 40px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 8px;
     }
 
     /* Play Demo overlay */
@@ -842,18 +841,14 @@
           <div class="vr-thumbnail-label">Canopy of Echoes</div>
         </div>
         <div class="vr-thumbnail empty">
-          Coming Soon
         </div>
         
         <!-- Row 2 -->
         <div class="vr-thumbnail empty">
-          Coming Soon
         </div>
         <div class="vr-thumbnail empty">
-          Coming Soon
         </div>
         <div class="vr-thumbnail empty">
-          Coming Soon
         </div>
       </div>
     </div>
@@ -929,10 +924,32 @@
           </div>
           
           <!-- Right: Video Demo -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/Our%20Final%20Video_compressed.mp4')">
-            <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
-              ▶ Play Demo
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; position: relative; background: #fff;">
+            <div id="canopy-video-carousel" style="height: 100%; position: relative;">
+              <!-- Video 1 -->
+              <div class="canopy-video-slide" style="height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/Our%20Final%20Video_compressed.mp4')">
+                <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
+                  ▶ Play Demo 1
+                </div>
+              </div>
+              <!-- Video 2 -->
+              <div class="canopy-video-slide" style="height: 100%; cursor: pointer; display: none; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/VR%20experience%20video_compressed.mp4')">
+                <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo 2" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
+                  ▶ Play Demo 2
+                </div>
+              </div>
+            </div>
+            
+            <!-- Navigation Arrows -->
+            <button onclick="previousCanopyVideo()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20;">←</button>
+            <button onclick="nextCanopyVideo()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20;">→</button>
+            
+            <!-- Dots -->
+            <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
+              <div class="canopy-dot active" onclick="showCanopyVideo(0)" style="width: 8px; height: 8px; border-radius: 50%; background: #231f20; cursor: pointer;"></div>
+              <div class="canopy-dot" onclick="showCanopyVideo(1)" style="width: 8px; height: 8px; border-radius: 50%; background: #ccc; cursor: pointer;"></div>
             </div>
           </div>
         </div>
@@ -1016,6 +1033,31 @@
         closeVRVideoDemo();
       }
     });
+
+    // Canopy of Echoes video navigation
+    let currentCanopyVideo = 0;
+    const canopyVideos = document.querySelectorAll('.canopy-video-slide');
+    const canopyDots = document.querySelectorAll('.canopy-dot');
+
+    function showCanopyVideo(index) {
+      canopyVideos.forEach((video, i) => {
+        video.style.display = i === index ? 'flex' : 'none';
+      });
+      canopyDots.forEach((dot, i) => {
+        dot.style.background = i === index ? '#231f20' : '#ccc';
+      });
+      currentCanopyVideo = index;
+    }
+
+    function previousCanopyVideo() {
+      const prevIndex = currentCanopyVideo > 0 ? currentCanopyVideo - 1 : canopyVideos.length - 1;
+      showCanopyVideo(prevIndex);
+    }
+
+    function nextCanopyVideo() {
+      const nextIndex = currentCanopyVideo < canopyVideos.length - 1 ? currentCanopyVideo + 1 : 0;
+      showCanopyVideo(nextIndex);
+    }
 
     // Mobile menu toggle (if needed)
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

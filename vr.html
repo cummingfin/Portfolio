@@ -321,12 +321,12 @@
 
     /* Empty slots styling */
     .vr-thumbnail.empty {
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px dashed rgba(255, 255, 255, 0.3);
+      background: transparent;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255, 255, 255, 0.5);
+      color: transparent;
       font-family: 'Courier New', monospace;
       font-size: 14px;
     }
@@ -875,7 +875,7 @@
         <button class="popup-close-btn" onclick="closePopup('inner-path-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px; position: relative;">
           <!-- Left: Description -->
           <div>
             <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Inner Path</h1>
@@ -887,6 +887,12 @@
                 Immersive VR Experience
               </p>
             </div>
+          </div>
+          
+          <!-- Bottom Corner Navigation Arrows (navigate between popups) -->
+          <div style="position: absolute; bottom: 0px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 10;">
+            <button onclick="closePopup('inner-path-popup'); document.getElementById('canopy-of-echoes-popup').classList.add('active');" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">←</button>
+            <button onclick="closePopup('inner-path-popup'); document.getElementById('canopy-of-echoes-popup').classList.add('active');" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">→</button>
           </div>
           
           <!-- Right: Video Demo -->
@@ -923,10 +929,10 @@
             </div>
           </div>
           
-          <!-- Bottom Corner Navigation Arrows (matching phone-projects style) -->
-          <div style="position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 10;">
-            <button onclick="previousCanopyVideo()" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">←</button>
-            <button onclick="nextCanopyVideo()" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">→</button>
+          <!-- Bottom Corner Navigation Arrows (navigate between popups) -->
+          <div style="position: absolute; bottom: 0px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 10;">
+            <button onclick="closePopup('canopy-of-echoes-popup'); document.getElementById('inner-path-popup').classList.add('active');" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">←</button>
+            <button onclick="closePopup('canopy-of-echoes-popup'); document.getElementById('inner-path-popup').classList.add('active');" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">→</button>
           </div>
           
           <!-- Right: Video Demo -->
@@ -949,8 +955,8 @@
             </div>
             
             <!-- Navigation Arrows -->
-            <button onclick="previousCanopyVideo()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20;">←</button>
-            <button onclick="nextCanopyVideo()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20;">→</button>
+            <button onclick="previousCanopyVideo()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20; display: flex; align-items: center; justify-content: center;">‹</button>
+            <button onclick="nextCanopyVideo()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; font-size: 14px; font-weight: bold; color: #231f20; display: flex; align-items: center; justify-content: center;">›</button>
             
             <!-- Dots -->
             <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
@@ -975,8 +981,8 @@
         <button class="vr-video-demo-close" onclick="closeVRVideoDemo()">×</button>
         
         <!-- Video Navigation Arrows (only show for Canopy videos) -->
-        <button id="lightbox-prev-btn" onclick="previousLightboxVideo()" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none;">←</button>
-        <button id="lightbox-next-btn" onclick="nextLightboxVideo()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none;">→</button>
+        <button id="lightbox-prev-btn" onclick="previousLightboxVideo()" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none; display: flex; align-items: center; justify-content: center;">‹</button>
+        <button id="lightbox-next-btn" onclick="nextLightboxVideo()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none; display: flex; align-items: center; justify-content: center;">›</button>
         
         <!-- Video Info -->
         <div id="lightbox-video-info" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 8px 16px; border-radius: 4px; font-size: 14px; display: none;">

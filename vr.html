@@ -185,7 +185,7 @@
       transform: translate(-50%, -50%);
       z-index: 1000;
       opacity: 0;
-      animation: logoSequence 7s ease-in-out forwards;
+      animation: logoSequence 7s ease-in-out 1.5s forwards;
     }
     
     /* Projects Panel Container */
@@ -196,14 +196,14 @@
       transform: translate(-50%, -50%);
       z-index: 1001;
       opacity: 0;
-      animation: panelAppear 0.5s ease-in-out 8s forwards;
+      animation: panelAppear 0.5s ease-in-out 9s forwards;
     }
 
     /* VR Lens starts black, then changes to original color */
     #Lense {
       fill: #000000;
       opacity: 1;
-      animation: lensColorChange 0.5s ease-in-out 7s forwards;
+      animation: lensColorChange 0.5s ease-in-out 8.5s forwards;
     }
 
     /* Logo animation sequence */
@@ -834,13 +834,11 @@
       <div class="vr-panel-content">
         <!-- Row 1 -->
         <div class="vr-thumbnail" onclick="openVRPopup('inner-path')">
-          <img src="Assets/Inner path/InnerPathThumbnail.png" alt="Inner Path" />
-          <div class="play-demo-overlay">▶ Play Demo</div>
+          <img src="Assets/Inner%20path/InnerPathThumbnail.png" alt="Inner Path" />
           <div class="vr-thumbnail-label">Inner Path</div>
         </div>
         <div class="vr-thumbnail" onclick="openVRPopup('canopy-of-echoes')">
-          <img src="Assets/Canopy of Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes" />
-          <div class="play-demo-overlay">▶ Play Demo</div>
+          <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes" />
           <div class="vr-thumbnail-label">Canopy of Echoes</div>
         </div>
         <div class="vr-thumbnail empty">
@@ -897,8 +895,8 @@
           </div>
           
           <!-- Right: Video Demo -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Inner path/Inner Path VR_compressed.mp4')">
-            <img src="Assets/Inner path/InnerPathThumbnail.png" alt="Inner Path VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Inner%20path/Inner%20Path%20VR_compressed.mp4')">
+            <img src="Assets/Inner%20path/InnerPathThumbnail.png" alt="Inner Path VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
               ▶ Play Demo
             </div>
@@ -931,8 +929,8 @@
           </div>
           
           <!-- Right: Video Demo -->
-          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy of Echos/Our Final Video_compressed.mp4')">
-            <img src="Assets/Canopy of Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #fff; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/Our%20Final%20Video_compressed.mp4')">
+            <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
             <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
               ▶ Play Demo
             </div>

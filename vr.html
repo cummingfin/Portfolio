@@ -185,7 +185,7 @@
       transform: translate(-50%, -50%);
       z-index: 1000;
       opacity: 0;
-      animation: logoSequence 5s ease-in-out forwards;
+      animation: logoSequence 7s ease-in-out forwards;
     }
     
     /* Projects Panel Container */
@@ -196,14 +196,14 @@
       transform: translate(-50%, -50%);
       z-index: 1001;
       opacity: 0;
-      animation: panelAppear 0.5s ease-in-out 6s forwards;
+      animation: panelAppear 0.5s ease-in-out 8s forwards;
     }
 
     /* VR Lens starts black, then changes to original color */
     #Lense {
       fill: #000000;
       opacity: 1;
-      animation: lensColorChange 0.5s ease-in-out 5s forwards;
+      animation: lensColorChange 0.5s ease-in-out 7s forwards;
     }
 
     /* Logo animation sequence */
@@ -226,6 +226,74 @@
     @keyframes panelAppear {
       0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
       100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* VR Panel Styles */
+    .vr-panel {
+      background: rgba(49, 49, 51, 0.85);
+      border-radius: 12px;
+      width: 448px;
+      height: 360px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .vr-panel-header {
+      background: rgba(49, 49, 51, 0.85);
+      padding: 20px 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .vr-panel-header h2 {
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .vr-panel-content {
+      padding: 30px;
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      height: calc(100% - 80px);
+    }
+
+    .vr-thumbnail {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .vr-thumbnail:hover {
+      transform: scale(1.05);
+    }
+
+    .vr-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .vr-thumbnail-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      text-align: center;
+      border-radius: 0 0 8px 8px;
     }
   </style>
 </head>
@@ -534,18 +602,21 @@
 
   <!-- Projects Panel Container -->
   <div class="projects-panel">
-    <!-- ========================================== -->
-    <?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" width="158.19mm" height="127.25mm" viewBox="0 0 448.42 360.7">
-  <g id="Pannel">
-    <g>
-      <rect width="448.42" height="360.7" rx="12.86" ry="12.86" fill="#313133" opacity=".85"/>
-      <path d="M12.86,0h422.7c7.1,0,12.86,5.76,12.86,12.86v33.61H0V12.86C0,5.76,5.76,0,12.86,0Z" fill="#313133" opacity=".85"/>
-      <text transform="translate(29.13 29.59)" fill="#fff" font-family="SatoshiVariable-Medium, &apos;Satoshi Variable&apos;" font-size="20" font-variation-settings="&apos;wght&apos; 500" font-weight="500"><tspan x="0" y="0">VR apps</tspan></text>
-    </g>
-  </g>
-</svg>
-    <!-- ========================================== -->
+    <div class="vr-panel">
+      <div class="vr-panel-header">
+        <h2>VR apps</h2>
+      </div>
+      <div class="vr-panel-content">
+        <div class="vr-thumbnail" onclick="openVRPopup('inner-path')">
+          <img src="Assets/InnerPath/InnerPathThumbnail.jpg" alt="Inner Path" />
+          <div class="vr-thumbnail-label">Inner Path</div>
+        </div>
+        <div class="vr-thumbnail" onclick="openVRPopup('canopy-of-echoes')">
+          <img src="Assets/CanopyOfEchoes/CanopyOfEchoesThumbnail.jpg" alt="Canopy of Echoes" />
+          <div class="vr-thumbnail-label">Canopy of Echoes</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- VR Frame Container -->
@@ -559,5 +630,38 @@
       </g>
     </svg>
   </div>
+
+  <script>
+    // VR Popup functions
+    function openVRPopup(projectId) {
+      // For now, we'll navigate to the main page with the project parameter
+      // This can be enhanced later with actual popup functionality
+      if (projectId === 'inner-path') {
+        window.location.href = 'index.html?open=inner-path';
+      } else if (projectId === 'canopy-of-echoes') {
+        window.location.href = 'index.html?open=canopy-of-echoes';
+      }
+    }
+
+    // Mobile menu toggle (if needed)
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuToggle && mobileMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        const isExpanded = mobileMenu.classList.contains('active');
+        mobileMenuToggle.setAttribute('aria-expanded', isExpanded);
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+          mobileMenu.classList.remove('active');
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1371,64 +1371,78 @@
     const lawny = document.getElementById('Lawny');
     const lawnyPopup = document.getElementById('lawny-popup');
 
-    lawny.addEventListener('click', () => {
-      lawnyPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (lawny && lawnyPopup) {
+      lawny.addEventListener('click', () => {
+        lawnyPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Fifty Pence popup
     const fiftyPence = document.getElementById('fiftyPence');
     const fiftyPencePopup = document.getElementById('fifty-pence-popup');
 
-    fiftyPence.addEventListener('click', () => {
-      fiftyPencePopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (fiftyPence && fiftyPencePopup) {
+      fiftyPence.addEventListener('click', () => {
+        fiftyPencePopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // oODo popup
     const oodo = document.getElementById('oodo');
     const oodoPopup = document.getElementById('oodo-popup');
 
-    oodo.addEventListener('click', () => {
-      oodoPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (oodo && oodoPopup) {
+      oodo.addEventListener('click', () => {
+        oodoPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Lotus popup
     const lotus = document.getElementById('lotus');
     const lotusPopup = document.getElementById('lotus-popup');
 
-    lotus.addEventListener('click', () => {
-      lotusPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (lotus && lotusPopup) {
+      lotus.addEventListener('click', () => {
+        lotusPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Toddler Text popup
     const toddlerText = document.getElementById('toddler_text');
     const toddlerTextPopup = document.getElementById('toddler-text-popup');
 
-    toddlerText.addEventListener('click', () => {
-      toddlerTextPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (toddlerText && toddlerTextPopup) {
+      toddlerText.addEventListener('click', () => {
+        toddlerTextPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Small Animation popup
     const smallAnimation = document.getElementById('animations');
     const smallAnimationPopup = document.getElementById('small-animation-popup');
 
-    smallAnimation.addEventListener('click', () => {
-      smallAnimationPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (smallAnimation && smallAnimationPopup) {
+      smallAnimation.addEventListener('click', () => {
+        smallAnimationPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Some Sketches popup - Note: This might need to be added to the SVG or use existing sketching icon
     const someSketches = document.getElementById('sketching');
     const someSketchesPopup = document.getElementById('some-sketches-popup');
 
-    someSketches.addEventListener('click', () => {
-      someSketchesPopup.classList.add('active');
-      initAllCarousels();
-    });
+    if (someSketches && someSketchesPopup) {
+      someSketches.addEventListener('click', () => {
+        someSketchesPopup.classList.add('active');
+        initAllCarousels();
+      });
+    }
 
     // Carousel functionality
     function initCarousel(carouselId) {

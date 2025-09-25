@@ -283,6 +283,21 @@
       transition: transform 0.2s ease;
     }
 
+    /* Make SVG icon groups clickable */
+    #Lawny, #fiftyPence, #oodo, #lotus, #toddler_text, #animations, #sketching {
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #Lawny:hover, #fiftyPence:hover, #oodo:hover, #lotus:hover, #toddler_text:hover, #animations:hover, #sketching:hover {
+      transform: scale(1.05);
+    }
+
+    /* Ensure invisible clickable areas are still clickable */
+    #Lawny rect[opacity="0"], #fiftyPence rect[opacity="0"], #oodo rect[opacity="0"], #lotus rect[opacity="0"], #toddler_text rect[opacity="0"], #animations rect[opacity="0"], #sketching rect[opacity="0"] {
+      pointer-events: all;
+    }
+
     .clickable:hover {
       transform: scale(1.05);
     }
@@ -1371,22 +1386,34 @@
     const lawny = document.getElementById('Lawny');
     const lawnyPopup = document.getElementById('lawny-popup');
 
+    console.log('Lawny element:', lawny);
+    console.log('Lawny popup:', lawnyPopup);
+
     if (lawny && lawnyPopup) {
       lawny.addEventListener('click', () => {
+        console.log('Lawny clicked!');
         lawnyPopup.classList.add('active');
         initAllCarousels();
       });
+    } else {
+      console.log('Lawny or lawnyPopup not found!');
     }
 
     // Fifty Pence popup
     const fiftyPence = document.getElementById('fiftyPence');
     const fiftyPencePopup = document.getElementById('fifty-pence-popup');
 
+    console.log('Fifty Pence element:', fiftyPence);
+    console.log('Fifty Pence popup:', fiftyPencePopup);
+
     if (fiftyPence && fiftyPencePopup) {
       fiftyPence.addEventListener('click', () => {
+        console.log('Fifty Pence clicked!');
         fiftyPencePopup.classList.add('active');
         initAllCarousels();
       });
+    } else {
+      console.log('Fifty Pence or fiftyPencePopup not found!');
     }
 
     // oODo popup

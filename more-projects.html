@@ -1369,9 +1369,11 @@
     window.addEventListener("load", () => {
       const loadingLayer = document.getElementById("Loading");
 
-      setTimeout(() => {
-        loadingLayer.classList.add('fade-out');
-      }, 2000); // 2 seconds delay
+      if (loadingLayer) {
+        setTimeout(() => {
+          loadingLayer.classList.add('fade-out');
+        }, 2000); // 2 seconds delay
+      }
     });
 
       const contact = document.getElementById('contact');
@@ -1386,58 +1388,22 @@
     const lawny = document.getElementById('Lawny');
     const lawnyPopup = document.getElementById('lawny-popup');
 
-    console.log('Lawny element:', lawny);
-    console.log('Lawny popup:', lawnyPopup);
-
     if (lawny && lawnyPopup) {
-      lawny.addEventListener('click', (e) => {
-        console.log('Lawny clicked!', e);
-        console.log('Adding active class to:', lawnyPopup);
+      lawny.addEventListener('click', () => {
         lawnyPopup.classList.add('active');
-        console.log('Popup classes after adding active:', lawnyPopup.className);
-        console.log('Popup display style:', window.getComputedStyle(lawnyPopup).display);
         initAllCarousels();
       });
-    } else {
-      console.log('Lawny or lawnyPopup not found!');
     }
-
-    // Test button to manually open popup
-    const testButton = document.createElement('button');
-    testButton.textContent = 'TEST POPUP';
-    testButton.style.position = 'fixed';
-    testButton.style.top = '100px';
-    testButton.style.right = '20px';
-    testButton.style.zIndex = '9999';
-    testButton.style.padding = '10px';
-    testButton.style.background = 'red';
-    testButton.style.color = 'white';
-    testButton.style.border = 'none';
-    testButton.style.cursor = 'pointer';
-    testButton.addEventListener('click', () => {
-      console.log('Test button clicked!');
-      if (lawnyPopup) {
-        lawnyPopup.classList.add('active');
-        console.log('Test popup opened!');
-      }
-    });
-    document.body.appendChild(testButton);
 
     // Fifty Pence popup
     const fiftyPence = document.getElementById('fiftyPence');
     const fiftyPencePopup = document.getElementById('fifty-pence-popup');
 
-    console.log('Fifty Pence element:', fiftyPence);
-    console.log('Fifty Pence popup:', fiftyPencePopup);
-
     if (fiftyPence && fiftyPencePopup) {
       fiftyPence.addEventListener('click', () => {
-        console.log('Fifty Pence clicked!');
         fiftyPencePopup.classList.add('active');
         initAllCarousels();
       });
-    } else {
-      console.log('Fifty Pence or fiftyPencePopup not found!');
     }
 
     // oODo popup

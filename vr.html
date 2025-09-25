@@ -1071,11 +1071,11 @@
 
     // Canopy of Echoes video navigation
     let currentCanopyVideo = 0;
-    const canopyVideos = document.querySelectorAll('.canopy-video-slide');
+    const canopyVideoSlides = document.querySelectorAll('.canopy-video-slide');
     const canopyDots = document.querySelectorAll('.canopy-dot');
 
     function showCanopyVideo(index) {
-      canopyVideos.forEach((video, i) => {
+      canopyVideoSlides.forEach((video, i) => {
         video.style.display = i === index ? 'flex' : 'none';
       });
       canopyDots.forEach((dot, i) => {
@@ -1085,12 +1085,12 @@
     }
 
     function previousCanopyVideo() {
-      const prevIndex = currentCanopyVideo > 0 ? currentCanopyVideo - 1 : canopyVideos.length - 1;
+      const prevIndex = currentCanopyVideo > 0 ? currentCanopyVideo - 1 : canopyVideoSlides.length - 1;
       showCanopyVideo(prevIndex);
     }
 
     function nextCanopyVideo() {
-      const nextIndex = currentCanopyVideo < canopyVideos.length - 1 ? currentCanopyVideo + 1 : 0;
+      const nextIndex = currentCanopyVideo < canopyVideoSlides.length - 1 ? currentCanopyVideo + 1 : 0;
       showCanopyVideo(nextIndex);
     }
 

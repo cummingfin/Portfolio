@@ -909,7 +909,7 @@
         <button class="popup-close-btn" onclick="closePopup('canopy-of-echoes-popup')">×</button>
       </div>
       <div class="popup-content">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px; position: relative;">
           <!-- Left: Description -->
           <div>
             <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Canopy of Echoes</h1>
@@ -923,19 +923,23 @@
             </div>
           </div>
           
+          <!-- Bottom Corner Navigation Arrows -->
+          <button onclick="previousCanopyVideo()" style="position: absolute; bottom: 20px; left: 20px; background: rgba(35, 31, 32, 0.8); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px; font-weight: bold; transition: all 0.2s ease; z-index: 10;">←</button>
+          <button onclick="nextCanopyVideo()" style="position: absolute; bottom: 20px; right: 20px; background: rgba(35, 31, 32, 0.8); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px; font-weight: bold; transition: all 0.2s ease; z-index: 10;">→</button>
+          
           <!-- Right: Video Demo -->
           <div style="height: 300px; border-radius: 8px; overflow: hidden; position: relative; background: #fff;">
             <div id="canopy-video-carousel" style="height: 100%; position: relative;">
               <!-- Video 1 -->
               <div class="canopy-video-slide" style="height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/Our%20Final%20Video_compressed.mp4')">
-                <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <img src="Assets/Canopy%20of%20Echos/Demo1.PNG" alt="Canopy of Echoes VR Demo 1" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
                   ▶ Play Demo 1
                 </div>
               </div>
               <!-- Video 2 -->
               <div class="canopy-video-slide" style="height: 100%; cursor: pointer; display: none; align-items: center; justify-content: center;" onclick="openVRVideoDemo('Assets/Canopy%20of%20Echos/VR%20experience%20video_compressed.mp4')">
-                <img src="Assets/Canopy%20of%20Echos/CanopyOfEchosThumbnail.png" alt="Canopy of Echoes VR Demo 2" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                <img src="Assets/Canopy%20of%20Echos/Demo2.png" alt="Canopy of Echoes VR Demo 2" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                 <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 12px 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 500;">
                   ▶ Play Demo 2
                 </div>
@@ -957,18 +961,27 @@
     </div>
   </div>
 
-  <!-- VR Video Demo Lightbox -->
-  <div id="vr-video-demo-lightbox" class="vr-video-demo-lightbox">
-    <div class="vr-video-demo-content">
-      <video id="vr-demo-video" controls>
-        <source src="" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      
-      <!-- Close Button -->
-      <button class="vr-video-demo-close" onclick="closeVRVideoDemo()">×</button>
+    <!-- VR Video Demo Lightbox -->
+    <div id="vr-video-demo-lightbox" class="vr-video-demo-lightbox">
+      <div class="vr-video-demo-content">
+        <video id="vr-demo-video" controls>
+          <source src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        
+        <!-- Close Button -->
+        <button class="vr-video-demo-close" onclick="closeVRVideoDemo()">×</button>
+        
+        <!-- Video Navigation Arrows (only show for Canopy videos) -->
+        <button id="lightbox-prev-btn" onclick="previousLightboxVideo()" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none;">←</button>
+        <button id="lightbox-next-btn" onclick="nextLightboxVideo()" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: #231f20; border: none; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 20px; font-weight: bold; transition: all 0.2s ease; display: none;">→</button>
+        
+        <!-- Video Info -->
+        <div id="lightbox-video-info" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: white; padding: 8px 16px; border-radius: 4px; font-size: 14px; display: none;">
+          Video <span id="current-video-num">1</span> of <span id="total-videos">2</span>
+        </div>
+      </div>
     </div>
-  </div>
 
   <script>
     // VR Popup functions
@@ -1008,13 +1021,35 @@
     });
 
     // VR Video Demo functions
+    const canopyVideos = [
+      'Assets/Canopy%20of%20Echos/Our%20Final%20Video_compressed.mp4',
+      'Assets/Canopy%20of%20Echos/VR%20experience%20video_compressed.mp4'
+    ];
+    let currentLightboxVideo = 0;
+
     function openVRVideoDemo(videoSrc) {
       const lightbox = document.getElementById('vr-video-demo-lightbox');
       const video = document.getElementById('vr-demo-video');
+      const prevBtn = document.getElementById('lightbox-prev-btn');
+      const nextBtn = document.getElementById('lightbox-next-btn');
+      const videoInfo = document.getElementById('lightbox-video-info');
       
       video.src = videoSrc;
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
+      
+      // Check if this is a Canopy video and show navigation
+      if (canopyVideos.includes(videoSrc)) {
+        currentLightboxVideo = canopyVideos.indexOf(videoSrc);
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+        videoInfo.style.display = 'block';
+        updateLightboxVideoInfo();
+      } else {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        videoInfo.style.display = 'none';
+      }
     }
 
     function closeVRVideoDemo() {
@@ -1057,6 +1092,26 @@
     function nextCanopyVideo() {
       const nextIndex = currentCanopyVideo < canopyVideos.length - 1 ? currentCanopyVideo + 1 : 0;
       showCanopyVideo(nextIndex);
+    }
+
+    // Lightbox video navigation functions
+    function updateLightboxVideoInfo() {
+      document.getElementById('current-video-num').textContent = currentLightboxVideo + 1;
+      document.getElementById('total-videos').textContent = canopyVideos.length;
+    }
+
+    function previousLightboxVideo() {
+      currentLightboxVideo = currentLightboxVideo > 0 ? currentLightboxVideo - 1 : canopyVideos.length - 1;
+      const video = document.getElementById('vr-demo-video');
+      video.src = canopyVideos[currentLightboxVideo];
+      updateLightboxVideoInfo();
+    }
+
+    function nextLightboxVideo() {
+      currentLightboxVideo = currentLightboxVideo < canopyVideos.length - 1 ? currentLightboxVideo + 1 : 0;
+      const video = document.getElementById('vr-demo-video');
+      video.src = canopyVideos[currentLightboxVideo];
+      updateLightboxVideoInfo();
     }
 
     // Mobile menu toggle (if needed)

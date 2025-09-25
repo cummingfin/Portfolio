@@ -185,24 +185,28 @@
     }
 
     .cards-container {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
+      padding: 0 10px;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .card {
       background: white;
       border-radius: 16px;
-      padding: 25px 20px;
+      padding: 20px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.3s ease;
       border: 3px solid #231f20;
       width: 100%;
-      height: 120px;
+      height: 180px;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       position: relative;
       overflow: hidden;
     }
@@ -231,39 +235,27 @@
     }
 
     .card-icon {
-      width: 60px;
-      height: 60px;
-      margin-right: 20px;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
     }
 
-    .card-icon svg {
+    .card-icon img {
       width: 100%;
       height: 100%;
-    }
-
-    .card-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      object-fit: contain;
     }
 
     .card-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: bold;
       color: #231f20;
-      margin-bottom: 8px;
+      text-align: center;
       font-family: 'Courier New', monospace;
-    }
-
-    .card-description {
-      color: #666;
-      line-height: 1.4;
-      font-size: 14px;
+      line-height: 1.2;
     }
 
     
@@ -284,6 +276,28 @@
       /* Show mobile cards, hide desk */
       .mobile-cards {
         display: block;
+        padding: 15px;
+        max-width: 100%;
+      }
+
+      .cards-container {
+        gap: 15px;
+        padding: 0 5px;
+      }
+
+      .card {
+        height: 160px;
+        padding: 15px;
+      }
+
+      .card-icon {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 12px;
+      }
+
+      .card-title {
+        font-size: 14px;
       }
 
       .desk-container {
@@ -1025,62 +1039,44 @@
       <div class="cards-container">
         <div class="card" onclick="openMobilePopup('about')">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/About@3x.png" alt="About Me" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/About@3x.png" alt="About Me">
           </div>
-          <div class="card-content">
-            <div class="card-title">About Me</div>
-            <div class="card-description">Learn about my background, skills, and journey in tech</div>
-          </div>
+          <div class="card-title">About Me</div>
         </div>
         
         <div class="card" onclick="openMobilePopup('computer')">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/Laptop@3x.png" alt="Computer Projects" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/Laptop@3x.png" alt="Computer Projects">
           </div>
-          <div class="card-content">
-            <div class="card-title">Computer Projects</div>
-            <div class="card-description">Web development, games, and desktop applications</div>
-          </div>
+          <div class="card-title">Computer Projects</div>
         </div>
         
         <div class="card" onclick="openMobilePopup('phone')">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/Phone@3x.png" alt="Mobile Apps" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/Phone@3x.png" alt="Mobile Apps">
           </div>
-          <div class="card-content">
-            <div class="card-title">Mobile Apps</div>
-            <div class="card-description">iOS and Android applications I've developed</div>
-          </div>
+          <div class="card-title">Mobile Apps</div>
         </div>
         
         <div class="card" onclick="window.location.href = 'vr.html'">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/VR@3x.png" alt="VR Projects" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/VR@3x.png" alt="VR Projects">
           </div>
-          <div class="card-content">
-            <div class="card-title">VR Projects</div>
-            <div class="card-description">Virtual and augmented reality experiences</div>
-          </div>
+          <div class="card-title">VR Projects</div>
         </div>
         
         <div class="card" onclick="openMobilePopup('donkeyjobs')">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/DonkeyJobs@3x.png" alt="DonkeyJobs" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/DonkeyJobs@3x.png" alt="DonkeyJobs">
           </div>
-          <div class="card-content">
-            <div class="card-title">DonkeyJobs</div>
-            <div class="card-description">Eco-friendly garden maintenance company I founded</div>
-          </div>
+          <div class="card-title">DonkeyJobs</div>
         </div>
         
         <div class="card" onclick="openMobilePopup('awards')">
           <div class="card-icon">
-            <img src="Assets/iPhoneIndex/Trophy@3x.png" alt="Awards & Recognition" style="width: 100%; height: 100%; object-fit: contain;">
+            <img src="Assets/iPhoneIndex/Trophy@3x.png" alt="Awards & Recognition">
           </div>
-          <div class="card-content">
-            <div class="card-title">Awards & Recognition</div>
-            <div class="card-description">Achievements and recognition in my career</div>
-          </div>
+          <div class="card-title">Awards & Recognition</div>
         </div>
       </div>
     </div>

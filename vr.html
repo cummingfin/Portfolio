@@ -232,8 +232,8 @@
     .vr-panel {
       background: rgba(49, 49, 51, 0.85);
       border-radius: 12px;
-      width: 448px;
-      height: 360px;
+      width: 600px;
+      height: 480px;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
@@ -254,21 +254,23 @@
 
     .vr-panel-content {
       padding: 30px;
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
       height: calc(100% - 80px);
     }
 
     .vr-thumbnail {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 100%;
+      height: 140px;
       cursor: pointer;
       transition: transform 0.3s ease;
       border-radius: 8px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .vr-thumbnail:hover {
@@ -277,23 +279,148 @@
 
     .vr-thumbnail img {
       width: 100%;
-      height: 100%;
+      height: 100px;
       object-fit: cover;
-      border-radius: 8px;
+      border-radius: 8px 8px 0 0;
     }
 
     .vr-thumbnail-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.8);
       color: #fff;
       padding: 8px;
       font-family: 'Courier New', monospace;
       font-size: 12px;
       text-align: center;
       border-radius: 0 0 8px 8px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Empty slots styling */
+    .vr-thumbnail.empty {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dashed rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+
+    .vr-thumbnail.empty:hover {
+      transform: none;
+      cursor: default;
+    }
+
+    /* Popup Styles */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .popup.active {
+      display: flex;
+    }
+    
+    .popup-window {
+      position: relative;
+      background: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      border-radius: 0;
+      width: 98%;
+      max-width: 1200px;
+      max-height: 95vh;
+      overflow: hidden;
+      transform: scale(0);
+      animation: windowExpand 0.4s ease-out forwards;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    }
+    
+    @keyframes windowExpand {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+    
+    .popup-titlebar {
+      background: #e8f4f8;
+      color: #231f20;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #000;
+    }
+    
+    .popup-close-btn {
+      background: #c0c0c0;
+      border: 1px outset #c0c0c0;
+      color: #000;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 6px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    .popup-close-btn:hover {
+      background: #a0a0a0;
+    }
+    
+    .popup-content {
+      background: #ffffff;
+      padding: 50px 40px;
+      max-height: calc(95vh - 30px);
+      overflow-y: auto;
+      color: #212529;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .popup-content::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .popup-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    .popup-content::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+    
+    .popup-content::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    .popup-content h1 {
+      font-family: 'Courier New', monospace;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #000;
+      margin: 0 0 1.5rem 0;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    
+    .popup-content p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #333;
+      margin: 0 0 1.5rem 0;
+      font-weight: 300;
     }
   </style>
 </head>
@@ -607,6 +734,7 @@
         <h2>VR apps</h2>
       </div>
       <div class="vr-panel-content">
+        <!-- Row 1 -->
         <div class="vr-thumbnail" onclick="openVRPopup('inner-path')">
           <img src="Assets/InnerPath/InnerPathThumbnail.jpg" alt="Inner Path" />
           <div class="vr-thumbnail-label">Inner Path</div>
@@ -614,6 +742,20 @@
         <div class="vr-thumbnail" onclick="openVRPopup('canopy-of-echoes')">
           <img src="Assets/CanopyOfEchoes/CanopyOfEchoesThumbnail.jpg" alt="Canopy of Echoes" />
           <div class="vr-thumbnail-label">Canopy of Echoes</div>
+        </div>
+        <div class="vr-thumbnail empty">
+          Coming Soon
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="vr-thumbnail empty">
+          Coming Soon
+        </div>
+        <div class="vr-thumbnail empty">
+          Coming Soon
+        </div>
+        <div class="vr-thumbnail empty">
+          Coming Soon
         </div>
       </div>
     </div>
@@ -631,17 +773,101 @@
     </svg>
   </div>
 
+  <!-- VR Project Popups -->
+  <!-- Inner Path Popup -->
+  <div id="inner-path-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Inner Path.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('inner-path-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Inner Path</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              An immersive VR experience that explores the journey of self-discovery through interactive environments and narrative storytelling.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Immersive VR Experience
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Image/Video Placeholder -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666;">
+            <p>VR Experience Preview</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Canopy of Echoes Popup -->
+  <div id="canopy-of-echoes-popup" class="popup">
+    <div class="popup-window">
+      <div class="popup-titlebar">
+        <div class="popup-title">Canopy of Echoes.exe</div>
+        <button class="popup-close-btn" onclick="closePopup('canopy-of-echoes-popup')">×</button>
+      </div>
+      <div class="popup-content">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; min-height: 400px;">
+          <!-- Left: Description -->
+          <div>
+            <h1 style="font-size: 3.5rem; font-weight: 100; color: #000; margin: 0 0 2rem 0; letter-spacing: -0.03em; line-height: 1.1;">Canopy of Echoes</h1>
+            <p style="font-size: 1.2rem; color: #333; margin: 0 0 2.5rem 0; font-weight: 300; line-height: 1.6;">
+              A VR heritage project that brings historical narratives to life through immersive digital experiences and interactive storytelling.
+            </p>
+            <div style="margin-bottom: 3rem;">
+              <p style="font-size: 1rem; color: #000; margin: 0; font-weight: 500; letter-spacing: 0.5px;">
+                Winner of Best Heritage Award - Nanjing Digital Heritage 2025
+              </p>
+            </div>
+          </div>
+          
+          <!-- Right: Image/Video Placeholder -->
+          <div style="height: 300px; border-radius: 8px; overflow: hidden; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666;">
+            <p>VR Heritage Experience Preview</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // VR Popup functions
     function openVRPopup(projectId) {
-      // For now, we'll navigate to the main page with the project parameter
-      // This can be enhanced later with actual popup functionality
       if (projectId === 'inner-path') {
-        window.location.href = 'index.html?open=inner-path';
+        document.getElementById('inner-path-popup').classList.add('active');
       } else if (projectId === 'canopy-of-echoes') {
-        window.location.href = 'index.html?open=canopy-of-echoes';
+        document.getElementById('canopy-of-echoes-popup').classList.add('active');
       }
     }
+
+    // Close popup function
+    function closePopup(popupId) {
+      document.getElementById(popupId).classList.remove('active');
+    }
+
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('popup')) {
+        document.querySelectorAll('.popup.active').forEach(popup => {
+          popup.classList.remove('active');
+        });
+      }
+    });
+
+    // Close popup with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup.active').forEach(popup => {
+          popup.classList.remove('active');
+        });
+      }
+    });
 
     // Mobile menu toggle (if needed)
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');

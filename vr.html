@@ -923,9 +923,11 @@
             </div>
           </div>
           
-          <!-- Bottom Corner Navigation Arrows -->
-          <button onclick="previousCanopyVideo()" style="position: absolute; bottom: 20px; left: 20px; background: rgba(35, 31, 32, 0.8); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px; font-weight: bold; transition: all 0.2s ease; z-index: 10;">←</button>
-          <button onclick="nextCanopyVideo()" style="position: absolute; bottom: 20px; right: 20px; background: rgba(35, 31, 32, 0.8); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 18px; font-weight: bold; transition: all 0.2s ease; z-index: 10;">→</button>
+          <!-- Bottom Corner Navigation Arrows (matching phone-projects style) -->
+          <div style="position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 20px; pointer-events: none; z-index: 10;">
+            <button onclick="previousCanopyVideo()" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">←</button>
+            <button onclick="nextCanopyVideo()" style="background: none; border: none; color: #000; font-size: 40px; font-weight: bold; cursor: pointer; pointer-events: auto; transition: color 0.2s ease;">→</button>
+          </div>
           
           <!-- Right: Video Demo -->
           <div style="height: 300px; border-radius: 8px; overflow: hidden; position: relative; background: #fff;">

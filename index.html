@@ -187,20 +187,17 @@
     .cards-container {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 0 10px;
+      gap: 30px;
+      padding: 20px;
       max-width: 500px;
       margin: 0 auto;
     }
 
     .card {
-      background: white;
-      border-radius: 16px;
+      background: transparent;
       padding: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       cursor: pointer;
       transition: all 0.3s ease;
-      border: 3px solid #231f20;
       width: 100%;
       height: 180px;
       display: flex;
@@ -208,30 +205,10 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, #FFB07B 0%, #e0f2f6 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      z-index: -1;
     }
 
     .card:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      border-color: #FFB07B;
-    }
-
-    .card:hover::before {
-      opacity: 0.1;
     }
 
     .card-icon {
@@ -281,8 +258,8 @@
       }
 
       .cards-container {
-        gap: 15px;
-        padding: 0 5px;
+        gap: 25px;
+        padding: 15px;
       }
 
       .card {

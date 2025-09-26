@@ -749,13 +749,14 @@
         padding: 0 15px;
       }
 
-      /* Mobile SVG styling */
+      /* Mobile SVG styling - fix horizontal scroll and centering */
       body {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
         overflow-x: hidden; /* Prevent horizontal scroll */
+        overflow-y: hidden; /* Prevent vertical scroll too */
       }
 
       svg {
@@ -765,7 +766,7 @@
         margin: 0 auto;
         display: block;
         transform: scale(2.5);
-        transform-origin: center;
+        transform-origin: center center; /* Ensure centered scaling */
       }
 
       /* Use web styling with a different sans-serif font for more-projects */

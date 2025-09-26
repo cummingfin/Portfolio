@@ -264,11 +264,7 @@
         overflow: hidden;
         padding: 0;
         margin: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        position: relative;
       }
 
       /* Desktop SVG - hide on mobile */
@@ -288,12 +284,12 @@
       }
 
       body {
-        align-items: flex-start;
-        padding-top: 0;
+        align-items: center;
+        padding: 0;
         margin: 0;
         overflow: hidden;
         height: 100vh;
-        position: fixed;
+        position: relative;
         width: 100%;
       }
     }
@@ -402,6 +398,15 @@
     }
 
     #cup-mobile {
+      cursor: pointer;
+    }
+
+    /* Desktop SVG clickable elements */
+    #laptop {
+      cursor: pointer;
+    }
+
+    #plant {
       cursor: pointer;
     }
 

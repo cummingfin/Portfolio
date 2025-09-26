@@ -758,9 +758,9 @@
       }
 
       svg {
-        width: 150vw !important;
+        width: 140vw !important;
         height: auto;
-        max-height: 150vh;
+        max-height: 140vh;
         margin: 0 auto;
         display: block;
       }
@@ -1408,9 +1408,9 @@
       const loadingLayer = document.getElementById("Loading");
 
       if (loadingLayer) {
-        setTimeout(() => {
-          loadingLayer.classList.add('fade-out');
-        }, 2000); // 2 seconds delay
+      setTimeout(() => {
+        loadingLayer.classList.add('fade-out');
+      }, 2000); // 2 seconds delay
       }
     });
 
@@ -1427,7 +1427,7 @@
     const lawnyPopup = document.getElementById('lawny-popup');
 
     if (lawny && lawnyPopup) {
-      lawny.addEventListener('click', () => {
+    lawny.addEventListener('click', () => {
         lawnyPopup.classList.add('active');
         initAllCarousels();
       });
@@ -1777,4 +1777,3 @@
   </script>
 </body>
 </html>
- 

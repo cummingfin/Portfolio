@@ -180,6 +180,31 @@
       .nav-container {
         padding: 0 15px;
       }
+
+      /* Mobile SVG styling */
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      svg {
+        width: 140vw !important;
+        height: auto;
+        max-height: 140vh;
+        margin: 0 auto;
+        display: block;
+      }
+
+      /* Increase text size in SVG for mobile */
+      svg text {
+        font-size: 18px !important;
+      }
+
+      svg .clickable-text {
+        font-size: 20px !important;
+      }
     }
 
     svg {

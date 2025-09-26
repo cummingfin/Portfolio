@@ -749,49 +749,24 @@
         padding: 0 15px;
       }
 
-      /* Mobile SVG styling - completely lock horizontal scrolling */
+      /* Mobile SVG styling */
       body {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        overflow-x: hidden !important; /* Force prevent horizontal scroll */
-        overflow-y: hidden !important; /* Force prevent vertical scroll */
-        width: 100vw !important; /* Ensure body takes full width */
-        max-width: 100vw !important; /* Prevent body from exceeding viewport */
-        margin: 0 !important;
-        padding: 0 !important;
-        position: fixed; /* Lock the body in place */
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      }
-
-      html {
-        overflow-x: hidden !important; /* Prevent html from scrolling */
-        overflow-y: hidden !important;
-        width: 100vw !important;
-        max-width: 100vw !important;
+        overflow-x: hidden; /* Prevent horizontal scroll */
       }
 
       svg {
         width: 100vw !important;
-        height: auto;
-        max-height: 100vh;
+        height: 100vh !important;
         margin: 0 auto;
         display: block;
+        object-fit: contain;
+        object-position: center;
         transform: scale(2.5);
-        transform-origin: center center; /* Ensure centered scaling */
-        overflow: visible; /* Allow SVG content to be visible */
-      }
-
-      /* Container to properly crop the scaled SVG */
-      body > svg {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%) scale(2.5);
-        transform-origin: center center;
+        transform-origin: center;
       }
 
       /* Use web styling with a different sans-serif font for more-projects */
@@ -869,9 +844,10 @@
           <a href="#" aria-haspopup="true" aria-expanded="false">Projects</a>
           <div class="dropdown-content" role="menu">
             <a href="phone-projects.html" role="menuitem">Mobile Apps</a>
-            <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">More Projects</a>
+            <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">Computer Projects</a>
             <a href="index.html?open=donkeyjobs" role="menuitem">DonkeyJobs</a>
             <a href="vr.html" role="menuitem">VR Projects</a>
+            <a href="more-projects.html" role="menuitem" style="background: #231f20; color: #e0f2f6;">All Projects</a>
           </div>
         </li>
         <li><a href="project-1.html">About</a></li>
@@ -889,9 +865,10 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="phone-projects.html">Mobile Apps</a></li>
-        <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">More Projects</a></li>
+        <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">Computer Projects</a></li>
         <li><a href="index.html?open=donkeyjobs">DonkeyJobs</a></li>
         <li><a href="vr.html">VR Projects</a></li>
+        <li><a href="more-projects.html" style="background: #231f20; color: #e0f2f6;">All Projects</a></li>
         <li><a href="project-1.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="resume.pdf" target="_blank">Resume</a></li>

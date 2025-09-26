@@ -189,16 +189,28 @@
         min-height: 100vh;
         overflow-x: hidden; /* Prevent horizontal scroll */
         overflow-y: hidden; /* Prevent vertical scroll too */
+        width: 100vw; /* Ensure body takes full width */
+        margin: 0;
+        padding: 0;
       }
 
       svg {
-        width: 40vw !important; /* Smaller base width to prevent overflow */
+        width: 100vw !important;
         height: auto;
         max-height: 100vh;
         margin: 0 auto;
         display: block;
         transform: scale(2.5);
         transform-origin: center center; /* Ensure centered scaling */
+        overflow: visible; /* Allow SVG content to be visible */
+      }
+
+      /* Container to properly crop the scaled SVG */
+      body > svg {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%) scale(2.5);
+        transform-origin: center center;
       }
 
       /* Use original web styling for contact */

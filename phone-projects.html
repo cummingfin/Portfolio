@@ -446,8 +446,20 @@
       }
       
       .phone-container svg {
-        width: 220px; /* Fixed width for mobile */
-        max-height: 90vh; /* Taller on mobile */
+        width: 98vw !important; /* Full width for mobile */
+        height: auto;
+        max-height: 98vh;
+        margin: 0 auto;
+        display: block;
+      }
+
+      /* Increase text size in SVG for mobile */
+      .phone-container svg text {
+        font-size: 18px !important;
+      }
+
+      .phone-container svg .clickable-text {
+        font-size: 20px !important;
       }
       
       /* Mobile device sizing adjustments */

@@ -250,40 +250,33 @@
         padding: 0 15px;
       }
 
-      /* Show mobile cards, hide desk */
+      /* Show mobile SVG, hide desk */
       .mobile-cards {
-        display: block;
-        padding: 5px;
-        max-width: 100%;
-      }
-
-      .cards-container {
-        gap: 10px;
-        padding: 5px 20px;
-        max-width: 100vw;
-        margin: 0 auto;
-      }
-
-      .card {
-        height: auto;
-        min-height: 120px;
-        padding: 2px;
-      }
-
-      .card-icon {
-        width: 70vw;
-        height: 70vw;
-        margin-bottom: 2px;
-      }
-
-      .card-title {
-        font-size: 16px;
-        margin: 0;
-        line-height: 1;
+        display: none;
       }
 
       .desk-container {
-        display: none;
+        display: block;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .desk-svg {
+        width: 98vw;
+        height: auto;
+        max-height: 98vh;
+        margin: 0 auto;
+        display: block;
+      }
+
+      /* Increase text size in SVG for mobile */
+      .desk-svg text {
+        font-size: 18px !important;
+      }
+
+      .desk-svg .clickable-text {
+        font-size: 20px !important;
       }
 
       body {

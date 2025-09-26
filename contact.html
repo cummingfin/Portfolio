@@ -181,17 +181,30 @@
         padding: 0 15px;
       }
 
-      /* Mobile SVG styling - fix horizontal scroll and centering */
+      /* Mobile SVG styling - completely lock horizontal scrolling */
       body {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        overflow-x: hidden; /* Prevent horizontal scroll */
-        overflow-y: hidden; /* Prevent vertical scroll too */
-        width: 100vw; /* Ensure body takes full width */
-        margin: 0;
-        padding: 0;
+        overflow-x: hidden !important; /* Force prevent horizontal scroll */
+        overflow-y: hidden !important; /* Force prevent vertical scroll */
+        width: 100vw !important; /* Ensure body takes full width */
+        max-width: 100vw !important; /* Prevent body from exceeding viewport */
+        margin: 0 !important;
+        padding: 0 !important;
+        position: fixed; /* Lock the body in place */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      html {
+        overflow-x: hidden !important; /* Prevent html from scrolling */
+        overflow-y: hidden !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
       }
 
       svg {

@@ -265,26 +265,23 @@
       }
 
       .desk-svg {
-        width: 95vw;
+        width: 90vw;
         height: auto;
-        max-height: 95vh;
+        max-height: 90vh;
         margin: 0 auto;
         display: block;
-        transform: scale(1.0);
+        transform: translateY(20vh);
+      }
+
+      /* Scale up text groups 2x on mobile for better readability */
+      .desk-svg #Text1,
+      .desk-svg #Text2,
+      .desk-svg #Text3,
+      .desk-svg #Text4,
+      .desk-svg #Text5,
+      .desk-svg #Text6 {
+        transform: scale(2);
         transform-origin: center;
-      }
-
-      /* Smaller text with proper sans-serif font for index */
-      .desk-svg text {
-        font-size: 12px !important;
-        font-family: 'Arial', sans-serif !important;
-        letter-spacing: 0.5px !important;
-      }
-
-      .desk-svg .clickable-text {
-        font-size: 14px !important;
-        font-family: 'Arial', sans-serif !important;
-        letter-spacing: 0.5px !important;
       }
 
       body {
@@ -315,7 +312,7 @@
         width: 70vw;
         max-width: 1000px; /* Don't grow beyond this size */
       height: auto;
-        transform: translateY(40vh); /* Move down more to clear nav bar */
+        transform: translateY(60vh); /* Move down more to clear nav bar */
         transform-origin: center; /* Scale from center */
       }
     }

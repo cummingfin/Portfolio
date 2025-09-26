@@ -1726,44 +1726,6 @@
     initCarousel('donkeyjobs-carousel');
   }
 
-  // DonkeyJobs carousel navigation functions
-  function previousDonkeyJobsImage() {
-    const carousel = document.getElementById('donkeyjobs-carousel');
-    if (!carousel) return;
-    
-    const images = carousel.querySelectorAll('.carousel-image');
-    const currentIndex = Array.from(images).findIndex(img => img.style.display !== 'none');
-    const prevIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1;
-    
-    images.forEach((img, index) => {
-      img.style.display = index === prevIndex ? 'block' : 'none';
-    });
-    
-    updateCarouselDots(carousel, prevIndex);
-  }
-
-  function nextDonkeyJobsImage() {
-    const carousel = document.getElementById('donkeyjobs-carousel');
-    if (!carousel) return;
-    
-    const images = carousel.querySelectorAll('.carousel-image');
-    const currentIndex = Array.from(images).findIndex(img => img.style.display !== 'none');
-    const nextIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0;
-    
-    images.forEach((img, index) => {
-      img.style.display = index === nextIndex ? 'block' : 'none';
-    });
-    
-    updateCarouselDots(carousel, nextIndex);
-  }
-
-  function updateCarouselDots(carousel, activeIndex) {
-    const dots = carousel.querySelectorAll('.carousel-dot');
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === activeIndex);
-    });
-  }
-
   // Lightbox functions
   let currentLightboxImages = [];
   let currentLightboxIndex = 0;
@@ -1878,5 +1840,18 @@
             </div>
             
             <!-- Carousel Navigation Arrows -->
-            <button class="carousel-nav carousel-prev" onclick="previousDonkeyJobsImage()">←</button>
-            <button class="carousel-nav carousel-next" onclick="nextDonkeyJobsImage()">→</button>
+            <button class="carousel-nav carousel-prev">←</button>
+            <button class="carousel-nav carousel-next">→</button>
+            <div class="carousel-dots">
+              <span class="carousel-dot active"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+            </div>

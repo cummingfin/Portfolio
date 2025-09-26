@@ -292,20 +292,22 @@
     }
 
     /* Desktop styles - show desktop SVG, hide mobile SVG */
-    .desktop-only {
-      display: block !important;
-    }
+    @media (min-width: 769px) {
+      .desktop-only {
+        display: block !important;
+      }
 
-    .mobile-only {
-      display: none !important;
-    }
+      .mobile-only {
+        display: none !important;
+      }
 
-    .desk-svg {
-      width: 100%;
-      height: auto;
-      max-width: 1000px;
-      margin: 0 auto;
-      display: block;
+      .desk-svg {
+        width: 100%;
+        height: auto;
+        max-width: 1000px;
+        margin: 0 auto;
+        display: block;
+      }
     }
 
     /* Tablet Responsive */
@@ -2090,6 +2092,21 @@
   function initDonkeyJobsCarousel() {
     initCarousel('donkeyjobs-carousel');
   }
+
+  // Handle URL parameters to open popups
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const openParam = urlParams.get('open');
+    
+    if (openParam === 'donkeyjobs') {
+      // Open DonkeyJobs popup
+      const popup = document.getElementById('popup-plant');
+      if (popup) {
+        popup.classList.add('active');
+        initDonkeyJobsCarousel();
+      }
+    }
+  });
 
   // DonkeyJobs carousel navigation functions
   function previousDonkeyJobsImage() {

@@ -307,25 +307,14 @@
       }
     }
 
-    /* Laptop/Desktop - position table so legs are below screen */
+    /* Laptop/Desktop - consistent positioning with top padding */
     @media (min-width: 1025px) {
       .desk-svg {
         width: 70vw !important;
-        max-width: 1000px !important; /* Don't grow beyond this size */
+        max-width: 1000px !important;
         height: auto !important;
-        transform: translateY(45vh) !important; /* Move SVG down more for laptop */
-        transform-origin: center !important; /* Scale from center */
-      }
-    }
-    
-    /* Large desktop screens - move SVG up to fit entirely on screen */
-    @media (min-width: 1400px) {
-      .desk-svg {
-        width: 70vw;
-        max-width: 1000px;
-        height: auto;
-        transform: translateY(15vh); /* Move up for large screens - fits without scrolling */
-        transform-origin: center;
+        margin-top: 120px !important; /* Simple top padding instead of transform */
+        transform: none !important;
       }
     }
     svg {

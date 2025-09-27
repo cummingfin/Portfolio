@@ -313,7 +313,10 @@
         align-items: flex-start !important; /* Change from flex-end to flex-start */
         justify-content: center !important;
         padding-top: 60px !important;
+        height: auto !important; /* Allow scrolling instead of fixed 100vh */
+        min-height: 100vh !important; /* Ensure minimum height */
       }
+      
       
       .desk-svg {
         width: 70vw !important;
@@ -321,13 +324,10 @@
         height: auto !important;
         margin-top: 60px !important; /* Add space below nav */
         transform: none !important;
+        max-height: none !important; /* Override mobile max-height */
       }
     }
-    svg {
-      width: 70vw;
-      height: auto;
-      overflow: visible;
-    }
+    /* General SVG styles - removed to avoid conflicts with .desk-svg */
 
     /* Light and cube hidden by default */
     #phoneLight,

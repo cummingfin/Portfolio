@@ -768,19 +768,24 @@
         transform-origin: center;
       }
 
-      /* Use web styling with a different sans-serif font for more-projects */
+      /* Use web styling with fallback fonts for more-projects */
       svg text {
-        font-family: 'Helvetica', sans-serif !important;
+        font-family: 'Helvetica', 'Arial', sans-serif !important;
       }
 
       svg .clickable-text {
-        font-family: 'Helvetica', sans-serif !important;
+        font-family: 'Helvetica', 'Arial', sans-serif !important;
       }
     }
 
     svg {
       height: auto;
       width: 100%;
+    }
+
+    /* Ensure SVG text uses fallback fonts for better compatibility */
+    svg text {
+      font-family: 'Helvetica', 'Arial', sans-serif !important;
     }
 
     #Loading {

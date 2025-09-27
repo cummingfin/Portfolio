@@ -312,9 +312,20 @@
       .desk-svg {
         width: 70vw;
         max-width: 1000px; /* Don't grow beyond this size */
-      height: auto;
-        transform: translateY(25vh); /* Move up to prevent bottom cutoff */
+        max-height: 80vh; /* Prevent SVG from being too tall */
+        height: auto;
+        transform: translateY(15vh); /* Better positioning for laptops */
         transform-origin: center; /* Scale from center */
+      }
+    }
+    
+    /* Extra large screens - reduce size further */
+    @media (min-width: 1400px) {
+      .desk-svg {
+        width: 60vw;
+        max-width: 800px;
+        max-height: 70vh;
+        transform: translateY(20vh);
       }
     }
     svg {

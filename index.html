@@ -307,13 +307,19 @@
       }
     }
 
-    /* Laptop/Desktop - consistent positioning with top padding */
+    /* Laptop/Desktop - fix body alignment and SVG positioning */
     @media (min-width: 1025px) {
+      body {
+        align-items: flex-start !important; /* Change from flex-end to flex-start */
+        justify-content: center !important;
+        padding-top: 60px !important;
+      }
+      
       .desk-svg {
         width: 70vw !important;
         max-width: 1000px !important;
         height: auto !important;
-        margin-top: 120px !important; /* Simple top padding instead of transform */
+        margin-top: 60px !important; /* Add space below nav */
         transform: none !important;
       }
     }

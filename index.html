@@ -313,18 +313,18 @@
         width: 70vw;
         max-width: 1000px; /* Don't grow beyond this size */
         height: auto;
-        transform: translateY(60vh); /* Move down more for laptop */
+        transform: translateY(25vh); /* Lower position for laptop - allows scrolling */
         transform-origin: center; /* Scale from center */
       }
     }
     
-    /* Large desktop screens - move SVG up significantly */
+    /* Large desktop screens - move SVG up to fit entirely on screen */
     @media (min-width: 1400px) {
       .desk-svg {
         width: 70vw;
         max-width: 1000px;
         height: auto;
-        transform: translateY(5vh); /* Move up even more for large screens */
+        transform: translateY(10vh); /* Higher position for large screens - fits without scrolling */
         transform-origin: center;
       }
     }

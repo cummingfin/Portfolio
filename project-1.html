@@ -216,6 +216,7 @@
     }
     #cup {
       transition: transform 0.8s ease;
+      cursor: pointer;
     }
     #cup.move-away {
       transform: translate(270px, -180px);
@@ -591,4 +592,16 @@
       }
     });
 
-    const cupGroup = document.getElementById
+    const cupGroup = document.getElementById("cup");
+
+    if (cupGroup) {
+      cupGroup.addEventListener("click", () => {
+        console.log("Cup clicked!"); // Debug log
+        cupGroup.classList.toggle("move-away");
+      });
+    } else {
+      console.log("Cup element not found!"); // Debug log
+    }
+  </script>
+</body>
+</html>

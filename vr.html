@@ -1212,4 +1212,11 @@
       // Close mobile menu when clicking outside
       document.addEventListener('click', (e) => {
         if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
-          mobileMenu.cl
+          mobileMenu.classList.remove('active');
+          mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

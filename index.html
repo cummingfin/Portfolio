@@ -1787,9 +1787,51 @@
     window.location.href = 'more-projects.html'; // Replace with your actual URL or route
   });
 
-  function closePopup(id) {
-    document.getElementById(id).classList.remove('active');
+  // Bulletproof close button system
+  function safeClosePopup(popupId) {
+    console.log(`Attempting to close popup: ${popupId}`);
+    
+    const popup = document.getElementById(popupId);
+    if (!popup) {
+      console.error(`Popup ${popupId} not found!`);
+      return false;
+    }
+    
+    try {
+      popup.classList.remove('active');
+      console.log(`Successfully closed ${popupId}`);
+      
+      // Visual confirmation
+      popup.style.display = 'none';
+      popup.style.opacity = '0';
+      popup.style.visibility = 'hidden';
+      
+      return true;
+    } catch (error) {
+      console.error(`Error closing ${popupId}:`, error);
+      return false;
+    }
   }
+
+  // Enhanced close popup function with fallbacks
+  function closePopup(id) {
+    return safeClosePopup(id);
+  }
+
+  // Global close button handler
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('popup-close-btn') || e.target.classList.contains('close')) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const popup = e.target.closest('.popup');
+      if (popup) {
+        const popupId = popup.id;
+        console.log(`Close button clicked for popup: ${popupId}`);
+        safeClosePopup(popupId);
+      }
+    }
+  });
 
   // Close popup when clicking outside the window
   document.addEventListener('click', (e) => {

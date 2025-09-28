@@ -1650,10 +1650,51 @@
       }
     });
 
-    // Close popup function
-    function closePopup(id) {
-      document.getElementById(id).classList.remove('active');
+    // Bulletproof close button system
+    function safeClosePopup(popupId) {
+      console.log('Attempting to close more projects popup:', popupId);
+      
+      var popup = document.getElementById(popupId);
+      if (!popup) {
+        console.error('More projects popup not found:', popupId);
+        return false;
+      }
+      
+      try {
+        popup.classList.remove('active');
+        console.log('Successfully closed more projects popup:', popupId);
+        
+        // Visual confirmation
+        popup.style.display = 'none';
+        popup.style.opacity = '0';
+        popup.style.visibility = 'hidden';
+        
+        return true;
+      } catch (error) {
+        console.error('Error closing more projects popup:', error);
+        return false;
+      }
     }
+
+    // Enhanced close popup function with fallbacks
+    function closePopup(id) {
+      return safeClosePopup(id);
+    }
+
+    // Global close button handler
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('popup-close-btn') || e.target.classList.contains('close')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var popup = e.target.closest('.popup');
+        if (popup) {
+          var popupId = popup.id;
+          console.log('Close button clicked for more projects popup:', popupId);
+          safeClosePopup(popupId);
+        }
+      }
+    });
 
     // Lightbox functions
     let currentLightboxImages = [];

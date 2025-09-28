@@ -848,10 +848,51 @@
       setTimeout(initializePopups, 500);
     });
 
-    // Close popup functions
-    function closePopup(popupId) {
-      document.getElementById(popupId).classList.remove('active');
+    // Bulletproof close button system
+    function safeClosePopup(popupId) {
+      console.log('Attempting to close popup:', popupId);
+      
+      var popup = document.getElementById(popupId);
+      if (!popup) {
+        console.error('Popup not found:', popupId);
+        return false;
+      }
+      
+      try {
+        popup.classList.remove('active');
+        console.log('Successfully closed popup:', popupId);
+        
+        // Visual confirmation
+        popup.style.display = 'none';
+        popup.style.opacity = '0';
+        popup.style.visibility = 'hidden';
+        
+        return true;
+      } catch (error) {
+        console.error('Error closing popup:', error);
+        return false;
+      }
     }
+
+    // Enhanced close popup function with fallbacks
+    function closePopup(popupId) {
+      return safeClosePopup(popupId);
+    }
+
+    // Global close button handler
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('popup-close-btn') || e.target.classList.contains('close')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var popup = e.target.closest('.popup');
+        if (popup) {
+          var popupId = popup.id;
+          console.log('Close button clicked for popup:', popupId);
+          safeClosePopup(popupId);
+        }
+      }
+    });
 
     // Close popup when clicking outside
     document.addEventListener('click', (e) => {

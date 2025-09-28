@@ -747,13 +747,31 @@
       }
     });
 
-    // App click handlers
-    document.getElementById('LearnLlama').addEventListener('click', () => {
-      document.getElementById('learnLlamaPopup').classList.add('active');
-    });
+    // App click handlers - ensure DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const learnLlamaElement = document.getElementById('LearnLlama');
+      const reCanvasedElement = document.getElementById('ReCanvased');
+      
+      console.log('LearnLlama element found:', learnLlamaElement);
+      console.log('ReCanvased element found:', reCanvasedElement);
+      
+      if (learnLlamaElement) {
+        learnLlamaElement.addEventListener('click', () => {
+          console.log('LearnLlama clicked!');
+          document.getElementById('learnLlamaPopup').classList.add('active');
+        });
+      } else {
+        console.log('LearnLlama element not found!');
+      }
 
-    document.getElementById('ReCanvased').addEventListener('click', () => {
-      document.getElementById('reCanvasedPopup').classList.add('active');
+      if (reCanvasedElement) {
+        reCanvasedElement.addEventListener('click', () => {
+          console.log('ReCanvased clicked!');
+          document.getElementById('reCanvasedPopup').classList.add('active');
+        });
+      } else {
+        console.log('ReCanvased element not found!');
+      }
     });
 
     // Close popup functions
@@ -837,4 +855,10 @@
 
     // Close video demo when clicking outside
     document.getElementById('video-demo-lightbox').addEventListener('click', (e) => {
-    
+      if (e.target === e.currentTarget) {
+        closeVideoDemo();
+      }
+    });
+  </script>
+</body>
+</html>

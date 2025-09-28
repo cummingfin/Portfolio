@@ -267,18 +267,25 @@
 
       /* Stack award sections vertically on mobile */
       #popup-awards .popup-content > div[style*="grid-template-columns"] {
-        display: block !important;
+        display: flex !important;
+        flex-direction: column !important;
         padding: 1.5rem !important;
         margin-bottom: 2rem !important;
       }
 
-      /* Make images larger on mobile */
+      /* Make images larger on mobile and position them after text */
       #popup-awards img {
         width: 100% !important;
         max-width: 300px !important;
         margin: 1rem auto !important;
         display: block !important;
         border-radius: 12px !important;
+        order: 2 !important; /* Image comes after text */
+      }
+
+      /* Text content positioning */
+      #popup-awards .popup-content > div[style*="grid-template-columns"] > div:first-child {
+        order: 1 !important; /* Text comes first */
       }
 
       /* Improve text sizing on mobile */
@@ -292,7 +299,7 @@
         line-height: 1.4 !important;
       }
 
-      /* Make buttons more touch-friendly */
+      /* Make buttons more touch-friendly and position them after images */
       #popup-awards a {
         padding: 14px 28px !important;
         font-size: 1rem !important;
@@ -302,6 +309,7 @@
         width: fit-content !important;
         margin-left: auto !important;
         margin-right: auto !important;
+        order: 3 !important; /* Button comes after image */
       }
     }
 

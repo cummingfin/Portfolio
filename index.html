@@ -608,6 +608,7 @@
       justify-content: center;
       backdrop-filter: blur(8px);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 10;
     }
     
     .carousel-nav:hover {
@@ -660,39 +661,6 @@
       background: rgba(255, 255, 255, 1);
     }
 
-    /* Carousel Navigation Arrows */
-    .carousel-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.8);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      color: #231f20;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-    }
-
-    .carousel-nav:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .carousel-prev {
-      left: 10px;
-    }
-
-    .carousel-next {
-      right: 10px;
-    }
 
     /* Image Lightbox */
     .image-lightbox {
@@ -1735,13 +1703,25 @@
   // Carousel functionality
   function initCarousel(carouselId) {
     const carousel = document.getElementById(carouselId);
-    if (!carousel) return;
+    if (!carousel) {
+      console.log('Carousel not found:', carouselId);
+      return;
+    }
     
     const images = carousel.querySelectorAll('.carousel-image');
     const prevBtn = carousel.querySelector('.carousel-prev');
     const nextBtn = carousel.querySelector('.carousel-next');
     const dots = carousel.querySelectorAll('.carousel-dot');
     const imagesContainer = carousel.querySelector('.carousel-images');
+    
+    console.log('Carousel elements found:', {
+      carousel: carousel,
+      images: images.length,
+      prevBtn: prevBtn,
+      nextBtn: nextBtn,
+      dots: dots.length,
+      imagesContainer: imagesContainer
+    });
     
     let currentIndex = 0;
     
@@ -1784,6 +1764,7 @@
 
   // Initialize DonkeyJobs carousel when popup opens
   function initDonkeyJobsCarousel() {
+    console.log('Initializing DonkeyJobs carousel...');
     initCarousel('donkeyjobs-carousel');
   }
 
@@ -1901,4 +1882,18 @@
             </div>
             
             <!-- Carousel Navigation Arrows -->
-          
+            <button class="carousel-nav carousel-prev">←</button>
+            <button class="carousel-nav carousel-next">→</button>
+            <div class="carousel-dots">
+              <span class="carousel-dot active"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+              <span class="carousel-dot"></span>
+            </div>

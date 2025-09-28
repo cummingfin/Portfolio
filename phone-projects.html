@@ -747,31 +747,105 @@
       }
     });
 
-    // App click handlers - ensure DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
+    // Bulletproof popup system with multiple fallbacks
+    function safeOpenPopup(popupId, elementName) {
+      console.log(`Attempting to open ${popupId} for ${elementName}`);
+      
+      const popup = document.getElementById(popupId);
+      if (!popup) {
+        console.error(`Popup ${popupId} not found!`);
+        alert(`Error: ${elementName} popup not found. Please refresh the page.`);
+        return false;
+      }
+      
+      try {
+        popup.classList.add('active');
+        console.log(`Successfully opened ${popupId}`);
+        
+        // Visual confirmation
+        popup.style.display = 'flex';
+        popup.style.opacity = '1';
+        popup.style.visibility = 'visible';
+        
+        return true;
+      } catch (error) {
+        console.error(`Error opening ${popupId}:`, error);
+        alert(`Error opening ${elementName} popup. Please refresh the page.`);
+        return false;
+      }
+    }
+
+    // Multiple initialization strategies
+    function initializePopups() {
+      console.log('Initializing popups...');
+      
       const learnLlamaElement = document.getElementById('LearnLlama');
       const reCanvasedElement = document.getElementById('ReCanvased');
       
       console.log('LearnLlama element found:', learnLlamaElement);
       console.log('ReCanvased element found:', reCanvasedElement);
       
+      // LearnLlama handler with multiple fallbacks
       if (learnLlamaElement) {
-        learnLlamaElement.addEventListener('click', () => {
+        learnLlamaElement.style.cursor = 'pointer';
+        learnLlamaElement.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           console.log('LearnLlama clicked!');
-          document.getElementById('learnLlamaPopup').classList.add('active');
+          safeOpenPopup('learnLlamaPopup', 'LearnLlama');
         });
+        
+        // Fallback: onclick attribute
+        learnLlamaElement.setAttribute('onclick', 'safeOpenPopup("learnLlamaPopup", "LearnLlama")');
       } else {
-        console.log('LearnLlama element not found!');
+        console.error('LearnLlama element not found!');
+        // Try again after a delay
+        setTimeout(() => {
+          const retryElement = document.getElementById('LearnLlama');
+          if (retryElement) {
+            console.log('LearnLlama found on retry!');
+            retryElement.style.cursor = 'pointer';
+            retryElement.addEventListener('click', () => safeOpenPopup('learnLlamaPopup', 'LearnLlama'));
+          }
+        }, 1000);
       }
 
+      // ReCanvased handler with multiple fallbacks
       if (reCanvasedElement) {
-        reCanvasedElement.addEventListener('click', () => {
+        reCanvasedElement.style.cursor = 'pointer';
+        reCanvasedElement.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
           console.log('ReCanvased clicked!');
-          document.getElementById('reCanvasedPopup').classList.add('active');
+          safeOpenPopup('reCanvasedPopup', 'ReCanvased');
         });
+        
+        // Fallback: onclick attribute
+        reCanvasedElement.setAttribute('onclick', 'safeOpenPopup("reCanvasedPopup", "ReCanvased")');
       } else {
-        console.log('ReCanvased element not found!');
+        console.error('ReCanvased element not found!');
+        // Try again after a delay
+        setTimeout(() => {
+          const retryElement = document.getElementById('ReCanvased');
+          if (retryElement) {
+            console.log('ReCanvased found on retry!');
+            retryElement.style.cursor = 'pointer';
+            retryElement.addEventListener('click', () => safeOpenPopup('reCanvasedPopup', 'ReCanvased'));
+          }
+        }, 1000);
       }
+    }
+
+    // Multiple initialization attempts
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializePopups);
+    } else {
+      initializePopups();
+    }
+    
+    // Fallback: try again after page fully loads
+    window.addEventListener('load', () => {
+      setTimeout(initializePopups, 500);
     });
 
     // Close popup functions

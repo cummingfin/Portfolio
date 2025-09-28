@@ -407,139 +407,180 @@
   <!-- ⬆️ END OF SVG SECTION -->
 
   <script>
-    // Mobile menu toggle
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileMenu = document.getElementById('mobileMenu');
+    // Safari-compatible mobile menu toggle
+    var mobileToggle = document.querySelector('.mobile-menu-toggle');
+    var mobileMenu = document.getElementById('mobileMenu');
     
-    mobileToggle.addEventListener('click', () => {
-      const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-      mobileToggle.setAttribute('aria-expanded', !isExpanded);
-      mobileMenu.classList.toggle('active');
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenu.classList.remove('active');
-        mobileToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+    if (mobileToggle && mobileMenu) {
+      mobileToggle.addEventListener('click', function() {
+        var isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+        mobileToggle.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!mobileToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.remove('active');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
 
     const hint = document.getElementById('hint');
 
-    function setupInteractive(id, action, hintText = '') {
-      const el = document.getElementById(id);
+    // Safari-compatible clipboard function
+    function copyToClipboard(text, successMessage) {
+      // Modern browsers (including Safari 13.1+)
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function() {
+          alert(successMessage);
+        }).catch(function(err) {
+          console.error('Clipboard write failed:', err);
+          fallbackCopyToClipboard(text, successMessage);
+        });
+      } else {
+        // Fallback for older browsers/Safari
+        fallbackCopyToClipboard(text, successMessage);
+      }
+    }
+
+    // Fallback clipboard method for Safari and older browsers
+    function fallbackCopyToClipboard(text, successMessage) {
+      var textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        var successful = document.execCommand('copy');
+        if (successful) {
+          alert(successMessage);
+        } else {
+          alert('Copy failed. Please manually copy: ' + text);
+        }
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+        alert('Copy failed. Please manually copy: ' + text);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+
+    function setupInteractive(id, action, hintText) {
+      var el = document.getElementById(id);
       if (!el) return;
 
       el.classList.add('interactive');
 
-      el.addEventListener('mouseenter', (e) => {
+      el.addEventListener('mouseenter', function(e) {
         if (hintText) {
           hint.innerText = hintText;
           hint.style.display = 'block';
           hint.style.left = e.pageX + 'px';
-          hint.style.top = e.pageY - 30 + 'px';
+          hint.style.top = (e.pageY - 30) + 'px';
         }
       });
 
-      el.addEventListener('mousemove', (e) => {
+      el.addEventListener('mousemove', function(e) {
         hint.style.left = e.pageX + 'px';
-        hint.style.top = e.pageY - 30 + 'px';
+        hint.style.top = (e.pageY - 30) + 'px';
       });
 
-      el.addEventListener('mouseleave', () => {
+      el.addEventListener('mouseleave', function() {
         hint.style.display = 'none';
       });
 
       el.addEventListener('click', action);
     }
 
-    // Setup interactive behaviors
-    setupInteractive('clickHere', () => {
+    // Setup interactive behaviors with Safari-compatible syntax
+    setupInteractive('clickHere', function() {
       window.open('https://www.linkedin.com/in/findlay-cumming-9a8481204/', '_blank');
     });
 
-    setupInteractive('phoneNumber', () => {
-      navigator.clipboard.writeText('07710698974');
-      alert('Phone number copied!');
+    setupInteractive('phoneNumber', function() {
+      copyToClipboard('07710698974', 'Phone number copied!');
     }, 'Click to copy');
 
-    setupInteractive('email', () => {
-      navigator.clipboard.writeText('cummingfin@gmail.com');
-      alert('Email address copied!');
+    setupInteractive('email', function() {
+      copyToClipboard('cummingfin@gmail.com', 'Email address copied!');
     }, 'Click to copy');
 
   function typeTextElement(textEl, delayPerLetter, onComplete) {
-
     textEl.style.visibility = 'visible';
     
-  const tspans = Array.from(textEl.querySelectorAll('tspan'));
-  const originalText = tspans.length > 0
-    ? tspans.map(t => t.textContent)
-    : [textEl.textContent];
+    var tspans = Array.from(textEl.querySelectorAll('tspan'));
+    var originalText = tspans.length > 0
+      ? tspans.map(function(t) { return t.textContent; })
+      : [textEl.textContent];
 
-  // Clear all tspans
-  if (tspans.length > 0) {
-    tspans.forEach(t => t.textContent = '');
-  } else {
-    textEl.textContent = '';
-  }
-
-  let tIndex = 0;
-  let cIndex = 0;
-
-  function typeNext() {
-    if (tIndex >= originalText.length) {
-      onComplete();
-      return;
-    }
-
-    const currentLine = originalText[tIndex];
-    const targetTspan = tspans.length > 0 ? tspans[tIndex] : textEl;
-
-    if (cIndex < currentLine.length) {
-      targetTspan.textContent += currentLine.charAt(cIndex);
-      cIndex++;
-      setTimeout(typeNext, delayPerLetter);
-    } else {
-      tIndex++;
-      cIndex = 0;
-      setTimeout(typeNext, delayPerLetter);
-    }
-  }
-
-  typeNext();
-}
-
-window.addEventListener('load', () => {
-  const textElements = [
-  // All static lines first
-  document.querySelector('#staticElements text:nth-of-type(1)'),
-  document.querySelector('#staticElements text:nth-of-type(2)'),
-  document.getElementById('email'),
-  document.querySelector('#staticElements text:nth-of-type(4)'),
-  document.querySelector('#staticElements text:nth-of-type(3)'),
-  document.getElementById('clickHere').querySelector('text'),
-  document.querySelector('#staticElements text:nth-of-type(5)'),
-  document.getElementById('phoneNumber').querySelector('text'),
-].filter(Boolean); // filter out nulls just in case
-
-  const totalChars = textElements.reduce((sum, el) => {
-    const tspans = el.querySelectorAll('tspan');
+    // Clear all tspans
     if (tspans.length > 0) {
-      return sum + Array.from(tspans).reduce((s, t) => s + t.textContent.length, 0);
+      tspans.forEach(function(t) { t.textContent = ''; });
+    } else {
+      textEl.textContent = '';
+    }
+
+    var tIndex = 0;
+    var cIndex = 0;
+
+    function typeNext() {
+      if (tIndex >= originalText.length) {
+        if (onComplete) onComplete();
+        return;
+      }
+
+      var currentLine = originalText[tIndex];
+      var targetTspan = tspans.length > 0 ? tspans[tIndex] : textEl;
+
+      if (cIndex < currentLine.length) {
+        targetTspan.textContent += currentLine.charAt(cIndex);
+        cIndex++;
+        setTimeout(typeNext, delayPerLetter);
+      } else {
+        tIndex++;
+        cIndex = 0;
+        setTimeout(typeNext, delayPerLetter);
+      }
+    }
+
+    typeNext();
+  }
+
+window.addEventListener('load', function() {
+  var textElements = [
+    // All static lines first
+    document.querySelector('#staticElements text:nth-of-type(1)'),
+    document.querySelector('#staticElements text:nth-of-type(2)'),
+    document.getElementById('email'),
+    document.querySelector('#staticElements text:nth-of-type(4)'),
+    document.querySelector('#staticElements text:nth-of-type(3)'),
+    document.getElementById('clickHere').querySelector('text'),
+    document.querySelector('#staticElements text:nth-of-type(5)'),
+    document.getElementById('phoneNumber').querySelector('text'),
+  ].filter(function(el) { return el !== null; }); // Safari-compatible filter
+
+  var totalChars = textElements.reduce(function(sum, el) {
+    var tspans = el.querySelectorAll('tspan');
+    if (tspans.length > 0) {
+      return sum + Array.from(tspans).reduce(function(s, t) { return s + t.textContent.length; }, 0);
     }
     return sum + el.textContent.length;
   }, 0);
 
-  const totalDuration = 5000;
-  const delayPerLetter = Math.max(5, Math.floor(totalDuration / totalChars));
-  let current = 0;
+  var totalDuration = 5000;
+  var delayPerLetter = Math.max(5, Math.floor(totalDuration / totalChars));
+  var current = 0;
 
   function animateNext() {
     if (current >= textElements.length) return;
-    const el = textElements[current];
-    typeTextElement(el, delayPerLetter, () => {
+    var el = textElements[current];
+    typeTextElement(el, delayPerLetter, function() {
       current++;
       animateNext();
     });

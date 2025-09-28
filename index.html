@@ -1633,37 +1633,144 @@
     window.location.href = 'vr.html';
   });
 
-  plant?.addEventListener('click', () => {
-    document.getElementById('popup-plant').classList.add('active');
-    initDonkeyJobsCarousel();
-  });
+  // Bulletproof popup system for main portfolio
+  function safeOpenPopup(popupId, elementName) {
+    console.log(`Attempting to open ${popupId} for ${elementName}`);
+    
+    const popup = document.getElementById(popupId);
+    if (!popup) {
+      console.error(`Popup ${popupId} not found!`);
+      alert(`Error: ${elementName} popup not found. Please refresh the page.`);
+      return false;
+    }
+    
+    try {
+      popup.classList.add('active');
+      console.log(`Successfully opened ${popupId}`);
+      
+      // Visual confirmation
+      popup.style.display = 'flex';
+      popup.style.opacity = '1';
+      popup.style.visibility = 'visible';
+      
+      // Initialize carousels if needed
+      if (popupId === 'popup-plant') {
+        setTimeout(() => initDonkeyJobsCarousel(), 100);
+      }
+      
+      return true;
+    } catch (error) {
+      console.error(`Error opening ${popupId}:`, error);
+      alert(`Error opening ${elementName} popup. Please refresh the page.`);
+      return false;
+    }
+  }
 
-  // Trophy click handler
-  const trophy = document.getElementById('Trophy');
-  console.log('Trophy element found:', trophy);
-  
-  // Test function to manually open trophy popup
-  window.testTrophyPopup = function() {
-    const popup = document.getElementById('popup-awards');
-    console.log('Manual test - Popup element found:', popup);
-    if (popup) {
-      popup.classList.add('active');
-      console.log('Manual test - Popup should be open now');
-    }
-  };
-  
-  trophy?.addEventListener('click', (e) => {
-    console.log('Trophy clicked!');
-    e.preventDefault();
-    e.stopPropagation();
-    const popup = document.getElementById('popup-awards');
-    console.log('Popup element found:', popup);
-    if (popup) {
-      popup.classList.add('active');
-      console.log('Popup should be open now');
+  // Enhanced popup initialization
+  function initializeMainPopups() {
+    console.log('Initializing main portfolio popups...');
+    
+    // Plant (DonkeyJobs) handler
+    const plant = document.getElementById('plant');
+    if (plant) {
+      plant.style.cursor = 'pointer';
+      plant.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Plant (DonkeyJobs) clicked!');
+        safeOpenPopup('popup-plant', 'DonkeyJobs');
+      });
     } else {
-      console.error('Popup element not found!');
+      console.error('Plant element not found!');
+      setTimeout(() => {
+        const retryPlant = document.getElementById('plant');
+        if (retryPlant) {
+          retryPlant.style.cursor = 'pointer';
+          retryPlant.addEventListener('click', () => safeOpenPopup('popup-plant', 'DonkeyJobs'));
+        }
+      }, 1000);
     }
+
+    // Trophy (Awards) handler
+    const trophy = document.getElementById('Trophy');
+    if (trophy) {
+      trophy.style.cursor = 'pointer';
+      trophy.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Trophy (Awards) clicked!');
+        safeOpenPopup('popup-awards', 'Awards');
+      });
+    } else {
+      console.error('Trophy element not found!');
+      setTimeout(() => {
+        const retryTrophy = document.getElementById('Trophy');
+        if (retryTrophy) {
+          retryTrophy.style.cursor = 'pointer';
+          retryTrophy.addEventListener('click', () => safeOpenPopup('popup-awards', 'Awards'));
+        }
+      }, 1000);
+    }
+  }
+
+  // Multiple initialization attempts
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeMainPopups);
+  } else {
+    initializeMainPopups();
+  }
+  
+  // Global popup health check system
+  function performPopupHealthCheck() {
+    console.log('🔍 Performing popup health check...');
+    
+    const criticalPopups = [
+      { id: 'popup-plant', name: 'DonkeyJobs' },
+      { id: 'popup-awards', name: 'Awards' }
+    ];
+    
+    const criticalElements = [
+      { id: 'plant', name: 'DonkeyJobs Plant' },
+      { id: 'Trophy', name: 'Awards Trophy' }
+    ];
+    
+    let allHealthy = true;
+    
+    // Check popup elements exist
+    criticalPopups.forEach(({ id, name }) => {
+      const popup = document.getElementById(id);
+      if (!popup) {
+        console.error(`❌ Critical popup missing: ${name} (${id})`);
+        allHealthy = false;
+      } else {
+        console.log(`✅ Popup found: ${name} (${id})`);
+      }
+    });
+    
+    // Check trigger elements exist
+    criticalElements.forEach(({ id, name }) => {
+      const element = document.getElementById(id);
+      if (!element) {
+        console.error(`❌ Critical element missing: ${name} (${id})`);
+        allHealthy = false;
+      } else {
+        console.log(`✅ Element found: ${name} (${id})`);
+      }
+    });
+    
+    if (allHealthy) {
+      console.log('🎉 All popups are healthy!');
+    } else {
+      console.error('⚠️ Popup health check failed! Some elements are missing.');
+      alert('Warning: Some portfolio features may not work properly. Please refresh the page.');
+    }
+    
+    return allHealthy;
+  }
+
+  // Run health check after page loads
+  window.addEventListener('load', () => {
+    setTimeout(performPopupHealthCheck, 1000);
   });
 
   // Cup click handler - navigate to project-1.html

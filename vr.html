@@ -1068,13 +1068,48 @@
     </div>
 
   <script>
-    // VR Popup functions
-    function openVRPopup(projectId) {
+    // Bulletproof VR popup system
+    function safeOpenVRPopup(projectId) {
+      console.log(`Attempting to open VR popup: ${projectId}`);
+      
+      let popupId;
       if (projectId === 'inner-path') {
-        document.getElementById('inner-path-popup').classList.add('active');
+        popupId = 'inner-path-popup';
       } else if (projectId === 'canopy-of-echoes') {
-        document.getElementById('canopy-of-echoes-popup').classList.add('active');
+        popupId = 'canopy-of-echoes-popup';
+      } else {
+        console.error(`Unknown project ID: ${projectId}`);
+        alert(`Error: Unknown project "${projectId}". Please refresh the page.`);
+        return false;
       }
+      
+      const popup = document.getElementById(popupId);
+      if (!popup) {
+        console.error(`VR Popup ${popupId} not found!`);
+        alert(`Error: ${projectId} popup not found. Please refresh the page.`);
+        return false;
+      }
+      
+      try {
+        popup.classList.add('active');
+        console.log(`Successfully opened VR popup: ${popupId}`);
+        
+        // Visual confirmation
+        popup.style.display = 'flex';
+        popup.style.opacity = '1';
+        popup.style.visibility = 'visible';
+        
+        return true;
+      } catch (error) {
+        console.error(`Error opening VR popup ${popupId}:`, error);
+        alert(`Error opening ${projectId} popup. Please refresh the page.`);
+        return false;
+      }
+    }
+
+    // Enhanced VR popup function with fallbacks
+    function openVRPopup(projectId) {
+      return safeOpenVRPopup(projectId);
     }
 
     // Close popup function

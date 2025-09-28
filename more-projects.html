@@ -1452,82 +1452,87 @@
           });
         }
 
-    // Modal logic - Updated for new popup system
-    const lawny = document.getElementById('Lawny');
-    const lawnyPopup = document.getElementById('lawny-popup');
+    // Bulletproof popup system for more projects
+    function safeOpenMoreProjectsPopup(popupId, elementName) {
+      console.log(`Attempting to open ${popupId} for ${elementName}`);
+      
+      const popup = document.getElementById(popupId);
+      if (!popup) {
+        console.error(`Popup ${popupId} not found!`);
+        alert(`Error: ${elementName} popup not found. Please refresh the page.`);
+        return false;
+      }
+      
+      try {
+        popup.classList.add('active');
+        console.log(`Successfully opened ${popupId}`);
+        
+        // Visual confirmation
+        popup.style.display = 'flex';
+        popup.style.opacity = '1';
+        popup.style.visibility = 'visible';
+        
+        // Initialize carousels
+        setTimeout(() => initAllCarousels(), 100);
+        
+        return true;
+      } catch (error) {
+        console.error(`Error opening ${popupId}:`, error);
+        alert(`Error opening ${elementName} popup. Please refresh the page.`);
+        return false;
+      }
+    }
 
-    if (lawny && lawnyPopup) {
-    lawny.addEventListener('click', () => {
-        lawnyPopup.classList.add('active');
-        initAllCarousels();
+    // Enhanced popup initialization with retry logic
+    function initializeMoreProjectsPopups() {
+      console.log('Initializing more projects popups...');
+      
+      const popupMappings = [
+        { elementId: 'Lawny', popupId: 'lawny-popup', name: 'Lawny' },
+        { elementId: 'fiftyPence', popupId: 'fifty-pence-popup', name: 'Fifty Pence' },
+        { elementId: 'oodo', popupId: 'oodo-popup', name: 'oODo' },
+        { elementId: 'lotus', popupId: 'lotus-popup', name: 'Lotus' },
+        { elementId: 'toddler_text', popupId: 'toddler-text-popup', name: 'Toddler Text' },
+        { elementId: 'animations', popupId: 'small-animation-popup', name: 'Small Animation' },
+        { elementId: 'sketching', popupId: 'some-sketches-popup', name: 'Some Sketches' }
+      ];
+      
+      popupMappings.forEach(({ elementId, popupId, name }) => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.style.cursor = 'pointer';
+          element.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log(`${name} clicked!`);
+            safeOpenMoreProjectsPopup(popupId, name);
+          });
+        } else {
+          console.error(`${name} element not found!`);
+          // Retry after delay
+          setTimeout(() => {
+            const retryElement = document.getElementById(elementId);
+            if (retryElement) {
+              console.log(`${name} found on retry!`);
+              retryElement.style.cursor = 'pointer';
+              retryElement.addEventListener('click', () => safeOpenMoreProjectsPopup(popupId, name));
+            }
+          }, 1000);
+        }
       });
     }
 
-    // Fifty Pence popup
-    const fiftyPence = document.getElementById('fiftyPence');
-    const fiftyPencePopup = document.getElementById('fifty-pence-popup');
-
-    if (fiftyPence && fiftyPencePopup) {
-      fiftyPence.addEventListener('click', () => {
-        fiftyPencePopup.classList.add('active');
-        initAllCarousels();
-      });
+    // Multiple initialization attempts
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initializeMoreProjectsPopups);
+    } else {
+      initializeMoreProjectsPopups();
     }
-
-    // oODo popup
-    const oodo = document.getElementById('oodo');
-    const oodoPopup = document.getElementById('oodo-popup');
-
-    if (oodo && oodoPopup) {
-      oodo.addEventListener('click', () => {
-        oodoPopup.classList.add('active');
-        initAllCarousels();
-      });
-    }
-
-    // Lotus popup
-    const lotus = document.getElementById('lotus');
-    const lotusPopup = document.getElementById('lotus-popup');
-
-    if (lotus && lotusPopup) {
-      lotus.addEventListener('click', () => {
-        lotusPopup.classList.add('active');
-        initAllCarousels();
-      });
-    }
-
-    // Toddler Text popup
-    const toddlerText = document.getElementById('toddler_text');
-    const toddlerTextPopup = document.getElementById('toddler-text-popup');
-
-    if (toddlerText && toddlerTextPopup) {
-      toddlerText.addEventListener('click', () => {
-        toddlerTextPopup.classList.add('active');
-        initAllCarousels();
-      });
-    }
-
-    // Small Animation popup
-    const smallAnimation = document.getElementById('animations');
-    const smallAnimationPopup = document.getElementById('small-animation-popup');
-
-    if (smallAnimation && smallAnimationPopup) {
-      smallAnimation.addEventListener('click', () => {
-        smallAnimationPopup.classList.add('active');
-        initAllCarousels();
-      });
-    }
-
-    // Some Sketches popup - Note: This might need to be added to the SVG or use existing sketching icon
-    const someSketches = document.getElementById('sketching');
-    const someSketchesPopup = document.getElementById('some-sketches-popup');
-
-    if (someSketches && someSketchesPopup) {
-      someSketches.addEventListener('click', () => {
-        someSketchesPopup.classList.add('active');
-        initAllCarousels();
-      });
-    }
+    
+    // Fallback: try again after page fully loads
+    window.addEventListener('load', () => {
+      setTimeout(initializeMoreProjectsPopups, 500);
+    });
 
     // Carousel functionality
     function initCarousel(carouselId) {

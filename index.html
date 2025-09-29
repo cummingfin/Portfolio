@@ -250,7 +250,7 @@
         padding: 0 15px;
       }
 
-      /* Mobile Awards Popup Layout */
+      /* Mobile Awards Popup Layout - Only for small screens */
       #popup-awards .popup-content {
         padding: 1rem !important;
       }
@@ -310,6 +310,41 @@
         margin-left: auto !important;
         margin-right: auto !important;
         order: 3 !important; /* Button comes after image */
+      }
+    }
+
+    /* Laptop/Desktop Awards Popup - Ensure proper sizing */
+    @media (min-width: 769px) {
+      #popup-awards h1 {
+        font-size: 3.5rem !important;
+        margin-bottom: 2rem !important;
+      }
+
+      #popup-awards p {
+        font-size: 1.2rem !important;
+        margin-bottom: 3rem !important;
+      }
+
+      #popup-awards .popup-content {
+        padding: 2rem !important;
+      }
+
+      #popup-awards h3 {
+        font-size: 1.5rem !important;
+      }
+
+      #popup-awards p {
+        font-size: 1rem !important;
+        line-height: 1.6 !important;
+      }
+
+      #popup-awards a {
+        padding: 12px 24px !important;
+        font-size: 0.9rem !important;
+        display: inline-block !important;
+        margin-top: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
       }
     }
 

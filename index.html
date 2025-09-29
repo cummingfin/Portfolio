@@ -389,6 +389,20 @@
       }
     }
 
+    /* Desktop/Laptop SVG text - normal size */
+    @media (min-width: 769px) {
+      .desk-svg #Text1,
+      .desk-svg #Text2,
+      .desk-svg #Text3,
+      .desk-svg #Text4,
+      .desk-svg #Text5,
+      .desk-svg #Text6 {
+        transform: scale(1) !important; /* Normal size on desktop */
+        transform-origin: center;
+        transform-box: fill-box;
+      }
+    }
+
     /* Tablet Responsive */
     @media (min-width: 769px) and (max-width: 1024px) {
       .desk-container {

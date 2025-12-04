@@ -136,7 +136,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 </div>
               ) : project.gallery.length > 0 ? (
                 <Image
-                  src={project.gallery[0]}
+                  src={typeof project.gallery[0] === 'string' ? project.gallery[0] : project.gallery[0].src}
                   alt={`${project.title} image`}
                   fill
                   className="object-cover rounded-3xl"

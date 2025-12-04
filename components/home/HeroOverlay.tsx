@@ -49,6 +49,8 @@ export default function HeroOverlay() {
           // Save to localStorage that overlay has been dismissed
           if (typeof window !== "undefined") {
             localStorage.setItem("overlayDismissed", "true");
+            // Dispatch custom event to notify Nav component
+            window.dispatchEvent(new Event("overlayDismissed"));
           }
         }, 1000);
       }, 1000);

@@ -13,12 +13,28 @@ export default function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (pathname === "/" && typeof window !== "undefined") {
-      const dismissed = localStorage.getItem("overlayDismissed");
-      setIsOverlay(!dismissed);
-    } else {
-      setIsOverlay(false);
-    }
+    const checkOverlayState = () => {
+      if (pathname === "/" && typeof window !== "undefined") {
+        const dismissed = localStorage.getItem("overlayDismissed");
+        setIsOverlay(!dismissed);
+      } else {
+        setIsOverlay(false);
+      }
+    };
+
+    // Check on mount and pathname change
+    checkOverlayState();
+
+    // Listen for custom event when overlay is dismissed
+    const handleOverlayDismissed = () => {
+      checkOverlayState();
+    };
+
+    window.addEventListener("overlayDismissed", handleOverlayDismissed);
+
+    return () => {
+      window.removeEventListener("overlayDismissed", handleOverlayDismissed);
+    };
   }, [pathname]);
 
   useEffect(() => {

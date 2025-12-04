@@ -8,34 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Nav() {
   const pathname = usePathname();
   const router = useRouter();
-  const [isOverlay, setIsOverlay] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const checkOverlayState = () => {
-      if (pathname === "/" && typeof window !== "undefined") {
-        const dismissed = localStorage.getItem("overlayDismissed");
-        setIsOverlay(!dismissed);
-      } else {
-        setIsOverlay(false);
-      }
-    };
-
-    // Check on mount and pathname change
-    checkOverlayState();
-
-    // Listen for custom event when overlay is dismissed
-    const handleOverlayDismissed = () => {
-      checkOverlayState();
-    };
-
-    window.addEventListener("overlayDismissed", handleOverlayDismissed);
-
-    return () => {
-      window.removeEventListener("overlayDismissed", handleOverlayDismissed);
-    };
-  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,9 +77,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center gap-6 md:gap-8 transition-all duration-300 ${
-        isOverlay ? "text-gray-300" : "text-text"
-      } ${
+      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center gap-6 md:gap-8 transition-all duration-300 text-text ${
         isScrolled ? "backdrop-blur-md bg-background/60" : ""
       }`}>
         <Link href="/" className="font-bricolage font-bold text-3xl md:text-4xl">

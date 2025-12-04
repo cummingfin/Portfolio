@@ -34,7 +34,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Large video files (over 100MB - need to be hosted separately or use Git LFS)
-public/images/LearnLlama/ScreenRecording_12-09-2024 20-05-54_1.MP4
-public/images/Recanvased/ScreenRecording_07-29-2025 17.MP4
 

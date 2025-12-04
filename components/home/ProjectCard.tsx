@@ -9,9 +9,10 @@ interface ProjectCardProps {
   project: Project;
   isSquare?: boolean;
   colorIndex?: number;
+  priority?: boolean;
 }
 
-export default function ProjectCard({ project, isSquare = false, colorIndex = 0 }: ProjectCardProps) {
+export default function ProjectCard({ project, isSquare = false, colorIndex = 0, priority = false }: ProjectCardProps) {
   // Mobile: always square (1:1 aspect ratio)
   // Desktop: 
   //   - Square: 4:3 aspect ratio (shorter height, determines row height)
@@ -40,6 +41,7 @@ export default function ProjectCard({ project, isSquare = false, colorIndex = 0 
               fill
               className="object-cover rounded-2xl"
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+              priority={priority}
             />
           </div>
         ) : (

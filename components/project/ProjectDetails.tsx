@@ -101,6 +101,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                           muted
                           loop
                           playsInline
+                          preload="auto"
                           className="h-full w-auto max-w-full object-contain"
                         />
                       </div>
@@ -113,6 +114,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                           muted
                           loop
                           playsInline
+                          preload="auto"
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
@@ -141,6 +143,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                   fill
                   className="object-cover rounded-3xl"
                   sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
                 />
               ) : (
                   <div className="bg-gray-100 rounded-3xl w-full h-full flex items-center justify-center text-gray-400">
@@ -182,6 +185,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                               muted
                               loop
                               playsInline
+                              preload={index < 2 ? "auto" : "metadata"}
                               className="absolute inset-0 w-full h-full object-cover"
                             />
                           </div>
@@ -207,6 +211,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                           muted
                           loop
                           playsInline
+                          preload={index < 2 ? "auto" : "metadata"}
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
@@ -223,6 +228,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 50vw"
+                      loading={index < 2 ? "eager" : "lazy"}
                     />
                   </div>
                 );

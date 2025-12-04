@@ -30,6 +30,7 @@ export default function ProjectGrid() {
                   project={project} 
                   isSquare={isSquare}
                   colorIndex={index}
+                  priority={index < 4}
                 />
               </div>
             );

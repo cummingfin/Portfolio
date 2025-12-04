@@ -119,6 +119,7 @@ export default function AboutSection() {
                       height={431}
                       className="w-full h-full object-contain"
                       priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
                     />
                   </motion.div>
                 );

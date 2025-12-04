@@ -10,7 +10,7 @@ export const projects: Project[] = [
     detailsVideo: "/images/Recanvased/ScreenRecording_07-29-2025%2017.MP4",
     problem: "Buying art should feel exciting, but for many people it feels stressful. Without knowing if a piece will fit, suit their space, or feel 'right', they hesitate — or don't buy at all. The uncertainty around visualising artwork makes the experience harder than it needs to be.",
     detailsTitle: "reCanvased",
-    detailsSubtitle: "Giving art back to the artists",
+    detailsSubtitle: "Visualize art in your home",
     detailsText: "ReCanvased is a project exploring how digital tools can help people visualise art before buying it. I built a cross-platform browsing app in React Native and an AR visualisation companion in Unity that lets users preview artwork directly on their walls. The project was awarded a Distinction as my final Master’s submission.",
     gallery: [
       { src: "/images/Recanvased/RecanvasedVid1.MOV", label: "Scroll the gallery to explore everything quickly" },
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     detailsVideo: "/images/LearnLlama/ScreenRecording_12-09-2024%2020-05-54_1.MP4",
     problem: "Buying art should feel exciting, but for many people it feels stressful. Without knowing if a piece will fit, suit their space, or feel 'right', they hesitate — or don't buy at all. The uncertainty around visualising artwork makes the experience harder than it needs to be.",
     detailsTitle: "LearnLlama",
-    detailsSubtitle: "Giving art back to the artists",
+    detailsSubtitle: "Bringing textbooks to life",
     detailsText: "LearnLlama is an educational companion designed to make textbooks more engaging. Children can scan illustrations to reveal interactive 3D models and explanations, making learning more accessible for those who struggle with text-heavy material. The aim was to bring traditional books into a more intuitive, playful digital space.",
     gallery: [
       "/images/LearnLlama/Image1.1.png",
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     detailsVideo: "/images/Signal/ScreenRecording_12-01-2025%2016-43-40_1.MP4",
     problem: "Buying art should feel exciting, but for many people it feels stressful. Without knowing if a piece will fit, suit their space, or feel 'right', they hesitate — or don't buy at all. The uncertainty around visualising artwork makes the experience harder than it needs to be.",
     detailsTitle: "Signal",
-    detailsSubtitle: "Giving art back to the artists",
+    detailsSubtitle: "Gesture-driven task management",
     detailsText: "Signal is a gesture-based to-do list that removes visual clutter from task management. I wanted to avoid checkboxes, heavy UI, and endless menus, and instead build a system that lets people separate the signal from the noise. Signal supports deeply nested lists, clean organisation, and almost no visible buttons—everything is driven through simple gestures for a focused writing experience.",
     gallery: [
       { src: "/images/Signal/Video1.MOV", label: "Gesture-based to-do list" },

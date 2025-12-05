@@ -9,7 +9,7 @@ export default function CustomCursor() {
   const [projectColor, setProjectColor] = useState<string>("#8FA3B2");
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Project cursor colors
   const projectColors = ["#6C8BEA", "#E8C75D", "#E4927C"];
@@ -77,9 +77,23 @@ export default function CustomCursor() {
 
   // Don't show on mobile/touch devices - check for hover capability
   useEffect(() => {
-    const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!hasHover) {
-      setIsVisible(false);
+    // Check immediately on mount
+    const checkHover = () => {
+      const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      setIsVisible(hasHover);
+    };
+    
+    checkHover();
+    
+    // Listen for changes (e.g., if device capabilities change)
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', checkHover);
+      return () => mediaQuery.removeEventListener('change', checkHover);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(checkHover);
+      return () => mediaQuery.removeListener(checkHover);
     }
   }, []);
 

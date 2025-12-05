@@ -10,11 +10,37 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasHoverSupport, setHasHoverSupport] = useState(false);
 
   // Project cursor colors
   const projectColors = ["#6C8BEA", "#E8C75D", "#E4927C"];
 
+  // Check for hover support first
   useEffect(() => {
+    const checkHover = () => {
+      const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      setHasHoverSupport(hasHover);
+      setIsVisible(hasHover);
+    };
+    
+    checkHover();
+    
+    // Listen for changes (e.g., if device capabilities change)
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', checkHover);
+      return () => mediaQuery.removeEventListener('change', checkHover);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(checkHover);
+      return () => mediaQuery.removeListener(checkHover);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Don't add event listeners if device doesn't support hover
+    if (!hasHoverSupport) return;
+
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -73,29 +99,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, []);
-
-  // Don't show on mobile/touch devices - check for hover capability
-  useEffect(() => {
-    // Check immediately on mount
-    const checkHover = () => {
-      const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-      setIsVisible(hasHover);
-    };
-    
-    checkHover();
-    
-    // Listen for changes (e.g., if device capabilities change)
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', checkHover);
-      return () => mediaQuery.removeEventListener('change', checkHover);
-    } else {
-      // Fallback for older browsers
-      mediaQuery.addListener(checkHover);
-      return () => mediaQuery.removeListener(checkHover);
-    }
-  }, []);
+  }, [hasHoverSupport]);
 
   if (!isVisible) return null;
 

@@ -172,10 +172,10 @@ export default function AboutSection() {
                 {/* Education List */}
                 <div className="mb-6 md:mb-8">
                   <p className="text-sm md:text-base lg:text-lg font-manrope font-bold mb-2">
-                    MA - VR and AR User Experience Design - Distinction
+                    MA - VR and AR User Experience Design - Distinction - Goldsmiths
                   </p>
                   <p className="text-sm md:text-base lg:text-lg font-manrope font-bold">
-                    BSc - Product Design - 2:1 Honours
+                    BSc - Product Design - 2:1 Honours - Brighton
                   </p>
                 </div>
 

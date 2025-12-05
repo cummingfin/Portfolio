@@ -89,7 +89,8 @@ export default function HeroOverlay() {
                       alt="Lightbulb lit"
                       width={54}
                       height={86}
-                      className="block w-[40px] h-auto md:w-[54px]"
+                      className="block w-[40px] md:w-[54px] h-auto"
+                      unoptimized
                     />
                   </motion.div>
                 ) : (
@@ -105,7 +106,8 @@ export default function HeroOverlay() {
                       alt="Lightbulb unlit"
                       width={54}
                       height={86}
-                      className="block w-[40px] h-auto md:w-[54px]"
+                      className="block w-[40px] md:w-[54px] h-auto"
+                      unoptimized
                     />
                   </motion.div>
                 )}

@@ -75,7 +75,7 @@ export const projects: Project[] = [
   {
     slug: "signal",
     title: "Signal",
-    subtitle: "Helping unknown artists break out into the art world with AR",
+    subtitle: "A simple to-do list that's surprisingly powerful",
     heroImage: "/images/Signal/Signalthumbnail.png",
     detailsVideo: "/images/Signal/ScreenRecording_12-01-2025%2016-43-40_1.MP4",
     problem: "Buying art should feel exciting, but for many people it feels stressful. Without knowing if a piece will fit, suit their space, or feel 'right', they hesitate — or don't buy at all. The uncertainty around visualising artwork makes the experience harder than it needs to be.",

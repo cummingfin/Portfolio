@@ -77,13 +77,14 @@ export default function ProjectHeroImage({ project }: ProjectHeroImageProps) {
       );
     }
 
-    // Format for recanvased/signal: "Helping unknown artists break out into the art world with AR"
-    if ((isRecanvased || isSignal) && subtitle.includes("the art world with AR")) {
+    // Format for recanvased: "Helping unknown artists break out into the art world with AR"
+    if (isRecanvased && subtitle.includes("the art world with AR")) {
       const parts = subtitle.split("the art world with");
       return (
         <>
           {parts[0].trim()}
-          <br />
+          <br className="hidden md:block" />
+          <span className="md:inline"> </span>
           the art world with <span className="font-bold">AR</span>
         </>
       );

@@ -8,8 +8,8 @@ export default function Hero() {
   const [angle, setAngle] = useState(0); // Current angle in radians
   const [angularVelocity, setAngularVelocity] = useState(0); // Angular velocity in rad/s
   
-  const cordLength = 192; // h-48 = 192px
-  const cordLengthMd = 256; // h-64 = 256px
+  const cordLength = 192; // h-48 = 192px (mobile)
+  const cordLengthMd = 288; // h-72 = 288px (desktop)
   
   // Physics constants
   const dampingFactor = 0.92; // Damping for natural decay
@@ -147,7 +147,7 @@ export default function Hero() {
             }}
           >
             {/* Cord line */}
-            <div className="w-0.5 bg-text h-48 md:h-64 2xl:h-[380px]" />
+            <div className="w-0.5 bg-text h-48 md:h-72 2xl:h-[438px]" />
             {/* Lightbulb - positioned at end of cord */}
             <motion.div
               ref={lightbulbRef}
@@ -166,9 +166,9 @@ export default function Hero() {
               <Image
                 src="/svgs/Lightbulb.svg"
                 alt="Lightbulb"
-                width={40}
-                height={64}
-                className="block"
+                width={54}
+                height={86}
+                className="block w-[40px] h-auto md:w-[54px]"
                 priority
               />
             </motion.div>

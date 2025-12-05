@@ -87,8 +87,8 @@ export default function HeroOverlay() {
                     <Image
                       src="/svgs/OverlayLightbulb2.svg"
                       alt="Lightbulb lit"
-                      width={54}
-                      height={86}
+                      width={40}
+                      height={64}
                       className="block"
                     />
                   </motion.div>
@@ -103,8 +103,8 @@ export default function HeroOverlay() {
                     <Image
                       src="/svgs/OverlayLightbulb1.svg"
                       alt="Lightbulb unlit"
-                      width={54}
-                      height={86}
+                      width={40}
+                      height={64}
                       className="block"
                     />
                   </motion.div>

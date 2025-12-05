@@ -166,8 +166,8 @@ export default function Hero() {
               <Image
                 src="/svgs/Lightbulb.svg"
                 alt="Lightbulb"
-                width={54}
-                height={86}
+                width={40}
+                height={64}
                 className="block"
                 priority
               />

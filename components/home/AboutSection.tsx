@@ -22,6 +22,14 @@ export default function AboutSection() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Automatically show spilled state on mobile
+  useEffect(() => {
+    if (isMobile) {
+      setCurrentMugIndex(5); // Mug6 (final state)
+      setMugState("spilled");
+    }
+  }, [isMobile]);
+
   // Handle the sequential animation when spilling
   useEffect(() => {
     if (mugState === "spilling") {

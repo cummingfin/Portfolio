@@ -34,12 +34,12 @@ export default function ProjectCard({ project, isSquare = false, colorIndex = 0,
         aria-label={`View ${project.title} project`}
       >
         {project.heroImage ? (
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full bg-section-bg">
             <Image
               src={project.heroImage}
               alt={project.title}
               fill
-              className="object-cover rounded-2xl"
+              className="object-contain md:object-cover rounded-2xl"
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
               priority={priority}
             />

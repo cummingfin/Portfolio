@@ -75,10 +75,10 @@ export default function CustomCursor() {
     };
   }, []);
 
-  // Don't show on mobile/touch devices
+  // Don't show on mobile/touch devices - check for hover capability
   useEffect(() => {
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) {
+    const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (!hasHover) {
       setIsVisible(false);
     }
   }, []);

@@ -175,10 +175,10 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 if (isVideo && hasLabel) {
                   // Video with label - phone on left, text on right, within rectangle
                   return (
-                    <div key={index} className="relative w-full aspect-[4/3] bg-gray-100 rounded-3xl overflow-hidden flex items-center p-4 md:p-6 lg:p-8">
+                    <div key={index} className="relative w-full aspect-[4/3] bg-gray-100 rounded-3xl overflow-hidden flex items-center px-4 md:px-6 lg:px-8 py-6 md:py-8 lg:py-10">
                       <div className="flex flex-row items-stretch gap-6 md:gap-8 lg:gap-10 w-full h-full">
                         <div className="flex-shrink-0 flex items-center justify-center h-full">
-                          <div className="relative h-full aspect-[9/19] rounded-[18px] md:rounded-[24px] lg:rounded-[32px] border-[3px] md:border-[4px] lg:border-[6px] border-text overflow-hidden bg-black shadow-md">
+                          <div className="relative h-[90%] max-h-full aspect-[9/19] rounded-[18px] md:rounded-[24px] lg:rounded-[32px] border-[3px] md:border-[4px] lg:border-[6px] border-text overflow-hidden bg-black shadow-md">
                             <video
                               src={item.src as string}
                               autoPlay
@@ -203,8 +203,8 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 if (isVideo) {
                   // Video without label - centered in rectangle
                   return (
-                    <div key={index} className="relative w-full aspect-[4/3] bg-gray-100 rounded-3xl overflow-hidden flex items-center justify-center p-3 md:p-5">
-                      <div className="relative h-full aspect-[9/19] rounded-[18px] md:rounded-[24px] lg:rounded-[32px] border-[3px] md:border-[4px] lg:border-[6px] border-text overflow-hidden bg-black shadow-md">
+                    <div key={index} className="relative w-full aspect-[4/3] bg-gray-100 rounded-3xl overflow-hidden flex items-center justify-center px-3 md:px-5 py-6 md:py-8 lg:py-10">
+                      <div className="relative h-[90%] max-h-full aspect-[9/19] rounded-[18px] md:rounded-[24px] lg:rounded-[32px] border-[3px] md:border-[4px] lg:border-[6px] border-text overflow-hidden bg-black shadow-md">
                         <video
                           src={item.src as string}
                           autoPlay

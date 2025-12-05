@@ -18,12 +18,18 @@ body {
   font-family: var(--font-manrope);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none; /* Hide default cursor, using custom cursor component */
 }
 
-/* Hide default cursor on interactive elements */
-a, button, [role="button"], [onclick], .cursor-pointer, .cursor-none {
-  cursor: none;
+/* Hide default cursor on non-touch devices only (using custom cursor component) */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  /* Hide default cursor on interactive elements */
+  a, button, [role="button"], [onclick], .cursor-pointer, .cursor-none {
+    cursor: none;
+  }
 }
 
 h1 {

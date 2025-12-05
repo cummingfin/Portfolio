@@ -39,7 +39,7 @@ export default function ProjectCard({ project, isSquare = false, colorIndex = 0,
               src={project.heroImage}
               alt={project.title}
               fill
-              className={project.slug === "recanvased" ? "object-contain md:object-cover rounded-2xl" : "object-cover rounded-2xl"}
+              className={`${project.slug === "recanvased" ? "object-contain md:object-cover" : "object-cover"} rounded-2xl`}
               sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
               priority={priority}
             />

@@ -107,6 +107,14 @@ export default function Nav() {
           >
             Contact
           </Link>
+          <a 
+            href="/images/FindlayCummingResumeWeb.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-70 transition-opacity"
+          >
+            CV
+          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -183,6 +191,15 @@ export default function Nav() {
               >
                 Contact
               </Link>
+              <a 
+                href="/images/FindlayCummingResumeWeb.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-2xl font-manrope font-normal hover:opacity-70 transition-opacity"
+              >
+                CV
+              </a>
             </motion.div>
           </motion.div>
         )}

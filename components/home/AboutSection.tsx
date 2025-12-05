@@ -10,6 +10,17 @@ export default function AboutSection() {
   const [mugState, setMugState] = useState<MugState>("default");
   const [currentMugIndex, setCurrentMugIndex] = useState(0);
   const [showAboutCopy, setShowAboutCopy] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Handle the sequential animation when spilling
   useEffect(() => {
@@ -58,7 +69,13 @@ export default function AboutSection() {
 
   const handleClick = () => {
     if (mugState !== "spilled" && mugState !== "spilling") {
-      setMugState("spilling");
+      if (isMobile) {
+        // On mobile, skip animation and go straight to spilled state
+        setCurrentMugIndex(5); // Mug6 (final state)
+        setMugState("spilled");
+      } else {
+        setMugState("spilling");
+      }
     }
   };
 

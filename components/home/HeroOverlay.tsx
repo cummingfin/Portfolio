@@ -72,7 +72,7 @@ export default function HeroOverlay() {
           {/* Lightbulb with cord - centered, matching Hero position exactly */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
             {/* Cord line - goes all the way to top, matching Hero height, overlay color */}
-            <div className="w-0.5 bg-[#2C2C2C] h-56 md:h-72 2xl:h-[438px]" />
+            <div className="w-0.5 bg-[#2C2C2C] h-48 md:h-64 2xl:h-[380px]" />
             {/* Lightbulb - switches from unlit to lit */}
             <div className="relative -mt-[1px]">
               <AnimatePresence mode="wait">

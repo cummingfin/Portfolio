@@ -93,7 +93,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="relative group h-full max-h-full flex items-center justify-center">
                     {project.slug === "learnllama" ? (
-                      <div className="relative flex items-center justify-center max-h-full h-full w-full rounded-[20px] md:rounded-[28px] lg:rounded-[36px] border-[3px] md:border-[5px] lg:border-[6px] border-text overflow-hidden bg-black shadow-lg backdrop-blur-lg bg-gray-200/60" style={{ maxWidth: '100%' }}>
+                      <div className="relative flex items-center justify-center rounded-[20px] md:rounded-[28px] lg:rounded-[36px] border-[3px] md:border-[5px] lg:border-[6px] border-text overflow-hidden bg-black shadow-lg backdrop-blur-lg bg-gray-200/60" style={{ width: '100%', maxWidth: '100%', height: '100%', maxHeight: '100%', minWidth: 0, minHeight: 0 }}>
                         <video
                           ref={videoRef}
                           src={project.detailsVideo}
@@ -101,9 +101,9 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
                           muted
                           loop
                           playsInline
-                          preload="auto"
+                          preload="metadata"
                           className="h-full w-auto max-w-full object-contain"
-                          style={{ maxHeight: '100%', display: 'block' }}
+                          style={{ maxHeight: '100%', display: 'block', width: 'auto', minWidth: 0 }}
                         />
                       </div>
                     ) : (

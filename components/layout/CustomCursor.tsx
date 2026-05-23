@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [projectName, setProjectName] = useState<string | null>(null);
+  const [projectHoverLabel, setProjectHoverLabel] = useState<string | null>(null);
   const [projectColor, setProjectColor] = useState<string>("#8FA3B2");
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
@@ -65,8 +66,10 @@ export default function CustomCursor() {
       
       if (projectCard) {
         const name = projectCard.getAttribute('data-project-name');
+        const hoverLabel = projectCard.getAttribute('data-project-hover-label');
         const colorIndex = projectCard.getAttribute('data-project-color-index');
         setProjectName(name);
+        setProjectHoverLabel(hoverLabel);
         // Cycle through the 3 colors based on project index
         if (colorIndex !== null) {
           const index = parseInt(colorIndex, 10);
@@ -75,9 +78,11 @@ export default function CustomCursor() {
         setIsHovering(true);
       } else if (interactiveElement) {
         setProjectName(null);
+        setProjectHoverLabel(null);
         setIsHovering(true);
       } else {
         setProjectName(null);
+        setProjectHoverLabel(null);
         setIsHovering(false);
       }
     };
@@ -131,7 +136,7 @@ export default function CustomCursor() {
               style={{ backgroundColor: projectColor }}
             >
               <span className="text-black font-bricolage text-sm font-medium whitespace-nowrap">
-                {projectName}
+                {projectHoverLabel || projectName}
               </span>
             </div>
           </motion.div>
@@ -160,4 +165,3 @@ export default function CustomCursor() {
     </div>
   );
 }
-

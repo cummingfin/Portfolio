@@ -2,31 +2,41 @@
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="px-6 md:px-12 py-20 md:py-32 scroll-mt-24" style={{ backgroundColor: '#E8DDD4' }}>
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="mb-6 md:mb-8 font-bricolage font-bold text-[40px] md:text-[48px]">Get in touch</h2>
-        <div className="space-y-4 text-lg md:text-xl font-manrope">
-          <p>
-            <a 
-              href="mailto:cummingfin@gmail.com" 
-              className="text-text hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-text focus:ring-offset-2 rounded px-4 py-2 inline-block"
+    <section
+      id="contact"
+      className="scroll-mt-24 bg-section-bg py-20 md:py-28 lg:py-32"
+    >
+      <div className="site-container">
+        <div className="max-w-5xl space-y-8 md:space-y-10">
+          <p className="font-bricolage text-lg text-text/60 md:text-xl">
+            Get in touch
+          </p>
+          <div className="max-w-4xl space-y-6">
+            <h2 className="font-bricolage text-[34px] font-medium leading-[1.05] tracking-[-0.03em] text-text md:text-[52px] lg:text-[72px]">
+              If you&apos;d like to work together, I&apos;d love to hear from you.
+            </h2>
+            <p className="max-w-2xl font-manrope text-lg leading-[1.55] text-text/80 md:text-xl">
+              I&apos;m currently applying for product, UX/UI, digital design, and creative technology roles in London.
+            </p>
+          </div>
+          <div className="flex flex-col items-start gap-3 pt-2 md:flex-row md:flex-wrap md:gap-4">
+            <a
+              href="mailto:cummingfin@gmail.com"
+              className="rounded-full border border-text/12 bg-background px-5 py-3 font-manrope text-base text-text transition-all hover:-translate-y-0.5 hover:border-text/25 hover:bg-white focus:outline-none focus:ring-2 focus:ring-text/25"
               aria-label="Send email to cummingfin@gmail.com"
             >
               cummingfin@gmail.com
             </a>
-          </p>
-          <p>
-            <a 
-              href="tel:07710698974" 
-              className="text-text hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-text focus:ring-offset-2 rounded px-4 py-2 inline-block"
+            <a
+              href="tel:07710698974"
+              className="rounded-full border border-text/12 bg-background px-5 py-3 font-manrope text-base text-text transition-all hover:-translate-y-0.5 hover:border-text/25 hover:bg-white focus:outline-none focus:ring-2 focus:ring-text/25"
               aria-label="Call 07710698974"
             >
-              07710698974
+              07710 698974
             </a>
-          </p>
+          </div>
         </div>
       </div>
     </section>
   );
 }
-

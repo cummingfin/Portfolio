@@ -9,8 +9,8 @@ export default function Home() {
     <main>
       <HeroOverlay />
       <Hero />
-      <ProjectGrid />
       <AboutSection />
+      <ProjectGrid />
       <ContactSection />
     </main>
   );

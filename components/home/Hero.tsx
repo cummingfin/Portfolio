@@ -189,7 +189,7 @@ export default function Hero() {
           Hi I&apos;m Fin
         </h1>
             <h2 className="mb-8 max-w-2xl font-bricolage font-medium text-[40px] text-center mx-auto">
-          I love design and want to work with people who feel the&nbsp;same
+          I design digital products with clarity, character, and intent
         </h2>
       </motion.div>
     </section>

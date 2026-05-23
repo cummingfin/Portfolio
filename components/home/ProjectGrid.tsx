@@ -7,9 +7,9 @@ export default function ProjectGrid() {
   return (
     <section 
       id="work" 
-      className="px-6 md:px-12 pt-8 md:pt-12 pb-24 md:pb-32 scroll-mt-24"
+      className="pt-8 md:pt-12 pb-24 md:pb-32 scroll-mt-24"
     >
-      <div className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto w-full">
+      <div className="site-container">
         {/* 3-column grid: squares = 1 col, rectangles = 2 cols */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full project-grid-row">
           {projects.map((project, index) => {
@@ -40,4 +40,3 @@ export default function ProjectGrid() {
     </section>
   );
 }
-

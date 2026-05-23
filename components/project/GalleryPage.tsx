@@ -11,7 +11,7 @@ interface GalleryPageProps {
 export default function GalleryPage({ project }: GalleryPageProps) {
   return (
     <main className="pt-24 pb-12 md:pb-16">
-      <section className="max-w-7xl xl:max-w-[1400px] 2xl:max-w-[1600px] mx-auto px-6 md:px-12">
+      <section className="site-container">
         <div className="text-center mb-12 md:mb-16">
           <h1 className="font-bricolage font-bold text-[48px] md:text-[64px]">{project.title}</h1>
           {project.subtitle && (
@@ -140,5 +140,4 @@ function GalleryMedia({ src, label, projectTitle, priority = false, isVideo }: G
     </div>
   );
 }
-
 

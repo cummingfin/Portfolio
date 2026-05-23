@@ -77,78 +77,80 @@ export default function Nav() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6 flex items-center gap-6 md:gap-8 transition-all duration-300 text-text ${
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-text ${
         isScrolled ? "backdrop-blur-md bg-background/60" : ""
       }`}>
-        <Link href="/" className="font-bricolage font-bold text-3xl md:text-4xl">
-          Fin
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-6 md:gap-8 text-lg md:text-xl font-manrope font-normal">
-          <Link 
-            href="#work" 
-            onClick={(e) => handleScroll(e, "#work")}
-            className="hover:opacity-70 transition-opacity"
-          >
-            Work
+        <div className="site-container flex items-center gap-6 md:gap-8 py-6">
+          <Link href="/" className="font-bricolage font-bold text-3xl md:text-4xl">
+            Fin
           </Link>
-          <Link 
-            href="#about" 
-            onClick={(e) => handleScroll(e, "#about")}
-            className="hover:opacity-70 transition-opacity"
-          >
-            About
-          </Link>
-          <Link 
-            href="#contact" 
-            onClick={(e) => handleScroll(e, "#contact")}
-            className="hover:opacity-70 transition-opacity"
-          >
-            Contact
-          </Link>
-          <a 
-            href="/images/FindlayCummingResumeWeb.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-70 transition-opacity"
-          >
-            CV
-          </a>
-        </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-6 md:gap-8 text-lg md:text-xl font-manrope font-normal">
+            <Link 
+              href="#work" 
+              onClick={(e) => handleScroll(e, "#work")}
+              className="hover:opacity-70 transition-opacity"
+            >
+              Work
+            </Link>
+            <Link 
+              href="#about" 
+              onClick={(e) => handleScroll(e, "#about")}
+              className="hover:opacity-70 transition-opacity"
+            >
+              About
+            </Link>
+            <Link 
+              href="#contact" 
+              onClick={(e) => handleScroll(e, "#contact")}
+              className="hover:opacity-70 transition-opacity"
+            >
+              Contact
+            </Link>
+            <a 
+              href="/Files/Findlay%20Cumming%20Resume2.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+            >
+              CV
+            </a>
+          </div>
 
-        {/* Mobile Hamburger Button */}
-        <button
-          type="button"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden ml-auto flex flex-col gap-1.5 w-6 h-6 focus:outline-none focus:ring-2 focus:ring-current focus:ring-offset-2 focus:ring-offset-transparent rounded"
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-        >
-          <motion.span
-            className="w-full h-0.5 bg-current"
-            animate={{
-              rotate: isMobileMenuOpen ? 45 : 0,
-              y: isMobileMenuOpen ? 8 : 0,
-            }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="w-full h-0.5 bg-current"
-            animate={{
-              opacity: isMobileMenuOpen ? 0 : 1,
-            }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="w-full h-0.5 bg-current"
-            animate={{
-              rotate: isMobileMenuOpen ? -45 : 0,
-              y: isMobileMenuOpen ? -8 : 0,
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        </button>
+          {/* Mobile Hamburger Button */}
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden ml-auto flex flex-col gap-1.5 w-6 h-6 focus:outline-none focus:ring-2 focus:ring-current focus:ring-offset-2 focus:ring-offset-transparent rounded"
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <motion.span
+              className="w-full h-0.5 bg-current"
+              animate={{
+                rotate: isMobileMenuOpen ? 45 : 0,
+                y: isMobileMenuOpen ? 8 : 0,
+              }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="w-full h-0.5 bg-current"
+              animate={{
+                opacity: isMobileMenuOpen ? 0 : 1,
+              }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="w-full h-0.5 bg-current"
+              animate={{
+                rotate: isMobileMenuOpen ? -45 : 0,
+                y: isMobileMenuOpen ? -8 : 0,
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
@@ -192,7 +194,7 @@ export default function Nav() {
                 Contact
               </Link>
               <a 
-                href="/images/FindlayCummingResumeWeb.pdf"
+                href="/Files/Findlay%20Cumming%20Resume2.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -207,4 +209,3 @@ export default function Nav() {
     </>
   );
 }
-

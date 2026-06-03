@@ -172,8 +172,8 @@ export default function ProjectCaseStudy({
   };
 
   return (
-    <section className="bg-white px-6 py-16 md:px-12 md:py-24">
-      <div className={`mx-auto ${isDesktopMediaProject ? "max-w-7xl xl:max-w-[1400px]" : "max-w-6xl"}`}>
+    <section className="bg-white py-16 md:py-24">
+      <div className={isDesktopMediaProject ? "project-wide-container" : "mx-auto max-w-6xl px-6 md:px-12"}>
         <div className="space-y-12 md:hidden">
           {sections.map((section, index) => (
             <section key={section.id} className="space-y-4">
@@ -198,16 +198,16 @@ export default function ProjectCaseStudy({
         <div
           className={`hidden md:grid md:gap-12 lg:gap-16 xl:gap-20 ${
             isDesktopMediaProject
-              ? "md:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]"
+              ? "md:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)] 2xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.55fr)] 2xl:gap-24"
               : "md:grid-cols-[minmax(0,0.95fr)_minmax(340px,1.05fr)]"
           }`}
         >
-          <div className="space-y-14 lg:pl-4 xl:pl-8">
+          <div className={`space-y-14 ${isDesktopMediaProject ? "" : "lg:pl-4 xl:pl-8"}`}>
             {sections.map((section) => {
               const frameType = section.frameType ?? defaultFrameType;
               const widthClass =
                 frameType === "desktop"
-                  ? "max-w-[1120px]"
+                  ? "max-w-[1120px] 2xl:max-w-[1400px]"
                   : frameType === "tablet"
                     ? "max-w-[360px] md:max-w-[400px] lg:max-w-[440px]"
                     : "max-w-[220px] md:max-w-[240px] lg:max-w-[280px] xl:max-w-[300px]";
@@ -219,7 +219,7 @@ export default function ProjectCaseStudy({
                     sectionRefs.current[section.id] = element;
                   }}
                   data-case-study-id={section.id}
-                  className="min-h-[56vh] flex items-center"
+                  className="min-h-[56vh] 2xl:min-h-[62vh] flex items-center"
                 >
                   <div className={`mx-auto flex w-full items-center justify-center ${widthClass}`}>
                     {renderCaseStudyMedia(section)}
@@ -230,7 +230,7 @@ export default function ProjectCaseStudy({
           </div>
 
           <div className="md:sticky md:top-28 md:self-start">
-            <div className="rounded-[32px] bg-section-bg px-8 py-8 shadow-sm md:px-9 md:py-9 lg:min-h-[360px] xl:min-h-[390px]">
+            <div className="rounded-[32px] bg-section-bg px-8 py-8 shadow-sm md:px-9 md:py-9 lg:min-h-[360px] xl:min-h-[390px] 2xl:px-10 2xl:py-10">
               <p className="mb-4 font-manrope text-xs uppercase tracking-[0.28em] text-text/52 md:text-sm">
                 How It Works
               </p>

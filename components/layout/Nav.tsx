@@ -80,7 +80,7 @@ export default function Nav() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-text ${
         isScrolled ? "backdrop-blur-md bg-background/60" : ""
       }`}>
-        <div className="site-container flex items-center gap-6 md:gap-8 py-6">
+        <div className="home-wide-container flex items-center gap-6 md:gap-8 py-6">
           <Link href="/" className="font-bricolage font-bold text-3xl md:text-4xl">
             Fin
           </Link>

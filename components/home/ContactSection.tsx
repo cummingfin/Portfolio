@@ -6,8 +6,8 @@ export default function ContactSection() {
       id="contact"
       className="scroll-mt-24 bg-section-bg py-20 md:py-28 lg:py-32"
     >
-      <div className="site-container">
-        <div className="max-w-5xl space-y-8 md:space-y-10">
+      <div className="home-wide-container">
+        <div className="max-w-5xl space-y-8 md:space-y-10 2xl:max-w-6xl">
           <p className="font-bricolage text-lg text-text/60 md:text-xl">
             Get in touch
           </p>

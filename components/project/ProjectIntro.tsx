@@ -21,14 +21,15 @@ export default function ProjectIntro({ project, title, subtitle, text, hasCustom
       ? "h-[440px] md:h-[520px] lg:h-[580px] xl:h-[640px]"
       : mediaType === "phone"
         ? "h-[420px] md:h-[500px] lg:h-[560px] xl:h-[620px]"
-        : "h-[400px] md:h-[500px] lg:h-[550px] xl:h-[600px]";
+        : "h-[400px] md:h-[500px] lg:h-[550px] xl:h-[600px] 2xl:h-[700px]";
   const mediaShellWidthClass =
     mediaType === "tablet"
       ? "max-w-[340px] md:max-w-[380px] lg:max-w-[440px] xl:max-w-[500px]"
       : mediaType === "phone"
         ? "max-w-[280px] md:max-w-[320px] lg:max-w-[360px] xl:max-w-[390px]"
-        : "max-w-[980px]";
+        : "max-w-[980px] 2xl:max-w-[1280px]";
   const isDeviceMedia = mediaType === "phone" || mediaType === "tablet";
+  const isDesktopMedia = mediaType === "desktop";
 
   useEffect(() => {
     if (!hasCustomVideo) return;
@@ -139,11 +140,11 @@ export default function ProjectIntro({ project, title, subtitle, text, hasCustom
 
   return (
     <div className="bg-background w-full px-0 md:px-0">
-      <div className="site-container pt-0 pb-12 md:pt-0 md:pb-16 lg:pt-0 lg:pb-20 xl:pb-24">
-        <div className={`grid grid-cols-1 items-center gap-8 md:gap-12 ${isDeviceMedia ? "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-14" : "lg:grid-cols-2 lg:gap-16 xl:gap-20"}`}>
+      <div className={`${isDesktopMedia ? "project-wide-container" : "site-container"} pt-0 pb-12 md:pt-0 md:pb-16 lg:pt-0 lg:pb-20 xl:pb-24`}>
+        <div className={`grid grid-cols-1 items-center gap-8 md:gap-12 ${isDeviceMedia ? "lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-10 xl:gap-14" : "lg:grid-cols-2 lg:gap-16 xl:gap-20 2xl:grid-cols-[minmax(360px,0.7fr)_minmax(0,1.3fr)] 2xl:gap-24"}`}>
           {/* Left side - Text */}
           <div className="flex w-full justify-center pt-6 md:pt-8 lg:pt-10">
-            <div className={`flex w-full flex-col items-start ${isDeviceMedia ? "max-w-[30rem] xl:max-w-[32rem]" : "max-w-[40rem] xl:max-w-[44rem]"}`}>
+            <div className={`flex w-full flex-col items-start ${isDeviceMedia ? "max-w-[30rem] xl:max-w-[32rem]" : "max-w-[40rem] xl:max-w-[44rem] 2xl:max-w-[46rem]"}`}>
               <h2 className="mb-0 max-w-none text-left font-bricolage text-[40px] font-bold md:text-[48px] lg:text-[56px] xl:text-[64px]">{title}</h2>
               {subtitle && (
                 <h3 className="mb-12 text-left font-manrope text-lg font-normal lg:mb-16 lg:text-xl xl:text-2xl">

@@ -4,7 +4,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-24 bg-section-bg py-20 md:py-28 lg:py-32 2xl:py-40"
+      className="scroll-mt-24 bg-section-bg py-20 md:py-28 lg:py-32"
     >
       <div className="site-container">
         <div className="max-w-5xl space-y-8 md:space-y-10">
@@ -12,10 +12,10 @@ export default function ContactSection() {
             Get in touch
           </p>
           <div className="max-w-4xl space-y-6">
-            <h2 className="font-bricolage text-[34px] font-medium leading-[1.05] tracking-[-0.03em] text-text md:text-[52px] lg:text-[72px] 2xl:text-[84px]">
+            <h2 className="font-bricolage text-[34px] font-medium leading-[1.05] tracking-[-0.03em] text-text md:text-[52px] lg:text-[72px]">
               If you&apos;d like to work together, I&apos;d love to hear from you.
             </h2>
-            <p className="max-w-2xl font-manrope text-lg leading-[1.55] text-text/80 md:text-xl 2xl:max-w-3xl 2xl:text-2xl">
+            <p className="max-w-2xl font-manrope text-lg leading-[1.55] text-text/80 md:text-xl">
               I&apos;m currently looking for digital design opportunities across web, brand, motion, and creative technology in London.
             </p>
           </div>

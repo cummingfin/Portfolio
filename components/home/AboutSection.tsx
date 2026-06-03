@@ -18,15 +18,15 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-20 mt-0 scroll-mt-24 bg-background pt-8 pb-16 md:pt-14 md:pb-24 lg:pt-16 lg:pb-28 2xl:pt-20 2xl:pb-36"
+      className="relative z-20 mt-0 scroll-mt-24 bg-background pt-8 pb-16 md:pt-14 md:pb-24 lg:pt-16 lg:pb-28"
     >
       <div className="site-container">
         <motion.div
           style={{ opacity, y }}
           className="w-full will-change-transform"
         >
-          <div className="max-w-[1700px] space-y-8 md:space-y-10 lg:space-y-12 2xl:space-y-14">
-            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px] 2xl:text-[52px] 2xl:leading-[1.2]">
+          <div className="space-y-8 md:space-y-10 lg:space-y-12">
+            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px]">
               I design and build digital work that has to perform in the real world. Before my Master&apos;s in AR and VR, I founded {" "}
               an eco-friendly {" "}
               <Link
@@ -40,7 +40,7 @@ export default function AboutSection() {
               </Link>{" "}
               with more than a thousand clients and spent four years learning what users actually do, not what you hope they will do.
             </p>
-            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px] 2xl:text-[52px] 2xl:leading-[1.2]">
+            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px]">
               Since then, I have worked across websites, apps, motion, and emerging technology, and I am currently leading the redesign and front-end build of the website for the UK&apos;s largest independent {" "}
               <Link
                 href="/work/panmure-liberum"

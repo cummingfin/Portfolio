@@ -9,9 +9,9 @@ export default function ProjectGrid() {
       id="work" 
       className="pt-8 md:pt-12 2xl:pt-16 pb-24 md:pb-32 2xl:pb-40 scroll-mt-24"
     >
-      <div className="site-container">
+      <div className="home-wide-container">
         {/* 3-column grid: squares = 1 col, rectangles = 2 cols */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 2xl:gap-10 w-full project-grid-row">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 2xl:gap-10 w-full project-grid-row home-project-grid-row">
           {homepageProjects.map((project, index) => {
             // Pattern from image:
             // Row 1 (0,1): rectangle (2 cols), square (1 col)

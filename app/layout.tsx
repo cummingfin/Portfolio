@@ -19,8 +19,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Fin - Product Designer",
-  description: "Portfolio of Fin, a product designer",
+  title: "Fin Cumming - Digital Designer",
+  description: "Digital Designer based in London, working across web design, UI, motion, front-end build, and creative technology.",
   icons: {
     icon: "/icon.svg",
   },
@@ -41,4 +41,3 @@ export default function RootLayout({
     </html>
   );
 }
-

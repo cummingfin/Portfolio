@@ -109,7 +109,7 @@ export default function Nav() {
               Contact
             </Link>
             <a 
-              href="/Files/Findlay%20Cumming%20Resume2.pdf"
+              href="/Files/Findlay%20Cumming%20-%20Digital%20Designer%20CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-70 transition-opacity"
@@ -194,7 +194,7 @@ export default function Nav() {
                 Contact
               </Link>
               <a 
-                href="/Files/Findlay%20Cumming%20Resume2.pdf"
+                href="/Files/Findlay%20Cumming%20-%20Digital%20Designer%20CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMobileMenuOpen(false)}

@@ -18,16 +18,16 @@ export default function AboutSection() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative z-20 mt-0 scroll-mt-24 bg-background pt-8 pb-16 md:pt-14 md:pb-24 lg:pt-16 lg:pb-28"
+      className="relative z-20 mt-0 scroll-mt-24 bg-background pt-8 pb-16 md:pt-14 md:pb-24 lg:pt-16 lg:pb-28 2xl:pt-20 2xl:pb-36"
     >
       <div className="site-container">
         <motion.div
           style={{ opacity, y }}
           className="w-full will-change-transform"
         >
-          <div className="space-y-8 md:space-y-10 lg:space-y-12">
-            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px]">
-              I build digital products that have to work in the real world. Before my Master&apos;s in AR and VR, I founded {" "}
+          <div className="max-w-[1700px] space-y-8 md:space-y-10 lg:space-y-12 2xl:space-y-14">
+            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px] 2xl:text-[52px] 2xl:leading-[1.2]">
+              I design and build digital work that has to perform in the real world. Before my Master&apos;s in AR and VR, I founded {" "}
               an eco-friendly {" "}
               <Link
                 href="/work/donkeyjobs"
@@ -38,30 +38,10 @@ export default function AboutSection() {
               >
                 home maintenance company
               </Link>{" "}
-              with more than a thousand clients and spent four years learning what users actually do, not what you hope they&apos;ll do.
+              with more than a thousand clients and spent four years learning what users actually do, not what you hope they will do.
             </p>
-            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px]">
-              Since then I&apos;ve designed {" "}
-              <Link
-                href="/work/recanvased"
-                data-project-name="reCanvased"
-                data-project-hover-label="reCanvased"
-                data-project-color-index="2"
-                className="rounded-sm text-[#B85C5C] transition-colors hover:text-[#A34E4E] focus:outline-none focus:ring-2 focus:ring-text/20"
-              >
-                AR marketplaces
-              </Link>
-              , {" "}
-              <Link
-                href="/work/learnllama"
-                data-project-name="LearnLlama."
-                data-project-hover-label="LearnLlama"
-                data-project-color-index="1"
-                className="rounded-sm text-[#B88A1B] transition-colors hover:text-[#9E7613] focus:outline-none focus:ring-2 focus:ring-text/20"
-              >
-                learning tools
-              </Link>
-              {" "}and web platforms and am currently leading the website redesign for the UK&apos;s largest independent {" "}
+            <p className="w-full font-bricolage font-normal text-[21px] leading-[1.28] tracking-[-0.02em] text-text md:text-[26px] lg:text-[38px] xl:text-[44px] 2xl:text-[52px] 2xl:leading-[1.2]">
+              Since then, I have worked across websites, apps, motion, and emerging technology, and I am currently leading the redesign and front-end build of the website for the UK&apos;s largest independent {" "}
               <Link
                 href="/work/panmure-liberum"
                 data-project-name="Panmure Liberum"
@@ -71,7 +51,7 @@ export default function AboutSection() {
               >
                 investment bank
               </Link>
-              . I&apos;m interested in products that are useful, sharp, and built with enough care that people trust them.
+              . I am interested in work that is useful, visually sharp, and built with enough care that people trust it.
             </p>
           </div>
         </motion.div>

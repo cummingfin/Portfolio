@@ -287,3 +287,16 @@ export const projects: Project[] = [
     ],
   },
 ];
+
+const homepageProjectOrder = [
+  "panmure-liberum",
+  "canopy-of-echos",
+  "donkeyjobs",
+  "learnllama",
+  "recanvased",
+  "signal",
+] as const;
+
+export const homepageProjects: Project[] = homepageProjectOrder
+  .map((slug) => projects.find((project) => project.slug === slug))
+  .filter((project): project is Project => Boolean(project));

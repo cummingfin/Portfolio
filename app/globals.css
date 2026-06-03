@@ -5,7 +5,7 @@
 @layer utilities {
   .site-container {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1760px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;
@@ -26,6 +26,22 @@
     .site-container-narrow {
       padding-left: 3rem;
       padding-right: 3rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .site-container,
+    .site-container-narrow {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .site-container,
+    .site-container-narrow {
+      padding-left: 5rem;
+      padding-right: 5rem;
     }
   }
 }
@@ -124,5 +140,27 @@ h4 {
   /* Square cards should also respect max height */
   .project-card {
     max-height: min(50vh, 500px);
+  }
+}
+
+@media (min-width: 1536px) {
+  .project-grid-row {
+    grid-auto-rows: minmax(0, min(52vh, 620px));
+  }
+
+  .project-rectangle,
+  .project-card {
+    max-height: min(52vh, 620px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .project-grid-row {
+    grid-auto-rows: minmax(0, min(54vh, 700px));
+  }
+
+  .project-rectangle,
+  .project-card {
+    max-height: min(54vh, 700px);
   }
 }

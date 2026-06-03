@@ -123,7 +123,7 @@ export default function Hero() {
   const lightbulbRotation = angularVelocity * 15; // Rotation multiplier
 
   return (
-    <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12 pt-32 pb-4 relative">
+    <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12 2xl:px-16 pt-32 pb-4 relative">
       {/* Lightbulb with cord - centered, cord always at top, stretching down */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2">
         <motion.div 
@@ -147,7 +147,7 @@ export default function Hero() {
             }}
           >
             {/* Cord line */}
-            <div className="w-0.5 bg-text h-48 md:h-72 2xl:h-[438px]" />
+            <div className="w-0.5 bg-text h-48 md:h-72 2xl:h-[380px] min-[1920px]:h-[438px]" />
             {/* Lightbulb - positioned at end of cord */}
             <motion.div
               ref={lightbulbRef}
@@ -168,7 +168,7 @@ export default function Hero() {
                 alt="Lightbulb"
                 width={54}
                 height={86}
-                className="block w-[40px] md:w-[54px] h-auto"
+                className="block w-[40px] md:w-[54px] 2xl:w-[62px] h-auto"
                 unoptimized
                 priority
               />
@@ -185,11 +185,11 @@ export default function Hero() {
           opacity: textOpacity
         }}
       >
-        <h1 className="mb-2 font-bricolage font-bold text-[64px] leading-tight text-center">
+        <h1 className="mb-2 font-bricolage font-bold text-[64px] leading-tight text-center 2xl:text-[80px]">
           Hi I&apos;m Fin
         </h1>
-            <h2 className="mb-8 max-w-2xl font-bricolage font-medium text-[40px] text-center mx-auto">
-          I design digital products with clarity, character, and intent
+            <h2 className="mb-8 max-w-2xl font-bricolage font-medium text-[40px] text-center mx-auto 2xl:max-w-4xl 2xl:text-[52px] 2xl:leading-[1.12]">
+          I design digital experiences with clarity, character, and intent
         </h2>
       </motion.div>
     </section>

@@ -89,12 +89,21 @@ export const projects: Project[] = [
     caseStudySections: [
       {
         id: "language",
-        title: "Friendly language",
-        text: "The interface was designed to feel approachable and playful rather than overly technical. Rounded forms, simple controls, and a lighter visual language help position the app as a study companion for children rather than a rigid school tool.",
+        title: "Designed for young learners",
+        text: "The interface uses clear language, simple controls, and strong visual hierarchy to reduce cognitive load. Each screen focuses on one action at a time, helping children explore independently without the experience feeling overly instructional.",
         mediaType: "image",
         mediaSrc: "/images/LearnLlama/1.png",
-        mediaAlt: "LearnLlama interface showing its friendly design language",
-        caption: "A playful and approachable interface",
+        mediaAlt: "LearnLlama interface designed for young learners",
+        caption: "Simple screens designed for independent learning",
+      },
+      {
+        id: "icon-library",
+        title: "A child-friendly icon library",
+        text: "I created a consistent library of illustrated icons specifically for LearnLlama. Familiar shapes and repeated visual cues help children recognise actions quickly, while giving the app its own playful identity.",
+        mediaType: "image",
+        mediaSrc: "/images/LearnLlama/IMG_3698.jpg",
+        mediaAlt: "Custom icon library designed for the LearnLlama app",
+        caption: "A custom visual system used throughout the app",
       },
       {
         id: "scan",

@@ -98,17 +98,19 @@ body {
 }
 
 h1 {
-  font-family: var(--font-bricolage);
+  font-family: var(--font-manrope);
   font-size: 64px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.045em;
 }
 
 h2 {
-  font-family: var(--font-bricolage);
+  font-family: var(--font-manrope);
   font-size: 40px;
   font-weight: 500;
-  line-height: 1.3;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
 }
 
 h3 {

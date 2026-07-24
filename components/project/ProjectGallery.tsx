@@ -2,6 +2,7 @@
 
 import { Project } from "@/types/project";
 import Image from "next/image";
+import { videoPoster } from "@/lib/media";
 
 interface GalleryItem {
   src: string | null;
@@ -64,7 +65,8 @@ export default function ProjectGallery({ project, displayedGallery }: ProjectGal
                           muted
                           loop
                           playsInline
-                          preload={index < 2 ? "auto" : "metadata"}
+                          preload="metadata"
+                          poster={videoPoster(item.src as string)}
                           className="absolute inset-0 h-full w-full object-cover"
                         />
                       </div>
@@ -125,7 +127,8 @@ export default function ProjectGallery({ project, displayedGallery }: ProjectGal
                           muted
                           loop
                           playsInline
-                          preload={index < 2 ? "auto" : "metadata"}
+                          preload="metadata"
+                          poster={videoPoster(item.src as string)}
                           className="absolute inset-0 w-full h-full object-cover"
                         />
                       </div>
@@ -151,7 +154,8 @@ export default function ProjectGallery({ project, displayedGallery }: ProjectGal
                       muted
                       loop
                       playsInline
-                      preload={index < 2 ? "auto" : "metadata"}
+                      preload="metadata"
+                      poster={videoPoster(item.src as string)}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>

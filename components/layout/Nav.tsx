@@ -80,26 +80,26 @@ export default function Nav() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-text ${
         isScrolled ? "backdrop-blur-md bg-background/60" : ""
       }`}>
-        <div className="home-wide-container flex items-center gap-6 md:gap-8 py-6">
-          <Link href="/" className="font-bricolage font-bold text-3xl md:text-4xl">
+        <div className="home-wide-container flex items-center gap-6 py-5 md:gap-8 md:py-6">
+          <Link href="/" className="font-manrope text-3xl font-bold tracking-[-0.055em] md:text-4xl">
             Fin
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-6 md:gap-8 text-lg md:text-xl font-manrope font-normal">
-            <Link 
-              href="#work" 
-              onClick={(e) => handleScroll(e, "#work")}
-              className="hover:opacity-70 transition-opacity"
-            >
-              Work
-            </Link>
-            <Link 
-              href="#about" 
+            <Link
+              href="#about"
               onClick={(e) => handleScroll(e, "#about")}
               className="hover:opacity-70 transition-opacity"
             >
               About
+            </Link>
+            <Link
+              href="#work"
+              onClick={(e) => handleScroll(e, "#work")}
+              className="hover:opacity-70 transition-opacity"
+            >
+              Work
             </Link>
             <Link 
               href="#contact" 
@@ -172,19 +172,19 @@ export default function Nav() {
               className="flex flex-col items-center gap-8 px-6 py-12"
               onClick={(e) => e.stopPropagation()}
             >
-              <Link 
-                href="#work" 
-                onClick={(e) => handleScroll(e, "#work")}
-                className="text-2xl font-manrope font-normal hover:opacity-70 transition-opacity"
-              >
-                Work
-              </Link>
-              <Link 
-                href="#about" 
+              <Link
+                href="#about"
                 onClick={(e) => handleScroll(e, "#about")}
                 className="text-2xl font-manrope font-normal hover:opacity-70 transition-opacity"
               >
                 About
+              </Link>
+              <Link
+                href="#work"
+                onClick={(e) => handleScroll(e, "#work")}
+                className="text-2xl font-manrope font-normal hover:opacity-70 transition-opacity"
+              >
+                Work
               </Link>
               <Link 
                 href="#contact" 

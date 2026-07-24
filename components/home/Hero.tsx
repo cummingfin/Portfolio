@@ -2,14 +2,12 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 export default function Hero() {
   const [angle, setAngle] = useState(0); // Current angle in radians
   const [angularVelocity, setAngularVelocity] = useState(0); // Angular velocity in rad/s
-  
-  const cordLength = 192; // h-48 = 192px (mobile)
-  const cordLengthMd = 288; // h-72 = 288px (desktop)
+  const shouldReduceMotion = useReducedMotion();
   
   // Physics constants
   const dampingFactor = 0.92; // Damping for natural decay
@@ -19,10 +17,11 @@ export default function Hero() {
   
   const heroRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const lightbulbRef = useRef<HTMLDivElement>(null);
+  const lightbulbRef = useRef<HTMLButtonElement>(null);
   const lastTimeRef = useRef<number>(0);
   const angleRef = useRef(0);
   const velocityRef = useRef(0);
+  const tapDirectionRef = useRef(1);
 
   // Track scroll progress - starts at 0 when hero is fully visible, progresses as user scrolls
   const { scrollYProgress } = useScroll({
@@ -39,8 +38,8 @@ export default function Hero() {
   const textOpacity = useTransform(scrollYProgress, [0.6, 0.75], [1, 0]);
 
   // Handle mouse move over lightbulb - apply impulse in direction of cursor
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !lightbulbRef.current) return;
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (shouldReduceMotion || !containerRef.current || !lightbulbRef.current) return;
     
     const containerRect = containerRef.current.getBoundingClientRect();
     const anchorX = containerRect.left + containerRect.width / 2;
@@ -58,28 +57,24 @@ export default function Hero() {
     velocityRef.current += impulse;
   };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (e.touches.length > 0) {
-      const touch = e.touches[0];
-      if (!containerRef.current || !lightbulbRef.current) return;
-      
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const anchorX = containerRect.left + containerRect.width / 2;
-      const anchorY = containerRect.top;
-      
-      const cursorAngle = Math.atan2(touch.clientX - anchorX, touch.clientY - anchorY);
-      const clampedAngle = Math.max(-maxAngle, Math.min(maxAngle, cursorAngle));
-      
-      const currentAngle = angleRef.current;
-      const angleDiff = clampedAngle - currentAngle;
-      const impulse = angleDiff * impulseStrength * 10; // Increased for more visible effect
-      
-      velocityRef.current += impulse;
-    }
+  // A tap gives the bulb a predictable alternating nudge on touch devices.
+  const handleBulbTap = () => {
+    if (shouldReduceMotion) return;
+
+    velocityRef.current += 2.2 * tapDirectionRef.current;
+    tapDirectionRef.current *= -1;
   };
 
   // Physics simulation loop - simple pendulum with damping
   useEffect(() => {
+    if (shouldReduceMotion) {
+      angleRef.current = 0;
+      velocityRef.current = 0;
+      setAngle(0);
+      setAngularVelocity(0);
+      return;
+    }
+
     let animationFrame: number;
     lastTimeRef.current = performance.now();
 
@@ -115,7 +110,7 @@ export default function Hero() {
 
     animationFrame = requestAnimationFrame(update);
     return () => cancelAnimationFrame(animationFrame);
-  }, []);
+  }, [shouldReduceMotion]);
 
   // Convert angle to degrees for rotation
   const cordRotation = (angle * 180) / Math.PI;
@@ -123,9 +118,9 @@ export default function Hero() {
   const lightbulbRotation = angularVelocity * 15; // Rotation multiplier
 
   return (
-    <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12 pt-32 pb-4 relative">
+    <section ref={heroRef} className="relative flex min-h-[100svh] flex-col pt-28 md:pt-32">
       {/* Lightbulb with cord - centered, cord always at top, stretching down */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2">
+      <div className="absolute left-1/2 top-0 -translate-x-1/2">
         <motion.div 
           ref={containerRef}
           className="flex flex-col items-center"
@@ -147,16 +142,19 @@ export default function Hero() {
             }}
           >
             {/* Cord line */}
-            <div className="w-0.5 bg-text h-48 md:h-72 2xl:h-[438px]" />
+            <div className="h-[clamp(12rem,32svh,27.375rem)] w-0.5 bg-text" />
             {/* Lightbulb - positioned at end of cord */}
-            <motion.div
+            <motion.button
+              type="button"
               ref={lightbulbRef}
-              className="relative -mt-[1px] cursor-pointer touch-none origin-top"
+              aria-label="Swing the lightbulb"
+              className="relative -mt-[1px] flex min-h-14 min-w-14 origin-top touch-manipulation items-start justify-center border-0 bg-transparent p-0"
               style={{
                 rotate: `${lightbulbRotation}deg`,
               }}
               onMouseMove={handleMouseMove}
-              onTouchStart={handleTouchStart}
+              onClick={handleBulbTap}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.94 }}
               transition={{
                 type: "spring",
                 stiffness: 1000,
@@ -172,25 +170,31 @@ export default function Hero() {
                 unoptimized
                 priority
               />
-            </motion.div>
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Hero text - centered, positioned lower, moves up after lightbulb */}
-          <motion.div 
-            className="flex flex-col items-center justify-center flex-1 text-center mt-24 md:mt-32 w-full"
+      {/* Keep the lightbulb and message on one central axis. */}
+      <motion.div
+        className="home-wide-container flex flex-1 flex-col items-center justify-end pb-8 pt-56 text-center md:pb-10 md:pt-72"
         style={{
           y: textY,
           opacity: textOpacity
         }}
       >
-        <h1 className="mb-2 font-bricolage font-bold text-[64px] leading-tight text-center">
-          Hi I&apos;m Fin
-        </h1>
-            <h2 className="mb-8 max-w-2xl font-bricolage font-medium text-[40px] text-center mx-auto">
-          I design digital experiences with clarity, character, and intent
-        </h2>
+        <div className="flex max-w-6xl flex-col items-center">
+          <p className="mb-5 font-manrope text-sm font-semibold text-text/55 md:text-base">
+            Fin Cumming · Digital designer · London
+          </p>
+          <h1 className="max-w-[14ch] font-manrope text-[clamp(44px,6.4vw,104px)] font-medium leading-[0.94] tracking-[-0.06em] text-text">
+            I design digital products with clarity, character, and intent.
+          </h1>
+        </div>
+        <div className="mt-12 grid w-full max-w-6xl grid-cols-2 border-t border-text/20 pt-4 text-left font-manrope text-xs text-text/55 md:mt-16 md:text-sm">
+          <span>Web · interaction · motion</span>
+          <span className="text-right">Scroll to explore selected work</span>
+        </div>
       </motion.div>
     </section>
   );

@@ -4,71 +4,115 @@ import Link from "next/link";
 import { Project } from "@/types/project";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 interface ProjectCardProps {
   project: Project;
   isSquare?: boolean;
-  colorIndex?: number;
   priority?: boolean;
+  appearance?: "default" | "editorial";
 }
 
-export default function ProjectCard({ project, isSquare = false, colorIndex = 0, priority = false }: ProjectCardProps) {
-  // Mobile: always square (1:1 aspect ratio)
-  // Desktop: 
-  //   - Square: 4:3 aspect ratio (shorter height, determines row height)
-  //   - Rectangle: matches square's height (via grid), 2x width (via column span)
-  // CSS Grid ensures items in same row have same height
-  // Rectangle should NOT use aspect-ratio on desktop - let grid control height
-  const rectangleClass = !isSquare ? 'md:project-rectangle' : '';
-  const squareAspectClass = isSquare ? 'md:aspect-[4/3]' : '';
-  
-  const cardInner = (
-    <motion.div
-      data-project-name={project.title}
-      data-project-hover-label={project.hoverLabel || undefined}
-      data-project-color-index={colorIndex}
-      whileHover={{ scale: 1.02, y: -4 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2 }}
-      className={`bg-section-bg rounded-2xl overflow-hidden w-full h-full cursor-none shadow-sm hover:shadow-md transition-shadow aspect-square ${squareAspectClass} ${rectangleClass} project-card relative`}
+function withOpacity(color: string, opacity: number) {
+  if (/^#[0-9a-f]{6}$/i.test(color)) {
+    const alpha = Math.round(opacity * 255)
+      .toString(16)
+      .padStart(2, "0");
+
+    return `${color}${alpha}`;
+  }
+
+  return `color-mix(in srgb, ${color} ${opacity * 100}%, transparent)`;
+}
+
+export default function ProjectCard({
+  project,
+  isSquare = false,
+  priority = false,
+  appearance = "default",
+}: ProjectCardProps) {
+  const mediaAspect = isSquare
+    ? "aspect-[5/6]"
+    : "aspect-[4/3] md:aspect-[8/3]";
+  const isEditorial = appearance === "editorial";
+  const palette = project.editorialPalette;
+  const cardStyles = {
+    "--card-surface": palette?.surface ?? "#EEE8DE",
+    "--card-ink": palette?.ink ?? "#2B2B2B",
+    "--card-divider": withOpacity(palette?.ink ?? "#2B2B2B", 0.14),
+  } as CSSProperties;
+
+  return (
+    <Link
+      href={`/work/${project.slug}`}
+      className="group block w-full cursor-none"
       aria-label={`View ${project.title} project`}
+      style={cardStyles}
     >
-      {project.heroImage ? (
-        <div className="relative w-full h-full bg-section-bg">
+      <motion.div
+        whileTap={{ scale: 0.992 }}
+        transition={{ duration: 0.2 }}
+        className={`relative w-full overflow-hidden rounded-[6px] border transition-[border-radius,box-shadow] duration-500 ease-out group-hover:rounded-[32px] ${
+          isEditorial
+            ? "border-[var(--card-divider)] bg-[var(--card-surface)]"
+            : "border-text/10 bg-section-bg"
+        } ${mediaAspect}`}
+      >
+        {project.heroImage ? (
+          <div
+            className={`relative h-full w-full ${
+              isEditorial
+                ? "bg-[var(--card-surface)]"
+                : "bg-section-bg"
+            }`}
+          >
           <Image
             src={project.heroImage}
             alt={project.title}
             fill
-            className={`${project.slug === "recanvased" ? "object-contain md:object-cover" : "object-cover"} rounded-2xl`}
+            className={`${project.slug === "recanvased" ? "object-contain md:object-cover" : "object-cover"} transition-transform duration-500 ease-out group-hover:scale-[1.018]`}
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
             priority={priority}
           />
-        </div>
-      ) : (
-        <div className="w-full h-full flex items-center justify-center p-6 absolute inset-0">
-          <div className="text-center">
-            <h3 className="text-xl md:text-2xl font-bricolage font-medium mb-2">
-              {project.title}
-            </h3>
-            <p className="text-sm md:text-base text-gray-600">
-              {project.subtitle}
-            </p>
           </div>
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className="text-center">
+              <h3 className="mb-2 font-manrope text-xl font-medium md:text-2xl">
+              {project.title}
+              </h3>
+              <p className="text-sm text-text/60 md:text-base">
+              {project.subtitle}
+              </p>
+            </div>
+          </div>
+        )}
+      </motion.div>
+
+      <div
+        className={`mt-2 border-t pt-2 ${
+          isEditorial
+            ? "border-[var(--card-divider)] text-[var(--card-ink)]"
+            : "border-text/16 text-text"
+        }`}
+      >
+        <div>
+          <h3
+            className={`font-manrope text-[22px] font-medium leading-tight tracking-[-0.03em] md:text-[25px] ${
+              isEditorial ? "" : "text-text"
+            }`}
+          >
+            {project.title}
+          </h3>
+          <p
+            className={`mt-1 line-clamp-2 max-w-2xl font-manrope text-sm leading-relaxed opacity-55 md:line-clamp-1 md:text-base ${
+              isEditorial ? "" : "text-text"
+            }`}
+          >
+            {project.subtitle}
+          </p>
         </div>
-      )}
-
-      {/* Floating pill label */}
-      <div className="absolute bottom-4 left-4">
-        <span className="inline-flex items-center rounded-full bg-black/80 text-white text-xs md:text-sm font-manrope tracking-wide px-3 py-1">
-          {project.title}
-        </span>
       </div>
-    </motion.div>
-  );
-
-  return (
-    <Link href={`/work/${project.slug}`} className="group block w-full h-full">
-      {cardInner}
     </Link>
   );
 }

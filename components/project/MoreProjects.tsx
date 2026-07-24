@@ -3,34 +3,25 @@
 import { projects } from "@/lib/projects";
 import { Project } from "@/types/project";
 import ProjectCard from "@/components/home/ProjectCard";
+import type { CSSProperties } from "react";
 
 interface MoreProjectsProps {
   currentProject: Project;
 }
 
+function withOpacity(color: string, opacity: number) {
+  if (/^#[0-9a-f]{6}$/i.test(color)) {
+    const alpha = Math.round(opacity * 255)
+      .toString(16)
+      .padStart(2, "0");
+
+    return `${color}${alpha}`;
+  }
+
+  return `color-mix(in srgb, ${color} ${opacity * 100}%, transparent)`;
+}
+
 export default function MoreProjects({ currentProject }: MoreProjectsProps) {
-  const getHomeGridShape = (projectSlug: string) => {
-    const index = projects.findIndex((project) => project.slug === projectSlug);
-
-    if (index === -1) {
-      return {
-        isSquare: false,
-        colSpan: "md:col-span-2",
-      };
-    }
-
-    const row = Math.floor(index / 2);
-    const positionInRow = index % 2;
-    const isSquare =
-      (row % 2 === 0 && positionInRow === 1) ||
-      (row % 2 === 1 && positionInRow === 0);
-
-    return {
-      isSquare,
-      colSpan: isSquare ? "md:col-span-1" : "md:col-span-2",
-    };
-  };
-
   const currentIndex = projects.findIndex(
     (project) => project.slug === currentProject.slug
   );
@@ -38,10 +29,6 @@ export default function MoreProjects({ currentProject }: MoreProjectsProps) {
   if (currentIndex === -1 || projects.length <= 1) {
     return null;
   }
-
-  const otherProjects = projects.filter(
-    (project) => project.slug !== currentProject.slug && project.slug !== "gallery"
-  );
 
   const orderedProjects = projects
     .slice(currentIndex + 1)
@@ -51,56 +38,43 @@ export default function MoreProjects({ currentProject }: MoreProjectsProps) {
         project.slug !== currentProject.slug && project.slug !== "gallery"
     );
 
-  let wideProject: Project | null = null;
-  let smallProject: Project | null = null;
+  const featuredProjects = orderedProjects.slice(0, 3);
 
-  for (const project of orderedProjects) {
-    const { isSquare } = getHomeGridShape(project.slug);
-
-    if (!isSquare && !wideProject) {
-      wideProject = project;
-    }
-
-    if (isSquare && !smallProject) {
-      smallProject = project;
-    }
-
-    if (wideProject && smallProject) {
-      break;
-    }
-  }
-
-  const featuredProjects = [wideProject, smallProject].filter(
-    (project): project is Project => Boolean(project)
-  );
-
-  if (featuredProjects.length < 2) {
+  if (featuredProjects.length < 3) {
     return null;
   }
 
+  const palette = currentProject.editorialPalette;
+  const sectionStyles = palette
+    ? ({
+        backgroundColor: palette.page,
+        color: palette.ink,
+        "--more-projects-divider": withOpacity(palette.ink, 0.14),
+      } as CSSProperties)
+    : undefined;
+
   return (
-    <section className="px-6 pb-16 pt-8 md:px-12 md:pb-24 md:pt-12">
-      <div className="site-container">
-        <div className="mb-8 md:mb-10">
-          <p className="mb-3 font-manrope text-sm uppercase tracking-[0.28em] text-text/60">
-            More Projects
-          </p>
-          <h2 className="font-bricolage text-[30px] font-bold text-text md:text-[38px]">
-            Keep exploring
+    <section
+      className="border-t border-[var(--more-projects-divider)] py-16 font-manrope md:py-24 lg:py-28"
+      style={sectionStyles}
+    >
+      <div className="project-wide-container">
+        <div className="mb-10 md:mb-14 lg:mb-16">
+          <p className="text-sm opacity-55 md:text-base">More projects</p>
+          <h2 className="mt-3 text-[clamp(42px,6vw,82px)] font-medium leading-[1] tracking-[-0.05em] md:whitespace-nowrap">
+            Continue exploring
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 project-grid-row">
-          {featuredProjects.map((project, index) => {
-            const { isSquare, colSpan } = getHomeGridShape(project.slug);
-
+        <div className="grid grid-cols-1 gap-x-6 gap-y-12 border-t border-[var(--more-projects-divider)] pt-8 md:grid-cols-3 md:gap-x-8 md:pt-10">
+          {featuredProjects.map((project) => {
             return (
-              <div key={project.slug} className={`w-full ${colSpan}`}>
+              <div key={project.slug} className="w-full">
                 <ProjectCard
                   project={project}
-                  isSquare={isSquare}
-                  colorIndex={projects.findIndex((item) => item.slug === project.slug)}
+                  isSquare
                   priority={false}
+                  appearance="editorial"
                 />
               </div>
             );

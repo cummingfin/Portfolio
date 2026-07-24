@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 export default function HeroOverlay() {
@@ -10,6 +10,7 @@ export default function HeroOverlay() {
   const [isLit, setIsLit] = useState(false);
   const [isFading, setIsFading] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
@@ -36,7 +37,11 @@ export default function HeroOverlay() {
 
   const handlePull = () => {
     if (isPulling || isFading || !mounted) return;
-    
+
+    const pullDuration = shouldReduceMotion ? 0 : 240;
+    const litDuration = shouldReduceMotion ? 100 : 650;
+    const fadeDuration = shouldReduceMotion ? 150 : 700;
+
     setIsPulling(true);
     setTimeout(() => {
       // Switch to lit lightbulb
@@ -52,9 +57,16 @@ export default function HeroOverlay() {
             // Dispatch custom event to notify Nav component
             window.dispatchEvent(new Event("overlayDismissed"));
           }
-        }, 1000);
-      }, 1000);
-    }, 300);
+        }, fadeDuration);
+      }, litDuration);
+    }, pullDuration);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      handlePull();
+    }
   };
 
   if (!mounted || !isVisible) return null;
@@ -66,13 +78,13 @@ export default function HeroOverlay() {
           initial={{ opacity: 1 }}
           animate={{ opacity: isFading ? 0 : 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: shouldReduceMotion ? 0.15 : 0.7 }}
           className="fixed inset-0 bg-[#2C2C2C] z-40 flex flex-col items-center justify-center"
         >
           {/* Lightbulb with cord - centered, matching Hero position exactly */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
-            {/* Cord line - goes all the way to top, matching Hero height, overlay color */}
-            <div className="w-0.5 bg-[#2C2C2C] h-48 md:h-72 2xl:h-[438px]" />
+          <div className="absolute left-1/2 top-0 flex -translate-x-1/2 flex-col items-center">
+            {/* Keep the fixture visible so it lines up with the hero underneath. */}
+            <div className="h-[clamp(12rem,32svh,27.375rem)] w-0.5 bg-[#D8D4CC]/35" />
             {/* Lightbulb - switches from unlit to lit */}
             <div className="relative -mt-[1px]">
               <AnimatePresence mode="wait">
@@ -115,33 +127,44 @@ export default function HeroOverlay() {
             </div>
           </div>
 
-          {/* Pull cord - positioned on right */}
+          {/* Pull cord - close enough to the bulb to read as one fixture. */}
           <motion.div
-            className="absolute right-[10%] md:right-[15%] top-0 flex flex-col items-center cursor-pointer touch-none"
+            role="button"
+            tabIndex={0}
+            aria-label="Turn on the light and enter the portfolio"
+            className="absolute left-[calc(50%+52px)] top-0 flex -translate-x-1/2 touch-none flex-col items-center outline-none md:left-[calc(50%+82px)]"
             onClick={handlePull}
-            onTouchStart={handlePull}
-            animate={{
-              y: isPulling ? 20 : 0,
+            onKeyDown={handleKeyDown}
+            drag={isPulling || shouldReduceMotion ? false : "y"}
+            dragConstraints={{ top: 0, bottom: 42 }}
+            dragElastic={0.08}
+            dragMomentum={false}
+            dragSnapToOrigin
+            onDragEnd={(_, info) => {
+              if (info.offset.y >= 28) handlePull();
             }}
-            transition={{ duration: 0.3 }}
+            animate={{
+              y: isPulling ? 24 : 0,
+            }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.24 }}
           >
-            {/* Cord line - goes all the way to top, connects to cord end */}
-            <div className="w-0.5 bg-white h-[55vh] md:h-[60vh]" />
-            {/* Cord end SVG - directly connected to cord */}
-            <div className="relative -mt-[1px]">
+            <div className="h-[56svh] w-px bg-[#D8D4CC]/70 md:h-[60vh]" />
+            <div className="-mt-px flex h-14 w-14 items-start justify-center">
               <Image
                 src="/svgs/CordEnd.svg"
-                alt="Cord end"
-                width={23}
-                height={23}
-                className="block"
+                alt=""
+                aria-hidden="true"
+                width={28}
+                height={28}
+                className="block h-7 w-7 drop-shadow-[0_5px_10px_rgba(0,0,0,0.22)]"
               />
             </div>
-            <h1 className="text-white text-2xl md:text-3xl mt-2 font-bricolage font-bold">Pull</h1>
+            <p className="-mt-3 font-manrope text-sm font-medium text-[#EEE8DE]/70">
+              Pull to enter
+            </p>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
-

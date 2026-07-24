@@ -3,6 +3,7 @@
 import { Project } from "@/types/project";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { videoPoster } from "@/lib/media";
 
 interface ProjectIntroProps {
   project: Project;
@@ -99,7 +100,8 @@ export default function ProjectIntro({ project, title, subtitle, text, hasCustom
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster={videoPoster(project.detailsVideo)}
             className="absolute inset-0 h-full w-full object-cover object-[center_12%] bg-[#EAF5FB]"
           />
         </div>
@@ -116,7 +118,8 @@ export default function ProjectIntro({ project, title, subtitle, text, hasCustom
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            poster={videoPoster(project.detailsVideo)}
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
@@ -131,7 +134,8 @@ export default function ProjectIntro({ project, title, subtitle, text, hasCustom
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
+          poster={videoPoster(project.detailsVideo)}
           className="block h-auto w-full object-contain bg-white"
         />
       </div>

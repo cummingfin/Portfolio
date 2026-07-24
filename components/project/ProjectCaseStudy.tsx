@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import { Project } from "@/types/project";
+import { videoPoster } from "@/lib/media";
 
 interface ProjectCaseStudyProps {
   project: Project;
@@ -101,6 +102,7 @@ export default function ProjectCaseStudy({
               loop
               playsInline
               preload="metadata"
+              poster={videoPoster(section.mediaSrc!)}
               className="block h-auto w-full scale-[1.01] object-contain"
             />
           </div>
@@ -131,6 +133,7 @@ export default function ProjectCaseStudy({
               loop
               playsInline
               preload="metadata"
+              poster={videoPoster(section.mediaSrc!)}
               className="absolute inset-0 h-full w-full object-cover object-[center_50%] bg-[#EAF5FB]"
             />
           ) : (
@@ -156,6 +159,7 @@ export default function ProjectCaseStudy({
             loop
             playsInline
             preload="metadata"
+            poster={videoPoster(section.mediaSrc!)}
             className="absolute inset-0 h-full w-full object-cover"
           />
         ) : (

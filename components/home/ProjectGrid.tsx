@@ -7,30 +7,26 @@ export default function ProjectGrid() {
   return (
     <section 
       id="work" 
-      className="pt-8 md:pt-12 2xl:pt-16 pb-24 md:pb-32 2xl:pb-40 scroll-mt-24"
+      className="scroll-mt-24 pb-24 pt-8 md:pb-32 md:pt-12 2xl:pb-40"
     >
       <div className="home-wide-container">
-        {/* 3-column grid: squares = 1 col, rectangles = 2 cols */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 2xl:gap-10 w-full project-grid-row home-project-grid-row">
+        <div className="mb-10 flex items-end justify-between gap-8 border-t border-text/20 pt-6 md:mb-14 md:pt-8">
+          <h2 className="font-manrope text-[36px] font-medium leading-none tracking-[-0.045em] text-text md:text-[52px]">
+            Selected work
+          </h2>
+          <p className="hidden font-manrope text-sm text-text/50 md:block">
+            Design · Build · Creative technology
+          </p>
+        </div>
+
+        <div className="grid w-full grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:grid-cols-3 2xl:gap-x-10 2xl:gap-y-20">
           {homepageProjects.map((project, index) => {
-            // Pattern from image:
-            // Row 1 (0,1): rectangle (2 cols), square (1 col)
-            // Row 2 (2,3): square (1 col), rectangle (2 cols)
-            // Row 3 (4,5): rectangle (2 cols), square (1 col)
-            const row = Math.floor(index / 2);
-            const positionInRow = index % 2;
-            // Even rows (0, 2): first is rectangle, second is square
-            // Odd rows (1): first is square, second is rectangle
-            const isSquare = (row % 2 === 0 && positionInRow === 1) || (row % 2 === 1 && positionInRow === 0);
-            const colSpan = isSquare ? "md:col-span-1" : "md:col-span-2";
-            
             return (
-              <div key={project.slug} className={`w-full ${colSpan}`}>
+              <div key={project.slug} className="w-full">
                 <ProjectCard 
                   project={project} 
-                  isSquare={isSquare}
-                  colorIndex={index}
-                  priority={index < 4}
+                  isSquare
+                  priority={index < 2}
                 />
               </div>
             );

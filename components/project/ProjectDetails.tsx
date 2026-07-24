@@ -7,12 +7,21 @@ import ProjectGallery from "./ProjectGallery";
 import ProjectCaseStudy from "./ProjectCaseStudy";
 import ProjectCaseStudyText from "./ProjectCaseStudyText";
 import ComingSoonCaseStudy from "./ComingSoonCaseStudy";
+import EditorialProjectDetails from "./EditorialProjectDetails";
 
 interface ProjectDetailsProps {
   project: Project;
 }
 
 export default function ProjectDetails({ project }: ProjectDetailsProps) {
+  if (project.pageStyle === "editorial") {
+    return (
+      <section className="mb-12 md:mb-16">
+        <EditorialProjectDetails project={project} />
+      </section>
+    );
+  }
+
   const title = project.detailsTitle || project.title;
   const subtitle = project.detailsSubtitle || "";
   const text = project.detailsText || "";
@@ -50,6 +59,7 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
         <ComingSoonCaseStudy project={project} />
       ) : (
         <>
+      {hasCaseStudyText && <ProjectCaseStudyText project={project} />}
       {hasCaseStudy ? (
         <ProjectCaseStudy project={project} />
       ) : hasNarrative && (
@@ -59,7 +69,6 @@ export default function ProjectDetails({ project }: ProjectDetailsProps) {
           theIdea={project.theIdea}
         />
       )}
-      {hasCaseStudyText && <ProjectCaseStudyText project={project} />}
       {showGallery && (
         <ProjectGallery
           project={project}

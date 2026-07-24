@@ -4,7 +4,7 @@ import { motion, MotionValue, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 const aboutCopy =
-  "I build digital products that have to work in the real world. Before completing a Master’s in AR and VR, I founded an eco-friendly home maintenance company and grew it to more than a thousand clients. I recently completed the design and build of the website for the UK’s largest independent investment bank, working across UX, interface design, development, and motion.";
+  "I design and build digital products that have to work in the real world. Before completing a Master’s in AR and VR, I founded an eco-friendly home maintenance company and grew it to more than a thousand clients. I recently completed the design and build of the website for the UK’s largest independent investment bank, working across UX, interface design, development, and motion.";
 
 function ScrollWord({
   word,
